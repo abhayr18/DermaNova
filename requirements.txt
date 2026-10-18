@@ -3,7 +3,8 @@
 # Deep Learning & Computer Vision
 torch>=2.2.0
 torchvision>=0.17.0
-opencv-python>=4.9.0
+opencv-python-headless>=4.9.0
+gradio>=5.0.0
 albumentations>=1.4.0
 scikit-learn>=1.4.0
 scikit-image>=0.22.0

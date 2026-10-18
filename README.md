@@ -1,3 +1,14 @@
+---
+title: DermaNova AI Skin Diagnostic
+emoji: 🔬
+colorFrom: blue
+colorTo: indigo
+sdk: gradio
+app_file: app.py
+pinned: false
+license: mit
+---
+
 # DermaNova 🌿🔬
 ### AI-Driven Facial Skin Analysis & Personalized Skincare Recommendation Framework
 
