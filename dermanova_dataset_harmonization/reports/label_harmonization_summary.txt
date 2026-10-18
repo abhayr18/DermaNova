@@ -1,0 +1,201 @@
+============================================================
+DERMANOVA LABEL HARMONIZATION SUMMARY
+============================================================
+
+Generated:               2026-08-08 (August 2026)
+Report ID:               HARM-DS-001-002-2026
+Phase:                   Post-Dataset-Audit / Pre-Model-Training
+Status:                  ⚠️  PROPOSED — AWAITING HUMAN APPROVAL
+
+------------------------------------------------------------
+DATASETS DISCOVERED
+------------------------------------------------------------
+Datasets discovered:     2
+
+  DS-001: Facial Skin (Acne, Pigmentation, Pores, Wrinkles)
+    Source:    Kaggle / Roboflow
+    Mount:     /kaggle/input/facial-skin-acne-pigmentation-pores-wrinkles/
+    License:   Open Access Research
+    Classes:   8
+    Images:    4,233
+
+  DS-002: GlowMix Merged Facial Skincare Dataset (Skin V2)
+    Source:    Kaggle (drishyatomar)
+    Mount:     /kaggle/input/datasets/drishyatomar/
+               glowmix-merged-facial-skincare-dataset/
+               Skin Issues Dataset/Skin v2/
+    License:   MIT License (Commercial + Research approved)
+    Classes:   5
+    Images:    9,770
+
+------------------------------------------------------------
+ORIGINAL LABELS (13 total)
+------------------------------------------------------------
+Original labels:         13
+
+  DS-001 (8 labels):
+    1.  inflammatory acne                    603 images
+    2.  dark spots                           619 images
+    3.  wrinkles                             600 images
+    4.  Redness                              600 images
+    5.  pores                                600 images
+    6.  pigmentation                         599 images
+    7.  non inflammatory acne black heads    312 images
+    8.  non inflammatory acne white heads    300 images
+
+  DS-002 (5 labels):
+    9.  dark spots                         2,126 images
+    10. acne                               2,060 images
+    11. wrinkles                           1,982 images
+    12. blackheades (confirmed misspelling) 1,970 images
+    13. pores                              1,632 images
+
+------------------------------------------------------------
+TOTAL IMAGES INSPECTED
+------------------------------------------------------------
+Total images inspected:  14,003
+
+  DS-001:   4,233 images
+  DS-002:   9,770 images
+
+------------------------------------------------------------
+MAPPING DECISIONS
+------------------------------------------------------------
+High-confidence mappings:    9
+  inflammatory acne    → Acne        [DS-001]
+  wrinkles             → Wrinkles    [DS-001]
+  pores                → Pores       [DS-001]
+  non infl. black heads→ Blackheads  [DS-001]
+  acne                 → Acne        [DS-002]
+  blackheades          → Blackheads  [DS-002]
+  dark spots           → Dark Spots  [DS-002]
+  pores                → Pores       [DS-002]
+  wrinkles             → Wrinkles    [DS-002]
+
+Medium-confidence mappings:  4
+  dark spots           → Dark Spots  [DS-001] ⚠️ REVIEW
+  Redness              → Redness     [DS-001] ⚠️ REVIEW
+  pigmentation         → Pigmentation[DS-001] ⚠️ REVIEW
+  non infl. white heads→ Whiteheads  [DS-001] ⚠️ REVIEW
+
+Low-confidence mappings:     0
+
+------------------------------------------------------------
+MANUAL REVIEW REQUIRED
+------------------------------------------------------------
+Manual-review labels:    5
+
+  [HIGH PRIORITY]
+  1. DS-001 dark spots ↔ pigmentation conflict
+     26 cross-class near-duplicate pairs.
+     DECISION REQUIRED: Merge or keep separate?
+
+  2. DS-001 pigmentation ↔ dark spots conflict
+     Same 26 pairs as above — both labels flagged.
+
+  [MEDIUM PRIORITY]
+  3. DS-001 Redness — single-source evidence.
+     Post-dedup unique count must be verified.
+     Threshold: ≥350 unique to proceed as standalone class.
+
+  4. DS-001 non inflammatory acne white heads — 300 raw images.
+     Post-dedup unique count may fall to ~180–200.
+     DECISION REQUIRED: Augment or merge with Blackheads?
+
+  5. DS-002 acne (25 open-comedo images) — semantic mislabeling.
+     25 acne-open-comedo-* images may be blackheads.
+     DECISION REQUIRED: Reclassify to Blackheads?
+
+------------------------------------------------------------
+CROSS-CLASS CONFLICTS
+------------------------------------------------------------
+Cross-class conflict groups: 56
+Total conflict rows (CSV):   112
+
+  DS-002 Conflicts (28 groups, 56 images):
+    Acne      ↔ Blackheads:  25 groups (SAME_IMAGE_DIFFERENT_LABEL)
+    Pores     ↔ Blackheads:   2 groups (SAME_IMAGE_DIFFERENT_LABEL)
+    Acne      ↔ Dark Spots:   1 group  (SAME_IMAGE_DIFFERENT_LABEL)
+
+  DS-001 Conflicts (28 pairs, 56 images):
+    Dark Spots ↔ Pigmentation: 26 pairs (POTENTIAL_NEAR_DUPLICATE)
+    Black Heads↔ White Heads:   2 pairs (POTENTIAL_NEAR_DUPLICATE)
+
+------------------------------------------------------------
+PROPOSED DERMANOVA CLASSES
+------------------------------------------------------------
+Proposed DermaNova classes:  8
+
+  Class           | Raw Count | Sources         | Notes
+  ----------------+-----------+-----------------+---------------------------
+  Acne            |  2,663    | DS-001 + DS-002 |
+  Blackheads      |  2,282    | DS-001 + DS-002 | +25 if reclassified
+  Whiteheads      |    300    | DS-001 only     | ⚠️ LOW COUNT
+  Dark Spots      |  2,745    | DS-001 + DS-002 | ⚠️ 26-pair overlap
+  Pigmentation    |    599    | DS-001 only     | ⚠️ 26-pair overlap
+  Pores           |  2,232    | DS-001 + DS-002 |
+  Wrinkles        |  2,582    | DS-001 + DS-002 |
+  Redness         |    600    | DS-001 only     | ⚠️ SINGLE-SOURCE
+  ----------------+-----------+-----------------+---------------------------
+  TOTAL RAW       | 14,003    |                 | ✅ Count verified
+
+  Post-dedup estimated: ~10,500–11,500 images
+
+------------------------------------------------------------
+OUTPUT FILES GENERATED
+------------------------------------------------------------
+
+  dermanova_dataset_harmonization/
+  ├── reports/
+  │   ├── label_harmonization_report.md      ← Full 16-section report
+  │   └── label_harmonization_summary.txt    ← This file
+  ├── mappings/
+  │   ├── dataset_label_inventory.csv        ← 13 label records
+  │   ├── label_mapping.csv                  ← 13 mapping decisions
+  │   ├── label_mapping_review.csv           ← 5 review labels
+  │   └── label_definitions.md              ← 13 label definitions
+  ├── conflicts/
+  │   └── cross_class_label_conflicts.csv    ← 112 conflict rows
+  └── metadata/
+      └── master_metadata.csv               ← Schema template
+                                               Full version: run in Kaggle
+
+  Reproducibility script:
+  ml_pipeline/data_ingestion/run_harmonization.py
+
+------------------------------------------------------------
+MISSING INFORMATION
+------------------------------------------------------------
+  - No official label definitions found in either dataset
+  - pHash per-image values not recomputed (use audit-derived stats)
+  - master_metadata.csv not fully populated (requires Kaggle runtime)
+  - Cross-dataset duplicate check NOT yet performed
+  - GlowMix sub-datasets beyond Skin V2 not assessed
+
+------------------------------------------------------------
+DECISIONS REQUIRING HUMAN APPROVAL
+------------------------------------------------------------
+  1. Dark Spots vs Pigmentation: merge or keep separate?
+  2. Model architecture: single-label or multi-label?
+  3. Whiteheads: augment or merge with Blackheads?
+  4. Redness: verify post-dedup count ≥350 unique
+  5. 25 acne open-comedo images: reclassify to Blackheads?
+
+------------------------------------------------------------
+RECOMMENDED NEXT STEP
+------------------------------------------------------------
+  STOP. Do not proceed to dataset cleaning or model training.
+  
+  1. Human team reviews this summary and the full report.
+  2. All 5 decisions above are approved in writing.
+  3. run_harmonization.py is executed in Kaggle to generate
+     the complete master_metadata.csv (14,003 rows).
+  4. After approval: proceed to Phase 3 — Dataset Cleaning.
+     Script: ml_pipeline/data_ingestion/clean_dataset.py
+
+============================================================
+STATUS: HARMONIZATION COMPLETE — AWAITING HUMAN APPROVAL
+============================================================
+DO NOT proceed to dataset cleaning or model training without
+human review and explicit approval of the label mapping.
+============================================================

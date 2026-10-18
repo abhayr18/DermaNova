@@ -1,0 +1,624 @@
+P[0] align=CENTER (1) style=Normal:
+  Text: A Review on the Utilization of Cow Dung in Sustainable and Eco-Friendly Building Materials
+  Runs: [('A Review on the Utilization of Cow Dung in Sustainable and ', 'Times New Roman', 16.0, True, True, None), ('Eco-Friendly Building Materials', 'Times New Roman', 16.0, True, True, None)]
+
+P[2] align=CENTER (1) style=Normal:
+  Text: Ms. Sonali Mangesh Jadhav1, Dr. Sharad Kadhbhane2
+  Runs: [('Ms.', 'Times New Roman', None, True, True, None), (' ', 'Times New Roman', None, True, True, None), ('Sona', 'Times New Roman', None, True, True, None), ('li', 'Times New Roman', None, True, True, None), (' ', 'Times New Roman', None, True, True, None), ('M', 'Times New Roman', None, True, True, None), ('angesh', 'Times New Roman', None, True, True, None), (' Jadhav', 'Times New Roman', None, True, True, None), ('1', 'Times New Roman', None, True, True, None), (', Dr.', 'Times New Roman', None, True, True, None), (' ', 'Times New Roman', None, True, True, None), ('Sharad', 'Times New Roman', None, True, True, None), (' ', 'Times New Roman', None, True, True, None), ('Kadhbhane', 'Times New Roman', None, True, True, None), ('2', 'Times New Roman', None, True, True, None)]
+
+P[4] align=CENTER (1) style=Normal:
+  Text: ABSTRACT
+  Runs: [('ABSTRACT', 'Times New Roman', 12.0, True, True, None)]
+
+P[5] align=JUSTIFY (3) style=Normal:
+  Text: The construction industry contributes significantly to the degradation of our environment, due to the large amount of energy and carbon emissions associated with its operations. Over the past few years, there has been increased interest in using sustainable and eco-friendly materials as alternatives to traditional building materials. One material that has good potential for use in the construction industry is cow dung (a very common agricultural waste product in India) which has shown great promise for applications such as bricks, plaster, and composite materials. This review paper will summarize what research has been conducted on the use of cow dung as a construction material, emphasizing information regarding its mechanical properties, environmental benefits, and practical use. The conclusion of this paper will show that cow dung has been found to provide advantages including improved thermal insulation; decreased cost of material used for construction, and increased sustainable construction methods.
+  Runs: [('The construction industry contributes significantly to the degradation of our environment, due to the large amount of energy and carbon emissions associated with its operations. Over the past few years, there has been increased interest in using sustainable and eco-friendly materials as alternatives to traditional building materials. One material that has good potential for use in the construction industry is cow dung (a very common agricultural waste product in India) which has shown great promise for applications such as bricks, plaster, and composite materials. This review paper will summarize what research ', 'Times New Roman', 12.0, None, True, None), ('has been conducted', 'Times New Roman', 12.0, None, True, None), (' on the use of cow dung as a construction material, emphasizing information regarding its mechanical properties, environmental benefits, and practical use. The conclusion of this paper will show that cow dung has been found to provide advantages including improved thermal ', 'Times New Roman', 12.0, None, True, None), ('insulation;', 'Times New Roman', 12.0, None, True, None), (' decreased cost of material used for construction, and increased sustainable construction methods.', 'Times New Roman', 12.0, None, True, None)]
+
+P[7] align=JUSTIFY (3) style=Normal:
+  Text: KEYWORDS: Cow dung, Sustainable building materials, Eco-friendly building materials, Green building, Affordable housing
+  Runs: [('KEYWORDS: ', 'Times New Roman', 12.0, True, True, None), ('Cow dung, Sustainable building materials, Eco-friendly building materials, Green building, Affordable housing', 'Times New Roman', 12.0, None, True, None)]
+
+P[9] align=JUSTIFY (3) style=Normal:
+  Text: INTRODUCTION
+  Runs: [('INTRODUCTION', 'Times New Roman', 12.0, True, None, None)]
+
+P[10] align=JUSTIFY (3) style=Normal:
+  Text: The construction industry contributes significantly to environmental degradation through excessive use of natural resources, energy consumption, and high levels of carbon dioxide produced from conventional building products like cement and fired brick. Shridhar Kumbhar (2014) noted that traditional methods used to produce bricks consume large amounts of energy and release large quantities of greenhouse gases, thereby making a very large negative impact on the environment.
+  Runs: [('The construction industry contributes significantly to environmental degradation through excessive use of natural resources, energy consumption, and high levels of carbon dioxide produced from conventional building products like cement and fired brick. ', 'Times New Roman', 12.0, None, None, None), ('Shridhar', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('Kumbhar', 'Times New Roman', 12.0, None, None, None), (' (2014) noted that traditional methods used to produce bricks consume large amounts of energy and release large quantities of greenhouse gases, thereby making a very large negative impact on the environment.', 'Times New Roman', 12.0, None, None, None)]
+
+P[12] align=JUSTIFY (3) style=Normal:
+  Text: In response to this environmental crisis, there has been a growing demand for sustainable and environmentally friendly building materials, and researchers have been trying to identify new materials to use in building. This includes looking towards using agricultural waste and animal byproducts as potential materials. Some examples of these materials are: rice husk ash, bagasse, coconut coir and cow dung, are all widely available and could be incorporated into many types of buildings. M. Arunima and her colleagues (2019) found that adding coir fiber and cow dung to earthen bricks increases their strength and decreases their likelihood of developing cracks. In a similar study by P. Indhiradevi (2020), cow dung ash can be used as an alternative source of fly ash to improve the sustainability of fly ash bricks without compromising their structural ability to carry loads.
+  Runs: [('In response to this environmental crisis, there has been a growing demand for sustainable and environmentally friendly building materials, and researchers have been trying to identify new materials to use in building. This includes looking towards using agricultural waste and animal byproducts as potential materials. Some examples of these materials are: rice husk ash, bagasse, ', 'Times New Roman', 12.0, None, None, None), ('coconut', 'Times New Roman', 12.0, None, None, None), (' coir and cow dung, are all widely available and could be incorporated into many types of buildings. M. ', 'Times New Roman', 12.0, None, None, None), ('Arunima', 'Times New Roman', 12.0, None, None, None), (' and her colleagues (2019) found that adding coir fiber and cow dung to earthen bricks increases their strength and decreases their likelihood of developing cracks. In a similar study by P. ', 'Times New Roman', 12.0, None, None, None), ('Indhiradevi', 'Times New Roman', 12.0, None, None, None), (' (2020), ', 'Times New Roman', 12.0, None, None, None), ('cow dung ash can be used', 'Times New Roman', 12.0, None, None, None), (' as an alternative source of fly ash to improve the sustainability of fly ash bricks without compromising their structural ability to carry loads.', 'Times New Roman', 12.0, None, None, None)]
+
+P[14] align=JUSTIFY (3) style=Normal:
+  Text: Research conducted by P. R. Fernando et al. (2019) as well as D. S. Thanki and G. D. Gohil (2024) has confirmed that both cow dung and cow dung ash assist with enhancing the physical and chemical properties of bricks, including enhancing insulating properties and decreasing the density of bricks. In addition, S. R. Bondre et al. stated that cow waste is a good option in the construction industry as a low-cost, eco-friendly construction material. Another area identified in the literature is the incorporation of agricultural byproducts such as sugarcane bagasse and natural fibres into construction materials to improve their thermal and mechanical performance (R. R. Moussa, 2024; Xinyuan Zhang et al., 2025).
+  Runs: [('Research conducted by P. R. Fernando et al. (2019) as well as D. S. ', 'Times New Roman', 12.0, None, None, None), ('Thanki', 'Times New Roman', 12.0, None, None, None), (' and G. D. ', 'Times New Roman', 12.0, None, None, None), ('Gohil', 'Times New Roman', 12.0, None, None, None), (' (2024) has confirmed that both cow dung and cow dung ash assist with enhancing the physical and chemical properties of bricks, including enhancing insulating properties and decreasing the density of bricks. In addition, S. R. ', 'Times New Roman', 12.0, None, None, None), ('Bondre', 'Times New Roman', 12.0, None, None, None), (' et al. stated that cow waste is a good option in the construction industry as a low-cost, eco-friendly construction material. Another area identified in the literature is the incorporation of agricultural byproducts such as sugarcane bagasse and natural ', 'Times New Roman', 12.0, None, None, None), ('fibres', 'Times New Roman', 12.0, None, None, None), (' into construction materials to improve their thermal and mechanical performance (R. R. Moussa, 2024; ', 'Times New Roman', 12.0, None, None, None), ('Xinyuan', 'Times New Roman', 12.0, None, None, None), (' Zhang et al., 2025).', 'Times New Roman', 12.0, None, None, None)]
+
+P[16] align=JUSTIFY (3) style=Normal:
+  Text: Recent research developments regarding sustainable construction have demonstrated the use of bio-based materials, which have significantly less negative impact on the environment and contribute to the principles of a circular economy (Bernat Vinolas et al., 2025; Youssef Khrissi and Amine Tilioua, 2025). Bio-based materials make efficient use of waste; in addition to making use of waste in a sustainable manner, they also provide benefits such as increased thermal insulation, reduced energy consumption, and cost-effectiveness.
+  Runs: [('Recent research developments regarding sustainable construction have demonstrated the use of bio-based materials, which have significantly less negative impact on the environment and contribute to the principles of a circular economy (', 'Times New Roman', 12.0, None, None, None), ('Bernat', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('Vinolas', 'Times New Roman', 12.0, None, None, None), (' et al., 2025; Youssef ', 'Times New Roman', 12.0, None, None, None), ('Khrissi', 'Times New Roman', 12.0, None, None, None), (' and Amine ', 'Times New Roman', 12.0, None, None, None), ('Tilioua', 'Times New Roman', 12.0, None, None, None), (', 2025). Bio-based materials make efficient use of waste; in addition to making use of waste in a sustainable manner, they also provide benefits such as increased thermal insulation, reduced energy consumption, and cost-effectiveness.', 'Times New Roman', 12.0, None, None, None)]
+
+P[18] align=JUSTIFY (3) style=Normal:
+  Text: Thus, the purpose of this review paper is to evaluate the potential use of cow dung and agricultural waste for the development of construction materials through a focus on their properties, applications, benefits, limitations, and recent developments in the study of cow dung and agricultural waste.
+  Runs: [('Thus, the purpose of this review paper is to evaluate the potential use of cow dung and agricultural waste for the development of construction materials through a focus on their properties, applications, benefits, limitations, and recent developments in the study of cow dung and agricultural waste.', 'Times New Roman', 12.0, None, None, None)]
+
+P[21] align=JUSTIFY (3) style=Normal:
+  Text: PROBLEM STATEMENT
+  Runs: [('PROBLEM STATEMENT', 'Times New Roman', 12.0, True, None, None)]
+
+P[22] align=JUSTIFY (3) style=Normal:
+  Text: Traditional materials like cement and fired clay bricks are the primary resources for the construction industry, which consume large amounts of natural resources. This also involves high energy consumption & huge quantities of carbon emissions, resulting in substantial environmental pollution. There are also many farms that produce large quantities of agricultural and animal waste (such as cow dung) in rural areas, which are often disposed of in ways that will lead to even worse environmental and sanitation issues. There have been a variety of studies done on the use of cow dung in making bricks, plaster, and other green construction materials; however, there is a general lack of raise to awareness about its use, lack of standardization and solutions to comparative studies related to cow dung’s mechanical properties, durability, environmental impact, and practical uses. As a result it is necessary to review/or further study the potential of cow dung and agricultural waste to provide low-cost, sustainable, and environmentally-friendly alternatives to modern construction materials.
+  Runs: [('Traditional materials like cement and fired clay bricks are the primary resources for the construction industry, which consume large amounts of natural resources. This also involves ', 'Times New Roman', 12.0, None, None, None), ('high energy', 'Times New Roman', 12.0, None, None, None), (' consumption & huge quantities of carbon emissions, resulting in substantial environmental pollution. ', 'Times New Roman', 12.0, None, None, None), ('There are also many farms that produce large quantities of agricultural and animal waste (such as cow dung) in rural areas, which are often disposed of in ways that will lead to even worse environmental and sanitation issues.', 'Times New Roman', 12.0, None, None, None), (' There have been a variety of studies done on the use of cow dung in making bricks, plaster, and other green construction materials; however, there is a general lack of raise to awareness about its use, lack of standardization and solutions to comparative studies related to cow dung’s mechanical properties, durability, environmental impact, and practical uses. As a result it is necessary to review/or further study the potential of cow dung and agricultural waste to provide low-cost, sustainable, and ', 'Times New Roman', 12.0, None, None, None), ('environmentally-friendly', 'Times New Roman', 12.0, None, None, None), (' alternatives to modern construction materials.', 'Times New Roman', 12.0, None, None, None)]
+
+P[24] align=JUSTIFY (3) style=Normal:
+  Text: NEED OF STUDY
+  Runs: [('NEED OF STUDY', 'Times New Roman', 12.0, True, None, None)]
+
+P[25] align=JUSTIFY (3) style=Normal:
+  Text: The construction sector uses large amounts of natural resources and creates significant levels of environmental pollution through the production of conventional materials such as cement and fired clay bricks. Agricultural and animal waste, in particular, cow dung are also produced in large volumes with much of those materials not being used. This creates an opportunity for developing sustainable, low-cost, and eco-friendly alternative building materials. The application of animal waste, particularly cow dung in construction materials, can assist in the reduction of carbon emissions, will allow for a reduction in waste disposal issues, will reduce construction costs, and will promote sustainable development. Therefore it is important to conduct a review of the potential uses, benefits, limitations, and future scope for the use of cow dung-based materials in environmentally-friendly construction practices.
+  Runs: [('The construction sector uses large amounts of natural resources and creates significant levels of environmental pollution through the production of conventional materials such as cement and fired clay bricks. Agricultural and animal waste, in particular, cow dung ', 'Times New Roman', 12.0, None, None, None), ('are also produced', 'Times New Roman', 12.0, None, None, None), (' in large volumes with much of those materials not being used. This creates an opportunity for developing sustainable, low-cost, and eco-friendly alternative building materials. The application of animal waste, particularly cow dung in construction materials, can assist in the reduction of carbon emissions, will allow for a reduction in waste disposal issues, will reduce construction costs, and will promote sustainable development. ', 'Times New Roman', 12.0, None, None, None), ('Therefore', 'Times New Roman', 12.0, None, None, None), (' it is important to conduct a review of the potential uses, benefits, limitations, and future scope for the use of cow dung-based materials in environmentally-friendly construction practices.', 'Times New Roman', 12.0, None, None, None)]
+
+P[27] align=JUSTIFY (3) style=Normal:
+  Text: OBJECTIVES
+  Runs: [('OBJECTIVES', 'Times New Roman', 12.0, True, None, None)]
+
+P[28] align=JUSTIFY (3) style=List Paragraph:
+  Text: To study the use of cow dung in sustainable construction materials.
+  Runs: [('To study the use of cow dung in sustainable construction materials.', 'Times New Roman', 12.0, None, None, None)]
+
+P[29] align=JUSTIFY (3) style=List Paragraph:
+  Text: To analyse application of cow dung in construction.
+  Runs: [('To ', 'Times New Roman', 12.0, None, None, None), ('analyse', 'Times New Roman', 12.0, None, None, None), (' application of cow dung in construction.', 'Times New Roman', 12.0, None, None, None)]
+
+P[30] align=JUSTIFY (3) style=List Paragraph:
+  Text: To identify the advantages, limitations, and future scope of cow dung in construction.
+  Runs: [('To identify the advantages, limitations, and future scope of cow dung in construction.', 'Times New Roman', 12.0, None, None, None)]
+
+P[31] align=JUSTIFY (3) style=List Paragraph:
+  Text: To promote eco-friendly and sustainable construction practices.
+  Runs: [('To promote eco-friendly and sustainable construction practices.', 'Times New Roman', 12.0, None, None, None)]
+
+P[34] align=JUSTIFY (3) style=Normal:
+  Text: LITERATURE REVIEW
+  Runs: [('LITERATURE REVIEW', 'Times New Roman', 12.0, True, None, None)]
+
+P[35] align=JUSTIFY (3) style=Normal:
+  Text: According to a Life Cycle Assessment (LCA) performed by Shridhar Kumbhar and his colleagues (2014), traditional brick manufacturing in Western Maharashtra requires large amounts of energy and has significant negative effects on the environment. To reduce carbon emissions from traditional bricks, alternative eco-friendly materials must be developed. M. Arunima et al. (2019) investigated Earth Blocks which had been reinforced with Coir Fibres and Cow Dung, and found that the addition of these materials resulted in significantly greater compressive strength and crack resistance, providing additional options for low-cost housing alternatives to traditional construction. P.R. Fernando et al. (2019) opined that Fire Clay bricks containing Cow Dung Ash improved their physical and chemical properties, had lower density, and outperformed other brick types in thermal performance. P. Indhiradevi et al. (2020) determined through testing Fly Ash bricks using both Cow Dung Ash and Wood Ash as partial replacements that Cow Dung Ash was superior with respect to sustainability and strength measures. In research by S.R. Bondre and colleagues, they found a high potential for use of Cow Waste as an additive material for construction products due to its ability to improve product workability, decrease product cost, and encourage the adoption of green building techniques. D.S. Thanki and G.D. Gohil (2024) found that light-weight Cow Dung bricks were more energy-efficient and cost-effective than conventional bricks.
+  Runs: [('According to a Life Cycle Assessment (LCA) performed by ', 'Times New Roman', 12.0, None, None, None), ('Shridhar', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('Kumbhar', 'Times New Roman', 12.0, None, None, None), (' and his colleagues (2014), traditional brick manufacturing in Western Maharashtra requires large amounts of energy and has significant negative effects on the environment. To reduce carbon emissions from traditional bricks, alternative eco-friendly materials ', 'Times New Roman', 12.0, None, None, None), ('must be developed', 'Times New Roman', 12.0, None, None, None), ('. M. ', 'Times New Roman', 12.0, None, None, None), ('Arunima', 'Times New Roman', 12.0, None, None, None), (' et al. (2019) investigated Earth ', 'Times New Roman', 12.0, None, None, None), ('Blocks which', 'Times New Roman', 12.0, None, None, None), (' had been reinforced with Coir ', 'Times New Roman', 12.0, None, None, None), ('Fibres', 'Times New Roman', 12.0, None, None, None), (' and Cow Dung, and found that the addition of these materials resulted in significantly greater compressive strength and crack resistance, providing additional options for low-cost housing alternatives to traditional construction. P.R. Fernando et al. (2019) opined that Fire Clay bricks containing Cow Dung Ash improved their physical and chemical properties, had lower density, and outperformed other brick types in thermal performance. P. ', 'Times New Roman', 12.0, None, None, None), ('Indhiradevi', 'Times New Roman', 12.0, None, None, None), (' et al. (2020) determined through testing Fly Ash bricks using both Cow Dung Ash and Wood Ash as partial replacements that Cow Dung Ash was superior with respect to sustainability and strength measures. In research by S.R. ', 'Times New Roman', 12.0, None, None, None), ('Bondre', 'Times New Roman', 12.0, None, None, None), (' and colleagues, they found a high potential for use of Cow Waste as an additive material for construction products due to its ability to improve product workability, decrease product cost, and encourage the adoption of green building techniques. D.S. ', 'Times New Roman', 12.0, None, None, None), ('Thanki', 'Times New Roman', 12.0, None, None, None), (' and G.D. ', 'Times New Roman', 12.0, None, None, None), ('Gohil', 'Times New Roman', 12.0, None, None, None), (' (2024) found that ', 'Times New Roman', 12.0, None, None, None), ('light-weight', 'Times New Roman', 12.0, None, None, None), (' Cow Dung bricks were more energy-efficient and cost-effective than conventional bricks.', 'Times New Roman', 12.0, None, None, None)]
+
+P[37] align=JUSTIFY (3) style=Normal:
+  Text: D. P. Katale et al. (2024) conducted research on combining clay-based soil and Cowpats and found that they can improve Cohesive Properties and reduce the risk of Cracking, which ultimately increases the lifespan of an Earthen Material. P. Magudeaswaran et al. (2018) created Eco-Brick and Concrete products using Cowpats as a partial replacement of Cement and found they can help reduce the Negative Environmental Effects of building materials while maintaining sufficient compressive strength of both products. R. R. Moussa (2024) researched Sugarcane Bagasse as an Addition to Clay bricks and suggested that this combination may help to improve the Thermal Insulation of buildings and part of their Energy Load due to Reduced Electricity Consumption. G.
+  Runs: [('D. P. ', 'Times New Roman', 12.0, None, None, None), ('Katale', 'Times New Roman', 12.0, None, None, None), (' et al. (2024) conducted research on combining clay-based soil and Cowpats and found that they can improve Cohesive Properties and reduce the risk of Cracking, which ultimately increases the lifespan of an Earthen Material. P. ', 'Times New Roman', 12.0, None, None, None), ('Magudeaswaran', 'Times New Roman', 12.0, None, None, None), (' et al. (2018) created Eco-Brick and Concrete products using Cowpats as a partial replacement of Cement and found they can help reduce the Negative Environmental Effects of building materials while maintaining sufficient compressive strength of both products. R. R. Moussa (2024) researched Sugarcane Bagasse as an Addition to Clay bricks and suggested that this combination may help to improve the Thermal Insulation of buildings and part of their Energy Load due to Reduced Electricity Consumption. G.', 'Times New Roman', 12.0, None, None, None)]
+
+P[39] align=JUSTIFY (3) style=Normal:
+  Text: S. Sutar et al. (2023) studied the use of Cow dung bricks and compared them to traditional clay bricks. Their results showed that Cow dung bricks are more Eco-Friendly and economically 
+  Runs: [('S. ', 'Times New Roman', 12.0, None, None, None), ('Sutar', 'Times New Roman', 12.0, None, None, None), (' et al. (2023) studied the use of Cow dung bricks and compared them to traditional clay bricks. Their results showed that Cow dung bricks are more Eco-Friendly and economically ', 'Times New Roman', 12.0, None, None, None)]
+
+P[40] align=JUSTIFY (3) style=Normal:
+  Text: advantageous but may have Lower Strength.
+  Runs: [('advantageous', 'Times New Roman', 12.0, None, None, None), (' but may have Lower Strength.', 'Times New Roman', 12.0, None, None, None)]
+
+P[42] align=JUSTIFY (3) style=Normal:
+  Text: Bernat Vinolas et al. (2025) examined Sustainable Wall Construction Practices and concluded that both Natural and Waste-based building materials will help to reduce the Total Environmental Impact of building structures for Rural Housing. Solene Bouzinac et al. (2025) proposed new Mix Design Approaches for Extruded Earth bricks, which provided Improved Strength and Durability of the bricks by using Cementitious Materials in the mix. S. Saari et al. (2025) researched Compressive Strength Relationships in Compressed Earth Brick Structures, providing valuable insight regarding the Engineering Properties of Compressed Earth Brick Structures.
+  Runs: [('Bernat', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('Vinolas', 'Times New Roman', 12.0, None, None, None), (' et al. (2025) examined Sustainable Wall Construction Practices and concluded that both Natural and Waste-based building materials will help to reduce the Total Environmental Impact of building structures for Rural Housing. ', 'Times New Roman', 12.0, None, None, None), ('Solene', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('Bouzinac', 'Times New Roman', 12.0, None, None, None), (' et al. (2025) proposed new Mix Design Approaches for Extruded Earth bricks, which provided Improved Strength and Durability of the bricks by using Cementitious Materials in the mix. S. ', 'Times New Roman', 12.0, None, None, None), ('Saari', 'Times New Roman', 12.0, None, None, None), (' et al. (2025) researched Compressive Strength Relationships in Compressed Earth Brick Structures, providing valuable insight regarding the Engineering Properties of Compressed Earth Brick Structures.', 'Times New Roman', 12.0, None, None, None)]
+
+P[44] align=JUSTIFY (3) style=Normal:
+  Text: In 2025, Youssef Khrissi and Amine Tilioua created eco-friendly earth bricks reinforced with date palm fibers and found that these bricks exhibited improved thermal and mechanical properties. In 2025, Xinyuan Zhang and others also presented corn straw that has been carbonized as a green building material with outstanding sound absorption and thermal insulation properties. Salim Barbhuiya and colleagues (2025) examined low-cost sustainable building materials for housing made from waste material found locally. The research conducted by Md Hamidul Islam and others in 2025 on concrete that employs natural fibres with waste bricks as aggregate found that the concrete exhibits enhanced strength and sustainability. In 2025, Mahapara Abbass and Shalom Akhai developed geopolymer bricks using rice husk ash and bagasse ash and demonstrated that these bricks have high strength and are eco-friendly. In 2024, Wen-Cheng Shao and other researchers examined insulating bricks produced from oyster shells and observed their thermal performance improved significantly and they are sustainable. Rachid Kidari and Amine Tilioua examined compressed earth bricks reinforced with corn straw in 2024 and documented their thermomechanical properties are improved as a result. Webster Sambo et al. (2024) also studied. Then they documented that intermixed soils create higher mechanical strengths in unfired earth bricks through the soil blending process.
+  Runs: [('In 2025, Youssef ', 'Times New Roman', 12.0, None, None, None), ('Khrissi', 'Times New Roman', 12.0, None, None, None), (' and Amine ', 'Times New Roman', 12.0, None, None, None), ('Tilioua', 'Times New Roman', 12.0, None, None, None), (' created eco-friendly earth bricks reinforced with date palm fibers and found that these bricks exhibited improved thermal and mechanical properties. In 2025, ', 'Times New Roman', 12.0, None, None, None), ('Xinyuan', 'Times New Roman', 12.0, None, None, None), (' Zhang and others also presented corn straw that ', 'Times New Roman', 12.0, None, None, None), ('has been carbonized', 'Times New Roman', 12.0, None, None, None), (' as a green building material with outstanding sound absorption and thermal insulation properties. Salim ', 'Times New Roman', 12.0, None, None, None), ('Barbhuiya', 'Times New Roman', 12.0, None, None, None), (' and colleagues (2025) examined low-cost sustainable building materials for housing made from waste material found locally. The research conducted by ', 'Times New Roman', 12.0, None, None, None), ('Md', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('Hamidul', 'Times New Roman', 12.0, None, None, None), (' Islam and others in 2025 on concrete that employs natural ', 'Times New Roman', 12.0, None, None, None), ('fibres', 'Times New Roman', 12.0, None, None, None), (' with waste bricks as aggregate found that the concrete exhibits enhanced strength and sustainability. In 2025, ', 'Times New Roman', 12.0, None, None, None), ('Mahapara', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('Abbass', 'Times New Roman', 12.0, None, None, None), (' and Shalom ', 'Times New Roman', 12.0, None, None, None), ('Akhai', 'Times New Roman', 12.0, None, None, None), (' developed ', 'Times New Roman', 12.0, None, None, None), ('geopolymer', 'Times New Roman', 12.0, None, None, None), (' bricks using rice husk ash and bagasse ash and demonstrated that these bricks have high strength and are eco-friendly. In 2024, Wen-Cheng Shao and other researchers examined insulating bricks produced from oyster shells and observed their thermal performance improved significantly and they are sustainable. ', 'Times New Roman', 12.0, None, None, None), ('Rachid', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('Kidari', 'Times New Roman', 12.0, None, None, None), (' and Amine ', 'Times New Roman', 12.0, None, None, None), ('Tilioua', 'Times New Roman', 12.0, None, None, None), (' examined compressed earth bricks reinforced with corn straw in 2024 and documented their thermomechanical properties ', 'Times New Roman', 12.0, None, None, None), ('are improved', 'Times New Roman', 12.0, None, None, None), (' as a result. Webster Sambo et al. (2024) also studied. Then they documented that intermixed soils create higher mechanical strengths in unfired earth bricks through the soil blending process.', 'Times New Roman', 12.0, None, None, None)]
+
+P[46] align=JUSTIFY (3) style=Heading 1:
+  Text: Research Gap
+  Runs: [('Research Gap', 'Times New Roman', 12.0, True, None, None)]
+
+P[47] align=JUSTIFY (3) style=Heading 1:
+  Text: The literature review has highlighted various gaps in terms of research conducted into the use of 
+  Runs: [('The literature review has highlighted various gaps in terms of research conducted into the use of ', 'Times New Roman', 12.0, None, None, None)]
+
+P[48] align=JUSTIFY (3) style=Normal:
+  Text: agricultural wastes and cow dung in creating sustainable construction materials. The majority of previous research has investigated mainly compressive strength properties and basic physical characteristics of cow dung brick materials, with an emphasis on short-term compressive strength attributes; however, very little research has focused on assessing long-term durability or structural performance. There are very few studies that have examined the water resistance properties, weathering behaviours and service life of cow dung-based materials as they are exposed to various environmental factors.
+  Runs: [('agricultural', 'Times New Roman', 12.0, None, None, None), (' wastes and cow dung in creating sustainable construction materials. The majority of', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('previous research has investigated mainly compressive strength properties and basic', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('physical', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('characteristics of cow dung brick materials, with an emphasis on short-term compressive strength attributes; however, very little research has focused on assessing long-term durability or structural performance. There are very few studies that have examined the water resistance ', 'Times New Roman', 12.0, None, None, None), ('properties, weathering ', 'Times New Roman', 12.0, None, None, None), ('behaviours', 'Times New Roman', 12.0, None, None, None), (' and service life of cow d', 'Times New Roman', 12.0, None, None, None), ('ung-based materials as they ', 'Times New Roman', 12.0, None, None, None), ('are ', 'Times New Roman', 12.0, None, None, None), ('exposed', 'Times New Roman', 12.0, None, None, None), (' to various environmental factors.', 'Times New Roman', 12.0, None, None, None)]
+
+P[50] align=JUSTIFY (3) style=Heading 1:
+  Text: There are currently no international standardisation protocols for the proportions of materials used to produce cow dung building materials, manufacturing techniques, or specifications for quality control when producing these materials. Comparative studies between conventional clay bricks and cow dung bricks have not been conducted, particularly with respect to thermal insulation properties; cost effectiveness; energy efficiency; and environmental impact. Very few researchers have provided detailed life cycle assessments (LCAs) and carbon emissions analyses for these sustainable building materials.
+  Runs: [('There are currently no international ', 'Times New Roman', 12.0, None, None, None), ('standardisation', 'Times New Roman', 12.0, None, None, None), (' protocols for the proportions of materials used to produce ', 'Times New Roman', 12.0, None, None, None), ('cow dung building materials', 'Times New Roman', 12.0, None, None, None), (', manufacturing techniques, or specifications for quality control when producing these materials. Comparative studies between conventional clay bricks and cow dung bricks ', 'Times New Roman', 12.0, None, None, None), ('have not been conducted', 'Times New Roman', 12.0, None, None, None), (', particularly with respect to thermal insulation properties; cost effectiveness; energy efficiency; and environmental impact. Very few researchers have provided detailed life cycle assessments (LCAs) and carbon emissions analyses for these sustainable building materials.', 'Times New Roman', 12.0, None, None, None)]
+
+P[52] align=JUSTIFY (3) style=Normal:
+  Text: In addition, there has not yet been significant government standards regarding cow dung as material for construction, nor will there likely be any widespread field use. This shows that more research is necessary to develop cow dung construction materials that are stronger, last longer, stay dry, and overall have practical applications available, in order to support sustainable development.
+  Runs: [('In addition, there has not yet been significant government standards regarding cow dung as material for construction, nor will there likely be any widespread field use. This shows that more research is necessary to develop cow dung construction materials that are stronger, last longer, stay dry, and overall have practical applications available, in order to support sustainable development.', 'Times New Roman', 12.0, None, None, None)]
+
+P[54] align=JUSTIFY (3) style=Normal:
+  Text: METHODOLOGY
+  Runs: [('METHODOLOGY', 'Times New Roman', 12.0, True, None, None)]
+
+P[56] align=CENTER (1) style=Heading 1:
+  Text: Identification of Research Topic
+  Runs: [('Identification of Research Topic', 'Times New Roman', 12.0, None, None, None)]
+
+P[57] align=CENTER (1) style=Normal:
+  Text: ↓
+  Runs: [('↓', 'Times New Roman', 12.0, None, None, None)]
+
+P[58] align=CENTER (1) style=Heading 1:
+  Text: Collection of Research Papers, Journals and Previous Literature Studies
+  Runs: [('Collection of Research Papers, Journals and Previous Literature Studies', 'Times New Roman', 12.0, None, None, None)]
+
+P[59] align=CENTER (1) style=Normal:
+  Text: ↓
+  Runs: [('↓', 'Times New Roman', 12.0, None, None, None)]
+
+P[60] align=CENTER (1) style=Heading 1:
+  Text: Selection of Relevant Review Papers Related to Cow Dung Construction
+  Runs: [('Selection of Relevant Review Papers Related to Cow Dung Construction', 'Times New Roman', 12.0, None, None, None)]
+
+P[61] align=CENTER (1) style=Normal:
+  Text: ↓
+  Runs: [('↓', 'Times New Roman', 12.0, None, None, None)]
+
+P[62] align=CENTER (1) style=Heading 1:
+  Text: Analysis of Different Applications (Bricks, Plaster, Concrete, Earth Blocks)
+  Runs: [('Analysis of Different Applications (Bricks, Plaster, Concrete, Earth Blocks)', 'Times New Roman', 12.0, None, None, None)]
+
+P[63] align=CENTER (1) style=Normal:
+  Text: ↓
+  Runs: [('↓', 'Times New Roman', 12.0, None, None, None)]
+
+P[64] align=CENTER (1) style=Heading 1:
+  Text: Evaluation of Advantages, Limitations and Sustainability Aspects
+  Runs: [('Evaluation of Advantages, Limitations and Sustainability Aspects', 'Times New Roman', 12.0, None, None, None)]
+
+P[65] align=CENTER (1) style=Normal:
+  Text: ↓
+  Runs: [('↓', 'Times New Roman', 12.0, None, None, None)]
+
+P[66] align=CENTER (1) style=Heading 1:
+  Text: Study of Case Studies and SDGs
+  Runs: [('Study of Case Studies and SDGs', 'Times New Roman', 12.0, None, None, None)]
+
+P[67] align=CENTER (1) style=Normal:
+  Text: ↓
+  Runs: [('↓', 'Times New Roman', 12.0, None, None, None)]
+
+P[68] align=CENTER (1) style=Heading 1:
+  Text: Identification of Research Gap and Future Scope
+  Runs: [('Identification of Research Gap and Future Scope', 'Times New Roman', 12.0, None, None, None)]
+
+P[69] align=CENTER (1) style=Normal:
+  Text: ↓
+  Runs: [('↓', 'Times New Roman', 12.0, None, None, None)]
+
+P[70] align=CENTER (1) style=Normal:
+  Text: Final Findings & Conclusion
+  Runs: [('Final Findings & Conclusion', 'Times New Roman', 12.0, None, None, None)]
+
+P[72] align=JUSTIFY (3) style=Normal:
+  Text: PROPERTIES OF COW DUNG AS A CONSTRUCTION MATERIAL
+  Runs: [('PROPERTIES OF COW DUNG AS A CONSTRUCTION MATERIAL', 'Times New Roman', 12.0, True, None, None)]
+
+P[73] align=JUSTIFY (3) style=Normal:
+  Text: For generations, cow dung has served a purpose in conventional construction methods around the world (primarily in rural settings) as it has been evaluated by current scientists and proven that it possesses many beneficial physical and functional qualities that are useful to construction. Cow dung's value is attributed to its physical structure and natural adhesive/ binding properties.
+  Runs: [('For generations, cow dung has served a purpose in conventional construction methods around the world (primarily in rural settings) as ', 'Times New Roman', 12.0, None, None, None), ('it has been evaluated by current scientists', 'Times New Roman', 12.0, None, None, None), (" and proven that it possesses many beneficial physical and functional qualities that are useful to construction. Cow dung's value ", 'Times New Roman', 12.0, None, None, None), ('is attributed', 'Times New Roman', 12.0, None, None, None), (' to its physical structure and natural adhesive/ binding properties.', 'Times New Roman', 12.0, None, None, None)]
+
+P[74] align=JUSTIFY (3) style=List Paragraph:
+  Text: Physical Qualities: Fibrous Composition: Partially decomposed plant material is contained within cow dung - thus providing an organic replacement to 'rebar' or otherwise reinforcing the tensile strength of the mud wall or cement block; therefore preventing cracking when used for their intended purpose (i.e., mud plaster).
+  Runs: [('Physical Qualities:', 'Times New Roman', 12.0, True, None, None), (" Fibrous Composition: Partially decomposed plant material is contained within cow dung - thus providing an organic replacement to 'rebar' or otherwise reinforcing the tensile strength of the mud wall or cement block; therefore preventing cracking when used for their intended purpose (i.e., mud plaster).", 'Times New Roman', 12.0, None, None, None)]
+
+P[75] align=JUSTIFY (3) style=List Paragraph:
+  Text: Low Weight: Lightweight construction materials reduce the weight with which any given construction method can bear upon the entirety of the structure.
+  Runs: [('Low Weight:', 'Times New Roman', 12.0, True, None, None), (' Lightweight construction materials reduce the weight with which any given construction method can bear upon the entirety of the structure.', 'Times New Roman', 12.0, None, None, None)]
+
+P[76] align=JUSTIFY (3) style=List Paragraph:
+  Text: Porous Nature: The porous nature of cow manure creates breathable walls that contribute to the maintenance of relative humidity within a particular space inside a building.
+  Runs: [('Porous Nature:', 'Times New Roman', 12.0, True, None, None), (' The porous nature of cow manure creates breathable walls that contribute to the maintenance of relative humidity within a particular space inside a building.', 'Times New Roman', 12.0, None, None, None)]
+
+P[77] align=JUSTIFY (3) style=List Paragraph:
+  Text: Thermal Insulating: Cow dung's low thermal conductivity makes it an excellent insulating material. Cow dung plastering keeps buildings cooler in the summertime and warmer in the winter, which also improves energy efficiency. This results in less reliance on artificial heating and cooling systems.
+  Runs: [('Thermal Insulating:', 'Times New Roman', 12.0, True, None, None), (" Cow dung's low thermal conductivity makes it an excellent insulating material. Cow dung plastering keeps buildings cooler in the summertime and warmer in the winter, which also improves energy efficiency. This results in less reliance on artificial heating and cooling systems.", 'Times New Roman', 12.0, None, None, None)]
+
+P[78] align=JUSTIFY (3) style=List Paragraph:
+  Text: Bonding & Cohesion: Cow dung acts as a natural bonding agent when mixed with soil and/or clay. When added to earthen construction materials, it increases the bond/coheison between the admixture and the earthen construction product. This increases the workability and plasticity of the mixtures used for making bricks and also for making plaster.
+  Runs: [('Bonding & Cohesion:', 'Times New Roman', 12.0, True, None, None), (' Cow dung acts as a natural bonding agent when mixed with soil and/or clay. When added to earthen construction materials, it increases the bond/', 'Times New Roman', 12.0, None, None, None), ('coheison', 'Times New Roman', 12.0, None, None, None), (' between the admixture and the earthen construction product. This increases the workability and plasticity of the mixtures used for making bricks ', 'Times New Roman', 12.0, None, None, None), ('and also', 'Times New Roman', 12.0, None, None, None), (' for making plaster.', 'Times New Roman', 12.0, None, None, None)]
+
+P[79] align=JUSTIFY (3) style=List Paragraph:
+  Text: Mechanical Properties: Cow dung, when used in combination with soil and/or ash, provides moderate compressive strength. The fibers within cow dung improve crack resistance and flexibility, reducing the likelihood of a brittle failure. When the dung has been converted to ash (cow dung ash), it possesses pozzolanic properties and may be used as partial replacement for cement.
+  Runs: [('Mechanical Properties:', 'Times New Roman', 12.0, True, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('Cow dung, when used in combination with soil and/or ash', 'Times New Roman', 12.0, None, None, None), (', ', 'Times New Roman', 12.0, None, None, None), ('provides moderate compressive strength', 'Times New Roman', 12.0, None, None, None), ('. The fibers within cow dung improve crack resistance and flexibility, reducing the likelihood of a brittle failure. When the dung has been converted to ash (cow dung ash), it possesses ', 'Times New Roman', 12.0, None, None, None), ('pozzolanic', 'Times New Roman', 12.0, None, None, None), (' properties and may be used as partial replacement for cement.', 'Times New Roman', 12.0, None, None, None)]
+
+P[80] align=JUSTIFY (3) style=List Paragraph:
+  Text: Water Resistant: If cow dung is adequately mixed with clay, it will reduce water permeability, thereby helping to protect walls from minor amounts of moisture penetration. However, if the cow dung materials are not stabilized, they may be subject to failure during periods of heavy rain.
+  Runs: [('Water ', 'Times New Roman', 12.0, True, None, None), ('Resistant: ', 'Times New Roman', 12.0, True, None, None), ('If', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('cow', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('dung', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('is', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('adequately', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('mixed', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('with', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('clay,', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('it', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('will', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('reduce', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('water', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('permeability,', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('thereby', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('helping ', 'Times New Roman', 12.0, None, None, None), ('to protect walls from minor amounts of moisture penetration. However, if the cow dung materials', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('are', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('not', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('stabilized', 'Times New Roman', 12.0, None, None, None), (',', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('they', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('may', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('be', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('subject', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('to', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('failure', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('during', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('periods', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('of', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('heavy', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('rain.', 'Times New Roman', 12.0, None, None, None)]
+
+P[81] align=JUSTIFY (3) style=List Paragraph:
+  Text: Insect Repellant Plus Antibacterial Properties: Considered to have antimicrobial activity, aiding with maintaining hygienic conditions. As an insect repellent, it serves as a natural barrier to protect against many different types of insect pests including; termites or mosquitoes.
+  Runs: [('Insect', 'Times New Roman', 12.0, True, None, None), (' ', 'Times New Roman', 12.0, True, None, None), ('Repellant', 'Times New Roman', 12.0, True, None, None), (' ', 'Times New Roman', 12.0, True, None, None), ('Plus', 'Times New Roman', 12.0, True, None, None), (' ', 'Times New Roman', 12.0, True, None, None), ('Antibacterial', 'Times New Roman', 12.0, True, None, None), (' ', 'Times New Roman', 12.0, True, None, None), ('Properties: ', 'Times New Roman', 12.0, True, None, None), ('Considered to have', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('antimicrobial activity, aiding with', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('maintaining hygienic', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('conditions. As an ', 'Times New Roman', 12.0, None, None, None), ('insect', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('repellent,', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('it', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('serves', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('as', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('a', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('natural', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('barrier', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('to', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('protect', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('against', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('many', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('different', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('types', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('of', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('insect pests', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('including', 'Times New Roman', 12.0, None, None, None), (';', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('termites', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('or', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('mosquitoes.', 'Times New Roman', 12.0, None, None, None)]
+
+P[82] align=JUSTIFY (3) style=List Paragraph:
+  Text: Environmental properties: Biodegradable and environmentally friendly, it reduces the creation of waste by utilizing the by-product of animal production. It has less embodied energy than cement or synthetic materials do in their full life cycle.
+  Runs: [('Environmental', 'Times New Roman', 12.0, True, None, None), (' ', 'Times New Roman', 12.0, True, None, None), ('properties: ', 'Times New Roman', 12.0, True, None, None), ('Biodegradable', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('and', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('environmentally', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('friendly,', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('it', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('reduces', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('the', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('creation', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('of', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('waste', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('by', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('utilizing', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('the ', 'Times New Roman', 12.0, None, None, None), ('by-product of animal production. It has less embodied energy than cement or synthetic materials', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('do', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('in their full life', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('cycle.', 'Times New Roman', 12.0, None, None, None)]
+
+P[83] align=JUSTIFY (3) style=List Paragraph:
+  Text: Acoustic Properties: Cow dung is a natural sound-absorbing material and when used as a plaster, can provide comfort acoustically within buildings. By using cow dung for plasters in rural and/or low- income homes, it has been valuable in minimizing noise levels.
+  Runs: [('Acoustic', 'Times New Roman', 12.0, True, None, None), (' ', 'Times New Roman', 12.0, True, None, None), ('Properties: ', 'Times New Roman', 12.0, True, None, None), ('Cow dung is a natural sound-absorbing material and when used as a plaster, can provide comfort', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('acoustically within', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('buildings.', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('By', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('using cow', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('dung', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('for', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('plasters', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('in rural and/or', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('low- income', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('homes,', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('it', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('has', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('been', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('valuable', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('in', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('minimizing', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('noise', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('levels.', 'Times New Roman', 12.0, None, None, None)]
+
+P[84] align=JUSTIFY (3) style=List Paragraph:
+  Text: Fire Resistance: Dried cow dung is reported to have moderate fire spread resistance, however it does not provide complete fire protection. Cow dung is commonly mixed with soil or ash as a means of improving fire performance.
+  Runs: [('Fire', 'Times New Roman', 12.0, True, None, None), (' ', 'Times New Roman', 12.0, True, None, None), ('Resistance:', 'Times New Roman', 12.0, True, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('Dried', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('cow', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('dung', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('is reported', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('to', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('have', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('moderate', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('fire', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('spread', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('resistance,', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('however', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('it does', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('not provide ', 'Times New Roman', 12.0, None, None, None), ('complete fire protection. Cow dung ', 'Times New Roman', 12.0, None, None, None), ('is commonly mixed', 'Times New Roman', 12.0, None, None, None), (' with soil or ash as a means of improving fire performance.', 'Times New Roman', 12.0, None, None, None)]
+
+P[86] align=JUSTIFY (3) style=List Paragraph:
+  Text: CASE STUDY: VEDIC BHAWAN, ROHTAK
+  Runs: [('CASE STUDY: VEDIC BHAWAN, ROHTAK', 'Times New Roman', 12.0, True, None, None)]
+
+P[87] align=JUSTIFY (3) style=Normal:
+  Text: Introduction
+  Runs: [('Introduction', 'Times New Roman', 12.0, True, None, None)]
+
+P[88] align=JUSTIFY (3) style=Normal:
+  Text: The Vedic Bhawan is amongst the first commercial structures constructed in India that has been completely built using cow dung based materials. It was built by Dr. Shivdarshan Malik in 2018 as an extension to the Vedic Plaster and Gaucrete Research Institute.
+  Runs: [('The Vedic ', 'Times New Roman', 12.0, None, None, None), ('Bhawan', 'Times New Roman', 12.0, None, None, None), (' is amongst the first commercial structures constructed in India that ', 'Times New Roman', 12.0, None, None, None), ('has been completely built', 'Times New Roman', 12.0, None, None, None), (' using cow dung based materials. ', 'Times New Roman', 12.0, None, None, None), ('It was built by Dr. ', 'Times New Roman', 12.0, None, None, None), ('Shivdarshan', 'Times New Roman', 12.0, None, None, None), (' Malik', 'Times New Roman', 12.0, None, None, None), (' in 2018 as an extension to the Vedic Plaster and ', 'Times New Roman', 12.0, None, None, None), ('Gaucrete', 'Times New Roman', 12.0, None, None, None), (' Research Institute.', 'Times New Roman', 12.0, None, None, None)]
+
+P[90] align=JUSTIFY (3) style=Normal:
+  Text: Project Details
+  Runs: [('Project Details', 'Times New Roman', 12.0, True, None, None)]
+
+P[91] align=JUSTIFY (3) style=Normal:
+  Text: Location: Rohtak, Haryana Built-up Area: 400 sqm Total Area: 700 sqm Typology: Commercial
+  Runs: [('Location: ', 'Times New Roman', 12.0, None, None, None), ('Rohtak', 'Times New Roman', 12.0, None, None, None), (', Haryana Built-up Area: 400 ', 'Times New Roman', 12.0, None, None, None), ('sqm', 'Times New Roman', 12.0, None, None, None), (' Total Area: 700 ', 'Times New Roman', 12.0, None, None, None), ('sqm', 'Times New Roman', 12.0, None, None, None), (' Typology: Commercial', 'Times New Roman', 12.0, None, None, None)]
+
+P[94] align=CENTER (1) style=Body Text:
+  Text: Figure 1: Case studies
+  Runs: [('Figure', None, None, True, True, None), (' 1', None, None, True, True, None), (': ', None, None, True, True, None), ('Case', None, None, True, True, None), (' ', None, None, True, True, None), ('studies', None, None, True, True, None)]
+
+P[95] align=None style=Body Text:
+  Text: Link- https://share.google/tez8UcsvzkN9A6LIN
+  Runs: [('Link-', None, None, None, None, None), (' ', None, None, None, None, None)]
+
+P[96] align=JUSTIFY (3) style=Normal:
+  Text: Materials and Construction
+  Runs: [('Materials and Construction', 'Times New Roman', 12.0, True, None, None)]
+
+P[97] align=JUSTIFY (3) style=Normal:
+  Text: The following substances were used in the formation of the building: -Bricks made from cow dung, mud, lime, and cow urine -Mortar made from cow dung, mud, lime, and cow urine -Walls could be plastered with Vedic plaster (made of gypsum, cow dung, mud, citric acid) -The surface was finished with a Vedic paint (made from cow dung).
+  Runs: [('The following substances were used in the formation of the building: -Bricks made from cow dung, mud, lime, and cow urine -Mortar made from cow dung, mud, lime, and cow urine -Walls could be plastered with Vedic plaster (made of gypsum, cow dung, mud, citric acid) -The surface was finished with a Vedic paint (made from cow dung).', 'Times New Roman', 12.0, None, None, None)]
+
+P[99] align=JUSTIFY (3) style=Normal:
+  Text: Climate Response
+  Runs: [('Climate Response', 'Times New Roman', 12.0, True, None, None)]
+
+P[100] align=JUSTIFY (3) style=Normal:
+  Text: The region has extreme climates, with temperatures ranging between -3°C to +50°C, and thus the use of cow dung materials will allow for better regulation of indoor thermal comfort levels; such buildings can be effectively constructed for both hot and cool climatic conditions.
+  Runs: [('The region has extreme climates, with temperatures ranging between -3°C to ', 'Times New Roman', 12.0, None, None, None), ('+50°C', 'Times New Roman', 12.0, None, None, None), (', and thus the use of cow dung materials will allow for better regulation of indoor thermal comfort levels; such buildings can be effectively constructed for both hot and cool climatic conditions.', 'Times New Roman', 12.0, None, None, None)]
+
+P[102] align=JUSTIFY (3) style=Normal:
+  Text: Benefits
+  Runs: [('Benefits', 'Times New Roman', 12.0, True, None, None)]
+
+P[103] align=JUSTIFY (3) style=Normal:
+  Text: Cow dung-based buildings will cool the entire building by up to 10°C lower than a traditional RCC structure; additionally, there will be improved indoor air quality and ventilation resulting in better health for the occupants of the structure; there will also be considerable earth-friendly cost savings due to reduced building material requirements and ultimately may help reduce the negative effects that harmful rays of radiation will have on occupants.
+  Runs: [('Cow dung-based buildings will cool the entire building by up to 10°C lower than a traditional RCC structure; additionally, there will be improved indoor air quality and ventilation resulting in better health for the occupants of the structure; there will also be considerable earth-friendly cost savings due to reduced building material requirements and ultimately may help reduce the negative effects that harmful rays of radiation will have on occupants.', 'Times New Roman', 12.0, None, None, None)]
+
+P[105] align=JUSTIFY (3) style=Normal:
+  Text: Inferences
+  Runs: [('Inferences', 'Times New Roman', 12.0, True, None, None)]
+
+P[106] align=JUSTIFY (3) style=Normal:
+  Text: In contrast with conventional building products, cow dung-based building products are sustainable and economical; additionally, they will provide superior thermal insulationcompared to conventional products; finally, the components used to manufacture cow dung-based building products are also acceptable for use in eco-friendly construction in rural locations; therefore the manufacturing process and regular maintenance to preserve these products will be required.
+  Runs: [('In contrast with conventional building products, cow dung-based building products are sustainable and economical; additionally, they will prov', 'Times New Roman', 12.0, None, None, None), ('ide superior thermal ', 'Times New Roman', 12.0, None, None, None), ('insulation', 'Times New Roman', 12.0, None, None, None), ('compared', 'Times New Roman', 12.0, None, None, None), (' to conventional products; finally, the components used to manufacture cow dung-based building products are also acceptable for use in eco-friendly construction in rural locations; ', 'Times New Roman', 12.0, None, None, None), ('therefore', 'Times New Roman', 12.0, None, None, None), (' the manufacturing process and regular maintenance to preserve these products will be required.', 'Times New Roman', 12.0, None, None, None)]
+
+P[108] align=JUSTIFY (3) style=Normal:
+  Text: UNITED NATIONS SUSTAINABLE DEVELOPMENT GOALS (SDGS)
+  Runs: [('UNITED NATIONS SUSTAINABLE DEVELOPMENT GOALS (SDGS)', 'Times New Roman', 12.0, True, None, None)]
+
+P[109] align=JUSTIFY (3) style=Normal:
+  Text: Utilizing agricultural wastes, including cow dung, in construction aligns directly with the United Nations Sustainable Development Goals (SDGs), which aim to achieve environmentally sound and sustainable development by the year 2030. By using these environmentally friendly materials, it greatly supports SDG 11: Sustainable Cities and Communities and will help provide more affordable, durable, and sustainable housing, especially in rural places and low income communities.
+  Runs: [('Utilizing agricultural wastes, including cow dung, in construction aligns directly with the United Nations Sustainable Development Goals (SDGs), which aim to achieve environmentally sound and sustainable development by the year 2030. By using these environmentally friendly materials, it greatly supports SDG 11: Sustainable Cities and Communities and will help provide more affordable, durable, and sustainable housing, especially in rural places and ', 'Times New Roman', 12.0, None, None, None), ('low income', 'Times New Roman', 12.0, None, None, None), (' communities.', 'Times New Roman', 12.0, None, None, None)]
+
+P[110] align=JUSTIFY (3) style=Normal:
+  Text: In addition to supporting SDG 11, using agricultural residues and animal waste in construction will help fulfill SDG 12, Responsible Consumption and Production as it encourages an efficient use of resources and reduces waste through recycling and reuse. Also, by reducing the quantity of carbon dioxide emissions produced by traditional construction materials such as cement, these materials contribute to SDG 13, Climate Action.
+  Runs: [('In addition to supporting SDG 11, using agricultural residues and animal waste in construction will help fulfill SDG 12, Responsible Consumption and Production as it encourages an efficient use of resources and reduces waste through recycling and reuse. Also, by reducing the quantity of carbon dioxide emissions produced by traditional construction materials such as cement, these materials contribute to SDG 13, Climate Action.', 'Times New Roman', 12.0, None, None, None)]
+
+P[112] align=JUSTIFY (3) style=Normal:
+  Text: Innovative bio-based construction materials support SDG 9, Industry, Innovation and Infrastructure as they promote sustainable technical advancements. Additionally, because many of these materials have improved thermal insulation characteristics, they also contribute to SDG 7, Affordable and Clean Energy by decreasing energy use in buildings.
+  Runs: [('Innovative bio-based construction materials support SDG 9, Industry, Innovation and Infrastructure as they promote sustainable technical advancements. Additionally, because many of these materials have improved thermal insulation characteristics, they also contribute to SDG 7, Affordable and Clean Energy by decreasing energy use in buildings.', 'Times New Roman', 12.0, None, None, None)]
+
+P[113] align=JUSTIFY (3) style=Normal:
+  Text: Overall, the incorporation of cow dung and agricultural waste in construction practices is a critical factor in achieving global sustainability goals, thus promoting environmentally sound development.
+  Runs: [('Overall, the incorporation of cow dung and agricultural waste in construction practices is a critical factor in achieving global sustainability goals, thus promoting environmentally sound development.', 'Times New Roman', 12.0, None, None, None)]
+
+P[116] align=CENTER (1) style=Body Text:
+  Text: Figure 2: Sustainable development
+  Runs: [('Figure', None, None, True, True, None), (' 2:', None, None, True, True, None), (' ', None, None, True, True, None), ('Sustainable', None, None, True, True, None), (' ', None, None, True, True, None), ('development', None, None, True, True, None)]
+
+P[118] align=None style=Body Text:
+  Text: Link- https://share.google/3la7WZLaYuMakYMbH
+  Runs: [('Link-', None, None, None, None, None), (' ', None, None, None, None, None)]
+
+P[120] align=JUSTIFY (3) style=Normal:
+  Text: Advantages of Cow Dung and Agricultural Waste in Construction
+  Runs: [('Advantages of Cow Dung and Agricultural Waste in Construction', 'Times New Roman', 12.0, True, None, None)]
+
+P[121] align=None style=Body Text:
+  Text: Eco-friendly: Natural and biodegradable; helps limit environmental damage.
+  Runs: [('Eco-friendly:', None, None, True, None, None), (' ', None, None, None, None, None), ('Natural', None, None, None, None, None), (' ', None, None, None, None, None), ('and', None, None, None, None, None), (' ', None, None, None, None, None), ('biodegradable;', None, None, None, None, None), (' ', None, None, None, None, None), ('helps', None, None, None, None, None), (' ', None, None, None, None, None), ('limit', None, None, None, None, None), (' ', None, None, None, None, None), ('environmental', None, None, None, None, None), (' ', None, None, None, None, None), ('damage.', None, None, None, None, None)]
+
+P[122] align=None style=Body Text:
+  Text: Low Cost: Readily available in rural/agricultural locations; makes building less expensive.
+  Runs: [('Low', None, None, True, None, None), (' ', None, None, True, None, None), ('Cost:', None, None, True, None, None), (' ', None, None, None, None, None), ('Readily', None, None, None, None, None), (' ', None, None, None, None, None), ('available', None, None, None, None, None), (' ', None, None, None, None, None), ('in', None, None, None, None, None), (' ', None, None, None, None, None), ('rural/agricultural', None, None, None, None, None), (' ', None, None, None, None, None), ('locations;', None, None, None, None, None), (' ', None, None, None, None, None), ('makes', None, None, None, None, None), (' ', None, None, None, None, None), ('building', None, None, None, None, None), (' ', None, None, None, None, None), ('less', None, None, None, None, None), (' ', None, None, None, None, None), ('expensive.', None, None, None, None, None)]
+
+P[123] align=None style=Body Text:
+  Text: Waste Utilization: Assists with efficient management of agricultural and animal waste; minimizes disposal.
+  Runs: [('Waste', None, None, True, None, None), (' ', None, None, True, None, None), ('Utilization:', None, None, True, None, None), (' Assists with efficient management', None, None, None, None, None), (' ', None, None, None, None, None), ('of', None, None, None, None, None), (' ', None, None, None, None, None), ('agricultural and', None, None, None, None, None), (' ', None, None, None, None, None), ('animal', None, None, None, None, None), (' ', None, None, None, None, None), ('waste;', None, None, None, None, None), (' ', None, None, None, None, None), ('minimizes', None, None, None, None, None), (' ', None, None, None, None, None), ('disposal.', None, None, None, None, None)]
+
+P[124] align=None style=Body Text:
+  Text: Reduced Carbon Emissions: Reduces cement use, thereby reducing greenhouse gases. Good Thermal Insulation: Provides cool/heat insulation; saves energy.
+  Runs: [('Reduced', None, None, True, None, None), (' ', None, None, True, None, None), ('Carbon', None, None, True, None, None), (' ', None, None, True, None, None), ('Emissions:', None, None, True, None, None), (' ', None, None, None, None, None), ('Reduces', None, None, None, None, None), (' ', None, None, None, None, None), ('cement', None, None, None, None, None), (' ', None, None, None, None, None), ('use,', None, None, None, None, None), (' ', None, None, None, None, None), ('thereby', None, None, None, None, None), (' ', None, None, None, None, None), ('reducing', None, None, None, None, None), (' ', None, None, None, None, None), ('greenhouse', None, None, None, None, None), (' ', None, None, None, None, None), ('gases. ', None, None, None, None, None), ('Good', None, None, True, None, None), (' ', None, None, True, None, None), ('Thermal Insulation:', None, None, True, None, None), (' Provides cool/heat', None, None, None, None, None), (' ', None, None, None, None, None), ('insulation;', None, None, None, None, None), (' ', None, None, None, None, None), ('saves energy.', None, None, None, None, None)]
+
+P[125] align=None style=Body Text:
+  Text: Lightweight Materials: Lowers the weight of the whole structure; thereby decreasing foundation costs.
+  Runs: [('Lightweight', None, None, True, None, None), (' ', None, None, True, None, None), ('Materials:', None, None, True, None, None), (' ', None, None, None, None, None), ('Lowers', None, None, None, None, None), (' ', None, None, None, None, None), ('the', None, None, None, None, None), (' ', None, None, None, None, None), ('weight', None, None, None, None, None), (' ', None, None, None, None, None), ('of', None, None, None, None, None), (' ', None, None, None, None, None), ('the', None, None, None, None, None), (' ', None, None, None, None, None), ('whole', None, None, None, None, None), (' ', None, None, None, None, None), ('structure;', None, None, None, None, None), (' ', None, None, None, None, None), ('thereby', None, None, None, None, None), (' ', None, None, None, None, None), ('decreasing', None, None, None, None, None), (' ', None, None, None, None, None), ('foundation costs.', None, None, None, None, None)]
+
+P[126] align=None style=Body Text:
+  Text: Improved Workability: Increases ease of mixing/working with/adding to.
+  Runs: [('Improved', None, None, True, None, None), (' ', None, None, True, None, None), ('Workability:', None, None, True, None, None), (' ', None, None, None, None, None), ('Increases', None, None, None, None, None), (' ', None, None, None, None, None), ('ease', None, None, None, None, None), (' ', None, None, None, None, None), ('of', None, None, None, None, None), (' ', None, None, None, None, None), ('mixing/working', None, None, None, None, None), (' ', None, None, None, None, None), ('with/adding', None, None, None, None, None), (' ', None, None, None, None, None), ('to', None, None, None, None, None), ('.', None, None, None, None, None)]
+
+P[127] align=None style=Body Text:
+  Text: Crack Resistance: Cow dung has natural fibres, reducing cracking due to shrinkage. Local Availability: Available within villages; reduces cost of transportation.
+  Runs: [('Crack', None, None, True, None, None), (' ', None, None, True, None, None), ('Resistance:', None, None, True, None, None), (' ', None, None, None, None, None), ('Cow', None, None, None, None, None), (' ', None, None, None, None, None), ('dung', None, None, None, None, None), (' ', None, None, None, None, None), ('has', None, None, None, None, None), (' ', None, None, None, None, None), ('natural', None, None, None, None, None), (' ', None, None, None, None, None), ('fibres', None, None, None, None, None), (',', None, None, None, None, None), (' ', None, None, None, None, None), ('reducing', None, None, None, None, None), (' ', None, None, None, None, None), ('cracking', None, None, None, None, None), (' ', None, None, None, None, None), ('due', None, None, None, None, None), (' ', None, None, None, None, None), ('to', None, None, None, None, None), (' ', None, None, None, None, None), ('shrinkage. ', None, None, None, None, None), ('Local', None, None, True, None, None), (' ', None, None, True, None, None), ('Availability:', None, None, True, None, None), (' ', None, None, None, None, None), ('Available', None, None, None, None, None), (' ', None, None, None, None, None), ('within', None, None, None, None, None), (' ', None, None, None, None, None), ('villages;', None, None, None, None, None), (' ', None, None, None, None, None), ('reduces', None, None, None, None, None), (' ', None, None, None, None, None), ('cost', None, None, None, None, None), (' ', None, None, None, None, None), ('of', None, None, None, None, None), (' ', None, None, None, None, None), ('transportation.', None, None, None, None, None)]
+
+P[128] align=None style=Body Text:
+  Text: Sustainable and Renewable: Provides long-term support of sustainable construction.
+  Runs: [('Sustainable', None, None, True, None, None), (' ', None, None, True, None, None), ('and', None, None, True, None, None), (' ', None, None, True, None, None), ('Renewable:', None, None, True, None, None), (' ', None, None, None, None, None), ('Provides', None, None, None, None, None), (' ', None, None, None, None, None), ('long-term', None, None, None, None, None), (' ', None, None, None, None, None), ('support', None, None, None, None, None), (' ', None, None, None, None, None), ('of', None, None, None, None, None), (' ', None, None, None, None, None), ('sustainable', None, None, None, None, None), (' ', None, None, None, None, None), ('construction.', None, None, None, None, None)]
+
+P[130] align=JUSTIFY (3) style=Heading 1:
+  Text: Applications of Cow Dung and Agricultural Waste in Construction
+  Runs: [('Applications', 'Times New Roman', 12.0, True, None, None), (' ', 'Times New Roman', 12.0, True, None, None), ('of', 'Times New Roman', 12.0, True, None, None), (' ', 'Times New Roman', 12.0, True, None, None), ('Cow', 'Times New Roman', 12.0, True, None, None), (' ', 'Times New Roman', 12.0, True, None, None), ('Dung', 'Times New Roman', 12.0, True, None, None), (' ', 'Times New Roman', 12.0, True, None, None), ('and', 'Times New Roman', 12.0, True, None, None), (' ', 'Times New Roman', 12.0, True, None, None), ('Agricultural', 'Times New Roman', 12.0, True, None, None), (' ', 'Times New Roman', 12.0, True, None, None), ('Waste', 'Times New Roman', 12.0, True, None, None), (' ', 'Times New Roman', 12.0, True, None, None), ('in', 'Times New Roman', 12.0, True, None, None), (' ', 'Times New Roman', 12.0, True, None, None), ('Construction', 'Times New Roman', 12.0, True, None, None)]
+
+P[131] align=None style=Normal:
+  Text: 1.	Concrete as Partial Cement Replacement
+  Runs: [('1.', 'Times New Roman', 12.0, True, None, None), ('\tConcrete as Partial Cement Replacement', 'Times New Roman', 12.0, True, None, None)]
+
+P[132] align=JUSTIFY (3) style=Normal:
+  Text: The application of both cow dung ash (CDA) and other agricultural waste materials such as rice husk ash can be used to partially replace cement in the production of concrete; percentage of replacement generally ranges from 5%-20%. The use of these materials not only reduces the amount of carbon emissions created but also lowers the cost of producing concrete and provides satisfactory compressive strength when developing a proper concrete mix.
+  Runs: [('The application of both cow dung ash (CDA) and other agricultural waste materials such as rice husk ash can be used to partially replace cement in the production of concrete; ', 'Times New Roman', 12.0, None, None, None), ('p', 'Times New Roman', 12.0, None, None, None), ('ercentage of replacement generally ranges from 5%-20%. The use of these materials not only reduces the amount of carbon emissions created but also lowers the cost of producing concrete and provides satisfactory compressive strength when developing a proper concrete mix.', 'Times New Roman', 12.0, None, None, None)]
+
+P[133] align=JUSTIFY (3) style=Normal:
+  Text: 2.	Earth Blocks and Bricks Stabilized by Cow Dung Ash
+  Runs: [('2.', 'Times New Roman', 12.0, True, None, None), ('\tEarth Blocks and Bricks Stabilized by Cow Dung Ash', 'Times New Roman', 12.0, True, None, None)]
+
+P[134] align=JUSTIFY (3) style=Normal:
+  Text: The addition of cow dung ash to mud brick and CEB's improves the cohesive properties of the materials, increases bonding strength, enhances resistance to cracking, and increases the overall durability of the blocks. Natural fibers such as straw and coconut coir are added to further increase reinforcement and structural performance.
+  Runs: [("The addition of cow dung ash to mud brick and CEB's improves the cohesive properties of the materials, increases bonding strength, enhances resistance to cracking, and increases the overall durability of the blocks. Natural fibers such as straw and coconut coir ", 'Times New Roman', 12.0, None, None, None), ('are added', 'Times New Roman', 12.0, None, None, None), (' to further increase reinforcement and structural performance.', 'Times New Roman', 12.0, None, None, None)]
+
+P[135] align=JUSTIFY (3) style=Normal:
+  Text: 3.	Use of Cow Dung Ash for Plastering and Coating
+  Runs: [('3.', 'Times New Roman', 12.0, True, None, None), ('\tUse of Cow Dung Ash for Plastering and Coating', 'Times New Roman', 12.0, True, None, None)]
+
+P[136] align=JUSTIFY (3) style=Normal:
+  Text: Cow dung ash can be used in plastering applications to create smooth wall surfaces with better bonding properties than those produced without using this material. In addition, the presence of cow dung ash will reduce crack formation and provide an insulation layer to protect walls against outside weather.
+  Runs: [('Cow dung ash can be used', 'Times New Roman', 12.0, None, None, None), (' in plastering applications to create smooth wall surfaces with better bonding properties than those produced without using this material. In addition, the presence of cow dung ash will reduce crack formation and provide an insulation layer to protect walls against outside weather.', 'Times New Roman', 12.0, None, None, None)]
+
+P[137] align=JUSTIFY (3) style=Normal:
+  Text: 4.	Flooring
+  Runs: [('4.', 'Times New Roman', 12.0, True, None, None), ('\tFlooring', 'Times New Roman', 12.0, True, None, None)]
+
+P[138] align=JUSTIFY (3) style=Normal:
+  Text: In rural building, flooring is typically made with a combination of cow manure mixed with earth. Flooring made this way creates a flat, clean, cool surface, and has natural bacteria-killing properties.
+  Runs: [('In rural building, flooring ', 'Times New Roman', 12.0, None, None, None), ('is typically made', 'Times New Roman', 12.0, None, None, None), (' with a combination of cow manure mixed with earth. Flooring made this way creates a flat, clean, cool surface, and has natural bacteria-killing properties.', 'Times New Roman', 12.0, None, None, None)]
+
+P[139] align=JUSTIFY (3) style=Normal:
+  Text: 5.	Thermal Insulation
+  Runs: [('5.', 'Times New Roman', 12.0, True, None, None), ('\tThermal Insulation', 'Times New Roman', 12.0, True, None, None)]
+
+P[140] align=JUSTIFY (3) style=Normal:
+  Text: Materials created from cow manure are used for thermal insulation layers in walls and roofs in order to keep indoor temperatures stable and reduce energy consumption used to heat and cool buildings.
+  Runs: [('Materials created from cow manure ', 'Times New Roman', 12.0, None, None, None), ('are used', 'Times New Roman', 12.0, None, None, None), (' for thermal insulation layers in walls and roofs in order to keep indoor temperatures stable and reduce energy consumption used to heat and cool buildings.', 'Times New Roman', 12.0, None, None, None)]
+
+P[141] align=JUSTIFY (3) style=Normal:
+  Text: 6.	Lightweight Insulating Panels and Boards
+  Runs: [('6.', 'Times New Roman', 12.0, True, None, None), ('\tLightweight Insulating Panels and Boards', 'Times New Roman', 12.0, True, None, None)]
+
+P[142] align=JUSTIFY (3) style=Normal:
+  Text: Materials from agricultural waste (bamboo, bagasse, and straw) are mixed with bonding materials to manufacture lightweight, biodegradable, and economical wall panels and partition boards.
+  Runs: [('Materials from agricultural waste (bamboo, bagasse, and straw) ', 'Times New Roman', 12.0, None, None, None), ('are mixed', 'Times New Roman', 12.0, None, None, None), (' with bonding materials to manufacture lightweight, biodegradable, and economical wall panels and partition boards.', 'Times New Roman', 12.0, None, None, None)]
+
+P[143] align=JUSTIFY (3) style=Normal:
+  Text: 7.	Roofing
+  Runs: [('7.', 'Times New Roman', 12.0, True, None, None), ('\tRoofing', 'Times New Roman', 12.0, True, None, None)]
+
+P[144] align=JUSTIFY (3) style=Normal:
+  Text: Cow manure mixed with straw and clay is used in agricultural roofing applications to provide thermal insulation and an economical roofing system in eco-friendly/rural houses.
+  Runs: [('Cow manure mixed with straw and clay ', 'Times New Roman', 12.0, None, None, None), ('is used', 'Times New Roman', 12.0, None, None, None), (' in agricultural roofing applications to provide thermal insulation and an economical roofing system in eco-friendly/rural houses.', 'Times New Roman', 12.0, None, None, None)]
+
+P[145] align=JUSTIFY (3) style=Normal:
+  Text: 8.	Mortars & Binders
+  Runs: [('8.', 'Times New Roman', 12.0, True, None, None), ('\tMortars & Binders', 'Times New Roman', 12.0, True, None, None)]
+
+P[146] align=JUSTIFY (3) style=Normal:
+  Text: Cow manure is used in earthen mortars to enhance the workability of mortar, improve the bonding between bricks, and provide flexibility in construction materials.
+  Runs: [('Cow manure ', 'Times New Roman', 12.0, None, None, None), ('is used', 'Times New Roman', 12.0, None, None, None), (' in earthen mortars to enhance the workability of mortar, improve the bonding between bricks, and provide flexibility in construction materials.', 'Times New Roman', 12.0, None, None, None)]
+
+P[148] align=JUSTIFY (3) style=Normal:
+  Text: RESULT & DISCUSSION
+  Runs: [('RESULT & DISCUSSION', 'Times New Roman', 12.0, True, None, None)]
+
+P[149] align=JUSTIFY (3) style=Normal:
+  Text: According to the review of past research, cow dung and agricultural waste materials could be used to create sustainable and eco-friendly materials for construction projects. Past studies have shown that cow dung used as an ingredient in building bricks, plaster, concrete and earth blocks improves the thermal insulation, crack resistance and workability of those materials. Cow dung fibers provide natural reinforcement, reduce shrinkage cracks and improve bonding properties between the materials.
+  Runs: [('According to the review of past research, cow dung and agricu', 'Times New Roman', 12.0, None, None, None), ('ltural waste materials ', 'Times New Roman', 12.0, None, None, None), ('could be ', 'Times New Roman', 12.0, None, None, None), ('used', 'Times New Roman', 12.0, None, None, None), (' to create sustainable and eco-friendly materials for construction projects. Past studies have shown that cow dung used as an ingredient in building bricks, plaster, ', 'Times New Roman', 12.0, None, None, None), ('concrete', 'Times New Roman', 12.0, None, None, None), (' and earth blocks improves the thermal insulation, crack resistance and workability of those materials. Cow dung fibers provide natural reinforcement, reduce shrinkage cracks and improve bonding properties between the materials.', 'Times New Roman', 12.0, None, None, None)]
+
+P[151] align=JUSTIFY (3) style=Normal:
+  Text: Various researchers found that cow dung ash can replace some of the cement or fly ash used in building bricks without significantly affecting the compressive strength of the finished product. Researchers have determined that cow dung-based bricks are lightweight and cost effective as compared to traditional clay bricks, while also being environmentally friendly. The use of these materials in construction will result in a decrease in carbon emissions, energy usage and waste disposal, which will help to promote sustainable construction practices.
+  Runs: [('Various researchers found that cow dung ash can replace some of the cement or fly ash used in building bricks without significantly affecting the compressive strength of the finished product. Researchers have determined that cow dung-based bricks are lightweight and cost effective as compared to traditional clay bricks, while also being environmentally friendly. The use of these materials in construction will result in a decrease in carbon emissions, energy usage and waste disposal, which will help to promote sustainable construction practices.', 'Times New Roman', 12.0, None, None, None)]
+
+P[153] align=JUSTIFY (3) style=Normal:
+  Text: LIMITATIONS
+  Runs: [('LIMITATIONS', 'Times New Roman', 12.0, True, None, None)]
+
+P[154] align=JUSTIFY (3) style=Normal:
+  Text: While utilizing cow dung or agricultural residuals for construction materials has many environmental and economic advantages, there are still significant limitations that hinder their adoption. These limitations primarily have to do with the lower mechanical strengths (load- bearing/height) of these materials when compared with conventional materials (cement/concrete). As a result, there will be a lower ability to use these materials in structurally sound and taller buildings. The physical composition of these materials (i.e., animal diet and agricultural waste) leads to high variability of the performance of these materials as a result of the high variability of the constituent materials.
+  Runs: [('While utilizing cow dung or agricultural residuals for construction materials has many environmental and economic advantages, there are still significant limitations that hinder their ', 'Times New Roman', 12.0, None, None, None), ('adoption. These limitations primarily have to do with the lower mechanical strengths (load- bearing/height) of these materials when compared with conventional materials (cement/concrete). As a result, there will be a lower ability to use these materials in structurally sound and taller buildings. The physical composition of these materials (i.e., animal diet and agricultural waste) leads to high variability of the performance of these materials ', 'Times New Roman', 12.0, None, None, None), ('as a result', 'Times New Roman', 12.0, None, None, None), (' of the high variability of the constituent materials.', 'Times New Roman', 12.0, None, None, None)]
+
+P[156] align=JUSTIFY (3) style=Normal:
+  Text: In addition to the mechanical and material properties of cow dung and agricultural residuals, these materials do not have good moisture resistance or weathering resistance, and may therefore suffer from derated (unsafe) characteristics in locations with high rainfall or humidity. Additionally, without building codes for use when implementing cow dung or agricultural residuals, quality control becomes difficult, leading to fewer opportunities for widespread adoption. Finally, issues related to hygiene, odor, and acceptance by potential users may impact whether they are accepted in general construction. Therefore, through better processing of cow dung or agricultural residuals as well as more research will allow for, and support the continued evolution of these building materials.
+  Runs: [('In addition to the mechanical and material properties of cow dung and agricultural residuals, these materials do not have good moisture resistance or weathering resistance, and may therefore suffer from ', 'Times New Roman', 12.0, None, None, None), ('derated', 'Times New Roman', 12.0, None, None, None), (' (unsafe) characteristics in locations with high rainfall or humidity. Additionally, without building codes for use when implementing cow dung or agricultural residuals, quality control becomes difficult, leading to fewer opportunities for widespread adoption. Finally, issues related to hygiene, odor, and acceptance by potential users may ', 'Times New Roman', 12.0, None, None, None), ('impact', 'Times New Roman', 12.0, None, None, None), (' whether they are accepted in general construction. Therefore, through better processing of cow dung or agricultural residuals as well as more research will allow for, and support the continued evolution of these building materials.', 'Times New Roman', 12.0, None, None, None)]
+
+P[158] align=JUSTIFY (3) style=Normal:
+  Text: FUTURE SCOPE
+  Runs: [('FUTURE SCOPE', 'Times New Roman', 12.0, True, None, None)]
+
+P[159] align=JUSTIFY (3) style=Normal:
+  Text: Cow dung and agricultural waste have much potential for use in construction because they are inexpensive, non-toxic, and readily available. The future of cow dung and agricultural waste in construction will involve further research to enhance their strength and durability for greater application in more various of buildings. Scientists may develop new techniques for mixing and developing guidelines that document how to safely utilize these materials within construction. Emerging technologies such as prefabrication and 3D printing may also allow construction projects to more efficiently and quickly incorporate these materials.
+  Runs: [('Cow dung and agricultural waste have much potential for use in construction because they are inexpensive, non-toxic, and readily available. The future of cow dung and agricultural waste in construction will involve further research to enhance their strength and durability for greater application in more ', 'Times New Roman', 12.0, None, None, None), ('various', 'Times New Roman', 12.0, None, None, None), (' of buildings. Scientists may develop new techniques for mixing and developing guidelines that document how ', 'Times New Roman', 12.0, None, None, None), ('to safely utilize', 'Times New Roman', 12.0, None, None, None), (' these materials within construction. Emerging technologies such as prefabrication and 3D printing may also allow construction projects to more efficiently and quickly incorporate these materials.', 'Times New Roman', 12.0, None, None, None)]
+
+P[161] align=JUSTIFY (3) style=Normal:
+  Text: These materials may also be blended with modern materials, including chemical substances and/or natural polymers, to improve their environmental performance by enhancing their water-resistance and durability. Furthermore, it will be critical that the usage of these waste products expands significantly to include urban construction projects as well as rural construction projects. Cow dung and agricultural waste will have a significant and positive impact on the overall economic, environmental, and social viability of construction, both now and in the future.
+  Runs: [('These materials ', 'Times New Roman', 12.0, None, None, None), ('may also be blended', 'Times New Roman', 12.0, None, None, None), (' with modern materials, including chemical substances and/or natural polymers, to improve their environmental performance by enhancing their water-resistance and durability. Furthermore, it will be critical that the usage of these waste products expands significantly to include urban construction projects as well as rural construction projects. Cow dung and agricultural waste will have a significant and positive impact on the overall economic, environmental, and social viability of construction, both now and in the future.', 'Times New Roman', 12.0, None, None, None)]
+
+P[162] align=JUSTIFY (3) style=Normal:
+  Text: CONCLUSION
+  Runs: [('CONCLUSION', 'Times New Roman', 12.0, True, None, None)]
+
+P[163] align=JUSTIFY (3) style=Normal:
+  Text: On the basis of this research, it appears that Cow dung is eco-friendly as a building material and could be used sustainably for constructing affordable housing and rural housing. In addition to providing thermal insulation properties, using cow dung in manufactured bricks and composite materials helps to lower density and aid in utilizing waste materials that can be produced locally. Cow dung as a substitute for traditional firing materials such as clay and cement decreases both the environmental impacts created by these materials and the energy consumed in their manufacture. For all of the above reasons, using commodity-based construction materials such as cow dung to achieve sustainable development will help to create less waste, at lower cost, and generate less carbon emissions. Additional research studies will be needed to further develop the strength, durability and standardization of cow dung-based construction products which will help to obtain acceptance of using cow dung-based products in today's modern construction methods.
+  Runs: [('On the basis of', 'Times New Roman', 12.0, None, None, None), (' this research, it appears that Cow dung is eco-friendly as a building material and could be used sustainably for constructing affordable housing and rural housing. In addition to providing thermal insulation properties, using cow dung in manufactured bricks and composite materials helps to lower density and aid in utilizing waste materials that ', 'Times New Roman', 12.0, None, None, None), ('can be produced', 'Times New Roman', 12.0, None, None, None), (" locally. Cow dung as a substitute for traditional firing materials such as clay and cement decreases both the environmental impacts created by these materials and the energy consumed in their manufacture. For all of the above reasons, using commodity-based construction materials such as cow dung to achieve sustainable development will help to create less waste, at lower cost, and generate less carbon emissions. Additional research studies will be needed to further develop the strength, durability and standardization of cow dung-based construction products which will help to obtain acceptance of using cow dung-based products in today's modern construction methods.", 'Times New Roman', 12.0, None, None, None)]
+
+P[165] align=JUSTIFY (3) style=Normal:
+  Text: REFERENCES
+  Runs: [('REFERENCES', 'Times New Roman', 12.0, True, None, None)]
+
+P[166] align=JUSTIFY (3) style=List Paragraph:
+  Text: Shridhar Kumbhar, Nitin Kulkarni, Anand B. Rao, Bakul Rao," Environmental Life Cycle Assessment of Traditional Bricks in Western Maharashtra, India", Energy Procedia Volume 54, 2014, Pages 260-269,https://doi.org/10.1016/j.egypro
+  Runs: [('Shridhar', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('Kumbhar', 'Times New Roman', 12.0, None, None, None), (', Nitin Kulkarni, ', 'Times New Roman', 12.0, None, None, None), ('Anand', 'Times New Roman', 12.0, None, None, None), (' B. Rao, ', 'Times New Roman', 12.0, None, None, None), ('Bakul', 'Times New Roman', 12.0, None, None, None), (' Rao," Environmental Life Cycle Assessment of Traditional Bricks in Western Maharashtra, India", Energy Procedia Volume 54, 2014, Pages 260-269,https://doi.org/10.1016/', 'Times New Roman', 12.0, None, None, None), ('j.egypro', 'Times New Roman', 12.0, None, None, None)]
+
+P[167] align=JUSTIFY (3) style=List Paragraph:
+  Text: .2014.07.269
+  Runs: [('.2014.07.269', 'Times New Roman', 12.0, None, None, None)]
+
+P[168] align=JUSTIFY (3) style=List Paragraph:
+  Text: M. Arunima et al., "Study of Strength of Earth Brick Reinforced with Coir Fibre and Cow Dung," International Journal of Engineering Research and Technology (IJERT), vol. 8, no. 6, June 2019. https://www.ijert.org/research/study-of-strength-of-earthbrick-reinforced-with- coirfibre-and-cowdung-IJERTV8IS060455.pdf
+  Runs: [('M. ', 'Times New Roman', 12.0, None, None, None), ('Arunima', 'Times New Roman', 12.0, None, None, None), (' et al., "Study of Strength of Earth Brick Reinforced with Coir ', 'Times New Roman', 12.0, None, None, None), ('Fibre', 'Times New Roman', 12.0, None, None, None), (' and Cow Dung," International Journal of Engineering Research and Technology (IJERT), vol. 8, no. 6, June 2019. https://www.ijert.org/research/study-of-strength-of-earthbrick-reinforced-with- coirfibre-and-cowdung-IJERTV8IS060455.pdf', 'Times New Roman', 12.0, None, None, None)]
+
+P[169] align=JUSTIFY (3) style=List Paragraph:
+  Text: P. R. Fernando, S. Krishanth, and N. B. Rathnayaka, "Manufacturing, Physical and Chemical Characterization of Fire Clay Brick Value Added with Cow Dung Ash," American Journal of Materials Synthesis and Processing, 2019. https://www.researchgate.net/publication/394970097_Properties_of_Sundried_Bricks_Ma de_from_the_Faecal_Clay
+  Runs: [('P. R. Fernando, S. ', 'Times New Roman', 12.0, None, None, None), ('Krishanth', 'Times New Roman', 12.0, None, None, None), (', and N. B. ', 'Times New Roman', 12.0, None, None, None), ('Rathnayaka', 'Times New Roman', 12.0, None, None, None), (', "Manufacturing, Physical and Chemical Characterization of Fire Clay Brick Value Added with Cow Dung Ash," American Journal of Materials Synthesis and Processing, 2019. https://www.researchgate.net/publication/394970097_Properties_of_Sundried_Bricks_Ma ', 'Times New Roman', 12.0, None, None, None), ('de_from_the_Faecal_Clay', 'Times New Roman', 12.0, None, None, None)]
+
+P[170] align=JUSTIFY (3) style=List Paragraph:
+  Text: P. Indhiradevi et al., "A Competitive Study on Usage of Cow Dung Ash and Wood Ash as Partial Replacement in Fly Ash Brick," Materials Today: Proceedings, 2020. https://www.researchgate.net/publication/343173827_A_comparative_study_on_usage_of_cowdung_ash_and_wood_ash_as_partial_replacement_in_flyash_brick
+  Runs: [('P. ', 'Times New Roman', 12.0, None, None, None), ('Indhiradevi', 'Times New Roman', 12.0, None, None, None), (' et al., "A Competitive Study on Usage of Cow Dung Ash and Wood Ash as Partial Replacement in Fly Ash Brick," Materials Today: Proceedings, 2020. https://www.researchgate.net/publication/343173827_A_comparative_study_on_usage_of_cowdung_ash_and_wood_ash_as_partial_replacement_in_flyash_brick', 'Times New Roman', 12.0, None, None, None)]
+
+P[171] align=JUSTIFY (3) style=List Paragraph:
+  Text: S. R. Bondre et al., "An Experimental Investigation on Suitability of Cow Waste in Construction Materials," International Journal of Research in Engineering and Technology (IJRET), vol. 9, no. 10, pp. 897-901.
+  Runs: [('S. R. ', 'Times New Roman', 12.0, None, None, None), ('Bondre', 'Times New Roman', 12.0, None, None, None), (' et al., "An Experimental Investigation on Suitability of Cow Waste in Construction Materials," International Journal of Research in Engineering and Technology (IJRET), vol. 9, no. 10, pp. 897-901.', 'Times New Roman', 12.0, None, None, None)]
+
+P[172] align=JUSTIFY (3) style=List Paragraph:
+  Text: chromeextension://efaidnbmnnnibpcajpcglclefindmkaj/https://ijirt.org/publishedpaper/IJI RT158818_PAPER.pdf
+  Runs: [('chromeextension://efaidnbmnnnibpcajpcglclefindmkaj/https://ijirt.org/publishedpaper/IJI RT158818_PAPER.pdf', 'Times New Roman', 12.0, None, None, None)]
+
+P[173] align=JUSTIFY (3) style=List Paragraph:
+  Text: D. S. Thanki and G. D. Gohil, "Development and Study of Cow Dung Bricks," International Journal of Scientific Research and Engineering Development (IJSRED), vol. 7, no. 4, July- Aug. 2024.
+  Runs: [('D. S. ', 'Times New Roman', 12.0, None, None, None), ('Thanki', 'Times New Roman', 12.0, None, None, None), (' and G. D. ', 'Times New Roman', 12.0, None, None, None), ('Gohil', 'Times New Roman', 12.0, None, None, None), (', "Development and Study of Cow Dung Bricks," International Journal of Scientific Research and Engineering Development (IJSRED), vol. 7, no. 4, July- Aug. 2024.', 'Times New Roman', 12.0, None, None, None)]
+
+P[174] align=JUSTIFY (3) style=List Paragraph:
+  Text: www.ijsred.com/volume7/issue4/IJSRED-V7I4P55.pdf
+  Runs: [('www.ijsred.com/volume7/issue4/IJSRED-V7I4P55.pdf', 'Times New Roman', 12.0, None, None, None)]
+
+P[175] align=JUSTIFY (3) style=List Paragraph:
+  Text: D. P. Katale et al., "Investigation on the Uses of Clayey Soil Mixed with Cow Dung," Trend in Applied Sciences Research, vol. 9, no. 8, pp. 406-242, 2024. https://scialert.net/fulltext/?doi=tasr.2014.406.424
+  Runs: [('D. P. ', 'Times New Roman', 12.0, None, None, None), ('Katale', 'Times New Roman', 12.0, None, None, None), (' et al., "Investigation on the Uses of Clayey Soil Mixed with Cow Dung," Trend in Applied Sciences Research, vol. 9, no. 8, pp. 406-242, ', 'Times New Roman', 12.0, None, None, None), ('2024', 'Times New Roman', 12.0, None, None, None), ('. https://scialert.net/fulltext/?doi=tasr.2014.406.424', 'Times New Roman', 12.0, None, None, None)]
+
+P[176] align=JUSTIFY (3) style=List Paragraph:
+  Text: P. Magudeaswaran et al., "Development of Eco Brick and Concrete with the Partial Replacement of Cow Dung," International Journal of Scientific Engineering Research 
+  Runs: [('P. ', 'Times New Roman', 12.0, None, None, None), ('Magudeaswaran', 'Times New Roman', 12.0, None, None, None), (' et al., "Development of Eco Brick and Concrete with the Partial Replacement of Cow Dung," International Journal of Scientific Engineering Research ', 'Times New Roman', 12.0, None, None, None)]
+
+P[177] align=JUSTIFY (3) style=List Paragraph:
+  Text: (IJOSER), vol. 6, no. 5, 2018.
+  Runs: [('(IJOSER), vol. 6, no. 5, 2018.', 'Times New Roman', 12.0, None, None, None)]
+
+P[178] align=JUSTIFY (3) style=List Paragraph:
+  Text: https://www.researchgate.net/publication/325176476_Development_of_Eco_Brick_and_ Concrete_with_the_partially_replacement_of_cow_dung
+  Runs: [('https://www.researchgate.net/publication/325176476_Development_of_Eco_Brick_and_ ', 'Times New Roman', 12.0, None, None, None), ('Concrete_with_the_partially_replacement_of_cow_dung', 'Times New Roman', 12.0, None, None, None)]
+
+P[179] align=JUSTIFY (3) style=List Paragraph:
+  Text: R. R. Moussa, "Embedding Sugarcane Bagasse in Clay Bricks Used in Building Envelope to Reduce Electricity Consumption," Ain Shams Engineering Journal, vol. 15, 2024, Art. no. 102840. https://doi.org/10.1016/j.asej.2024.102840
+  Runs: [('R. R. Moussa, "Embedding Sugarcane Bagasse in Clay Bricks Used in Building Envelope to Reduce Electricity Consumption," Ain Shams Engineering Journal, vol. 15, 2024, Art. ', 'Times New Roman', 12.0, None, None, None), ('no', 'Times New Roman', 12.0, None, None, None), ('. 102840. https://doi.org/10.1016/j.asej.2024.102840', 'Times New Roman', 12.0, None, None, None)]
+
+P[180] align=JUSTIFY (3) style=List Paragraph:
+  Text: G. S. Sutar et al., "Analysis of Cow Dung Brick and Comparison with Other Bricks," International Journal for Scientific Research and Development (IJSRD), vol. 11, no. 11, 2023. chromeextension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.ijsrd.
+  Runs: [('G. S. ', 'Times New Roman', 12.0, None, None, None), ('Sutar', 'Times New Roman', 12.0, None, None, None), (' et al., "Analysis of Cow Dung Brick and Comparison with Other Bricks," International Journal for Scientific Research and Development (IJSRD), vol. 11, no. 11, 2023. chromeextension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.ijsrd.', 'Times New Roman', 12.0, None, None, None)]
+
+P[181] align=JUSTIFY (3) style=List Paragraph:
+  Text: com/articles/IJS RDV11I110059.pdf
+  Runs: [('com/articles/IJS', 'Times New Roman', 12.0, None, None, None), (' RDV11I110059.pdf', 'Times New Roman', 12.0, None, None, None)]
+
+P[182] align=JUSTIFY (3) style=List Paragraph:
+  Text: Bernat Vinolas, et.al, Cleaner Environmental Systems 19 (2025) 100348, Sustainability of wall construction techniques for self-built rural housing. A case study from Brazil, https://doi.org/10.1016/j.cesys.2025.100348
+  Runs: [('Bernat', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('Vinolas', 'Times New Roman', 12.0, None, None, None), (', et.al, Cleaner Environmental Systems 19 (2025) 100348, Sustainability of wall construction techniques for self-built rural housing. A case study from Brazil, https://doi.org/10.1016/j.cesys.2025.100348', 'Times New Roman', 12.0, None, None, None)]
+
+P[183] align=JUSTIFY (3) style=List Paragraph:
+  Text: Solene Bouzinac, et.al, Cement and Concrete Composites 160 (2025) 106-055, 
+  Runs: [('Solene', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('Bouzinac', 'Times New Roman', 12.0, None, None, None), (', et.al, Cement and Concrete Composites 160 (2025) 106-055, ', 'Times New Roman', 12.0, None, None, None)]
+
+P[184] align=JUSTIFY (3) style=List Paragraph:
+  Text: Development and validation of a mix design procedure for extruded earth bricks with cementitious stabilisation, https://doi.org/10.1016/j.cemconcomp.2025.106055
+  Runs: [('Development and validation of a mix design procedure for extruded earth bricks with cementitious ', 'Times New Roman', 12.0, None, None, None), ('stabilisation', 'Times New Roman', 12.0, None, None, None), (', https://doi.org/10.1016/j.cemconcomp.2025.106055', 'Times New Roman', 12.0, None, None, None)]
+
+P[185] align=JUSTIFY (3) style=List Paragraph:
+  Text: S. Saari a, B.H. Abu Bakar b, N.A. Surip c, Next Materials 8 (2025) 100-643, Correlation between compressive strength of interlocking compressed earth brick wall, 
+  Runs: [('S. ', 'Times New Roman', 12.0, None, None, None), ('Saari', 'Times New Roman', 12.0, None, None, None), (' a, B.H. Abu Bakar b, N.A. ', 'Times New Roman', 12.0, None, None, None), ('Surip', 'Times New Roman', 12.0, None, None, None), (' c, Next Materials 8 (2025) 100-643, Correlation between compressive strength of interlocking compressed earth brick wall, ', 'Times New Roman', 12.0, None, None, None)]
+
+P[186] align=JUSTIFY (3) style=List Paragraph:
+  Text: prism, and single unit. https://doi.org/10.1016/j.nxmate.2025.100643
+  Runs: [('prism', 'Times New Roman', 12.0, None, None, None), (', and single unit. https://doi.org/10.1016/j.nxmate.2025.100643', 'Times New Roman', 12.0, None, None, None)]
+
+P[187] align=JUSTIFY (3) style=List Paragraph:
+  Text: Youssef Khrissi, Amine Tilioua, Cleaner Waste Systems 11 (2025) 100-283, Development and characterization of eco-friendly earth bricks stabilized with date palm waste fibers for sustainable construction. https://doi.org/10.1016/j.clwas.2025.100283
+  Runs: [('Youssef ', 'Times New Roman', 12.0, None, None, None), ('Khrissi', 'Times New Roman', 12.0, None, None, None), (', Amine ', 'Times New Roman', 12.0, None, None, None), ('Tilioua', 'Times New Roman', 12.0, None, None, None), (', Cleaner Waste Systems 11 (2025) 100-283, Development and characterization of eco-friendly earth bricks stabilized with date palm waste fibers for sustainable construction. https://doi.org/10.1016/j.clwas.2025.100283', 'Times New Roman', 12.0, None, None, None)]
+
+P[188] align=JUSTIFY (3) style=List Paragraph:
+  Text: Xinyuan Zhang a, et.al, Industrial Crops & Products 230 (2025) 121-107. Carbonized corn straw core: A green building material with high-efficiency EMI shielding, thermal, and sound insulation. https://doi.org/10.1016/j.indcrop.2025.121107
+  Runs: [('Xinyuan', 'Times New Roman', 12.0, None, None, None), (' Zhang a, et.al, Industrial Crops & Products 230 (2025) 121-107. Carbonized corn straw core: A green building material with high-efficiency EMI shielding, thermal, and sound insulation. https://doi.org/10.1016/j.indcrop.2025.121107', 'Times New Roman', 12.0, None, None, None)]
+
+P[189] align=JUSTIFY (3) style=List Paragraph:
+  Text: Salim Barbhuiya, et.al, Case Studies in Construction Materials 22 (2025) e04461. Sustainable solutions for low-cost building: Material innovations for Assam-type house in North-East India https://doi.org/10.1016/j.cscm.2025.e04461
+  Runs: [('Salim ', 'Times New Roman', 12.0, None, None, None), ('Barbhuiya', 'Times New Roman', 12.0, None, None, None), (', et.al, Case Studies in Construction Materials 22 (2025) e04461. Sustainable solutions for low-cost building: Material innovations for Assam-type house in North-East India https://doi.org/10.1016/j.cscm.2025.e04461', 'Times New Roman', 12.0, None, None, None)]
+
+P[190] align=JUSTIFY (3) style=List Paragraph:
+  Text: Md. Hamidul Islam, et.al, Ain Shams Engineering Journal 16 (2025) 103755.Experimental and machine learning assessment of sustainable natural fiber reinforced concrete incorporating waste brick powder as an alternative binder material. https://doi.org/10.1016/j.asej.2025.103755
+  Runs: [('Md. ', 'Times New Roman', 12.0, None, None, None), ('Hamidul', 'Times New Roman', 12.0, None, None, None), (' Islam, et.al, Ain Shams Engineering Journal 16 (2025) 103755.Experimental and machine learning assessment of sustainable natural fiber reinforced concrete incorporating waste brick powder as an alternative binder material. https://doi.org/10.1016/j.asej.2025.103755', 'Times New Roman', 12.0, None, None, None)]
+
+P[191] align=JUSTIFY (3) style=List Paragraph:
+  Text: Mahapara Abbass, Shalom Akhai , Industrial Crops & Products 233 (2025) 121410,Eco- friendly geopolymer bricks synthesized from alkali-activated sugarcane bagasse ash and rice
+  Runs: [('Mahapara', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('Abbass', 'Times New Roman', 12.0, None, None, None), (', Shalom ', 'Times New Roman', 12.0, None, None, None), ('Akhai', 'Times New Roman', 12.0, None, None, None), (' , Industrial Crops & Products 233 (2025) 121410,Eco- friendly ', 'Times New Roman', 12.0, None, None, None), ('geopolymer', 'Times New Roman', 12.0, None, None, None), (' bricks synthesized from alkali-activated sugarcane bagasse ash and rice', 'Times New Roman', 12.0, None, None, None)]
+
+P[192] align=JUSTIFY (3) style=List Paragraph:
+  Text: husk ash. https://doi.org/10.1016/j.indcrop.2025.121410
+  Runs: [('husk', 'Times New Roman', 12.0, None, None, None), (' ash. https://doi.org/10.1016/j.indcrop.2025.121410', 'Times New Roman', 12.0, None, None, None)]
+
+P[193] align=JUSTIFY (3) style=List Paragraph:
+  Text: Rania Rushdy Moussa, Ain Shams Engineering Journal 15 (2024) 102840, Embedding sugarcane bagasse (SCB) in clay bricks used in building envelop to reduce the electricity consumption. https://doi.org/10.1016/j.asej.2024.102840
+  Runs: [('Rania Rushdy Moussa, Ain Shams Engineering Journal 15 (2024) 102840, Embedding sugarcane bagasse (SCB) in clay bricks used in building envelop to reduce the electricity consumption. https://doi.org/10.1016/j.asej.2024.102840', 'Times New Roman', 12.0, None, None, None)]
+
+P[194] align=JUSTIFY (3) style=List Paragraph:
+  Text: Webster Sambo, et.al, Construction and Building Materials 449 (2024) 138337,Soil cross breeding: Mechanical streng analysi of intermixed soils used as unfired earth brick. https://doi.org/10.1016/j.conbuildmat.2024.138337
+  Runs: [('Webster Sambo, et.al, Construction and Building Materials 449 (2024) 138337', 'Times New Roman', 12.0, None, None, None), (',Soil', 'Times New Roman', 12.0, None, None, None), (' cross breeding: Mechanical ', 'Times New Roman', 12.0, None, None, None), ('streng', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('analysi', 'Times New Roman', 12.0, None, None, None), (' of intermixed soils used as unfired earth brick. https://doi.org/10.1016/j.conbuildmat.2024.138337', 'Times New Roman', 12.0, None, None, None)]
+
+P[195] align=JUSTIFY (3) style=List Paragraph:
+  Text: Wen-Cheng Shao a, et.al, Cleaner Materials 11 (2024) 100-222. Research on innovative green building materials from waste oyster shells into foamed heat-insulating bricks. https://doi.org/10.1016/j.clema.2024.100222
+  Runs: [('Wen-Cheng Shao a, et.al, Cleaner Materials 11 (2024) 100-222. Research on innovative green building materials from waste oyster shells into foamed heat-insulating bricks. https://doi.org/10.1016/j.clema.2024.100222', 'Times New Roman', 12.0, None, None, None)]
+
+P[196] align=JUSTIFY (3) style=List Paragraph:
+  Text: Rachid Kidari, Amine Tilioua, Cleaner Waste Systems 9 (2024) 100-160, Investigation of the thermomechanical characteristics of compressed earth bricks reinforced with cement and corn straw waste fibers. https://doi.org/10.1016/j.clwas.2024.100160
+  Runs: [('Rachid', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('Kidari', 'Times New Roman', 12.0, None, None, None), (', Amine ', 'Times New Roman', 12.0, None, None, None), ('Tilioua', 'Times New Roman', 12.0, None, None, None), (', Cleaner Waste Systems 9 (2024) 100-160, Investigation ', 'Times New Roman', 12.0, None, None, None), ('of the thermomechanical characteristics of compressed earth bricks reinforced with cement and corn straw waste fibers. https://doi.org/10.1016/j.clwas.2024.100160', 'Times New Roman', 12.0, None, None, None)]
+
+P[197] align=JUSTIFY (3) style=List Paragraph:
+  Text: Guruprasad Sadashiv Sutar. et.al, International Journal for Scientific Research & Development Vol. 11, Issue 11, 2321-0613.Analysis of Cow Dung Brick and Compare 
+  Runs: [('Guruprasad', 'Times New Roman', 12.0, None, None, None), (' Sadashiv ', 'Times New Roman', 12.0, None, None, None), ('Sutar', 'Times New Roman', 12.0, None, None, None), ('. et.al, International Journal for Scientific Research & Development Vol. 11, Issue 11, 2321-0613.Analysis of Cow Dung Brick and Compare ', 'Times New Roman', 12.0, None, None, None)]
+
+P[198] align=JUSTIFY (3) style=List Paragraph:
+  Text: with Other Bricks. https://www.ijsrd.com/articles/IJSRDV11I110059.pdf
+  Runs: [('with', 'Times New Roman', 12.0, None, None, None), (' Other Bricks. https://www.ijsrd.com/articles/IJSRDV11I110059.pdf', 'Times New Roman', 12.0, None, None, None)]
+
+P[199] align=JUSTIFY (3) style=List Paragraph:
+  Text: D S Thanki, G D Gohil. International Journal of Scientific Research and Engineering Development-- Volume 7 Issue 4, July-Aug 2024 Development and Study of Cow Dung Bricks. www.ijsred.com
+  Runs: [('D S ', 'Times New Roman', 12.0, None, None, None), ('Thanki', 'Times New Roman', 12.0, None, None, None), (', G D ', 'Times New Roman', 12.0, None, None, None), ('Gohil', 'Times New Roman', 12.0, None, None, None), ('. International Journal of Scientific Research and Engineering Development-- Volume 7 Issue 4, July-Aug 2024 Development and Study of Cow Dung Bricks. www.ijsred.com', 'Times New Roman', 12.0, None, None, None)]
+
+P[200] align=JUSTIFY (3) style=List Paragraph:
+  Text: Sanket Rajkumar Bondre, et.al, JIRT Volume 9, Issue 10, P 897-901 An Experimental Investigation on Suitability of Cow Waste in Construction Material. https://share.google/EYNgjGetNvm57RMip
+  Runs: [('Sanket', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('Rajkumar', 'Times New Roman', 12.0, None, None, None), (' ', 'Times New Roman', 12.0, None, None, None), ('Bondre', 'Times New Roman', 12.0, None, None, None), (', et.al, JIRT Volume 9, Issue 10, P 897-901 An Experimental Investigation on Suitability of Cow Waste in Construction Material. ', 'Times New Roman', 12.0, None, None, None)]
+

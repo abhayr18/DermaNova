@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # FastAPI Microservice Backend
+  backend:
+    build:
+      context: .
+      dockerfile: ./backend/Dockerfile
+    container_name: dermanova_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=development
+      - POSTGRES_HOST=db
+      - POSTGRES_USER=dermanova_admin
+      - POSTGRES_PASSWORD=dermanova_secure_pass
+      - POSTGRES_DB=dermanova_db
+      - DATABASE_URL=postgresql://dermanova_admin:dermanova_secure_pass@db:5432/dermanova_db
+    volumes:
+      - ./backend:/app
+      - ./ml_pipeline:/app/ml_pipeline
+    depends_on:
+      - db
+      - redis
+    restart: always
+
+  # Next.js Web Interface Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: dermanova_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - backend
+    restart: always
+
+  # PostgreSQL Relational Database
+  db:
+    image: postgres:15-alpine
+    container_name: dermanova_postgres
+    environment:
+      - POSTGRES_USER=dermanova_admin
+      - POSTGRES_PASSWORD=dermanova_secure_pass
+      - POSTGRES_DB=dermanova_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  # Redis In-Memory Cache & Session Store
+  redis:
+    image: redis:7-alpine
+    container_name: dermanova_redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+volumes:
+  postgres_data:

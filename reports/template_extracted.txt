@@ -1,0 +1,372 @@
+[0] Paper Title (16 Bold Blue Color)
+[1] First Author1, Second Author2 (14)
+[2] 1(Department, College/ University Name, Country Name) (10 Italic)
+[3] 2(Department, College/ University Name, Country Name) (10 Italic)
+[4] Abstract: (11Bold)
+[5] Background: (10Bold) Analgesia, one of the components of triad of anaesthesia, has now extended to relief of postoperative pain, chronic pain and cancer pain. The spinal cord has taken the center stage in analgesia practice and Spinal anaesthesia is the commonly used technique for lower limb surgeries as it is easy to administer, economical and causes less hemodynamic variation than general anaesthesia. Hence different additives can be used to increase the duration of postoperative analgesia. Since there are no studies comparing Buprenorphine and Nalbuphine, we have selected this study to evaluate the effect of intrathecal Bupivacaine with Buprenorphine compared with Nalbuphine for postoperative analgesia. (10)
+[6] Materials and Methods: In this prospective randomised controlled study, 60 patients of ASA physical status I and II belonging to age group of 18-60years undergoing elective lower limb surgery under sub-arachnoid block were randomly allocated into 2 groups of 30patients each, Group A (Bupivacaine and Nalbuphine) and Group B (Bupivacaine and Buprenorphine). Group A received 2.8ml of 0.5%(H)Bupivacaine+[0.2 ml (2mg) of Nalbuphine (undiluted) taken in 1ml tuberculin syringe 1mg/0.1ml] and group B received 2.8ml of 0.5%(H)Bupivacaine+0.2ml(60µg) of buprenorphine for spinal anaesthesia. The onset and duration of sensory and motor blockade, 2 segment regression, duration of postoperative analgesia, side-effects and haemodynamic parameters were compared between the groups. (10)
+[7] Results: The mean time of onset of sensory and motor block, 2 segment regression and duration of motor block was comparable and statistically not significant between the two groups. The duration of postoperative analgesia was significantly prolonged with Buprenorphine compared to Nalbuphine with Bupivacaine (p<0.05). (10)
+[8] Conclusion: Intrathecal Bupivacaine with Buprenorphine 60μg caused prolonged duration of postoperative analgesia when compared to intrathecal Bupivacaine with Nalbuphine 2mg. (10)
+[9] Key Word: (11Bold)  Intrathecal; Bupivacaine; Buprenorphine; Nalbuphine; Postoperative analgesia.
+[10] Introduction (11 Bold)
+[11] Diabetes is now commonly recognized as a coronary heart disease risk  equivalent1,2,3,4.This is mainly attributed to the high rates of dyslipidemia among diabetic patients which is believed to be one of the major factors accounting for the high percentage of deaths among diabetics due to cardiovascular disease (CVD)5.Numerous epidemiological studies and randomized controlled trials have documented the association between elevated LDL-C levels with increased CVD risk in both diabetic and non diabetic populations.6,7. Thus reducing LDL-C levels is the primary goal of therapy for diabetic dyslipidemia.5,8.Statins are considered the first pharmacological line of treatment of dyslipidemia in diabetic patients9. Lowering of LDL-C levels is thought to be the main beneficial effect of statin treatment.In India currently no guidelines available for treating diabetic dyslipidemia and no previous study has documented the efficacy.The current study aims to build growing awareness of atherosclerosis specific care of diabetes patient by examining efficacy of two most commonly prescribed statins in India. (10)
+[12] Material And Methods (11 Bold)
+[13] This prospective comparative study was carried out on patients of Department of general Medicine at Dr. Ram Manohar Lohia Combined Hospital, Vibhuti Khand, Gomti Nagar, Lucknow, Uttar Pradesh from November 2014 to November 2015. A total 300 adult subjects (both male and females) of aged ≥ 18, years were for in this study. (10)
+[14] Study Design: Prospective open label observational study
+[15] Study Location: This was a tertiary care teaching hospital based study done in Department of General Medicine, at Dr. Ram Manohar Lohia Combined Hospital, Vibhuti Khand, Gomti Nagar, Lucknow, Uttar Pradesh. (10)
+[16] Study Duration: November 2014 to November 2015.
+[17] Sample size: 300 patients.
+[18] Sample size calculation: The sample size was estimated on the basis of a single proportion design. The target population from which we randomly selected our sample was considered 20,000. We assumed that the confidence interval of 10% and confidencelevel of 95%. The sample size actually obtained for this study was 96 patients for each group. We planned to include 300 patients (Group I- Control, Group II- Cases of 100 patients for each group) with 4% drop out rate. (10)
+[19] Subjects & selection method: The study population was drawn from consecutive diabetic patients who presented to Dr. Ram ManoharLohia Combined Hospital with dyslipidemia and were prescribed the indicated statins and underwent fasting blood test of lipid profile before statin treatment initiation between from November 2014 to November 2015. Patients were divided into three groups (each group had 100 patients) according to doses of statins. The prescribed doses of statin in RMLH for diabetic patients (10)
+[20] With dyslipidemia were as follows:
+[21] Group A(N=100 patients) -Atorvaststin 40mg daily to each patients;
+[22] Group B (N=100 patients) -Rosuvastatin 20mg daily to each patients; and
+[23] Group C (N=100 patients) -Rosuvastatin 20 mg to each patients at alternative days.
+[24] Inclusion criteria: (10 Bold)
+[25] Diabetic patients (fasting blood glucose ≥ 126 mg/dL [7.0mmol/L])
+[26] Either sex
+[27] Aged ≥ 18 years,
+[28] Patients have a total cholesterol level of ≥154.68 mg/dl , LDL-C 96.6 mg/dl, HDL-C ≤ 138.6 in men and ≤46.3 mg/dl in women.
+[29] Fasting triglycerides ≥ 150.56 mg/dl, obtained within 1 week before the first use of statins which was then compared at first- and second-year intervals. (10)
+[30] Exclusion criteria: (10 Bold)
+[31] Pregnant women;
+[32] Patients with genetic disorders
+[33] Patients on other concurrent lipid lowering agents such as bile acid sequest
+[34] rants (cholestyramine, colesevelam), niacin, ezetimibe, fenofibrate and/or omega 3.
+[35] Patients with previous history of angina, severe vascular disease, or other life threatening disease.
+[36] Patients with nephropathy and/or hypothyroidism, active liver disease, bile duct problems, or ALT > 3 × ULN.
+[37] Patients with creatine kinase levels > 10 × ULN.
+[38] Patients taking concurrent corticosteroids, ciclosporin, and/or hormone replacement therapy.
+[39] Patients who are physically inactive.
+[40] Patients with a history of drug or alcohol abuse. (10)
+[41] Procedure methodology (10 Bold)
+[42] After written informed consent was obtained, a well-designed questionnaire was used to collect the data of the recruited patients retrospectively. The questionnaire included socio-demographic characteristics such as age, gender, nationality, height, weight, and consanguineous marriage, physical activity and lifestyle habits like smoking and alcohol and statin prescribed for at least 2 years continuously and dose, type of DM, its duration, and clinical and biochemistry laboratory investigations such as fasting bloodglucose, glycated hemoglobin (HbA1C), total cholesterol, HDL and LDL cholesterol levels, and TGs. (10)
+[43] All lipid parameters were quantified on samples collected in the fasting state. Cholesterol and TG quantization was determined by enzymatic assay. LDL-C was calculated using the Friedewal dequation for patients with TG ≤ 400 mg/dl and measured by b-quantification for those with TG > 400 mg/dl. Levels of non-HDL-C were calculated by subtraction of HDL-C from total cholesterol. (10)
+[44] Information about the type of statin (rosuvastatin, atorvastatin) was taken from the pharmacy database. Baseline characteristics of the patients were collected from the database 1 week before the first use of statins. . Height and weight were measured using standardized method. The body mass index (BMI) was calculated as the weight in kilograms (with 1 kg subtracted to allow for clothing) divided by height in meters squared. (10)
+[45] Blood pressure was recorded using an electronic instrument (Model: HEM-7101, Omron Corporation, Tokyo, Japan) as the mean of two readings taken five minutes apart. (10)
+[46] The prescribed doses of statin in RMLH for diabetic patients with dyslipidemia wereas follows: (10 Bold)
+[47] Group A-Atorvaststin 40mg;
+[48] Group B -Rosuvastatin 20mg; and
+[49] Group C -Rosuvastatin 20 mg at alternate days. (10)
+[50] Fasting capillary blood glucose [CBG] was determined by using One Touch Ultra glucose meter (Johnson & Johnson, Milpitas, California) after eight hours of overnight fasting. A fasting venous sample was collected and lipids were measured. (10)
+[51] All biochemical assays was carried out by the same team of laboratory technicians using the same method, throughout the study period. The samples were assayed for total cholesterol, triglycerides and HDL cholesterol.
+[52] Serum cholesterol (cholesterol esterase oxidase-peroxidase-amidopyrine method), serum triglycerides (glycerol phosphate oxidase-peroxidase-amidopyrine method), and high-density lipoprotein cholesterol (direct method poly-ethylene-glycol-pretreated enzymes) was measured using the Beckman Coulter AU 2700/480 Autoanalyser (Beckm an AU [Olympus], Ireland). The intra– and inter-assay coefficients of variants (CV) for the biochemical assays ranged from 3.1% to 7.6%. (10)
+[53] In every subject, a semi-quantitative food frequency questionnaire was administered to collect detailed information on dietary intake over the past year. Dietary fat and oil intake was assessed as the amount of fat/oil used during cooking and/or added at the table.
+[54] Statistical analysis (10 Bold)
+[55] Data was analyzed using SPSS version 20 (SPSS Inc., Chicago, IL). Student's t-test was used to ascertain the significance of differences between mean values of two continuous variables and confirmed by nonparametric Mann-Whitney test. In addition, paired t-test was used to determine the difference between baseline and 2 years after regarding biochemistry parameters, and this was confirmed by the Wilcoxon test which wasa nonparametric test that compares two paired groups. Chi-square and Fisher exact tests were performed to test for differences in proportions of categorical variables between two or more groups. The level P < 0.05 was considered as the cutoff value or significance. (10)
+[56] Result (11 Bold)
+[57] After 6 weeks of follow upmit was found that LDL-C ,went down by -32.81%on regular dose of Atorvastatin 40 mg,-37.28% on Rosuvastatin 20 mg daily and -37.53% on Rosuvastatin 20 mg alternate day.
+[58] The total Cholestrol level reduced by -14.71%,17.35%,-11.63%,respectively.
+[59] Trigyceride level reduced by -14.71%,17.3%,11.^3%, respectively.
+[60] Non HDL-C went down by -37.32%,29.715% and -29.71% respectively.
+[61] HDL-C improved by +3.46%,+8.17%and 8.17%,respectively. (10)
+[62] Table no 1 Shows metabolic parameters of patients of the three groups before treatment. Total cholesterol (TC), 224.3 ±30.8 mg/dl, 226.1 ±35.4&225.3 ±40.7 mg/dl, LDL-C, 158.3 ±22.6 mg/dl, 156.1 ±27.8&157.2 ±26.7 mg/dl, HDL-C, 37.5 ±2.70 mg/dl, 35.5 ±2.21&36.4 ±1.90 mg/dl, Triglyceride165.8 ±30.8 mg/dl, 162.6 ±28.2&166.8 ±35.7mg/dl, Non-HDL-C 180.6 ±31.2 mg/dl, 182.4 ±29.2 & 185.2 ±32.4 mg/dl,  , FBG, 142.5 ±25.7 mg/dl, 148.2 ±26.9 & 145.8 ±27. mg/dl4, HbA1c, %, 5.82 ±0.2, 5.62±0.4 & 5.65 ±0.3 respectively of patients of  the three groups. The difference in the values of all parameters in respect of three groups was not statistically significant (p>0.05) (10)
+[63] Table no 1 (10 Bold): Shows metabolic parameters of patients of the three groups before treatment. (10)
+[64] Atorvastatin 40 mg
+[65] Rosuvastatin 20mg
+[66] Rosuvastatin 20 mg alternate day
+[67] P value (I to II)
+[68] P value (I to III)
+[69] P value (II to III)
+[70] Lipids, mg/dL
+[71] Total Cholesterol (TC)
+[72] 224.3±30.8
+[73] 226.1±35.4
+[74] 225.3±40.7
+[75] 0.7017
+[76] 0.8449
+[77] 0.8449
+[78] LDL-C
+[79] 158.3±22.6
+[80] 156.1±27.8
+[81] 157.2±26.7
+[82] 0.5399
+[83] 0.7535
+[84] 0.7757
+[85] HDL-C
+[86] 37.5±8.70
+[87] 35.5±9.21
+[88] 36.4±7.90
+[89] 0.357
+[90] 0.487
+[91] 0.389
+[92] Triglyceride
+[93] 165.8±30.8
+[94] 162.6±28.2
+[95] 166.8±35.7
+[96] 0.4444
+[97] 0.8323
+[98] 0.3570
+[99] Non-HDL-C
+[100] 180.6±31.2
+[101] 182.4±29.2
+[102] 185.2±32.4
+[103] 0.6740
+[104] 0.3077
+[105] 0.5216
+[106] Glucose and HbA1C
+[107] FBG, mg/dL
+[108] 142.5±25.7
+[109] 148.2±26.9
+[110] 145.8±27.4
+[111] 0.1271
+[112] 0.3808
+[113] 0.5327
+[114] HbA1c, %
+[115] 5.82±0.2
+[116] 5.62±0.4
+[117] 5.65±0.3
+[118] 0.265
+[119] 0.357
+[120] 0.647
+[121] Table Size (8)
+[122] Follow up after 6 weeks (10)
+[123] Table no 2: Records the percent change in lipids,( mg/dL) on a regular dose of atorvastatin40 mg.for 6weeks. (TC)level reduced by(-32.81%), low-density lipoproteins cholesterol(LDL-C)went down by( -46.99%),triglycerides reduced by by(-14.71%), non-HDL-C went down  by(-37.32%).While there had been a reduction in the undesirable Lipids, as above, due to the above medication ,there was a positive upwards change in the desirable lipids like high-density lipoprotein cholesterol (HDL-C) which improved by(+3.46%).Further, Fasting blood glucose (FBG) mg/dL level were reduced  by (-36.17%).and HbA1c, % hemoglobin A1C test  which measures blood sugar control over the preceding three months had also gone down by( -1.89%). The desirable alterations in respect of all the  above parameters after 6 weeks of medication which are attributable to the  above medication,  were highly statistically significant, P<0.001 except HbA1c .
+[124] Table no2 (10 Bold): Records the Percent Change in Lipids profile after treatment given. (10)
+[125] Atorvastatin 40 mg
+[126] (before)
+[127] Atorvastatin 40 mg
+[128] (After)
+[129] Percentage Change
+[130] P value
+[131] Lipids, mg/dL
+[132] Total Cholesterol (TC)
+[133] 224.3±30.8
+[134] 150.7±22.2
+[135] -32.81%
+[136] <0.001
+[137] LDL-C
+[138] 158.3±22.6
+[139] 83.9±15.1
+[140] -46.99%
+[141] <0.001
+[142] HDL-C
+[143] 37.5±2.70
+[144] 38.8±3.5
+[145] +3.46%
+[146] 0.003
+[147] Triglyceride
+[148] 165.8±30.8
+[149] 141.4±22.6
+[150] -14.71%
+[151] <0.001
+[152] Non-HDL-C
+[153] 180.6±31.2
+[154] 113.2±18.1
+[155] -37.32%
+[156] <0.001
+[157] Glucose and HbA1C
+[158] FBG, mg/dL
+[159] 142.5±25.7
+[160] 90.95±7.9
+[161] -36.17%
+[162] <0.001
+[163] HbA1c, %
+[164] 5.82±0.2
+[165] 5.71±0.3
+[166] -1.89%
+[167] 0.198
+[168] Table Size (8)
+[169] Table no3: Shows Percent Change in Lipids,( mg/dL) on a regular dose of  Rosuvastatin 20mg  for 6weeks. Total Cholesterol (TC)level reduced by(-26.49%), Low-density lipoproteins cholesterol(LDL-C) went down by (-37.28%), Triglyceride reduced to(-17.3%), Non-HDL-C went down  by(-29.71%),after 6 weeks of medication. While there had been a reduction in the undesirable Lipids due to the above medication ,there was a positive upwards change in the desirable Lipids like high-density lipoprotein cholesterol (HDL-C) which improved by (+8.17%), Further, Fasting blood glucose, FBG, mg/dL level were reduced  by (-37.95%). and HbA1c, % hemoglobin A1C test  which measures blood sugar control over the preceding three months had also gone down by(-11.00%).  The desirable alterations in respect of all the  above parameters which were attributable to the  above medication,  were statistically significant, P<0.001---0.033.
+[170] Table no 3 (10 Bold): Shows Percent Change in Lipids,( mg/dL) on a regular dose of  Rosuvastatin 20mg  for 6 weeks. (10)
+[171] Rosuvastatin 20mg
+[172] (before)
+[173] Rosuvastatin 20mg
+[174] (After)
+[175] Percentage Change
+[176] P value
+[177] Lipids, mg/dL
+[178] Total Cholesterol (TC)
+[179] 226.1±35.4
+[180] 166.2±25.7
+[181] -26.49%
+[182] <0.001
+[183] LDL-C
+[184] 156.1±27.8
+[185] 97.9±14.7
+[186] -37.28%
+[187] <0.001
+[188] HDL-C
+[189] 35.5±2.21
+[190] 38.4±3.6
+[191] +8.17%
+[192] <0.001
+[193] Triglyceride
+[194] 164.6±28.2
+[195] 136.2±23.4
+[196] -17.3%
+[197] <0.001
+[198] Non-HDL-C
+[199] 182.4±29.2
+[200] 128.2±20.5
+[201] -29.71%
+[202] <0.001
+[203] Glucose and HbA1C
+[204] FBG, mg/dL
+[205] 148.2±26.9
+[206] 91.95±8.8
+[207] -37.95%
+[208] <0.001
+[209] HbA1c, %
+[210] 5.62±0.4
+[211] 5.5±0.2
+[212] -2.13%
+[213] 0.187
+[214] Table Size (8)
+[215] Table no4 Shows Percent Change in Lipids,( mg/dL) on a dose of  Rosuvastatin 20mg on alternate Days  for 6weeks. Total Cholesterol (TC)level reduced by(-26.36%), Low-density lipoproteins cholesterol (LDL-C) went down by (-37.53%), Triglyceride reduced by by(-11.63%), Non-HDL-C went down  by(-29.71%),. While there had been a reduction in the undesirable Lipids due to the above medication ,there was a positive upwards change in the desirable Lipids like high-density lipoprotein cholesterol (HDL-C) which improved by(+8.17%), Further, Fasting blood glucose, FBG, mg/dL level were reduced  by (-36.65%). and HbA1c, % hemoglobin A1C test  which measures blood sugar control over the preceding three months had also gone down by(+4.07%). The  desirable changes in respect of  all the  above parameters attributable to the  above medication,  were statistically  highly significant, P<0.001---0.033 except HbA1c.
+[216] Rosuvastatin 20 mg alternate day
+[217] (before)
+[218] Rosuvastatin 20 mg alternate day
+[219] (After)
+[220] Percentage Change
+[221] P value
+[222] Lipids, mg/dL
+[223] Total Cholesterol (TC)
+[224] 225.3±40.7
+[225] 165.9±23.1
+[226] -26.36%
+[227] <0.001
+[228] LDL-C
+[229] 157.2±26.7
+[230] 98.2±16.3
+[231] -37.53%
+[232] <0.001
+[233] HDL-C
+[234] 36.4±1.90
+[235] 38.5±2.9
+[236] +5.76%
+[237] < 0.001
+[238] Triglyceride
+[239] 166.8±35.7
+[240] 140.4±21.9
+[241] -15.83%
+[242] <0.001
+[243] Non-HDL-C
+[244] 185.2±32.4
+[245] 127.2±19.9
+[246] -31.31%
+[247] <0.001
+[248] Glucose and HbA1C
+[249] FBG, mg/dL
+[250] 145.8±27.4
+[251] 92.35±9.6
+[252] -36.65%
+[253] <0.001
+[254] HbA1c, %
+[255] 5.65±0.3
+[256] 5.66±0.4
+[257] +0.17%
+[258] 0.287
+[259] Table Size (8)
+[260] Table no 5 Shows metabolic parameters of patients of each of the three groups after 6 weeks of treatment. Metabolic parameters  of patients of the three groups after 6 weeks of  medication reveal that  not only maximum quantities of  harmful  lipids  like total cholesterol, LDL-C, Triglyceride, Non-HDL-C, Glucose, mg/dL ,have gone down, there was an increase in the useful lipids  like HDL-C and in the patients treated  with a regular dose of Atorvastatin 40 mg. In that group of patients the  HbA1c, % level was also well  within the  normal range of4% to 5.6%. The variation in the quantities of Total Cholesterol , LDL-Cand HbA1c, % among the  patients of  the three groups was statistically significant as P<0.001. (10)
+[261] Table no 5 (10 Bold): Shows metabolic parameters of patients of each of the three groups after 6 weeks of treatment. (10)
+[262] Atorvastatin 40 mg
+[263] Rosuvastatin 20mg
+[264] Rosuvastatin 20 mg alternate day
+[265] P value (I to II)
+[266] P value (I to III)
+[267] P value (II to III)
+[268] Lipids, mg/dL
+[269] Total Cholesterol
+[270] 150.7±22.2
+[271] 166.2±25.7
+[272] 165.9±23.1
+[273] <0.001
+[274] <0.001
+[275] 0.9309
+[276] LDL-C
+[277] 83.9±15.1
+[278] 97.9±14.7
+[279] 98.2±16.3
+[280] < 0.001
+[281] < 0.001
+[282] 0.8914
+[283] HDL-C
+[284] 38.8±3.5
+[285] 38.4±3.6
+[286] 38.5±2.9
+[287] 0.4266
+[288] 0.5100
+[289] 0.8290
+[290] Triglyceride
+[291] 141.4±22.6
+[292] 146.4±23.4
+[293] 147.4±21.9
+[294] 0.1259
+[295] 0.0580
+[296] 0.7554
+[297] Non-HDL-C
+[298] 113.2±18.1
+[299] 128.2±20.5
+[300] 127.2±19.9
+[301] < 0.001
+[302] < 0.001
+[303] 0.7267
+[304] Glucose and HbA1C
+[305] Glucose, mg/dL
+[306] 90.95±7.9
+[307] 91.95±8.8
+[308] 92.35±9.6
+[309] 0.398
+[310] 0.261
+[311] 0.759
+[312] HbA1c, %
+[313] 5.71±0.3
+[314] 5.5±0.2
+[315] 5.66±0.4
+[316] 0.013
+[317] 0.010
+[318] 0.056
+[319] Table Size (8)
+[320] Table no 6 National Cholesterol Education Program NCEP ATP III goal. Figures show that while NCEP ATP III goal was achieved by40 (40%) patient treated with  a regular dose of Rosuvastatin 20mg, 39 (39%)patient could  achieve the goal with an alternate dose of Rosuvastatin 20mg . As for treatment with Atorvastatin 40mgwas concerned only 37 (37%) patient achieved the goal as stipulated by National Cholesterol Education Program NCEP ATP III goal. (10)
+[321] Table no 6 (10 Bold) : National Cholesterol Education Program NCEP ATP III goal. (10)
+[322] Number of patients (%) achieving NCEP ATP III goal
+[323] Statin therapy
+[324] Achieved (%)
+[325] Total
+[326] Atorvastatin 40mg
+[327] 37 (37)
+[328] 100
+[329] Rosuvastatin 20mg
+[330] 40 (40)
+[331] 100
+[332] Rosuvastatin 20mg alternate days
+[333] 39 (39)
+[334] 100
+[335] Total
+[336] 116(38.66)
+[337] 300
+[338] Table Size (8)
+[339] Discussion (11 Bold)
+[340] Dyslipidemia in patients with diabetes plays an important role in development of atherogenesis. The standarded of treatment for dyslipidemia have been statins.For the treatment of dyslipidemia the most commonly used statins are are atorvastatin and rosuvastatin. (10)
+[341] The four major statin beneficiary groups have already been defined  by NCEP 2013 report.
+[342] There is a wealth of evidence suggesting that lowering low density lipoprotein cholesterol (LDL-C) reduces the risk of cardiovascular disease (CVD). Both European and US guidelines for CVD prevention recommend the use statins as first-line therapy for dyslipidemia and specify target LDL-C levels.  Previously, a National Cholesterol Education Program (NCEP) report had proposed to lower target levels to even more aggressive LDL-C goals for very high-risk patients.
+[343] Despite the proven benefits of LDL-C reduction ,lipid managenent  is suboptimal and many patients fail to achieve recommended LDL-C goals11,12..Themost likely reasons for this are the use of agents with poor efficacy for LDL-C lowering and suboptimal dose titration.
+[344] Such aggressive LDL-C goals,however are  harder to achieve. The most effective statin at the lowest dose would represent a simple, effective treatment strategy, enabling more patients to achieve goals without the need for dose titration.
+[345] Rosuvastatin, at a dose of 20 mg, has demonstrated high efficacy for LDL-C lowering, enabling patients with hypercholesterolemia to achieve their lipid goals10,11.
+[346] Currently no Indian study is available for treating diabetic patients with dyslipidemia or dyslipidemia alone with statin on alternate day and no previous study has documented the efficacy, safety and cost effectiveness of various statins prescribed to diabetic patients. Thus the present study aimed to build on this growing awareness of atherosclerosis-specific care of diabetes patients, by examining efficacy and safety of the two most commonly prescribed statins in India.
+[347] The present study was an open label prospective comparative study done in Department of General Medicine, at Dr. Ram Manohar Lohia Combined Hospital a tertiary care teaching hospital,Lucknow, Uttar Pradesh in the time interval of November 2014 to November 2015..  (10)
+[348] The study, shows that rosuvastatin (20mg daily and 20mg on alternarnate days) was found to be the most effective statin at reducing LDL-C when compared with atorvastatin (40mg) daily. In other words, rosuvastatin at its lowest dose in this study (20mg) on alternate days was more effective at reducing LDL-C levels than atorvastatin at their higher dose (40mg) daily. Our results are consistent with STELLAR trial which is one of the major open-label, randomized, and multicenter trials to compare rosuvastatin (10, 20, 40, or 80mg) with atorvastatin (10, 20, 40, or 80mg), pravastatin (10, 20, or 40mg), and simvastatin (10, 20, 40, or 80mg) across dose ranges for reduction of LDL-C13. The results of the STELLAR trial revealed that rosuvastatin was consistently, across all doses, the most effective at reducing LDL-C levels in comparison to all of the other statins. (10)
+[349] Brunzell JD et al reported the lowering of triglycerides is another important goal in reducing CVD risk among diabetic patients.5 In the present study, the greatest reduction in triglycerides was (−17.3%, P < 0.01) and was achieved by patients taking rosuvastatin (20mg daily). This was the case, even in comparison with  rosuvastatin 20mg on alternate days and to higher doses of atorvastatin (40mg). However, it is important to note that rosuvastatin (20mg on alternate day) and atorvastatin (40mg) both achieved the second highest reduction in triglycerides (−15.83%, P < 0.05, and −14.71%,P<0.05), respectively. These findings are similar to the majority of studies in the literature, which have shown a slightly higher reduction in triglycerides in patients taking rosuvastatin in comparison to atorvastatin as reported by Clearfield MB et al.14. It thus appears that, reduction in triglyceride levels is equal with rozuvastatin and atorvastatin in relation to this factor (triglycerides), and that both rosuvastatin and atorvastatin are effective in reducing it.
+[350] Raising HDL-C levels is another major factor known to reduce CVD risk. In the present study, all of the statins were found to increase HDL-C levels as has been shown in previous studies. Rosuvastatin (20mg daily) lead to maximal increase (+8.17%). (10)
+[351] Conclusion (11 Bold)
+[352] Rosuvastatin 20 mg on every other regimen had equal effect when compared to daily dose regimen of atorvastatin 40 mg &rosuvastatin 20mg.
+[353] References (11 Bold)
+[354] National Cholesterol Education Program (NCEP) Expert Panel on Detection, Evaluation, and Treatment of High Blood Cholesterol in Adults (AdultTreatment Panel III) Third report of the national cholesterol education (8)
+[355] program (NCEP) expert panel on detection, evaluation, and treatment of highblood cholesterol in adults (adult treatment panel III) finalreport. Circulation. 2002;106(25, article 3143).
+[356] Bener A, Zirie M, Janahi IM, Al-Hamaq AOAA, Musallam M, Wareham NJ.Prevalence of diagnosed and undiagnosed diabetes mellitus and its risk factorsin a population-based study of Qatar. Diabetes Research and Clinical Practice. 2009;84(1):99–106.
+[357] Bener A, Zirie M, Musallam M, Khader YS, Al-Hamaq AOAA. Prevalence ofmetabolic syndrome according to adult treatment panel III and internationaldiabetes federation criteria: a population-based study. Metabolic Syndrome
+[358] and Related Disorders. 2009;7(3):221–230
+[359] Bener A, Dafeeah E, Ghuloum S, Al-HamaqAOAA.Association between psychological distress and gastrointestinal symptoms in type 2 diabetes mellitus. World Journal of Diabetes. 2012;3(6):123–129
+[360] Brunzell JD, Davidson M, Furberg CD, et al. Lipoprotein management inpatients with cardiometabolic risk:consensus statement from the American diabetes association and the american college of cardiology
+[361] foundation.Diabetes Care. 2008;31(4):811–822
+[362] Colhoun HM, Betteridge DJ, Durrington PN, et al. Primary prevention of cardiovascular disease with atorvastatin in type 2 diabetes in the collaborative atorvastatin diabetes study (CARDS): multi centrer trial. The Lancet. 2004; 364(9435) :685–696.
+[363] Shepherd J, Barter P, Carmena R, et al. Effect of lowering LDL cholesterol substantially below currently recommended levels in patients with coronary heart disease and diabetes: the treating To new targets (TNT) study.Diabetes Care. 2006;29(6):1220–1226.
+[364] American Diabetes Association.Standards of medical care in diabetes. Diabetes Care. 2009;32(supplement 1):S13–S61.
+[365] Henry RR. Preventing cardiovascular complications of type 2 diabetes: focus on lipid management. Clinical Diabetes.
+[366] Jones PH, Davidson MH, Stein EA, et al. Comparison of the efficacy and safety of rosuvastatin versus atorvastatin, simvastatin, and pravastatin across doses (STELLAR* trial) American Journal of Cardiology.2003;92(2):152–160.
+[367] Group EUROASPIREIIS: Lifestyle and risk management and use of drug therapies in coronary patients from 15 countries.
+[368] Principal results from EUROASPIRE II. Eur Heart J 2001,22:554-572.
+[369] Schuster H, Barter PJ, Cheung RC, Bonnet J, Morrell JM, Watkins C, Kallend D, Raza A, for the MERCURY I Study Group: Effects ofswitching statins on achievement of lipid goals: MeasuringEffective Reductions in holesterol
+[370] Using Rosuvastatin Therapy (MERCURY I) study. Am Heart J 2004,147:705-713.
+[371] Pharmaceutical Management Agency. Prescription for pharmacoeconomic analysis: methods for cost-utility analysis. (8)

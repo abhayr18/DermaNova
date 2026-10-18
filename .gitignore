@@ -1,0 +1,103 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv
+
+# Datasets & Large Data Files (Ignore heavy image sets)
+datasets/raw/*
+!datasets/raw/.gitkeep
+datasets/processed/*
+!datasets/processed/.gitkeep
+datasets/annotations/*.json
+datasets/annotations/*.csv
+!datasets/annotations/.gitkeep
+datasets/dataset_audit/reports/*
+!datasets/dataset_audit/reports/.gitkeep
+datasets/dataset_audit/analysis_outputs/*
+!datasets/dataset_audit/analysis_outputs/.gitkeep
+
+# ML Model Checkpoints & Large Weights
+*.pt
+*.bin
+*.h5
+*.ckpt
+*.safetensors
+ml_pipeline/models/saved_models/*
+!ml_pipeline/models/saved_models/.gitkeep
+!ml_pipeline/models/saved_models/dermanova_best_weights.pth
+!ml_pipeline/models/saved_models/dermanova_model.onnx
+
+# MLflow & Experiment Logs
+mlruns/
+.mlflow/
+research/experiments/experiment_logs/*
+!research/experiments/experiment_logs/.gitkeep
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# Node & Frontend Build Artifacts
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/.vercel
+.npm
+.yarn/
+*.log
+
+# Environment variables & secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Uploads and temporary scans
+uploads/*
+!uploads/.gitkeep
+*Cow Dung*
+
+# Docker volumes & local data
+postgres_data/
+.freebuff/
+*.db
+*.sqlite
+*.sqlite3
+dermanova_clinical.db
