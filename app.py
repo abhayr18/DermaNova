@@ -4,6 +4,19 @@ from pathlib import Path
 from PIL import Image
 import gradio as gr
 
+# Hugging Face ZeroGPU compatibility
+try:
+    import spaces
+except ImportError:
+    class spaces:
+        @staticmethod
+        def GPU(fn=None, duration=None):
+            if fn is None:
+                def decorator(f):
+                    return f
+                return decorator
+            return fn
+
 # Add project root to path
 import sys
 ROOT_DIR = Path(__file__).resolve().parent
@@ -15,6 +28,7 @@ from backend.app.services.recommender import recommender_service
 # Initialize clinical inference & recommendation engines
 predictor = DermaNovaPredictor()
 
+@spaces.GPU
 def analyze_skin(image: Image.Image):
     if image is None:
         return 0, {}, None, "⚠️ Please upload or capture a facial photo."
