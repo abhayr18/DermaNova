@@ -27,8 +27,9 @@ COPY .env.example /app/.env
 # Create uploads directory
 RUN mkdir -p /app/uploads
 
-# Expose default port
+# Expose ports (7860 for Hugging Face Spaces, 8000 for standard/Render)
+EXPOSE 7860
 EXPOSE 8000
 
-# Launch FastAPI with dynamic port binding for Render/HuggingFace/Railway
-CMD ["sh", "-c", "uvicorn backend.app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+# Launch FastAPI with dynamic port binding (default 7860 for Hugging Face Spaces)
+CMD ["sh", "-c", "uvicorn backend.app.main:app --host 0.0.0.0 --port ${PORT:-7860}"]
