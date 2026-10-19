@@ -1,6 +1,19 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+// Resolve API Base URL for Vercel Services multi-service routing:
+// 1. Server-side (Vercel runtime functions / SSR): uses bound BACKEND_URL injected by Vercel service binding
+// 2. Client-side (Browser): uses relative '/api/v1' routed by Vercel top-level rewrites, or NEXT_PUBLIC_API_URL
+const getApiBaseUrl = (): string => {
+  if (typeof window === 'undefined') {
+    if (process.env.BACKEND_URL) {
+      return `${process.env.BACKEND_URL.replace(/\/$/, '')}/api/v1`;
+    }
+    return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+  }
+  return process.env.NEXT_PUBLIC_API_URL || '/api/v1';
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 // Configure Axios with Auth Token Interceptor
 const apiClient = axios.create({
@@ -8,6 +21,9 @@ const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use((config) => {
+  if (!config.baseURL) {
+    config.baseURL = getApiBaseUrl();
+  }
   if (typeof window !== 'undefined') {
     const token = localStorage.getItem('dermanova_auth_token');
     if (token) {
