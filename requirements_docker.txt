@@ -1,6 +1,4 @@
-# DermaNova Cloud Production Docker Dependencies
-torch>=2.2.0 --index-url https://download.pytorch.org/whl/cpu
-torchvision>=0.17.0 --index-url https://download.pytorch.org/whl/cpu
+# DermaNova Cloud Production Docker Dependencies (Ultralight ONNX Engine <150MB RAM)
 opencv-python-headless>=4.9.0
 albumentations>=1.4.0
 scikit-learn>=1.4.0

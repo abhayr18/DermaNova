@@ -127,16 +127,16 @@ class DermaNovaPredictor:
 
     def _init_models(self):
         """Attempt to load trained PyTorch or ONNX checkpoints."""
-        # 1. Try ONNX runtime for lightweight fast execution
+        # 1. Try ONNX runtime for lightweight fast execution (<30MB RAM)
         if HAS_ONNX and self.onnx_path.exists():
             try:
                 self.onnx_session = ort.InferenceSession(str(self.onnx_path), providers=["CPUExecutionProvider"])
-                print(f"[Predictor] Loaded ONNX model from {self.onnx_path}")
+                print(f"[Predictor] Loaded ONNX model from {self.onnx_path} (Ultralight Memory Footprint)")
             except Exception as e:
                 print(f"[Predictor Warning] Failed loading ONNX: {e}")
 
-        # 2. Try PyTorch model checkpoint
-        if HAS_TORCH and self.weights_path and self.weights_path.exists():
+        # 2. Only load PyTorch checkpoint if ONNX is not available (avoids loading both into RAM)
+        if self.onnx_session is None and HAS_TORCH and self.weights_path and self.weights_path.exists():
             try:
                 from ml_pipeline.models.cnn.multi_task_efficientnet import DermaNovaMultiTaskModel
                 checkpoint = torch.load(self.weights_path, map_location="cpu")
@@ -328,8 +328,36 @@ class DermaNovaPredictor:
         acne_severity_grade = SeverityLevelEnum.CLEAR
         detected_skin_type = SkinTypeEnum.NORMAL
 
-        # 3. Model Inference (PyTorch or ONNX if loaded)
-        if self.torch_model is not None and HAS_TORCH:
+        # 3. Model Inference: Try ONNX Runtime first (ultralight RAM ~25MB), then PyTorch
+        if self.onnx_session is not None:
+            try:
+                img_resized = cropped_pil.resize((224, 224), Image.Resampling.BILINEAR)
+                img_arr = np.array(img_resized, dtype=np.float32) / 255.0
+                mean = np.array([0.485, 0.456, 0.406], dtype=np.float32)
+                std = np.array([0.229, 0.224, 0.225], dtype=np.float32)
+                img_norm = (img_arr - mean) / std
+                input_tensor = np.transpose(img_norm, (2, 0, 1))[np.newaxis, :, :, :]
+
+                outputs = self.onnx_session.run(None, {'input_image': input_tensor})
+                logits_cond, logits_sev, logits_type = outputs[0], outputs[1], outputs[2]
+
+                probs_cond = 1.0 / (1.0 + np.exp(-logits_cond.squeeze(0)))
+                sev_pred = int(np.argmax(logits_sev, axis=1)[0]) if logits_sev.shape[1] > 1 else 0
+                type_pred = int(np.argmax(logits_type, axis=1)[0])
+
+                for idx, c_name in enumerate(DERMANOVA_ORDER):
+                    raw_probabilities[c_name] = float(probs_cond[idx])
+
+                sev_map = [SeverityLevelEnum.MILD, SeverityLevelEnum.MODERATE, SeverityLevelEnum.SEVERE]
+                acne_severity_grade = sev_map[min(sev_pred, 2)]
+
+                type_map = [SkinTypeEnum.NORMAL, SkinTypeEnum.OILY, SkinTypeEnum.DRY, SkinTypeEnum.COMBINATION, SkinTypeEnum.SENSITIVE]
+                detected_skin_type = type_map[min(type_pred, 4)]
+            except Exception as e:
+                print(f"[Inference Error] ONNX inference failed: {e}")
+                raw_probabilities = {}
+
+        elif self.torch_model is not None and HAS_TORCH:
             try:
                 # Preprocess to tensor
                 tensor_in = T.ToTensor()(cropped_pil).unsqueeze(0)  # (1, 3, 224, 224)
