@@ -163,4 +163,7 @@ with gr.Blocks(title="DermaNova: AI Facial Skin Diagnostic Framework") as demo:
     )
 
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=7860)
+    url, local_url, share_url = demo.launch(server_name="0.0.0.0", server_port=7860, share=True)
+    print(f"\n=========================================\nDERMANOVA LIVE PUBLIC URL: {share_url}\n=========================================\n", flush=True)
+    with open("public_url.txt", "w") as f:
+        f.write(str(share_url))
