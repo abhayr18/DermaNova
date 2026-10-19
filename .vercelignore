@@ -1,0 +1,20 @@
+# Exclude heavy training files, datasets, and docs from Vercel function bundle
+ml_pipeline/models/saved_models/*.pth
+datasets/
+research/
+docs/
+scripts/
+tests/
+sample_images/
+preprocessing_walkthrough_output/
+*.db
+*.sqlite
+*.sqlite3
+Dockerfile
+docker-compose.yml
+requirements_dev.txt
+requirements_docker.txt
+.github/
+.gradio/
+temp_*
+public_url.txt
