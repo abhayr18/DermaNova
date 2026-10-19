@@ -14,7 +14,10 @@ import uuid
 from datetime import datetime, timedelta
 from typing import Optional, Dict, Any
 
-import jwt
+try:
+    import jwt
+except ImportError:
+    from jose import jwt
 from passlib.context import CryptContext
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
