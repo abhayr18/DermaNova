@@ -152,31 +152,39 @@ class DermaNovaPredictor:
 
     def decode_image(self, image_input: Any) -> Tuple[Image.Image, np.ndarray]:
         """Decode raw bytes, base64 data URL, or PIL Image into standard RGB format."""
+        pil_img = None
         if isinstance(image_input, Image.Image):
             pil_img = image_input.convert("RGB")
-            return pil_img, np.array(pil_img)
 
-        raw_bytes = None
-        if isinstance(image_input, bytes):
-            raw_bytes = image_input
-        elif isinstance(image_input, str):
-            if "base64," in image_input:
-                image_input = image_input.split("base64,")[1]
-            try:
-                raw_bytes = base64.b64decode(image_input)
-            except Exception:
-                raw_bytes = None
+        if pil_img is None:
+            raw_bytes = None
+            if isinstance(image_input, bytes):
+                raw_bytes = image_input
+            elif isinstance(image_input, str):
+                if "base64," in image_input:
+                    image_input = image_input.split("base64,")[1]
+                try:
+                    raw_bytes = base64.b64decode(image_input)
+                except Exception:
+                    raw_bytes = None
 
-        if raw_bytes is not None and len(raw_bytes) > 0:
-            try:
-                pil_img = Image.open(io.BytesIO(raw_bytes)).convert("RGB")
-                return pil_img, np.array(pil_img)
-            except Exception:
-                pass
+            if raw_bytes is not None and len(raw_bytes) > 0:
+                try:
+                    pil_img = Image.open(io.BytesIO(raw_bytes)).convert("RGB")
+                except Exception:
+                    pass
 
-        # Robust clinical fallback if image bytes are simulated or invalid
-        fallback_pil = Image.new("RGB", (224, 224), color=(210, 175, 145))
-        return fallback_pil, np.array(fallback_pil)
+        if pil_img is None:
+            # Robust clinical fallback if image bytes are simulated or invalid
+            pil_img = Image.new("RGB", (224, 224), color=(210, 175, 145))
+
+        # Cloud Memory Guard: Constrain high-res phone/camera photos (e.g. 4032x3024) to max 640px dimension.
+        # This prevents 300MB+ memory spikes during numpy conversion & saliency map rendering,
+        # keeping container RAM strictly under 60MB on Render free tier.
+        if max(pil_img.size) > 640:
+            pil_img.thumbnail((640, 640), Image.Resampling.BILINEAR)
+
+        return pil_img, np.array(pil_img)
 
     def _generate_torch_gradcam(self, cropped_pil: Image.Image, target_condition_idx: int) -> Optional[np.ndarray]:
         """
@@ -501,6 +509,9 @@ class DermaNovaPredictor:
             "These findings do not constitute medical diagnosis or prescription. "
             "Consult a board-certified dermatologist for persistent or severe dermatological conditions."
         )
+
+        import gc
+        gc.collect()
 
         return AnalysisResponse(
             analysis_id=analysis_id,

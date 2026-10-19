@@ -83,8 +83,20 @@ export const SingleCloseUpCapture: React.FC<SingleCloseUpCaptureProps> = ({
   const capturePhoto = () => {
     if (!videoRef.current) return;
     const canvas = document.createElement('canvas');
-    canvas.width = videoRef.current.videoWidth || 640;
-    canvas.height = videoRef.current.videoHeight || 480;
+    const maxDim = 720;
+    let width = videoRef.current.videoWidth || 640;
+    let height = videoRef.current.videoHeight || 480;
+    if (width > maxDim || height > maxDim) {
+      if (width > height) {
+        height = Math.round((height * maxDim) / width);
+        width = maxDim;
+      } else {
+        width = Math.round((width * maxDim) / height);
+        height = maxDim;
+      }
+    }
+    canvas.width = width;
+    canvas.height = height;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -93,7 +105,7 @@ export const SingleCloseUpCapture: React.FC<SingleCloseUpCaptureProps> = ({
       ctx.scale(-1, 1);
     }
     ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-    const dataUrl = canvas.toDataURL('image/jpeg', 0.94);
+    const dataUrl = canvas.toDataURL('image/jpeg', 0.90);
     setCapturedImage(dataUrl);
     setSelectedFile(null);
 
@@ -108,10 +120,34 @@ export const SingleCloseUpCapture: React.FC<SingleCloseUpCaptureProps> = ({
     const file = e.target.files?.[0];
     if (!file) return;
 
-    setSelectedFile(file);
     const reader = new FileReader();
     reader.onload = (event) => {
-      setCapturedImage(event.target?.result as string);
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const maxDim = 720;
+        let width = img.width;
+        let height = img.height;
+        if (width > maxDim || height > maxDim) {
+          if (width > height) {
+            height = Math.round((height * maxDim) / width);
+            width = maxDim;
+          } else {
+            width = Math.round((width * maxDim) / height);
+            height = maxDim;
+          }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, width, height);
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.90);
+          setCapturedImage(compressedDataUrl);
+          setSelectedFile(null);
+        }
+      };
+      img.src = event.target?.result as string;
     };
     reader.readAsDataURL(file);
 

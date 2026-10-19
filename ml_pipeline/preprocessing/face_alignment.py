@@ -110,10 +110,13 @@ class FaceROIExtractor:
         if skin_ratio < self.skin_presence_threshold:
             return False, None
 
-        # Calculate bounding box of primary skin cluster
-        coords = np.argwhere(mask > 0)
-        ymin, xmin = coords.min(axis=0)
-        ymax, xmax = coords.max(axis=0)
+        # Memory-safe bounding box without large coordinate array allocation
+        rows = np.any(mask > 0, axis=1)
+        cols = np.any(mask > 0, axis=0)
+        if not np.any(rows) or not np.any(cols):
+            return False, None
+        ymin, ymax = np.where(rows)[0][[0, -1]]
+        xmin, xmax = np.where(cols)[0][[0, -1]]
         bbox = (int(xmin), int(ymin), int(xmax - xmin), int(ymax - ymin))
 
         return True, bbox
