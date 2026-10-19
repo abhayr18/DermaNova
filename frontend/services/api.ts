@@ -4,13 +4,19 @@ import axios from 'axios';
 // 1. Server-side (Vercel runtime functions / SSR): uses bound BACKEND_URL injected by Vercel service binding
 // 2. Client-side (Browser): uses relative '/api/v1' routed by Vercel top-level rewrites, or NEXT_PUBLIC_API_URL
 const getApiBaseUrl = (): string => {
-  if (typeof window === 'undefined') {
-    if (process.env.BACKEND_URL) {
-      return `${process.env.BACKEND_URL.replace(/\/$/, '')}/api/v1`;
-    }
-    return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL.replace(/\/$/, '');
   }
-  return process.env.NEXT_PUBLIC_API_URL || '/api/v1';
+  if (typeof window !== 'undefined') {
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return 'http://localhost:8000/api/v1';
+    }
+    return 'https://dermanova.onrender.com/api/v1';
+  }
+  if (process.env.BACKEND_URL) {
+    return `${process.env.BACKEND_URL.replace(/\/$/, '')}/api/v1`;
+  }
+  return 'https://dermanova.onrender.com/api/v1';
 };
 
 const API_BASE_URL = getApiBaseUrl();
