@@ -48,6 +48,26 @@ export interface ConditionScore {
   clinical_note: string;
 }
 
+export interface BoundingBox {
+  x: number;      // 0 - 100 percentage
+  y: number;      // 0 - 100 percentage
+  width: number;  // 0 - 100 percentage
+  height: number; // 0 - 100 percentage
+}
+
+export interface DetectedLesion {
+  id: string;
+  condition_id: string;
+  condition_name: string;
+  confidence: number;
+  severity: string;
+  location_label: string;
+  box: BoundingBox;
+  color: string;
+  clinical_finding: string;
+  recommended_active: string;
+}
+
 export interface AnalysisResponse {
   analysis_id: string;
   timestamp: string;
@@ -60,6 +80,7 @@ export interface AnalysisResponse {
   face_detected: boolean;
   clinical_disclaimer: string;
   requires_clinical_referral: boolean;
+  detected_lesions?: DetectedLesion[];
 }
 
 export interface ActiveIngredient {

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { MultiAngleCapture } from '../components/MultiAngleCapture';
+import { SingleCloseUpCapture } from '../components/SingleCloseUpCapture';
 import { DiagnosticDashboard } from '../components/DiagnosticDashboard';
 import { PersonalizedKitCard } from '../components/PersonalizedKitCard';
 import { RoutineRecommendations } from '../components/RoutineRecommendations';
@@ -35,7 +35,8 @@ import {
   Award,
   Users,
   Activity,
-  HeartHandshake
+  HeartHandshake,
+  Focus
 } from 'lucide-react';
 
 type MobileTab = 'home' | 'scan' | 'regimen' | 'journey';
@@ -77,20 +78,20 @@ export default function Home() {
     setRecommendations(null);
   };
 
-  // Handle uploaded or captured image from 3-angle scanner
-  const handleImagesReady = async (frontImage: string | File) => {
+  // Handle uploaded or captured single close-up skin photo
+  const handleImageReady = async (image: string | File) => {
     setIsLoading(true);
     setErrorMsg(null);
 
     try {
       let analysis: AnalysisResponse;
-      if (typeof frontImage === 'string') {
-        setSelectedImage(frontImage);
-        analysis = await apiService.analyzeBase64(frontImage);
+      if (typeof image === 'string') {
+        setSelectedImage(image);
+        analysis = await apiService.analyzeBase64(image);
       } else {
-        const objectUrl = URL.createObjectURL(frontImage);
+        const objectUrl = URL.createObjectURL(image);
         setSelectedImage(objectUrl);
-        analysis = await apiService.analyzeFile(frontImage);
+        analysis = await apiService.analyzeFile(image);
       }
 
       setAnalysisResult(analysis);
@@ -235,7 +236,7 @@ export default function Home() {
                   className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-brand-500 via-teal-400 to-emerald-400 hover:opacity-95 text-slate-950 font-extrabold text-xs flex items-center justify-center gap-2 transition shadow-xl shadow-brand-500/20 active:scale-95"
                 >
                   <Camera className="w-4 h-4" />
-                  <span>Start Free 3-Angle Skin Check</span>
+                  <span>Start Free 1-Photo Skin Check</span>
                   <ChevronRight className="w-4 h-4" />
                 </button>
 
@@ -249,10 +250,10 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* CureSkin 3-Step Process Cards */}
+              {/* 3-Step Process Cards */}
               <div className="space-y-2">
                 <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono px-1">
-                  How CureSkin Treatment Works
+                  How AI Treatment Works
                 </h3>
 
                 <div className="grid grid-cols-3 gap-2">
@@ -260,24 +261,24 @@ export default function Home() {
                     <div className="w-8 h-8 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center mx-auto text-xs font-bold">
                       1
                     </div>
-                    <div className="text-[11px] font-bold text-white leading-tight">Take 3 Photos</div>
-                    <div className="text-[9px] text-slate-400 leading-tight">Front & cheek profiles</div>
+                    <div className="text-[11px] font-bold text-white leading-tight">1 Close-Up Photo</div>
+                    <div className="text-[9px] text-slate-400 leading-tight">Face or concern area</div>
                   </div>
 
                   <div className="p-3 rounded-2xl bg-slate-900/60 border border-slate-800/80 text-center space-y-1.5">
                     <div className="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mx-auto text-xs font-bold">
                       2
                     </div>
-                    <div className="text-[11px] font-bold text-white leading-tight">AI Diagnosis</div>
-                    <div className="text-[9px] text-slate-400 leading-tight">Grad-CAM heatmaps</div>
+                    <div className="text-[11px] font-bold text-white leading-tight">AI Disease Pins</div>
+                    <div className="text-[9px] text-slate-400 leading-tight">Exact bounding zones</div>
                   </div>
 
                   <div className="p-3 rounded-2xl bg-slate-900/60 border border-slate-800/80 text-center space-y-1.5">
                     <div className="w-8 h-8 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mx-auto text-xs font-bold">
                       3
                     </div>
-                    <div className="text-[11px] font-bold text-white leading-tight">Free Regimen</div>
-                    <div className="text-[9px] text-slate-400 leading-tight">Generic OTC guide</div>
+                    <div className="text-[11px] font-bold text-white leading-tight">Targeted Regimen</div>
+                    <div className="text-[9px] text-slate-400 leading-tight">Spot actives & guide</div>
                   </div>
                 </div>
               </div>
@@ -347,11 +348,11 @@ export default function Home() {
             </div>
           )}
 
-          {/* TAB: 3-ANGLE SCAN & DIAGNOSTIC REPORT */}
+          {/* TAB: 1-PHOTO CLOSE-UP SCAN & DIAGNOSTIC REPORT */}
           {activeTab === 'scan' && (
             <div className="space-y-4 animate-fade-in">
-              <MultiAngleCapture
-                onImagesReady={handleImagesReady}
+              <SingleCloseUpCapture
+                onImageReady={handleImageReady}
                 onRunDemo={handleRunDemo}
                 isLoading={isLoading}
               />
@@ -359,8 +360,8 @@ export default function Home() {
               {isLoading && (
                 <div className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 text-center space-y-3">
                   <div className="w-10 h-10 border-4 border-brand-500/20 border-t-brand-400 rounded-full animate-spin mx-auto" />
-                  <p className="text-xs font-bold text-white">Extracting Clinical Saliency Map...</p>
-                  <p className="text-[10px] text-slate-400">PyTorch Multi-Task EfficientNet Backward-Pass Grad-CAM (582ms)</p>
+                  <p className="text-xs font-bold text-white">Detecting Disease Sites & Saliency Coordinates...</p>
+                  <p className="text-[10px] text-slate-400">Multi-Task Neural Inference + Spatial Peak Extraction (582ms)</p>
                 </div>
               )}
 

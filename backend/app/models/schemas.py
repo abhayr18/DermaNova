@@ -65,6 +65,26 @@ class DailyRoutine(BaseModel):
     lifestyle_and_diet: List[str]
 
 
+class BoundingBox(BaseModel):
+    x: float = Field(..., description="Left offset percentage (0 to 100)")
+    y: float = Field(..., description="Top offset percentage (0 to 100)")
+    width: float = Field(..., description="Box width percentage (0 to 100)")
+    height: float = Field(..., description="Box height percentage (0 to 100)")
+
+
+class DetectedLesion(BaseModel):
+    id: str
+    condition_id: str
+    condition_name: str
+    confidence: float
+    severity: str
+    location_label: str  # e.g. "Upper Left Forehead", "Mid Right Cheek", "Nasal Bridge"
+    box: BoundingBox
+    color: str  # Hex color code for UI bounding box and pinpoint badge
+    clinical_finding: str
+    recommended_active: str
+
+
 class AnalysisResponse(BaseModel):
     analysis_id: str
     timestamp: str
@@ -77,6 +97,7 @@ class AnalysisResponse(BaseModel):
     face_detected: bool = True
     clinical_disclaimer: str
     requires_clinical_referral: bool = False
+    detected_lesions: Optional[List[DetectedLesion]] = []
 
 
 class RecommendationRequest(BaseModel):
