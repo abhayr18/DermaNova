@@ -117,51 +117,17 @@ export default function DermaNovaApp() {
         setCurrentScreen('results');
       }, 1800);
     } catch (err: any) {
-      console.warn('API fallback to calibrated demo model:', err);
-      // Graceful clinical demo fallback
-      const mockAnalysis: AnalysisResponse = {
-        analysis_id: `an_${Date.now()}`,
-        timestamp: new Date().toISOString(),
-        overall_health_score: 84,
-        detected_skin_type: 'Combination (T-Zone)',
-        conditions: {
-          acne: {
-            condition_id: 'acne',
-            display_name: 'Acne (Papules & Pustules)',
-            probability: 0.74,
-            severity_level: 'Mild',
-            is_detected: true,
-            clinical_note: 'Superficial papules around malar zone.',
-          },
-          erythema: {
-            condition_id: 'erythema',
-            display_name: 'Facial Redness',
-            probability: 0.82,
-            severity_level: 'Moderate',
-            is_detected: true,
-            clinical_note: 'Reactive micro-vascular flushing.',
-          },
-          pores: {
-            condition_id: 'pores',
-            display_name: 'Visible Pores',
-            probability: 0.71,
-            severity_level: 'Mild',
-            is_detected: true,
-            clinical_note: 'Enlarged central follicular openings.',
-          },
-        },
-        top_concerns: ['Acne', 'Redness', 'Visible Pores'],
-        acne_severity_grade: 'Grade 1 - Mild Non-Cystic',
-        face_detected: true,
-        clinical_disclaimer: 'Informational skincare insights. Not a medical diagnosis.',
-        requires_clinical_referral: false,
-      };
+      console.error('Analysis error:', err);
+      setIsLoading(false);
+      setCurrentScreen('capture');
 
-      setAnalysisResult(mockAnalysis);
-      setTimeout(() => {
-        setIsLoading(false);
-        setCurrentScreen('results');
-      }, 2000);
+      const serverDetail =
+        err?.response?.data?.detail ||
+        err?.response?.data?.message ||
+        err?.message ||
+        'Could not analyze photo. Please ensure you upload a clear, well-lit photograph of a human face.';
+
+      setErrorMsg(typeof serverDetail === 'string' ? serverDetail : JSON.stringify(serverDetail));
     }
   };
 

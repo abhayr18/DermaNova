@@ -18,6 +18,11 @@ async def get_model_info():
     Returns verified model capabilities, supported conditions, input resolution,
     and inference readiness.
     """
+    if not model_loader.is_loaded and getattr(model_loader, "has_torch", False):
+        try:
+            model_loader.load()
+        except Exception:
+            pass
     info = model_loader.get_info()
     return {
         "model_name": info["model_name"],
