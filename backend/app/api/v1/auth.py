@@ -8,8 +8,11 @@ Implements:
 4. DermaNova Medical Intake Questionnaire (/api/v1/auth/profile)
 """
 
+from datetime import timedelta
+import logging
+import re
 from typing import Optional, List
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, Field, field_validator
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
@@ -19,24 +22,67 @@ from backend.app.authentication.auth_handler import (
     hash_password,
     verify_password,
     create_access_token,
+    decode_jwt_token,
     get_current_user
 )
+from backend.app.core.rate_limiter import (
+    signup_limiter,
+    login_limiter,
+    password_reset_limiter
+)
+
+logger = logging.getLogger("dermanova.auth")
 
 router = APIRouter(prefix="/auth", tags=["User Authentication & Profile"])
+
+EMAIL_REGEX = re.compile(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
 
 
 # ------------------ Pydantic Request/Response Models ------------------
 
 class SignupRequest(BaseModel):
-    email: str = Field(..., min_length=3)
-    password: str = Field(..., min_length=6)
-    full_name: str = Field(..., min_length=2)
-    phone: Optional[str] = None
+    email: str = Field(..., min_length=3, max_length=255)
+    password: str = Field(..., min_length=6, max_length=128)
+    full_name: str = Field(..., min_length=2, max_length=100)
+    phone: Optional[str] = Field(None, max_length=32)
+
+    @field_validator("email")
+    @classmethod
+    def validate_email(cls, v: str) -> str:
+        clean = v.strip().lower()
+        if not EMAIL_REGEX.match(clean):
+            raise ValueError("Invalid email address format.")
+        return clean
 
 
 class LoginRequest(BaseModel):
-    email: str
-    password: str
+    email: str = Field(..., min_length=3, max_length=255)
+    password: str = Field(..., min_length=1, max_length=128)
+
+    @field_validator("email")
+    @classmethod
+    def validate_email(cls, v: str) -> str:
+        clean = v.strip().lower()
+        if not EMAIL_REGEX.match(clean):
+            raise ValueError("Invalid email address format.")
+        return clean
+
+
+class ForgotPasswordRequest(BaseModel):
+    email: str = Field(..., min_length=3, max_length=255)
+
+    @field_validator("email")
+    @classmethod
+    def validate_email(cls, v: str) -> str:
+        clean = v.strip().lower()
+        if not EMAIL_REGEX.match(clean):
+            raise ValueError("Invalid email address format.")
+        return clean
+
+
+class ResetPasswordRequest(BaseModel):
+    token: str
+    new_password: str = Field(..., min_length=6, max_length=128)
 
 
 class AuthResponse(BaseModel):
@@ -48,26 +94,33 @@ class AuthResponse(BaseModel):
 
 class ProfileUpdateRequest(BaseModel):
     age: Optional[int] = Field(None, ge=10, le=100)
-    gender: Optional[str] = None
-    primary_skin_concern: Optional[str] = "acne"  # acne, dark_spots, pigmentation, pores, wrinkles, redness
-    baseline_skin_type: Optional[str] = "Normal"  # Normal, Oily, Dry, Combination, Sensitive
+    gender: Optional[str] = Field(None, max_length=32)
+    primary_skin_concern: Optional[str] = Field("acne", max_length=64)
+    baseline_skin_type: Optional[str] = Field("Normal", max_length=32)
     has_sensitive_skin: Optional[bool] = False
     known_allergies: Optional[List[str]] = []
-    sun_exposure_level: Optional[str] = "moderate"  # low, moderate, high
-    water_intake_liters: Optional[float] = 2.0
-    sleep_hours: Optional[float] = 7.0
+    sun_exposure_level: Optional[str] = Field("moderate", max_length=32)
+    water_intake_liters: Optional[float] = Field(2.0, ge=0.0, le=10.0)
+    sleep_hours: Optional[float] = Field(7.0, ge=0.0, le=24.0)
     is_pregnant_or_nursing: Optional[bool] = False
 
 
 # ------------------ Endpoints ------------------
 
-@router.post("/signup", response_model=AuthResponse, summary="Register a new patient account")
+@router.post(
+    "/signup",
+    response_model=AuthResponse,
+    summary="Register a new patient account",
+    dependencies=[Depends(signup_limiter)]
+)
 async def signup(payload: SignupRequest, db: Session = Depends(get_db)):
     """
     Registers a new patient account with encrypted password storage,
     initializes their profile, and returns a session JWT.
+    Rate-limited to prevent automated spam registrations.
     """
-    existing = db.query(User).filter(User.email == payload.email.lower()).first()
+    normalized_email = payload.email.lower().strip()
+    existing = db.query(User).filter(User.email == normalized_email).first()
     if existing:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -76,10 +129,10 @@ async def signup(payload: SignupRequest, db: Session = Depends(get_db)):
 
     # Create User
     new_user = User(
-        email=payload.email.lower(),
+        email=normalized_email,
         password_hash=hash_password(payload.password),
-        full_name=payload.full_name,
-        phone=payload.phone,
+        full_name=payload.full_name.strip(),
+        phone=payload.phone.strip() if payload.phone else None,
         role="patient",
         is_verified=True
     )
@@ -95,6 +148,8 @@ async def signup(payload: SignupRequest, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
 
+    logger.info(f"New patient account registered: {new_user.id}")
+
     # Issue JWT token
     token = create_access_token(data={"sub": new_user.id, "email": new_user.email, "role": new_user.role})
 
@@ -104,13 +159,21 @@ async def signup(payload: SignupRequest, db: Session = Depends(get_db)):
     )
 
 
-@router.post("/login", response_model=AuthResponse, summary="Log in with email and password")
+@router.post(
+    "/login",
+    response_model=AuthResponse,
+    summary="Log in with email and password",
+    dependencies=[Depends(login_limiter)]
+)
 async def login(payload: LoginRequest, db: Session = Depends(get_db)):
     """
     Authenticates email and password, returning an active JWT session token.
+    Rate-limited to prevent brute-force attacks.
     """
-    user = db.query(User).filter(User.email == payload.email.lower()).first()
+    normalized_email = payload.email.lower().strip()
+    user = db.query(User).filter(User.email == normalized_email).first()
     if not user or not user.password_hash or not verify_password(payload.password, user.password_hash):
+        logger.warning(f"Failed login attempt for {normalized_email}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect email or password. Please try again."
@@ -122,6 +185,72 @@ async def login(payload: LoginRequest, db: Session = Depends(get_db)):
         access_token=token,
         user=user.to_dict()
     )
+
+
+@router.post(
+    "/forgot-password",
+    summary="Request a password recovery token",
+    dependencies=[Depends(password_reset_limiter)]
+)
+async def forgot_password(payload: ForgotPasswordRequest, db: Session = Depends(get_db)):
+    """
+    Initiates account password recovery.
+    Issues a short-lived password reset token (15 min) for the account.
+    """
+    normalized_email = payload.email.lower().strip()
+    user = db.query(User).filter(User.email == normalized_email).first()
+    # Always return a generic success message to prevent user enumeration
+    if not user:
+        return {
+            "status": "success",
+            "message": "If an account with that email exists, password reset instructions have been generated."
+        }
+
+    reset_token = create_access_token(
+        data={"sub": user.id, "purpose": "password_reset", "email": user.email},
+        expires_delta=timedelta(minutes=15)
+    )
+
+    logger.info(f"Password reset token issued for user {user.id}")
+    return {
+        "status": "success",
+        "message": "Password reset token generated successfully. Valid for 15 minutes.",
+        "reset_token": reset_token
+    }
+
+
+@router.post(
+    "/reset-password",
+    summary="Reset password using a valid reset token",
+    dependencies=[Depends(password_reset_limiter)]
+)
+async def reset_password(payload: ResetPasswordRequest, db: Session = Depends(get_db)):
+    """
+    Validates a password reset token and updates the user's password hash.
+    """
+    token_data = decode_jwt_token(payload.token)
+    if not token_data or token_data.get("purpose") != "password_reset":
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid, expired, or malformed password reset token."
+        )
+
+    user_id = token_data.get("sub")
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User associated with token no longer exists."
+        )
+
+    user.password_hash = hash_password(payload.new_password)
+    db.commit()
+
+    logger.info(f"Password reset successfully completed for user {user.id}")
+    return {
+        "status": "success",
+        "message": "Your password has been reset successfully. You can now log in with your new credentials."
+    }
 
 
 @router.get("/me", summary="Get currently authenticated patient profile")

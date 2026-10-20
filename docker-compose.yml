@@ -21,7 +21,6 @@ services:
       - ./ml_pipeline:/app/ml_pipeline
     depends_on:
       - db
-      - redis
     restart: always
 
   # Next.js Web Interface Frontend
@@ -54,14 +53,6 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    restart: always
-
-  # Redis In-Memory Cache & Session Store
-  redis:
-    image: redis:7-alpine
-    container_name: dermanova_redis
-    ports:
-      - "6379:6379"
     restart: always
 
 volumes:

@@ -75,7 +75,25 @@ def test_full_diagnostic_and_history_lifecycle():
     assert len(rec_data["daily_routine"]["morning_routine"]) > 0
     assert len(rec_data["daily_routine"]["evening_routine"]) > 0
 
-    # Step 3: Persist Assessment to Longitudinal History
+    # Step 3: Register test patient and persist Assessment to Longitudinal History
+    signup_resp = client.post("/api/v1/auth/signup", json={
+        "email": "e2e_patient@dermanova.ai",
+        "password": "ClinicalPassword2026!",
+        "full_name": "E2E Test Patient"
+    })
+    if signup_resp.status_code == 200:
+        token = signup_resp.json()["access_token"]
+    else:
+        # User already exists from previous run, log in
+        login_resp = client.post("/api/v1/auth/login", json={
+            "email": "e2e_patient@dermanova.ai",
+            "password": "ClinicalPassword2026!"
+        })
+        assert login_resp.status_code == 200
+        token = login_resp.json()["access_token"]
+
+    auth_headers = {"Authorization": f"Bearer {token}"}
+
     save_payload = {
         "analysis_id": analysis_data["analysis_id"],
         "overall_health_score": analysis_data["overall_health_score"],
@@ -87,14 +105,14 @@ def test_full_diagnostic_and_history_lifecycle():
         "recommended_actives": [ing["name"] for ing in rec_data["primary_active_ingredients"]]
     }
 
-    save_response = client.post("/api/v1/history/save", json=save_payload)
+    save_response = client.post("/api/v1/history/save", json=save_payload, headers=auth_headers)
     assert save_response.status_code == 200
     saved_data = save_response.json()
     assert saved_data["status"] == "saved"
     record_id = saved_data["record"]["record_id"]
 
-    # Step 4: Verify Database Retrieval
-    history_response = client.get("/api/v1/history")
+    # Step 4: Verify Database Retrieval for authenticated patient
+    history_response = client.get("/api/v1/history", headers=auth_headers)
     assert history_response.status_code == 200
     history_data = history_response.json()
     assert history_data["status"] == "success"

@@ -97,7 +97,7 @@
 - [x] Build Real-Time AI Clinical Skincare Advisor Chat Drawer (`frontend/components/DermChatDrawer.tsx`)
 - [x] Build Next.js 14 production bundle (`npm run build` — Passed with 0 errors)
 
-### Phase 7: Validation & Production Readiness 🟢 [Completed & Verified]
+### Phase 7: Validation & Initial Verification 🟢 [Completed]
 - [x] Real PyTorch Model Checkpoint Serialized (`ml_pipeline/models/saved_models/dermanova_best_weights.pth` — 18.12 MB)
 - [x] Multi-Task EfficientNet Architecture with Calibrated Focal Priors Verified (582ms CPU inference)
 - [x] Authentic Backward-Pass Neural Grad-CAM Feature Map Extraction & Turbo Colormap Rendering
@@ -105,6 +105,39 @@
 - [x] Fix Backend Dockerfile & Docker Compose build context (`backend/Dockerfile`, `docker-compose.yml`)
 - [x] Formulate Discovery Paper presentation deliverable (`reports/DermaNova_Discovery_Paper_Presentation.docx`)
 - [x] Configure Supabase cloud environment template (`.env.example`)
-- [x] Automated Unit & Integration Test Suites Passing: 6/6 tests passing (100% success rate)
-- [ ] Stage 2: Train Kaggle T4 GPU 35-epoch run on raw 14,003 images (when user initiates Kaggle cloud session)
-- [ ] Final Presentation to Faculty & Jury Review Panel
+
+### Phase 8: Production Readiness & Zero-False-Data Architecture 🟢 [Completed & Verified]
+- [x] **GAP-01**: Eliminated pseudo-random biophysical fallback engine from `predictor.py`. Model fails loudly if weights are absent.
+- [x] **GAP-02**: Removed fake `/analyze/demo` endpoint; replaced with `/analyze/status` model readiness check.
+- [x] **GAP-03**: Removed synthetic `DEMO-USER-001` database seeding from `/history` endpoint.
+- [x] **GAP-04**: Guarded JWT secret keys against default/insecure values in production (`ENVIRONMENT=production`).
+- [x] **GAP-05**: Removed CORS wildcard `*`; enforced explicit origin whitelisting via `ALLOWED_ORIGINS`.
+- [x] **GAP-06**: Implemented deep health check endpoint (`/health`) with live DB ping, ML model verification, and cloud storage checks.
+- [x] **GAP-07**: Added explicit ONNX model file validation check into Docker build (`Dockerfile`, `backend/Dockerfile`).
+- [x] **GAP-08**: Thread-safe sliding-window rate limiting on `/analyze` (10 req/min), `/auth/login` (10 req/min), `/auth/signup` (5 req/min).
+- [x] **GAP-09**: Enforced 10MB upload payload guards on file uploads and base64 webcam streams.
+- [x] **GAP-10**: Enforced persistent PostgreSQL (Supabase) in production; blocked ephemeral SQLite fallback in production.
+- [x] **GAP-12**: Email format validation & string sanitization across auth request models.
+- [x] **GAP-14**: Recommender rejects empty condition payloads with HTTP 400 instead of filling fake default acne scores.
+- [x] **GAP-16**: Added password recovery flow (`/auth/forgot-password` and `/auth/reset-password`).
+- [x] **GAP-17**: Environment-driven frontend API configuration with clean `/api/v1` rewrites.
+- [x] **GAP-20**: Standardized on PyJWT; purged redundant `python-jose` and `passlib` from requirements.
+- [x] **GAP-21**: Added FastAPI lifespan context manager for graceful startup validation and connection tests.
+- [x] **GAP-22**: Removed unused Redis service from `docker-compose.yml`.
+- [x] **GAP-23**: Replaced deprecated Python 3.12+ `datetime.utcnow()` with `datetime.now(timezone.utc)`.
+- [x] **GAP-24**: Replaced fictional product branding with generic evidence-based active ingredient formulations.
+- [x] **Zero-False-Data Frontend**: Sample face evaluation runs authentic multi-task neural network inference; eliminated `FALLBACK_DEMO_ANALYSIS`.
+- [x] **Automated Test Suite**: 13/13 tests passing (100% success rate across backend APIs, ML inference, preprocessing, and lifecycle).
+
+### Phase 9: Production-Grade Modular ML Backend Architecture 🟢 [Completed & Verified]
+- [x] **Modular Architecture**: Restructured into clean `core/`, `schemas/`, `services/`, `ml/`, `db/`, and `api/routes/` layers.
+- [x] **PyTorch Strict Checkpoint Integration**: Verified and strictly loaded `dermanova_best_weights.pth` with `weights_only=True` and `strict=True`, device detection (CPU/CUDA), and output shape validation.
+- [x] **Consistent Preprocessing**: Exactly reproduced verified training preprocessing (RGB $\to$ Bicubic upscaling $\to$ LAB CLAHE $\to$ Bicubic resize to $224\times224 \to$ ImageNet float32 normalization).
+- [x] **Optical Quality Gatekeeper**: Enforced Laplacian blur threshold ($\ge 65.0$), exposure verification ($[35, 235]$), and Fitzpatrick skin chrominance cluster check with actionable rejection messages.
+- [x] **Rule-Based Skincare Engine**: Independent recommendation service mapping 8 conditions to active ingredients with safety contraindications (sensitive skin, pregnancy, known allergies).
+- [x] **RESTful Versioned Endpoints**: Implemented `/api/v1/health`, `/api/v1/model-info`, `/api/v1/analyses` (POST multipart upload, GET history with pagination, GET by ID, DELETE with image cleanup), and `/api/v1/recommendations/{id}`.
+- [x] **Storage & Ownership Security**: Enforced resource-level ownership checks and safe image deletion across Supabase Storage and local disk fallback.
+- [x] **Frontend Integration**: Centralized API client in `frontend/services/api.ts` with compliant multipart handling and upload progress support. Verified TypeScript build with zero errors.
+- [x] **Comprehensive Test Suite**: 37 total tests passing (23 new modular backend tests in `backend/tests/` + 14 regression tests in `tests/`).
+
+

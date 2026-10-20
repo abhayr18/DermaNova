@@ -11,12 +11,12 @@ const getApiBaseUrl = (): string => {
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
       return 'http://localhost:8000/api/v1';
     }
-    return 'https://dermanova.onrender.com/api/v1';
+    return '/api/v1';
   }
   if (process.env.BACKEND_URL) {
     return `${process.env.BACKEND_URL.replace(/\/$/, '')}/api/v1`;
   }
-  return 'https://dermanova.onrender.com/api/v1';
+  return 'http://localhost:8000/api/v1';
 };
 
 const API_BASE_URL = getApiBaseUrl();
@@ -220,11 +220,26 @@ export const apiService = {
   },
 
   // AI Diagnostic Analysis
-  async analyzeFile(file: File): Promise<AnalysisResponse> {
+  async analyzeFile(
+    file: File,
+    onProgress?: (progressPercent: number) => void
+  ): Promise<AnalysisResponse> {
     const formData = new FormData();
     formData.append('file', file);
-    const response = await apiClient.post<AnalysisResponse>('/analyze', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
+    // Let browser/Axios set correct multipart/form-data boundary automatically
+    const response = await apiClient.post<AnalysisResponse>('/analyses', formData, {
+      onUploadProgress: (progressEvent) => {
+        if (onProgress && progressEvent.total) {
+          const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          onProgress(percent);
+        }
+      },
+    }).catch(async (err) => {
+      // Fallback to legacy endpoint if /analyses not available
+      if (err?.response?.status === 404) {
+        return await apiClient.post<AnalysisResponse>('/analyze', formData);
+      }
+      throw err;
     });
     return response.data;
   },
@@ -236,8 +251,28 @@ export const apiService = {
     return response.data;
   },
 
-  async getDemoAnalysis(): Promise<AnalysisResponse> {
-    const response = await apiClient.get<AnalysisResponse>('/analyze/demo');
+  async getModelStatus(): Promise<{ model_loaded: boolean; status: string; supported_conditions: number }> {
+    const response = await apiClient.get('/analyze/status');
+    return response.data;
+  },
+
+  async getModelInfo(): Promise<any> {
+    const response = await apiClient.get('/model-info');
+    return response.data;
+  },
+
+  async getHealth(): Promise<any> {
+    const response = await apiClient.get('/health');
+    return response.data;
+  },
+
+  async forgotPassword(email: string) {
+    const response = await apiClient.post('/auth/forgot-password', { email });
+    return response.data;
+  },
+
+  async resetPassword(token: string, newPassword: string) {
+    const response = await apiClient.post('/auth/reset-password', { token, new_password: newPassword });
     return response.data;
   },
 
@@ -248,6 +283,29 @@ export const apiService = {
     has_sensitive_skin: boolean;
   }): Promise<RecommendationResponse> {
     const response = await apiClient.post<RecommendationResponse>('/recommend', params);
+    return response.data;
+  },
+
+  async getRecommendationsByAnalysisId(analysisId: string): Promise<RecommendationResponse> {
+    const response = await apiClient.get<RecommendationResponse>(`/recommendations/${analysisId}`);
+    return response.data;
+  },
+
+  // DermaNova Analyses CRUD & History
+  async getAnalyses(page: number = 1, pageSize: number = 20): Promise<any> {
+    const response = await apiClient.get('/analyses', {
+      params: { page, page_size: pageSize }
+    });
+    return response.data;
+  },
+
+  async getAnalysis(analysisId: string): Promise<any> {
+    const response = await apiClient.get(`/analyses/${analysisId}`);
+    return response.data;
+  },
+
+  async deleteAnalysis(analysisId: string): Promise<any> {
+    const response = await apiClient.delete(`/analyses/${analysisId}`);
     return response.data;
   },
 
@@ -280,3 +338,4 @@ export const apiService = {
     return response.data;
   }
 };
+

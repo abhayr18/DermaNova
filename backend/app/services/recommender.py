@@ -88,72 +88,72 @@ ACTIVE_INGREDIENTS_MAP = {
 
 PRODUCT_CATALOG = [
     SkincareProduct(
-        product_name="DermaNova Pure Balance Gentle Gel Cleanser",
+        product_name="Gentle Balancing pH 5.5 Foaming Gel Cleanser",
         category="Cleanser",
-        brand="DermaNova Clinical",
+        brand="Clinical Formulary",
         key_actives=["Zinc PCA", "Panthenol (2%)", "Green Tea Extract"],
         suitable_for_skin_types=["Normal", "Oily", "Combination", "Sensitive"],
         price_range="$",
         description="Sulfate-free pH 5.5 foaming gel that lifts grime without disrupting stratum corneum acid mantle."
     ),
     SkincareProduct(
-        product_name="DermaNova Clarifying 2% Salicylic BHA Solution",
+        product_name="2% Salicylic Acid (BHA) Pore-Clearing Solution",
         category="Treatment",
-        brand="DermaNova Clinical",
+        brand="Clinical Formulary",
         key_actives=["Salicylic Acid (2%)", "Tea Tree Terpenes", "Betaine"],
         suitable_for_skin_types=["Oily", "Combination"],
         price_range="$$",
         description="Unclogs congested follicular pores, reduces blackheads, and controls excess oil shine."
     ),
     SkincareProduct(
-        product_name="DermaNova Rapid Acne Clearing Emulsion",
+        product_name="2.5% Micronized Benzoyl Peroxide + Azelaic Acid Emulsion",
         category="Treatment",
-        brand="DermaNova Clinical",
+        brand="Clinical Formulary",
         key_actives=["Benzoyl Peroxide (2.5%)", "Azelaic Acid (5%)"],
         suitable_for_skin_types=["Oily", "Combination", "Normal"],
         price_range="$$",
         description="Dual-action spot treatment targeting inflamed papules and reducing bacterial colonisation within 48 hours."
     ),
     SkincareProduct(
-        product_name="DermaNova Clinical 10% Niacinamide + Zinc Serum",
+        product_name="10% Niacinamide + 1% Zinc PCA Sebum Balancing Serum",
         category="Serum",
-        brand="DermaNova Clinical",
+        brand="Clinical Formulary",
         key_actives=["Niacinamide (10%)", "Zinc PCA (1%)", "Hyaluronic Acid"],
         suitable_for_skin_types=["Normal", "Oily", "Dry", "Combination"],
         price_range="$$",
         description="Refines texture, reduces the appearance of enlarged pores, and balances erratic sebum levels."
     ),
     SkincareProduct(
-        product_name="DermaNova Fade-Bright Tranexamic Pigment Corrector",
+        product_name="5% Tranexamic Acid + 2% Alpha Arbutin Pigment Corrector",
         category="Serum",
-        brand="DermaNova Clinical",
+        brand="Clinical Formulary",
         key_actives=["Tranexamic Acid (5%)", "Alpha Arbutin (2%)", "Licorice Extract"],
         suitable_for_skin_types=["Normal", "Dry", "Combination", "Sensitive"],
         price_range="$$$",
         description="Clinically targets stubborn dark spots, post-acne erythema, and diffuse melasma discoloration."
     ),
     SkincareProduct(
-        product_name="DermaNova Age-Renewal Encapsulated Retinal 0.05%",
+        product_name="0.05% Encapsulated Retinaldehyde Cell-Renewal Serum",
         category="Treatment",
-        brand="DermaNova Clinical",
+        brand="Clinical Formulary",
         key_actives=["Retinaldehyde (0.05%)", "Copper Peptides", "Bisabolol"],
         suitable_for_skin_types=["Normal", "Dry", "Combination"],
         price_range="$$$",
         description="Potent youth-restoring serum smoothing fine lines and accelerating dermal matrix renewal."
     ),
     SkincareProduct(
-        product_name="DermaNova Barrier Calm Cica-Repair Cream",
+        product_name="Triple Ceramide (NP, AP, EOP) + 1% Madecassoside Barrier Cream",
         category="Moisturizer",
-        brand="DermaNova Clinical",
+        brand="Clinical Formulary",
         key_actives=["Madecassoside (1%)", "Ceramides (NP, AP, EOP)", "Colloidal Oatmeal"],
         suitable_for_skin_types=["Normal", "Dry", "Sensitive"],
         price_range="$$",
         description="Intensively soothes facial erythema, calms irritated skin, and seals compromised lipid moisture barrier."
     ),
     SkincareProduct(
-        product_name="DermaNova Ultra-Shield Invisible Mineral SPF 50+ PA++++",
+        product_name="Broad-Spectrum Mineral Sunscreen SPF 50+ PA++++",
         category="Sunscreen",
-        brand="DermaNova Clinical",
+        brand="Clinical Formulary",
         key_actives=["Non-nano Zinc Oxide (18%)", "Ectoin", "Vitamin E"],
         suitable_for_skin_types=["Normal", "Oily", "Dry", "Combination", "Sensitive"],
         price_range="$$",

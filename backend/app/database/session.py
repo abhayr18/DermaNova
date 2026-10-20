@@ -10,23 +10,17 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-# Determine database URL
-DEFAULT_SQLITE_URL = "sqlite:///./dermanova_clinical.db"
-DATABASE_URL = os.getenv("DATABASE_URL", DEFAULT_SQLITE_URL)
-
-# Supabase and Heroku/Render often provide 'postgres://' URLs which SQLAlchemy 2.0 requires as 'postgresql://'
-if DATABASE_URL.startswith("postgres://"):
-    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+from backend.app.core.config import settings
 
 # Configure engine arguments based on DB driver
-if DATABASE_URL.startswith("sqlite"):
+if settings.DATABASE_URL.startswith("sqlite"):
     engine = create_engine(
-        DATABASE_URL,
+        settings.DATABASE_URL,
         connect_args={"check_same_thread": False}
     )
 else:
     engine = create_engine(
-        DATABASE_URL,
+        settings.DATABASE_URL,
         pool_pre_ping=True,
         pool_size=10,
         max_overflow=20

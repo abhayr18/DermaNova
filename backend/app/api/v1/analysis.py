@@ -1,5 +1,6 @@
 import base64
 import json
+import logging
 from typing import Optional
 from fastapi import APIRouter, UploadFile, File, HTTPException, Depends
 from pydantic import BaseModel
@@ -12,8 +13,14 @@ from backend.app.database.models import User, SkinAssessment, PersonalizedRoutin
 from backend.app.authentication.auth_handler import get_optional_user
 from backend.app.services.storage import storage_service
 from backend.app.services.recommender import recommender_service
+from backend.app.core.rate_limiter import analyze_limiter
+
+logger = logging.getLogger("dermanova.analysis")
 
 router = APIRouter(prefix="/analyze", tags=["Skin Analysis"])
+
+# Maximum allowed image upload size: 10MB
+MAX_IMAGE_SIZE_BYTES = 10 * 1024 * 1024
 
 
 class Base64AnalysisPayload(BaseModel):
@@ -91,10 +98,15 @@ async def _save_assessment_and_routine(
         db.commit()
     except Exception as e:
         db.rollback()
-        print(f"[Database/Storage Warning] Failed saving user scan: {e}")
+        logger.error(f"Failed saving user scan to database/storage: {e}")
 
 
-@router.post("", response_model=AnalysisResponse, summary="Analyze uploaded facial skin image")
+@router.post(
+    "",
+    response_model=AnalysisResponse,
+    summary="Analyze uploaded facial skin image",
+    dependencies=[Depends(analyze_limiter)]
+)
 async def analyze_image_file(
     file: UploadFile = File(...),
     current_user: Optional[User] = Depends(get_optional_user),
@@ -106,7 +118,7 @@ async def analyze_image_file(
     and returns spatial Grad-CAM attention heatmaps.
     If authenticated, automatically saves to user's Supabase cloud account.
     """
-    if not file.content_type.startswith("image/"):
+    if not file.content_type or not file.content_type.startswith("image/"):
         raise HTTPException(
             status_code=400,
             detail=f"Invalid file type '{file.content_type}'. Please upload a valid JPEG, PNG, or WEBP image."
@@ -116,17 +128,33 @@ async def analyze_image_file(
         image_bytes = await file.read()
         if len(image_bytes) < 100:
             raise HTTPException(status_code=400, detail="Uploaded file is empty or corrupted.")
+        if len(image_bytes) > MAX_IMAGE_SIZE_BYTES:
+            raise HTTPException(
+                status_code=413,
+                detail=f"Image too large ({len(image_bytes) / 1024 / 1024:.1f}MB). Maximum allowed size is 10MB."
+            )
 
         result = predictor_service.predict(image_bytes)
         await _save_assessment_and_routine(result, image_bytes, current_user, db)
         return result
     except HTTPException:
         raise
+    except RuntimeError as e:
+        logger.error(f"ML model error during analysis: {e}")
+        raise HTTPException(status_code=503, detail=str(e))
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
+        logger.error(f"Unexpected diagnostic pipeline error: {e}")
         raise HTTPException(status_code=500, detail=f"Diagnostic pipeline error: {str(e)}")
 
 
-@router.post("/base64", response_model=AnalysisResponse, summary="Analyze base64-encoded webcam selfie")
+@router.post(
+    "/base64",
+    response_model=AnalysisResponse,
+    summary="Analyze base64-encoded webcam selfie",
+    dependencies=[Depends(analyze_limiter)]
+)
 async def analyze_base64_image(
     payload: Base64AnalysisPayload,
     current_user: Optional[User] = Depends(get_optional_user),
@@ -145,30 +173,37 @@ async def analyze_base64_image(
             raw_b64 = raw_b64.split("base64,")[1]
         image_bytes = base64.b64decode(raw_b64)
 
+        if len(image_bytes) > MAX_IMAGE_SIZE_BYTES:
+            raise HTTPException(
+                status_code=413,
+                detail=f"Image too large ({len(image_bytes) / 1024 / 1024:.1f}MB). Maximum allowed size is 10MB."
+            )
+
         result = predictor_service.predict(payload.image_base64)
         await _save_assessment_and_routine(result, image_bytes, current_user, db)
         return result
     except HTTPException:
         raise
+    except RuntimeError as e:
+        logger.error(f"ML model error during base64 analysis: {e}")
+        raise HTTPException(status_code=503, detail=str(e))
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
+        logger.error(f"Unexpected diagnostic pipeline error: {e}")
         raise HTTPException(status_code=500, detail=f"Diagnostic pipeline error: {str(e)}")
 
 
-@router.get("/demo", response_model=AnalysisResponse, summary="Generate sample clinical demonstration analysis")
-async def get_demo_analysis():
+@router.get("/status", summary="Check ML model availability and inference readiness")
+async def get_model_status():
     """
-    Returns an instant, complete diagnostic assessment and Grad-CAM heatmap for UI testing and presentations.
+    Returns the current status of the ML inference engine.
+    Use this to check if the diagnostic pipeline is ready before submitting images.
     """
-    from pathlib import Path
-    sample_path = Path("sample_images/my_face.jpeg")
-    if sample_path.exists():
-        with open(sample_path, "rb") as f:
-            image_bytes = f.read()
-    else:
-        from PIL import Image
-        import io
-        buf = io.BytesIO()
-        Image.new("RGB", (224, 224), color=(210, 175, 145)).save(buf, format="JPEG")
-        image_bytes = buf.getvalue()
-
-    return predictor_service.predict(image_bytes)
+    return {
+        "model_loaded": predictor_service.is_model_loaded,
+        "onnx_available": predictor_service.onnx_session is not None,
+        "pytorch_available": predictor_service.torch_model is not None,
+        "supported_conditions": 8,
+        "status": "ready" if predictor_service.is_model_loaded else "model_unavailable"
+    }

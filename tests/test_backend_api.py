@@ -21,17 +21,13 @@ def test_health_check():
     assert data["services"]["ml_inference"] == "operational"
 
 
-def test_demo_analysis_endpoint():
-    response = client.get("/api/v1/analyze/demo")
+def test_model_status_endpoint():
+    response = client.get("/api/v1/analyze/status")
     assert response.status_code == 200
     data = response.json()
-    assert "analysis_id" in data
-    assert "overall_health_score" in data
-    assert 0 <= data["overall_health_score"] <= 100
-    assert "conditions" in data
-    assert len(data["conditions"]) == 8
-    assert "heatmap_image_base64" in data
-    assert data["heatmap_image_base64"].startswith("data:image/png;base64,")
+    assert data["model_loaded"] is True
+    assert data["status"] == "ready"
+    assert data["supported_conditions"] == 8
 
 
 def test_recommendation_endpoint():
@@ -57,9 +53,42 @@ def test_recommendation_endpoint():
     assert len(data["daily_routine"]["evening_routine"]) == 3
 
 
-def test_history_endpoint():
+def test_recommendation_empty_conditions_rejected():
+    """GAP-14 test: Recommender must reject requests with no detected conditions."""
+    payload = {
+        "detected_conditions": {},
+        "skin_type": "Normal"
+    }
+    response = client.post("/api/v1/recommend", json=payload)
+    assert response.status_code == 400
+    assert "Please run a skin analysis first" in response.text
+
+
+def test_history_endpoint_unauthenticated_empty():
+    """GAP-03 test: Unauthenticated requests return empty records without demo data."""
     response = client.get("/api/v1/history")
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "success"
-    assert data["total_records"] >= 3
+    assert data["total_records"] == 0
+    assert data["records"] == []
+
+
+def test_blank_white_image_rejected_with_400():
+    """Verify that a blank white image is rejected by the gatekeeper rather than generating fake acne scores."""
+    import io
+    import numpy as np
+    from PIL import Image
+
+    buf = io.BytesIO()
+    Image.fromarray(np.full((224, 224, 3), 255, dtype=np.uint8)).save(buf, format="JPEG")
+    buf.seek(0)
+
+    response = client.post(
+        "/api/v1/analyze",
+        files={"file": ("blank_white.jpg", buf, "image/jpeg")}
+    )
+    assert response.status_code == 400
+    assert "blank" in response.text or "No human face" in response.text
+
+

@@ -11,7 +11,7 @@ Models:
 
 import uuid
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Any, List, Optional
 from sqlalchemy import (
     Column,
@@ -28,6 +28,11 @@ from sqlalchemy.orm import relationship
 from backend.app.database.session import Base
 
 
+def get_utc_now():
+    """Return timezone-aware current UTC time."""
+    return datetime.now(timezone.utc)
+
+
 class User(Base):
     """
     Patient or Clinician account in DermaNova.
@@ -42,8 +47,8 @@ class User(Base):
     phone = Column(String(32), nullable=True)
     role = Column(String(32), default="patient")  # 'patient', 'dermatologist', 'admin'
     is_verified = Column(Boolean, default=False)
-    created_at = Column(DateTime, default=datetime.utcnow, index=True)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime(timezone=True), default=get_utc_now, index=True)
+    updated_at = Column(DateTime(timezone=True), default=get_utc_now, onupdate=get_utc_now)
 
     # Relationships
     profile = relationship("PatientProfile", back_populates="user", uselist=False, cascade="all, delete-orphan")
@@ -85,8 +90,8 @@ class PatientProfile(Base):
     sleep_hours = Column(Float, default=7.0)
     is_pregnant_or_nursing = Column(Boolean, default=False)  # Crucial for contraindicating Retinoids
     
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime(timezone=True), default=get_utc_now)
+    updated_at = Column(DateTime(timezone=True), default=get_utc_now, onupdate=get_utc_now)
 
     # Relationships
     user = relationship("User", back_populates="profile")
@@ -128,7 +133,7 @@ class SkinAssessment(Base):
     id = Column(String(64), primary_key=True, default=lambda: f"DN-{uuid.uuid4().hex[:8].upper()}")
     user_id = Column(String(64), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
     
-    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+    created_at = Column(DateTime(timezone=True), default=get_utc_now, index=True)
     overall_health_score = Column(Integer, nullable=False)  # 0 to 100
     detected_skin_type = Column(String(32), default="Normal")
     primary_concern = Column(String(64), nullable=False)
@@ -184,7 +189,7 @@ class PersonalizedRoutine(Base):
     user_id = Column(String(64), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
     assessment_id = Column(String(64), ForeignKey("skin_assessments.id", ondelete="SET NULL"), nullable=True)
     
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime(timezone=True), default=get_utc_now)
     is_active = Column(Boolean, default=True)
     
     primary_actives_json = Column(Text, default="[]")
@@ -223,7 +228,7 @@ class SkinJourneyLog(Base):
 
     id = Column(String(64), primary_key=True, default=lambda: str(uuid.uuid4()))
     user_id = Column(String(64), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
-    log_date = Column(DateTime, default=datetime.utcnow, index=True)
+    log_date = Column(DateTime(timezone=True), default=get_utc_now, index=True)
     
     completed_am_routine = Column(Boolean, default=False)
     completed_pm_routine = Column(Boolean, default=False)

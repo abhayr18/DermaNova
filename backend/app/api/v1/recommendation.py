@@ -15,21 +15,23 @@ async def generate_recommendations(request: RecommendationRequest):
     Accepts diagnosed condition severity scores and user profile parameters,
     and returns evidence-based active ingredients, safe curated products,
     structured AM/PM routines, and dietary recommendations.
+    Requires valid condition scores from a prior skin analysis.
     """
     conditions = request.detected_conditions or {}
-    
-    # If no conditions were explicitly provided, use default balanced scores
+
     if not conditions:
-        conditions = {
-            "acne": 0.48,
-            "blackheads": 0.45,
-            "pores": 0.52,
-            "dark_spots": 0.35,
-            "redness": 0.25,
-            "wrinkles": 0.20,
-            "pigmentation": 0.15,
-            "whiteheads": 0.10
-        }
+        raise HTTPException(
+            status_code=400,
+            detail="No skin condition scores provided. Please run a skin analysis first using /api/v1/analyze."
+        )
+
+    # Validate that condition values are within expected range
+    for cond_name, score in conditions.items():
+        if not (0.0 <= score <= 1.0):
+            raise HTTPException(
+                status_code=400,
+                detail=f"Invalid score for condition '{cond_name}': {score}. Scores must be between 0.0 and 1.0."
+            )
 
     try:
         response = recommender_service.generate_recommendations(

@@ -24,6 +24,9 @@ COPY backend /app/backend
 COPY ml_pipeline /app/ml_pipeline
 COPY .env.example /app/.env
 
+# Verify ONNX model is present (fails docker build immediately if weights are missing)
+RUN python -c "from pathlib import Path; p = Path('/app/ml_pipeline/models/saved_models/dermanova_model.onnx'); assert p.exists(), f'CRITICAL: ONNX model missing at {p}'"
+
 # Create uploads directory
 RUN mkdir -p /app/uploads
 

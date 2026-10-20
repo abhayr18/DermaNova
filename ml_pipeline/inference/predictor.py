@@ -7,7 +7,10 @@ Integrates:
 3. Real Neural Network Inference (PyTorch / ONNX Runtime) with automatic weight detection
 4. Saliency & Authentic Grad-CAM Spatial Heatmap Rendering (Turbo/Jet overlay)
 5. Validation-Tuned Selective Abstain for Ambiguous Acne Grading
-6. Biophysical Skin Health Scoring (0 - 100)
+6. Overall Skin Health Scoring (0 - 100)
+
+IMPORTANT: This engine requires a trained ONNX or PyTorch model to produce results.
+No fallback/fake inference is performed — if no model is loaded, prediction raises an error.
 """
 
 import io
@@ -16,6 +19,7 @@ import math
 import time
 import base64
 import uuid
+import logging
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional, Any, Union
 import numpy as np
@@ -100,11 +104,14 @@ DERMANOVA_ORDER = [
 ]
 
 
+logger = logging.getLogger("dermanova.predictor")
+
+
 class DermaNovaPredictor:
     """
     Clinical-Grade Multi-Task Diagnostic Inference Engine.
-    Seamlessly utilizes PyTorch or ONNX Runtime when model weights are available,
-    with an adaptive biophysical pixel-saliency fallback.
+    Requires a trained ONNX or PyTorch model checkpoint to produce results.
+    No fallback or synthetic inference — fails explicitly if no model is available.
     """
 
     def __init__(self, model_weights_path: Optional[str] = None):
@@ -127,15 +134,24 @@ class DermaNovaPredictor:
         default_p = self.root_dir / "ml_pipeline" / "models" / "saved_models" / "dermanova_best_weights.pth"
         return default_p if default_p.exists() else None
 
+    @property
+    def is_model_loaded(self) -> bool:
+        """Check if at least one inference backend (ONNX or PyTorch) is available."""
+        return self.onnx_session is not None or self.torch_model is not None
+
     def _init_models(self):
-        """Attempt to load trained PyTorch or ONNX checkpoints."""
+        """Load trained ONNX or PyTorch checkpoints. Logs warnings but does not crash on failure."""
         # 1. Try ONNX runtime for lightweight fast execution (<30MB RAM)
         if HAS_ONNX and self.onnx_path.exists():
             try:
                 self.onnx_session = ort.InferenceSession(str(self.onnx_path), providers=["CPUExecutionProvider"])
-                print(f"[Predictor] Loaded ONNX model from {self.onnx_path} (Ultralight Memory Footprint)")
+                logger.info(f"Loaded ONNX model from {self.onnx_path} (Ultralight Memory Footprint)")
             except Exception as e:
-                print(f"[Predictor Warning] Failed loading ONNX: {e}")
+                logger.error(f"Failed loading ONNX model: {e}")
+        elif HAS_ONNX:
+            logger.warning(f"ONNX model file not found at {self.onnx_path}")
+        else:
+            logger.warning("onnxruntime is not installed — ONNX inference unavailable")
 
         # 2. Only load PyTorch checkpoint if ONNX is not available (avoids loading both into RAM)
         if self.onnx_session is None and HAS_TORCH and self.weights_path and self.weights_path.exists():
@@ -146,9 +162,17 @@ class DermaNovaPredictor:
                 model.load_state_dict(checkpoint["model_state_dict"])
                 model.eval()
                 self.torch_model = model
-                print(f"[Predictor] Loaded PyTorch checkpoint from {self.weights_path}")
+                logger.info(f"Loaded PyTorch checkpoint from {self.weights_path}")
             except Exception as e:
-                print(f"[Predictor Warning] Failed loading PyTorch checkpoint: {e}")
+                logger.error(f"Failed loading PyTorch checkpoint: {e}")
+
+        # Final status
+        if not self.is_model_loaded:
+            logger.critical(
+                "NO ML MODEL LOADED. Neither ONNX nor PyTorch weights are available. "
+                "The /analyze endpoint will return errors until a valid model is deployed. "
+                f"Searched ONNX: {self.onnx_path}, PyTorch: {self.weights_path}"
+            )
 
     def decode_image(self, image_input: Any) -> Tuple[Image.Image, np.ndarray]:
         """Decode raw bytes, base64 data URL, or PIL Image into standard RGB format."""
@@ -175,8 +199,9 @@ class DermaNovaPredictor:
                     pass
 
         if pil_img is None:
-            # Robust clinical fallback if image bytes are simulated or invalid
-            pil_img = Image.new("RGB", (224, 224), color=(210, 175, 145))
+            raise ValueError(
+                "Could not decode the provided image. Please upload a valid JPEG, PNG, or WEBP file."
+            )
 
         # Cloud Memory Guard: Constrain high-res phone/camera photos (e.g. 4032x3024) to max 640px dimension.
         # This prevents 300MB+ memory spikes during numpy conversion & saliency map rendering,
@@ -321,7 +346,15 @@ class DermaNovaPredictor:
     def predict(self, image_input: Any) -> AnalysisResponse:
         """
         Execute full end-to-end clinical diagnostic assessment.
+        Requires a trained ML model to be loaded — raises RuntimeError if unavailable.
         """
+        if not self.is_model_loaded:
+            raise RuntimeError(
+                "DermaNova ML model is not loaded. Cannot perform skin diagnosis. "
+                "Please ensure the ONNX model file exists at: "
+                f"{self.onnx_path}"
+            )
+
         analysis_id = f"DN-{uuid.uuid4().hex[:8].upper()}"
         timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -332,6 +365,36 @@ class DermaNovaPredictor:
         # 2. Optical Quality Gatekeeper & Face Crop
         quality_res = self.roi_extractor.validate_optical_quality(img_np)
         cropped_pil, face_detected = self.roi_extractor.crop_face_roi(pil_img)
+
+        # -----------------------------------------------------------------
+        # CLINICAL INPUT GATEKEEPING: Refuse non-face / blank / invalid images
+        # Real clinical AI must reject invalid inputs rather than hallucinating
+        # medical diagnoses on blank canvas or non-facial pixels.
+        # -----------------------------------------------------------------
+        if quality_res.get("exposure_status") == "overexposed" and quality_res.get("luminance", 0) > 240.0:
+            raise ValueError(
+                "Image appears completely blank, washed out, or overexposed (white image). "
+                "No visible facial skin features found. Please upload a clear photo of your face."
+            )
+
+        if quality_res.get("exposure_status") == "underexposed" and quality_res.get("luminance", 100) < 20.0:
+            raise ValueError(
+                "Image is completely dark or underexposed (black image). "
+                "No visible facial skin features found. Please upload a photo taken in adequate lighting."
+            )
+
+        if quality_res.get("blur_score", 100.0) < 8.0:
+            raise ValueError(
+                "Image lacks visible facial skin texture or features (blank or solid color canvas). "
+                "Please upload a real, clear clinical facial photo."
+            )
+
+        if not face_detected:
+            raise ValueError(
+                "No human face or valid skin region detected in the image. "
+                "Please ensure your face is clearly visible, centered in the frame, and unobstructed."
+            )
+
         enhanced_np = self.enhancer.preprocess_image(cropped_pil)
 
         raw_probabilities = {}
@@ -364,8 +427,8 @@ class DermaNovaPredictor:
                 type_map = [SkinTypeEnum.NORMAL, SkinTypeEnum.OILY, SkinTypeEnum.DRY, SkinTypeEnum.COMBINATION, SkinTypeEnum.SENSITIVE]
                 detected_skin_type = type_map[min(type_pred, 4)]
             except Exception as e:
-                print(f"[Inference Error] ONNX inference failed: {e}")
-                raw_probabilities = {}
+                logger.error(f"ONNX inference failed: {e}")
+                raise RuntimeError(f"ONNX model inference failed: {e}") from e
 
         elif self.torch_model is not None and HAS_TORCH:
             try:
@@ -388,62 +451,15 @@ class DermaNovaPredictor:
                 type_map = [SkinTypeEnum.NORMAL, SkinTypeEnum.OILY, SkinTypeEnum.DRY, SkinTypeEnum.COMBINATION, SkinTypeEnum.SENSITIVE]
                 detected_skin_type = type_map[min(type_pred, 4)]
             except Exception as e:
-                print(f"[Inference Error] PyTorch inference failed: {e}. Falling back to biophysical engine.")
-                raw_probabilities = {}
+                logger.error(f"PyTorch inference failed: {e}")
+                raise RuntimeError(f"PyTorch model inference failed: {e}") from e
 
-        # 4. Biophysical Feature Engine (if model not loaded or error occurred)
+        # 4. Verify that model inference produced valid results
         if not raw_probabilities:
-            # Extract real physical color & texture variance from the user's face pixels
-            mean_r = float(np.mean(enhanced_np[:, :, 0])) / 255.0
-            mean_g = float(np.mean(enhanced_np[:, :, 1])) / 255.0
-            mean_b = float(np.mean(enhanced_np[:, :, 2])) / 255.0
-            redness_ratio = mean_r / (mean_g + mean_b + 1e-6)
-            local_var = float(np.var(enhanced_np / 255.0))
-
-            diff_y = np.abs(enhanced_np[1:, :, :] - enhanced_np[:-1, :, :]) / 255.0
-            diff_x = np.abs(enhanced_np[:, 1:, :] - enhanced_np[:, :-1, :]) / 255.0
-            texture_energy = float(np.mean(diff_y) + np.mean(diff_x))
-
-            # Deterministic seed based on physical pixel signature
-            pixel_seed = int((mean_r + texture_energy + local_var) * 100000) % 65535
-            rng = np.random.RandomState(pixel_seed)
-
-            raw_probabilities = {
-                "acne": float(np.clip(0.32 + (redness_ratio - 0.52) * 0.7 + rng.normal(0, 0.05), 0.05, 0.92)),
-                "blackheads": float(np.clip(0.38 + texture_energy * 0.45 + rng.normal(0, 0.05), 0.08, 0.86)),
-                "whiteheads": float(np.clip(0.22 + texture_energy * 0.3 + rng.normal(0, 0.06), 0.04, 0.70)),
-                "dark_spots": float(np.clip(0.35 + local_var * 1.8 + rng.normal(0, 0.05), 0.06, 0.85)),
-                "pigmentation": float(np.clip(0.28 + (mean_r - mean_b) * 0.6 + rng.normal(0, 0.05), 0.05, 0.80)),
-                "pores": float(np.clip(0.44 + texture_energy * 0.5 + rng.normal(0, 0.05), 0.10, 0.90)),
-                "wrinkles": float(np.clip(0.30 + texture_energy * 0.4 + rng.normal(0, 0.05), 0.05, 0.82)),
-                "redness": float(np.clip(0.26 + (redness_ratio - 0.54) * 0.9 + rng.normal(0, 0.06), 0.06, 0.88)),
-            }
-
-            # Selective abstain check for acne severity
-            acne_prob = raw_probabilities["acne"]
-            margin = abs(acne_prob - 0.50)
-            if margin < self.abstain_threshold:
-                acne_severity_grade = SeverityLevelEnum.AMBIGUOUS_RANGE
-            elif acne_prob < 0.32:
-                acne_severity_grade = SeverityLevelEnum.CLEAR
-            elif acne_prob < 0.55:
-                acne_severity_grade = SeverityLevelEnum.MILD
-            elif acne_prob < 0.78:
-                acne_severity_grade = SeverityLevelEnum.MODERATE
-            else:
-                acne_severity_grade = SeverityLevelEnum.SEVERE
-
-            # Skin type classification
-            if raw_probabilities["pores"] > 0.55 and raw_probabilities["acne"] > 0.45:
-                detected_skin_type = SkinTypeEnum.OILY
-            elif raw_probabilities["redness"] > 0.50:
-                detected_skin_type = SkinTypeEnum.SENSITIVE
-            elif raw_probabilities["wrinkles"] > 0.50 and raw_probabilities["pores"] < 0.35:
-                detected_skin_type = SkinTypeEnum.DRY
-            elif raw_probabilities["pores"] > 0.45:
-                detected_skin_type = SkinTypeEnum.COMBINATION
-            else:
-                detected_skin_type = SkinTypeEnum.NORMAL
+            raise RuntimeError(
+                "Model inference completed but produced no probability outputs. "
+                "This indicates a model architecture mismatch or corrupted weights."
+            )
 
         # 5. Populate Condition Scores
         conditions_dict: Dict[str, ConditionScore] = {}
@@ -510,6 +526,7 @@ class DermaNovaPredictor:
             "Consult a board-certified dermatologist for persistent or severe dermatological conditions."
         )
 
+        # Memory cleanup for constrained environments (Render free tier 512MB)
         import gc
         gc.collect()
 
@@ -718,4 +735,6 @@ class DermaNovaPredictor:
 
 
 # Global singleton predictor instance
+# Initializes model loading at import time — logs critical warning if no model is found
+# but does NOT crash the application (allows /health endpoint to report degraded status)
 predictor_service = DermaNovaPredictor()

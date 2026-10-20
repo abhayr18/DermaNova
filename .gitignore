@@ -70,9 +70,12 @@ frontend/.next/
 frontend/out/
 frontend/build/
 frontend/.vercel
+frontend/*.tsbuildinfo
+*.tsbuildinfo
 .npm
 .yarn/
 *.log
+
 
 # Environment variables & secrets
 .env

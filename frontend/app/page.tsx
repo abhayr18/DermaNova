@@ -52,147 +52,6 @@ import {
 
 type MobileTab = 'home' | 'scan' | 'fit' | 'regimen' | 'journey';
 
-const FALLBACK_DEMO_ANALYSIS: AnalysisResponse = {
-  analysis_id: "demo-scan-8821",
-  timestamp: new Date().toISOString(),
-  overall_health_score: 82,
-  detected_skin_type: "Combination",
-  top_concerns: ["Inflammatory Acne", "Post-Inflammatory Erythema", "Localized PIH"],
-  acne_severity_grade: "Mild-to-Moderate (Grade II)",
-  face_detected: true,
-  clinical_disclaimer: "DermaNova provides AI-assisted educational skincare assessment with botanical and pharmacologic integrity. Consult a board-certified dermatologist for medical diagnosis.",
-  requires_clinical_referral: false,
-  heatmap_image_base64: undefined,
-  conditions: {
-    acne: {
-      condition_id: "acne",
-      display_name: "Inflammatory Acne",
-      probability: 0.88,
-      severity_level: "Moderate",
-      is_detected: true,
-      clinical_note: "Erythematous papules and pustules localized across the cheekbones and chin area."
-    },
-    redness: {
-      condition_id: "redness",
-      display_name: "Facial Redness & Erythema",
-      probability: 0.74,
-      severity_level: "Mild-to-Moderate",
-      is_detected: true,
-      clinical_note: "Microvascular capillary dilation indicating epidermal barrier stress."
-    },
-    dark_spots: {
-      condition_id: "dark_spots",
-      display_name: "Dark Spots (Localized PIH)",
-      probability: 0.65,
-      severity_level: "Mild",
-      is_detected: true,
-      clinical_note: "Post-inflammatory melanocyte hyperactivity from resolved papules."
-    },
-    pores: {
-      condition_id: "pores",
-      display_name: "Dilated Pores",
-      probability: 0.58,
-      severity_level: "Mild",
-      is_detected: true,
-      clinical_note: "Enlarged follicular orifices across nasal bridge and T-zone."
-    },
-    blackheads: {
-      condition_id: "blackheads",
-      display_name: "Blackheads (Open Comedones)",
-      probability: 0.46,
-      severity_level: "Mild",
-      is_detected: true,
-      clinical_note: "Open comedones with oxidized sebum plugs along the nasal crest."
-    },
-    whiteheads: {
-      condition_id: "whiteheads",
-      display_name: "Whiteheads (Closed Comedones)",
-      probability: 0.35,
-      severity_level: "Clear",
-      is_detected: false,
-      clinical_note: "No clinically significant closed comedonal clustering detected."
-    },
-    pigmentation: {
-      condition_id: "pigmentation",
-      display_name: "Pigmentation (Diffuse Melasma)",
-      probability: 0.28,
-      severity_level: "Clear",
-      is_detected: false,
-      clinical_note: "Uniform epidermal melanin dispersion without diffuse melasma patches."
-    },
-    wrinkles: {
-      condition_id: "wrinkles",
-      display_name: "Fine Lines & Wrinkles",
-      probability: 0.22,
-      severity_level: "Clear",
-      is_detected: false,
-      clinical_note: "High epidermal elasticity and robust stratum corneum moisture retention."
-    }
-  },
-  detected_lesions: [
-    {
-      id: "lesion-1",
-      condition_id: "acne",
-      condition_name: "Inflammatory Acne (Papule/Pustule)",
-      confidence: 0.94,
-      severity: "Moderate",
-      location_label: "Right Cheekbone",
-      box: { x: 58, y: 38, width: 14, height: 14 },
-      color: "#b85c3c",
-      clinical_finding: "Active inflammatory papule with localized erythema and microcomedone obstruction.",
-      recommended_active: "2.5% Micronized Benzoyl Peroxide / Salicylic Acid 2%"
-    },
-    {
-      id: "lesion-2",
-      condition_id: "acne",
-      condition_name: "Inflammatory Acne (Pustule)",
-      confidence: 0.89,
-      severity: "Moderate",
-      location_label: "Left Cheekbone",
-      box: { x: 26, y: 44, width: 13, height: 13 },
-      color: "#b85c3c",
-      clinical_finding: "Follicular pustular lesion exhibiting superficial leukocyte infiltration.",
-      recommended_active: "2% Salicylic Acid BHA Spot Gel"
-    },
-    {
-      id: "lesion-3",
-      condition_id: "redness",
-      condition_name: "Facial Erythema / Barrier Redness",
-      confidence: 0.82,
-      severity: "Mild-to-Moderate",
-      location_label: "Nasal Crest & Malar Area",
-      box: { x: 42, y: 48, width: 16, height: 15 },
-      color: "#c15c3d",
-      clinical_finding: "Superficial capillary congestion indicating slight cutaneous barrier compromise.",
-      recommended_active: "10% Azelaic Acid + Centella Asiatica & Ceramide NP"
-    },
-    {
-      id: "lesion-4",
-      condition_id: "dark_spots",
-      condition_name: "Dark Spots (Localized PIH)",
-      confidence: 0.86,
-      severity: "Mild",
-      location_label: "Lower Right Jawline",
-      box: { x: 62, y: 64, width: 12, height: 12 },
-      color: "#8a7d55",
-      clinical_finding: "Post-inflammatory hyperpigmented macule with residual melanin deposition.",
-      recommended_active: "Niacinamide 5% + Tranexamic Acid 3% Serum"
-    },
-    {
-      id: "lesion-5",
-      condition_id: "pores",
-      condition_name: "Dilated Pores (Sebum Congestion)",
-      confidence: 0.77,
-      severity: "Mild",
-      location_label: "Central T-Zone",
-      box: { x: 43, y: 28, width: 14, height: 12 },
-      color: "#637852",
-      clinical_finding: "Enlarged follicular infundibula associated with localized sebum pooling.",
-      recommended_active: "Niacinamide 2% + Zinc PCA 1% Clarifying Fluid"
-    }
-  ]
-};
-
 export default function Home() {
   const [activeTab, setActiveTab] = useState<MobileTab>('home');
   const [currentUser, setCurrentUser] = useState<UserAccount | null>(null);
@@ -276,43 +135,45 @@ export default function Home() {
     }
   };
 
-  // Instant Demo Mode (with sample patient face and pinpointing)
+  // Sample Face Clinical Evaluation (runs authentic multi-task neural network inference)
   const handleRunDemo = async () => {
     setIsLoading(true);
     setErrorMsg(null);
     setSelectedImage('/demo_face.jpg');
 
     try {
-      let demoAnalysis: AnalysisResponse;
-      try {
-        demoAnalysis = await apiService.getDemoAnalysis();
-      } catch (backendErr) {
-        console.warn('Backend demo API not responding, using validated fallback dataset:', backendErr);
-        demoAnalysis = FALLBACK_DEMO_ANALYSIS;
+      const resp = await fetch('/demo_face.jpg');
+      if (!resp.ok) {
+        throw new Error('Sample face image could not be loaded.');
       }
+      const blob = await resp.blob();
+      const file = new File([blob], 'demo_face.jpg', { type: 'image/jpeg' });
 
-      setAnalysisResult(demoAnalysis);
+      // Run authentic AI inference
+      const analysis = await apiService.analyzeFile(file);
+      setAnalysisResult(analysis);
 
       const conditionProbMap: Record<string, number> = {};
-      Object.entries(demoAnalysis.conditions).forEach(([k, v]) => {
+      Object.entries(analysis.conditions).forEach(([k, v]) => {
         conditionProbMap[k] = v.probability;
       });
 
       try {
         const recs = await apiService.getRecommendations({
           detected_conditions: conditionProbMap,
-          skin_type: demoAnalysis.detected_skin_type,
-          has_sensitive_skin: false,
+          skin_type: analysis.detected_skin_type,
+          has_sensitive_skin: analysis.detected_skin_type === 'Sensitive',
         });
         setRecommendations(recs);
       } catch (recErr) {
-        console.warn('Recommendation API offline, using standard botanical & pharmacologic guidance');
+        console.warn('Recommendation API notice:', recErr);
       }
 
       setActiveTab('scan');
     } catch (err: any) {
-      console.error(err);
-      setErrorMsg('Could not run demo scan. Please try again.');
+      console.error('Diagnostic error:', err);
+      const detail = err?.response?.data?.detail || err?.message || 'Could not complete clinical analysis.';
+      setErrorMsg(`AI Diagnostic Engine Notice: ${detail}. Please verify the ML backend is online.`);
     } finally {
       setIsLoading(false);
     }

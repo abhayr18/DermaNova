@@ -19,6 +19,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY backend /app/backend
 COPY ml_pipeline /app/ml_pipeline
 
+# Verify ONNX model is present (fails build if model is missing)
+RUN python -c "from pathlib import Path; p = Path('/app/ml_pipeline/models/saved_models/dermanova_model.onnx'); assert p.exists(), f'CRITICAL: ONNX model missing at {p}'"
+
 # Ensure /app is in Python path for absolute imports
 ENV PYTHONPATH=/app
 
