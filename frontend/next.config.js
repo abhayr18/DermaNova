@@ -2,8 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   async rewrites() {
-    const backendUrl = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || 'https://dermanova.onrender.com';
-    const cleanUrl = backendUrl.replace(/\/api\/v1\/?$/, '').replace(/\/$/, '');
+    const rawUrl = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || 'https://dermanova.onrender.com';
+    const cleanUrl = rawUrl.replace(/[\r\n\t]/g, '').trim().replace(/\/api\/v1\/?$/, '').replace(/\/$/, '');
     return [
       {
         source: '/api/v1/:path*',

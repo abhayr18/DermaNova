@@ -3,25 +3,37 @@ import axios from 'axios';
 // Production Render Cloud Backend URL (with active ML inference & CORS enabled)
 const RENDER_BACKEND_URL = 'https://dermanova.onrender.com/api/v1';
 
+// Strict URL cleaner to remove accidental newlines, tabs, and trailing slashes
+export const sanitizeApiUrl = (raw?: string | null): string => {
+  if (!raw) return '';
+  return raw.replace(/[\r\n\t]/g, '').trim().replace(/\/$/, '');
+};
+
 // Resolve API Base URL:
 // 1. User manual override stored in localStorage (validated)
 // 2. Explicit environment variable (NEXT_PUBLIC_API_URL / BACKEND_URL)
 // 3. Localhost in development, or live Render cloud backend in production / Vercel
 export const getApiBaseUrl = (): string => {
   if (typeof window !== 'undefined') {
-    const saved = localStorage.getItem('dermanova_backend_url');
-    if (saved) {
+    const rawSaved = localStorage.getItem('dermanova_backend_url');
+    if (rawSaved) {
+      const saved = sanitizeApiUrl(rawSaved);
       const isCloudHost = !['localhost', '127.0.0.1'].includes(window.location.hostname);
       const isLocalSaved = saved.includes('localhost') || saved.includes('127.0.0.1');
       // If user is on a cloud domain (e.g. Vercel), discard any stale localhost override
-      if (!(isCloudHost && isLocalSaved)) {
-        return saved.replace(/\/$/, '');
+      if (isCloudHost && isLocalSaved) {
+        try {
+          localStorage.removeItem('dermanova_backend_url');
+        } catch (_) {}
+      } else if (saved) {
+        return saved;
       }
     }
   }
 
-  if (process.env.NEXT_PUBLIC_API_URL) {
-    return process.env.NEXT_PUBLIC_API_URL.replace(/\/$/, '');
+  const envPublic = sanitizeApiUrl(process.env.NEXT_PUBLIC_API_URL);
+  if (envPublic) {
+    return envPublic;
   }
 
   if (typeof window !== 'undefined') {
@@ -31,8 +43,9 @@ export const getApiBaseUrl = (): string => {
     return RENDER_BACKEND_URL;
   }
 
-  if (process.env.BACKEND_URL) {
-    return `${process.env.BACKEND_URL.replace(/\/$/, '')}/api/v1`;
+  const envBackend = sanitizeApiUrl(process.env.BACKEND_URL);
+  if (envBackend) {
+    return `${envBackend}/api/v1`;
   }
 
   return RENDER_BACKEND_URL;
@@ -378,8 +391,9 @@ export const apiService = {
   // Backend Cloud URL Configuration & Diagnostics
   setCustomBackendUrl(url: string) {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('dermanova_backend_url', url.trim());
-      apiClient.defaults.baseURL = url.trim();
+      const clean = sanitizeApiUrl(url);
+      localStorage.setItem('dermanova_backend_url', clean);
+      apiClient.defaults.baseURL = clean;
     }
   },
 
@@ -392,7 +406,8 @@ export const apiService = {
 
   getCustomBackendUrl(): string | null {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('dermanova_backend_url');
+      const val = localStorage.getItem('dermanova_backend_url');
+      return val ? sanitizeApiUrl(val) : null;
     }
     return null;
   },
@@ -402,7 +417,7 @@ export const apiService = {
   },
 
   async testConnection(testUrl?: string): Promise<{ success: boolean; latencyMs: number; status?: any; error?: string }> {
-    const raw = (testUrl || getApiBaseUrl()).replace(/\/$/, '');
+    const raw = sanitizeApiUrl(testUrl || getApiBaseUrl());
     const url = raw.endsWith('/api/v1') ? `${raw}/health` : `${raw}/api/v1/health`;
     const start = Date.now();
     try {
