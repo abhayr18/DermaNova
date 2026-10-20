@@ -53,7 +53,19 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
   const skinType = latestAnalysis?.detected_skin_type || 'Combination (T-Zone)';
   const overallScore = latestAnalysis?.overall_health_score || 84;
 
-  const topConcerns = [
+  const topConcerns = latestAnalysis?.conditions ? (
+    Object.entries(latestAnalysis.conditions)
+      .map(([k, v]) => ({
+        id: k === 'dark_spots' ? 'darkSpots' : k === 'pores' ? 'visiblePores' : k,
+        label: v.display_name,
+        status: `${v.severity_level || 'Detected'} (${Math.round(v.probability * 100)}%)`,
+        probability: v.probability,
+        isDetected: v.is_detected,
+        indicator: v.probability >= 0.75 ? 'bg-[#EEEAF5] text-[#304D40] border-[#d5cbe4]' : v.probability >= 0.40 ? 'bg-[#F3E5E2] text-[#252923] border-[#d6c4c0]' : 'bg-[#E8EFE9] text-[#304D40] border-[#cbd7c1]'
+      }))
+      .sort((a, b) => b.probability - a.probability)
+      .slice(0, 4)
+  ) : [
     { id: 'acne', label: 'Acne (Papules)', status: 'Mild (74%)', indicator: 'bg-[#F3E5E2] text-[#252923] border-[#d6c4c0]' },
     { id: 'redness', label: 'Facial Redness', status: 'Moderate (82%)', indicator: 'bg-[#EEEAF5] text-[#252923] border-[#d5cbe4]' },
     { id: 'visiblePores', label: 'Dilated Pores', status: 'Mild (71%)', indicator: 'bg-[#E8EFE9] text-[#304D40] border-[#cbd7c1]' },

@@ -53,6 +53,79 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
     : 'October 20, 2026 • 16:48';
 
   const skinType = analysis?.detected_skin_type || 'Combination (T-Zone)';
+  const overallScore = analysis?.overall_health_score ?? 84;
+
+  const getConditionScore = (concernId: string) => {
+    if (!analysis?.conditions) return null;
+    const normalizedKey =
+      concernId === 'darkSpots' ? 'dark_spots' :
+      concernId === 'visiblePores' ? 'pores' :
+      concernId === 'erythema' ? 'redness' :
+      concernId;
+
+    const match = analysis.conditions[normalizedKey] || analysis.conditions[concernId];
+    if (match) {
+      return {
+        probability: Math.round(match.probability * 100),
+        isDetected: match.is_detected ?? (match.probability >= 0.38),
+        severity: match.severity_level || (match.probability >= 0.75 ? 'Severe' : match.probability >= 0.50 ? 'Moderate' : match.probability >= 0.25 ? 'Mild' : 'Clear'),
+        note: match.clinical_note || '',
+      };
+    }
+    return null;
+  };
+
+  const dynamicPins = React.useMemo(() => {
+    if (analysis?.detected_lesions && analysis.detected_lesions.length > 0) {
+      return analysis.detected_lesions.map((l) => ({
+        id: l.condition_id === 'dark_spots' ? 'darkSpots' : l.condition_id === 'pores' ? 'visiblePores' : l.condition_id,
+        label: l.condition_name.split(' ')[0],
+        prob: Math.round(l.confidence * 100),
+        color: l.color || '#b85c3c',
+        x: l.box.x + l.box.width / 2,
+        y: l.box.y + l.box.height / 2,
+      }));
+    }
+
+    if (analysis?.conditions) {
+      const pinPositions: Record<string, { x: number; y: number; color: string; label: string }> = {
+        acne: { x: 58, y: 38, color: '#ef4444', label: 'Acne' },
+        redness: { x: 34, y: 48, color: '#f43f5e', label: 'Redness' },
+        pores: { x: 46, y: 44, color: '#06b6d4', label: 'Pores' },
+        dark_spots: { x: 70, y: 55, color: '#a855f7', label: 'Dark Spots' },
+        pigmentation: { x: 30, y: 60, color: '#d946ef', label: 'Pigmentation' },
+        blackheads: { x: 50, y: 42, color: '#eab308', label: 'Blackheads' },
+        whiteheads: { x: 40, y: 35, color: '#fb923c', label: 'Whiteheads' },
+        wrinkles: { x: 50, y: 24, color: '#3b82f6', label: 'Wrinkles' },
+      };
+
+      const detected = Object.entries(analysis.conditions)
+        .filter(([_, v]) => v.probability >= 0.30)
+        .sort((a, b) => b[1].probability - a[1].probability)
+        .slice(0, 3);
+
+      if (detected.length > 0) {
+        return detected.map(([k, v]) => {
+          const pos = pinPositions[k] || { x: 50, y: 50, color: '#b85c3c', label: v.display_name };
+          const cid = k === 'dark_spots' ? 'darkSpots' : k === 'pores' ? 'visiblePores' : k;
+          return {
+            id: cid,
+            label: pos.label,
+            prob: Math.round(v.probability * 100),
+            color: pos.color,
+            x: pos.x,
+            y: pos.y,
+          };
+        });
+      }
+    }
+
+    return [
+      { id: 'acne', label: 'Acne', prob: 74, color: '#b85c3c', x: 58, y: 38 },
+      { id: 'redness', label: 'Redness', prob: 82, color: '#527665', x: 34, y: 48 },
+      { id: 'visiblePores', label: 'Pores', prob: 71, color: '#777D76', x: 46, y: 44 },
+    ];
+  }, [analysis]);
 
   // All 8 core concerns in structured order
   const concernList: SkinConcernInfo[] = [
@@ -78,10 +151,18 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
          ======================================================================= */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#E8E8E1]">
         <div>
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex flex-wrap items-center gap-2 mb-1">
             <span className="px-3 py-1 rounded-full bg-[#E8EFE9] text-[#304D40] text-[11px] font-mono font-medium">
-              AI-generated insights
+              Health Score: {overallScore}/100
             </span>
+            <span className="px-3 py-1 rounded-full bg-[#FAF9F6] border border-[#E8E8E1] text-[#252923] text-[11px] font-mono">
+              Skin Type: {skinType}
+            </span>
+            {analysis?.acne_severity_grade && (
+              <span className="px-3 py-1 rounded-full bg-[#FAF9F6] border border-[#E8E8E1] text-[#777D76] text-[11px] font-mono">
+                Acne Grade: {analysis.acne_severity_grade}
+              </span>
+            )}
             <span className="text-[11px] font-mono text-[#777D76]">
               {scanDate}
             </span>
@@ -150,47 +231,37 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
               {showOverlay && (
                 <div className="absolute inset-0 pointer-events-none">
                   
+                  {/* Grad-CAM Heatmap Overlay if present */}
+                  {analysis?.heatmap_image_base64 && (
+                    <img
+                      src={analysis.heatmap_image_base64}
+                      alt="Grad-CAM Saliency Heatmap"
+                      className="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-50 mix-blend-screen"
+                    />
+                  )}
+
                   {/* Subtle Facial Zone Contours */}
                   <div className="absolute inset-10 border border-white/20 rounded-[48%] pointer-events-none" />
 
-                  {/* Marker Pin 1: Acne (Cheek) */}
-                  <div
-                    onClick={() => { setSelectedPinConcern('acne'); onOpenConcernDetail('acne'); }}
-                    className="absolute top-[38%] left-[58%] pointer-events-auto cursor-pointer group"
-                  >
-                    <div className="w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#b85c3c] bg-[#b85c3c]/20 flex items-center justify-center animate-pulse group-hover:scale-125 transition">
-                      <span className="w-2 h-2 rounded-full bg-[#b85c3c]" />
+                  {/* Dynamic Pins from real model inference */}
+                  {dynamicPins.map((pin) => (
+                    <div
+                      key={pin.id}
+                      onClick={() => { setSelectedPinConcern(pin.id); onOpenConcernDetail(pin.id); }}
+                      style={{ top: `${pin.y}%`, left: `${pin.x}%` }}
+                      className="absolute pointer-events-auto cursor-pointer group"
+                    >
+                      <div
+                        style={{ borderColor: pin.color }}
+                        className="w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 bg-black/20 flex items-center justify-center animate-pulse group-hover:scale-125 transition"
+                      >
+                        <span style={{ backgroundColor: pin.color }} className="w-2 h-2 rounded-full" />
+                      </div>
+                      <span className="absolute -top-6 -translate-x-1/2 left-1/2 px-2 py-0.5 rounded-full bg-[#304D40] text-white text-[9px] font-mono whitespace-nowrap shadow-md">
+                        {pin.label} {pin.prob}%
+                      </span>
                     </div>
-                    <span className="absolute -top-6 -translate-x-1/2 left-1/2 px-2 py-0.5 rounded-full bg-[#304D40] text-white text-[9px] font-mono whitespace-nowrap shadow-md">
-                      Acne 74%
-                    </span>
-                  </div>
-
-                  {/* Marker Pin 2: Redness (Malar Flush) */}
-                  <div
-                    onClick={() => { setSelectedPinConcern('redness'); onOpenConcernDetail('redness'); }}
-                    className="absolute top-[48%] left-[34%] pointer-events-auto cursor-pointer group"
-                  >
-                    <div className="w-9 h-9 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#527665] bg-[#527665]/20 flex items-center justify-center group-hover:scale-125 transition">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#527665]" />
-                    </div>
-                    <span className="absolute -top-6 -translate-x-1/2 left-1/2 px-2 py-0.5 rounded-full bg-[#304D40] text-white text-[9px] font-mono whitespace-nowrap shadow-md">
-                      Redness 82%
-                    </span>
-                  </div>
-
-                  {/* Marker Pin 3: Dilated Pores (Nose / Inner Cheek) */}
-                  <div
-                    onClick={() => { setSelectedPinConcern('visiblePores'); onOpenConcernDetail('visiblePores'); }}
-                    className="absolute top-[44%] left-[46%] pointer-events-auto cursor-pointer group"
-                  >
-                    <div className="w-7 h-7 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[#777D76] bg-white/30 flex items-center justify-center group-hover:scale-125 transition">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#252923]" />
-                    </div>
-                    <span className="absolute -bottom-6 -translate-x-1/2 left-1/2 px-2 py-0.5 rounded-full bg-white text-[#252923] border border-[#E8E8E1] text-[9px] font-mono whitespace-nowrap shadow-sm">
-                      Pores 71%
-                    </span>
-                  </div>
+                  ))}
                 </div>
               )}
 
@@ -229,13 +300,13 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
             {/* Concise Overlay Legend */}
             <div className="p-3 pt-3 flex flex-wrap items-center justify-around gap-2 text-[10px] font-mono text-[#777D76] border-t border-[#E8E8E1] mt-2">
               <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#b85c3c]" /> Acne & Blemishes
+                <span className="w-2 h-2 rounded-full bg-[#ef4444]" /> Blemishes
               </span>
               <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#527665]" /> Reactive Erythema
+                <span className="w-2 h-2 rounded-full bg-[#f43f5e]" /> Redness
               </span>
               <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#252923]" /> Pore Density
+                <span className="w-2 h-2 rounded-full bg-[#06b6d4]" /> Pore Density
               </span>
             </div>
           </div>
@@ -274,7 +345,11 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
           {/* 8 Core Concern Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             {concernList.map((concern) => {
-              const isDetected = concern.isDetectedInDemo;
+              const liveScore = getConditionScore(concern.id);
+              const isDetected = liveScore ? liveScore.isDetected : concern.isDetectedInDemo;
+              const confidence = liveScore ? liveScore.probability : concern.sampleConfidence;
+              const severity = liveScore ? liveScore.severity : concern.sampleSeverity;
+
               return (
                 <div
                   key={concern.id}
@@ -291,19 +366,19 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
                       <span
                         className={`px-2 py-0.5 rounded-full text-[10px] font-mono shrink-0 ${
                           isDetected
-                            ? concern.sampleSeverity === 'Moderate'
+                            ? severity === 'Moderate' || severity === 'Severe'
                               ? 'bg-[#EEEAF5] text-[#304D40] border border-[#d5cbe4]'
                               : 'bg-[#E8EFE9] text-[#304D40] border border-[#d6e0ce]'
                             : 'bg-[#FAF9F6] text-[#777D76] border border-[#E8E8E1]'
                         }`}
                       >
-                        {isDetected ? `${concern.sampleConfidence}% confidence` : 'Low probability'}
+                        {isDetected ? `${confidence}% probability` : 'Low probability'}
                       </span>
                     </div>
 
-                    {/* Concise Plain-language explanation */}
+                    {/* Plain-language explanation */}
                     <p className="text-[11px] text-[#777D76] leading-relaxed line-clamp-2">
-                      {concern.shortDesc}
+                      {liveScore?.note || concern.shortDesc}
                     </p>
                   </div>
 
@@ -315,7 +390,7 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
                           isDetected ? 'bg-[#527665]' : 'bg-[#777D76]/40'
                         }`}
                       />
-                      {isDetected ? 'Detected' : 'Not prominent'}
+                      {isDetected ? severity : 'Not prominent'}
                     </span>
 
                     <span className="text-[#527665] group-hover:underline text-[11px] font-semibold flex items-center gap-0.5">
