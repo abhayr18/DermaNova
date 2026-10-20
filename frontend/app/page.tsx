@@ -23,6 +23,7 @@ import { PersonalizedRoutineScreen } from '../components/screens/PersonalizedRou
 import { ProgressTrackingScreen } from '../components/screens/ProgressTrackingScreen';
 import { ProfileSettingsScreen } from '../components/screens/ProfileSettingsScreen';
 import { TelehealthBookingScreen } from '../components/screens/TelehealthBookingScreen';
+import { HistoricalTelemetryScreen } from '../components/screens/HistoricalTelemetryScreen';
 import {
   Camera,
   Home as HomeIcon,
@@ -466,6 +467,15 @@ export default function DermaNovaApp() {
           {currentScreen === 'telehealth' && (
             <TelehealthBookingScreen
               onBackToDashboard={() => setCurrentScreen('dashboard')}
+            />
+          )}
+
+          {/* SCREEN 12: HISTORICAL SCAN ARCHIVE & TELEMETRY LOG (Stitch AI Feature) */}
+          {currentScreen === 'telemetry' && (
+            <HistoricalTelemetryScreen
+              onBackToDashboard={() => setCurrentScreen('dashboard')}
+              onOpenAnalysisResults={() => setCurrentScreen('results')}
+              onOpenConsultation={() => setCurrentScreen('telehealth')}
             />
           )}
         </main>
