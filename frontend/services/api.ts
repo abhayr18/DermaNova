@@ -3,12 +3,16 @@ import axios from 'axios';
 // Resolve API Base URL for Vercel Services multi-service routing:
 // 1. Server-side (Vercel runtime functions / SSR): uses bound BACKEND_URL injected by Vercel service binding
 // 2. Client-side (Browser): uses relative '/api/v1' routed by Vercel top-level rewrites, or NEXT_PUBLIC_API_URL
-const getApiBaseUrl = (): string => {
+export const getApiBaseUrl = (): string => {
+  if (typeof window !== 'undefined') {
+    const saved = localStorage.getItem('dermanova_backend_url');
+    if (saved) {
+      return saved.replace(/\/$/, '');
+    }
+  }
   if (process.env.NEXT_PUBLIC_API_URL) {
     return process.env.NEXT_PUBLIC_API_URL.replace(/\/$/, '');
   }
-  // In browser, using relative '/api/v1' routes through Next.js proxy rewrite
-  // to avoid cross-origin preflights, IPv6 issues, and CORS network errors
   if (typeof window !== 'undefined') {
     return '/api/v1';
   }
@@ -27,9 +31,7 @@ const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use((config) => {
-  if (!config.baseURL) {
-    config.baseURL = getApiBaseUrl();
-  }
+  config.baseURL = getApiBaseUrl();
   if (typeof window !== 'undefined') {
     const token = localStorage.getItem('dermanova_auth_token');
     if (token) {
@@ -43,8 +45,14 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.message === 'Network Error' || !error.response) {
-      error.friendlyMessage =
-        'Unable to connect to the DermaNova AI backend. Please verify that the backend server is running on http://127.0.0.1:8000.';
+      const isVercel = typeof window !== 'undefined' && window.location.hostname.includes('vercel.app');
+      if (isVercel) {
+        error.friendlyMessage =
+          'Cannot reach the AI Backend. Your Vercel frontend needs a live cloud backend URL. Please set NEXT_PUBLIC_API_URL in Vercel Project Settings, or connect a live backend URL.';
+      } else {
+        error.friendlyMessage =
+          'Unable to connect to the DermaNova AI backend. Please verify that the backend server is running on http://127.0.0.1:8000.';
+      }
     }
     return Promise.reject(error);
   }
@@ -347,6 +355,48 @@ export const apiService = {
   async getHistory(): Promise<any> {
     const response = await apiClient.get('/history');
     return response.data;
+  },
+
+  // Backend Cloud URL Configuration & Diagnostics
+  setCustomBackendUrl(url: string) {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('dermanova_backend_url', url.trim());
+      apiClient.defaults.baseURL = url.trim();
+    }
+  },
+
+  clearCustomBackendUrl() {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('dermanova_backend_url');
+      apiClient.defaults.baseURL = getApiBaseUrl();
+    }
+  },
+
+  getCustomBackendUrl(): string | null {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('dermanova_backend_url');
+    }
+    return null;
+  },
+
+  async testConnection(testUrl?: string): Promise<{ success: boolean; latencyMs: number; status?: any; error?: string }> {
+    const raw = (testUrl || getApiBaseUrl()).replace(/\/$/, '');
+    const url = raw.endsWith('/api/v1') ? `${raw}/health` : `${raw}/api/v1/health`;
+    const start = Date.now();
+    try {
+      const resp = await axios.get(url, { timeout: 10000 });
+      return {
+        success: resp.status === 200,
+        latencyMs: Date.now() - start,
+        status: resp.data,
+      };
+    } catch (err: any) {
+      return {
+        success: false,
+        latencyMs: Date.now() - start,
+        error: err?.message || 'Connection failed',
+      };
+    }
   }
 };
 

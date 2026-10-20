@@ -52,6 +52,35 @@ export default function DermaNovaApp() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
+  const [showBackendConfig, setShowBackendConfig] = useState(false);
+  const [backendInputUrl, setBackendInputUrl] = useState('');
+  const [backendTesting, setBackendTesting] = useState(false);
+  const [backendTestStatus, setBackendTestStatus] = useState<string | null>(null);
+
+  useEffect(() => {
+    const saved = apiService.getCustomBackendUrl();
+    if (saved) setBackendInputUrl(saved);
+  }, []);
+
+  const handleTestAndSaveBackend = async () => {
+    if (!backendInputUrl.trim()) return;
+    setBackendTesting(true);
+    setBackendTestStatus('Pinging backend /health...');
+    const res = await apiService.testConnection(backendInputUrl.trim());
+    setBackendTesting(false);
+    if (res.success) {
+      apiService.setCustomBackendUrl(backendInputUrl.trim());
+      setBackendTestStatus(`Connected successfully! Latency: ${res.latencyMs}ms`);
+      setTimeout(() => {
+        setErrorMsg(null);
+        setShowBackendConfig(false);
+        setBackendTestStatus(null);
+      }, 1500);
+    } else {
+      setBackendTestStatus(`Connection failed: ${res.error || 'Backend not responding'}. Please check URL.`);
+    }
+  };
+
   // Restore authenticated session on mount
   useEffect(() => {
     const checkSession = async () => {
@@ -178,14 +207,59 @@ export default function DermaNovaApp() {
       {/* Global Error Banner if any */}
       {errorMsg && (
         <div className="max-w-[1200px] mx-auto w-full px-4 sm:px-6 mt-4">
-          <div className="p-4 rounded-2xl bg-[#fff5f5] border border-[#fed7d7] text-[#9b2c2c] text-xs flex items-center justify-between shadow-xs">
-            <span>{errorMsg}</span>
-            <button
-              onClick={() => setErrorMsg(null)}
-              className="text-xs text-[#9b2c2c] underline font-semibold ml-2"
-            >
-              Dismiss
-            </button>
+          <div className="p-4 rounded-2xl bg-[#fff5f5] border border-[#fed7d7] text-[#9b2c2c] text-xs space-y-2 shadow-xs">
+            <div className="flex items-center justify-between flex-wrap gap-2">
+              <span className="font-medium">{errorMsg}</span>
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => setShowBackendConfig(!showBackendConfig)}
+                  className="text-xs text-[#304D40] underline font-semibold"
+                >
+                  {showBackendConfig ? 'Close Backend Config' : 'Connect Cloud Backend URL'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setErrorMsg(null)}
+                  className="text-xs text-[#9b2c2c] underline font-semibold"
+                >
+                  Dismiss
+                </button>
+              </div>
+            </div>
+
+            {showBackendConfig && (
+              <div className="pt-2 border-t border-[#fed7d7] space-y-2 text-[#252923]">
+                <div className="text-[11px] text-[#777D76]">
+                  On Vercel, the frontend connects to your deployed FastAPI backend. Paste your live backend URL below (Render, Railway, or localtunnel/ngrok):
+                </div>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <input
+                    type="url"
+                    value={backendInputUrl}
+                    onChange={(e) => setBackendInputUrl(e.target.value)}
+                    placeholder="https://your-backend.onrender.com/api/v1"
+                    className="flex-1 px-3.5 py-2 rounded-xl border border-[#E8E8E1] bg-white text-xs font-mono focus:outline-none focus:border-[#527665]"
+                  />
+                  <button
+                    type="button"
+                    disabled={backendTesting || !backendInputUrl.trim()}
+                    onClick={handleTestAndSaveBackend}
+                    className="px-4 py-2 rounded-xl bg-[#304D40] hover:bg-[#253d33] disabled:opacity-50 text-white font-mono text-xs font-medium shrink-0 transition"
+                  >
+                    {backendTesting ? 'Testing Connection...' : 'Test & Connect'}
+                  </button>
+                </div>
+                {backendTestStatus && (
+                  <div className={`text-[11px] font-mono ${backendTestStatus.includes('failed') ? 'text-[#9b2c2c]' : 'text-[#304D40] font-semibold'}`}>
+                    {backendTestStatus}
+                  </div>
+                )}
+                <div className="text-[10px] text-[#777D76] font-mono">
+                  Permanent setting: Add <strong>NEXT_PUBLIC_API_URL</strong> in your Vercel Project Settings &gt; Environment Variables.
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
