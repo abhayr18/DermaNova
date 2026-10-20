@@ -1,6 +1,6 @@
 """
-DermaNova CureSkin Cloud Architecture Test Suite
-=================================================
+DermaNova Cloud Architecture Test Suite
+========================================
 Verifies:
 1. Patient registration & JWT issuance
 2. Medical Intake Questionnaire (skin type, allergies, lifestyle)
@@ -19,10 +19,10 @@ from backend.app.main import app
 client = TestClient(app)
 
 
-def test_cureskin_full_patient_lifecycle():
+def test_dermanova_full_patient_lifecycle():
     # 1. Signup a new patient
     signup_payload = {
-        "email": "cureskin.patient.test@dermanova.app",
+        "email": "patient.test@dermanova.app",
         "password": "SecurePassword123!",
         "full_name": "Priya Sharma",
         "phone": "+91 9876543210"

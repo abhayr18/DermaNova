@@ -15,7 +15,7 @@ from backend.app.api.v1.history import router as history_router
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-    title="DermaNova AI Clinical Backend API (CureSkin Architecture)",
+    title="DermaNova AI Clinical Backend API",
     description=(
         "Production-Grade Cloud-Native Facial Skin Diagnosis, "
         "Multi-User Longitudinal Tracking, and Pharmacological Skincare Guidance."
@@ -53,7 +53,7 @@ async def root():
         "status": "online",
         "system": "DermaNova Clinical AI Engine",
         "version": "2.0.0",
-        "architecture": "CureSkin Cloud Multi-Tenant",
+        "architecture": "DermaNova Cloud Multi-Tenant",
         "cloud_database": "Supabase PostgreSQL",
         "cloud_storage": "Supabase Storage",
         "supported_conditions": 8,

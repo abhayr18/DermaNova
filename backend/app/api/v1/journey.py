@@ -1,6 +1,6 @@
 """
-DermaNova "Skin Journey" Longitudinal Tracking API (CureSkin Architecture)
-==========================================================================
+DermaNova "Skin Journey" Longitudinal Tracking API
+==================================================
 Provides:
 1. Patient healing timeline (scans over 30, 60, 90 days with before/after photos)
 2. Quantitative healing analytics (overall health score trajectory & condition delta)
@@ -86,7 +86,7 @@ async def get_patient_stats(
     db: Session = Depends(get_db)
 ):
     """
-    Computes CureSkin-style healing progress statistics:
+    Computes DermaNova healing progress statistics:
     - Baseline vs Current health score delta (+X%)
     - Total scans recorded
     - Routine compliance streak

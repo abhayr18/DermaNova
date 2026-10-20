@@ -208,7 +208,7 @@ export const apiService = {
     return res.data;
   },
 
-  // CureSkin Medical Intake Quiz
+  // DermaNova Medical Intake Quiz
   async updateProfile(profile: Partial<PatientProfile>) {
     const res = await apiClient.post('/auth/profile', profile);
     return res.data;
@@ -251,7 +251,7 @@ export const apiService = {
     return response.data;
   },
 
-  // CureSkin "Skin Journey" Timeline & Analytics
+  // DermaNova "Skin Journey" Longitudinal Progress & Analytics
   async getJourneyTimeline(): Promise<{ status: string; total_scans: number; timeline: TimelineScanItem[] }> {
     const response = await apiClient.get('/journey/timeline');
     return response.data;

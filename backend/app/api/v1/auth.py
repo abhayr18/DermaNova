@@ -5,7 +5,7 @@ Implements:
 1. Signup & Account Registration (/api/v1/auth/signup)
 2. Login & JWT Token Exchange (/api/v1/auth/login)
 3. Authenticated Identity Verification (/api/v1/auth/me)
-4. CureSkin-style Medical Intake Questionnaire (/api/v1/auth/profile)
+4. DermaNova Medical Intake Questionnaire (/api/v1/auth/profile)
 """
 
 from typing import Optional, List
@@ -138,7 +138,7 @@ async def get_me(current_user: User = Depends(get_current_user)):
     }
 
 
-@router.post("/profile", summary="Submit CureSkin-style Medical Intake Questionnaire")
+@router.post("/profile", summary="Submit DermaNova Medical Intake Questionnaire")
 async def update_profile(
     payload: ProfileUpdateRequest,
     current_user: User = Depends(get_current_user),

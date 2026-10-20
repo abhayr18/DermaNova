@@ -63,7 +63,7 @@
 ### Phase 5: Cloud Architecture & Supabase Multi-Tenancy 🟢 [Completed]
 - [x] Integrate Supabase Cloud PostgreSQL database models (`backend/app/database/models.py`)
   - [x] `User` account entity (UUID, role-based access control, bcrypt hashing)
-  - [x] `PatientProfile` CureSkin medical intake (age, concerns, allergies, sun exposure, pregnancy)
+  - [x] `PatientProfile` DermaNova medical intake (age, concerns, allergies, sun exposure, pregnancy)
   - [x] `SkinAssessment` cloud scans linked to user ID with condition score vectors
   - [x] `PersonalizedRoutine` active ingredients & AM/PM regimens
   - [x] `SkinJourneyLog` daily routine compliance, streak tracking & photos
@@ -75,24 +75,24 @@
   - [x] Direct bcrypt password hashing (patched for Python 3.14+ compatibility)
   - [x] Bearer token issuance (`/api/v1/auth/signup`, `/api/v1/auth/login`, `/api/v1/auth/me`)
   - [x] Medical Intake Questionnaire API (`/api/v1/auth/profile`)
-- [x] Implement CureSkin "Skin Journey" Longitudinal Tracking API (`backend/app/api/v1/journey.py`)
+- [x] Implement DermaNova "Skin Journey" Longitudinal Tracking API (`backend/app/api/v1/journey.py`)
   - [x] Before-and-after photo timeline (`/api/v1/journey/timeline`)
   - [x] Healing trajectory analytics & habit streak calculation (`/api/v1/journey/stats`)
   - [x] Daily AM/PM routine habit logging (`/api/v1/journey/log`)
 - [x] Automated Test Suite Passed: 6/6 tests passing (100% success rate)
 
-### Phase 6: Next.js Frontend & CureSkin Patient Portal 🟢 [Completed]
+### Phase 6: Next.js Frontend & DermaNova Patient Portal 🟢 [Completed]
 - [x] Initialize Next.js 14 App Router project setup (`frontend/app/`)
 - [x] Design modern glassmorphic, responsive UI with Tailwind CSS (`frontend/app/globals.css`, `tailwind.config.js`)
 - [x] Implement WebCam live image capture module with face guide oval & file upload dropzone (`frontend/components/WebcamCapture.tsx`)
 - [x] Build interactive visual skin diagnostic dashboard with 8 condition meters (`frontend/components/DiagnosticDashboard.tsx`)
 - [x] Implement interactive Grad-CAM heatmap viewer with opacity slider & side-by-side mode
 - [x] Build Pharmacological Recommendations & Routine tabs (`frontend/components/RoutineRecommendations.tsx`)
-- [x] Build CureSkin Patient Authentication Modal (`frontend/components/AuthModal.tsx`)
-- [x] Build CureSkin Medical Intake Quiz Modal (`frontend/components/IntakeQuizModal.tsx`)
-- [x] Build CureSkin "My Skin Journey" Longitudinal Progress & Daily Checklist (`frontend/components/SkinJourneyTimeline.tsx`)
-- [x] Implement Interactive CureSkin Before/After Comparison Slider (`frontend/components/BeforeAfterSlider.tsx`)
-- [x] Build CureSkin 3-Angle Facial Scanner with Oval Guides (`frontend/components/MultiAngleCapture.tsx`)
+- [x] Build DermaNova Patient Authentication Modal (`frontend/components/AuthModal.tsx`)
+- [x] Build DermaNova Medical Intake Quiz Modal (`frontend/components/IntakeQuizModal.tsx`)
+- [x] Build DermaNova "My Skin Journey" Longitudinal Progress & Daily Checklist (`frontend/components/SkinJourneyTimeline.tsx`)
+- [x] Implement Interactive DermaNova Before/After Comparison Slider (`frontend/components/BeforeAfterSlider.tsx`)
+- [x] Build DermaNova 3-Angle Facial Scanner with Oval Guides (`frontend/components/MultiAngleCapture.tsx`)
 - [x] Build Free Open-Source Personalized Clinical Regimen & Chemist Guidance (`frontend/components/PersonalizedKitCard.tsx`)
 - [x] Build Real-Time AI Clinical Skincare Advisor Chat Drawer (`frontend/components/DermChatDrawer.tsx`)
 - [x] Build Next.js 14 production bundle (`npm run build` — Passed with 0 errors)

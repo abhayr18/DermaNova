@@ -3,7 +3,7 @@ DermaNova Multi-Tenant Cloud Database Schema (Supabase / PostgreSQL)
 =====================================================================
 Models:
 1. User: Patient & Clinician accounts (UUID, role, email)
-2. PatientProfile: CureSkin-style medical intake (skin type, sensitivity, allergies, lifestyle)
+2. PatientProfile: DermaNova medical intake (skin type, sensitivity, allergies, lifestyle)
 3. SkinAssessment: Longitudinal facial skin scans & 8-condition severity vectors
 4. PersonalizedRoutine: Active ingredients, AM/PM regimens, and contraindications
 5. SkinJourneyLog: Daily compliance check-ins, habit streaks, and healing photos
@@ -64,7 +64,7 @@ class User(Base):
 
 class PatientProfile(Base):
     """
-    CureSkin-inspired Medical Intake & Skin Biology Profile.
+    DermaNova Medical Intake & Skin Biology Profile.
     Stores user's baseline skin characteristics, sensitivities, and lifestyle factors.
     """
     __tablename__ = "patient_profiles"
@@ -216,7 +216,7 @@ class PersonalizedRoutine(Base):
 
 class SkinJourneyLog(Base):
     """
-    CureSkin-style Daily Habit & Longitudinal Healing Log.
+    DermaNova Daily Habit & Longitudinal Healing Log.
     Tracks routine compliance (AM/PM checkoff), daily notes, and photo check-ins.
     """
     __tablename__ = "skin_journey_logs"
