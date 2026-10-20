@@ -88,90 +88,93 @@ export const SkinJourneyTimeline: React.FC<SkinJourneyTimelineProps> = ({ isAuth
   };
 
   return (
-    <div className="glass-panel rounded-2xl p-6 sm:p-8 border border-slate-800 space-y-6">
-      {/* Top Header & Healing Trajectory Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800/80 pb-5">
+    <div className="rounded-3xl bg-[#1c1f1a]/90 border border-white/10 p-6 sm:p-8 backdrop-blur-xl space-y-6 shadow-2xl">
+      {/* Top Header & Trajectory Info */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="w-8 h-8 rounded-lg bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400">
+          <div className="flex items-center gap-3">
+            <span className="w-9 h-9 rounded-xl bg-navara-moss/50 border border-navara-sage/20 flex items-center justify-center text-navara-sage">
               <Clock className="w-4 h-4" />
             </span>
-            <h3 className="text-lg font-bold text-white tracking-tight">
-              My Skin Journey & Longitudinal Trajectory
-            </h3>
+            <div>
+              <span className="text-[10px] font-mono-clinical uppercase tracking-widest text-navara-sage">Longitudinal Tracking</span>
+              <h3 className="font-serif-luxury text-xl sm:text-2xl text-navara-alabaster font-normal tracking-tight">
+                Skin Journey & Healing Trajectory
+              </h3>
+            </div>
           </div>
-          <p className="text-xs text-slate-400 mt-1">
-            Tracking photographic healing progression, condition drops, and routine habit streaks over time.
+          <p className="text-xs text-navara-cream/60 mt-1 max-w-xl">
+            Lóvi-powered photographic progression, month-by-month condition regression, and barrier recovery streak.
           </p>
         </div>
 
         {/* Stats Badges */}
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">
-            <Flame className="w-4 h-4 text-amber-400 fill-amber-400/20 animate-pulse" />
+        <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#232e1b]/70 border border-navara-sage/30 text-navara-cream text-xs font-mono-clinical">
+            <Flame className="w-4 h-4 text-navara-terracotta fill-navara-terracotta/30 animate-pulse" />
             <span>{stats?.streak_days ? `${stats.streak_days} Day Streak` : '14 Day Streak'}</span>
           </div>
 
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
+          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#232e1b]/70 border border-emerald-500/30 text-emerald-400 text-xs font-mono-clinical">
             <TrendingUp className="w-4 h-4" />
-            <span>Healing Velocity: {stats?.healing_velocity || '+23.5%'}</span>
+            <span>Clearance Velocity: {stats?.healing_velocity || '+23.5%'}</span>
           </div>
         </div>
       </div>
 
-      {/* CureSkin Daily Routine Habit Check-in Widget */}
-      <div className="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-brand-950/30 border border-slate-800 space-y-3">
+      {/* Daily Routine Habit Check-in Widget */}
+      <div className="p-5 sm:p-6 rounded-2xl bg-[#232e1b]/40 border border-white/10 space-y-3.5">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-brand-400" />
-            <span className="text-xs font-bold text-white uppercase tracking-wider font-mono">
+            <ShieldCheck className="w-4 h-4 text-navara-sage" />
+            <span className="text-xs font-mono-clinical uppercase tracking-wider text-navara-alabaster">
               Today's Regimen Check-in
             </span>
           </div>
           {isLoggedToday && (
-            <span className="text-[11px] font-semibold text-emerald-400 flex items-center gap-1 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-              <CheckCircle2 className="w-3.5 h-3.5" /> Checked in!
+            <span className="text-[11px] font-mono-clinical text-emerald-400 flex items-center gap-1.5 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
+              <CheckCircle2 className="w-3.5 h-3.5" /> Habit Logged Today
             </span>
           )}
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
-          <label className="flex items-center gap-2 p-2.5 rounded-lg bg-slate-950/60 border border-slate-800 text-xs text-slate-300 cursor-pointer hover:border-slate-700 transition">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
+          <label className="flex items-center gap-2.5 p-3 rounded-xl bg-[#1c1f1a]/70 border border-white/10 text-xs text-navara-cream/90 cursor-pointer hover:border-navara-sage/40 transition">
             <input
               type="checkbox"
               checked={amCleanse}
               onChange={(e) => setAmCleanse(e.target.checked)}
-              className="w-4 h-4 rounded text-brand-500 focus:ring-0"
+              className="w-4 h-4 rounded text-navara-sage accent-[#aaab87] focus:ring-0"
             />
             <span>AM Cleanser</span>
           </label>
 
-          <label className="flex items-center gap-2 p-2.5 rounded-lg bg-slate-950/60 border border-slate-800 text-xs text-slate-300 cursor-pointer hover:border-slate-700 transition">
+          <label className="flex items-center gap-2.5 p-3 rounded-xl bg-[#1c1f1a]/70 border border-white/10 text-xs text-navara-cream/90 cursor-pointer hover:border-navara-sage/40 transition">
             <input
               type="checkbox"
               checked={amSunscreen}
               onChange={(e) => setAmSunscreen(e.target.checked)}
-              className="w-4 h-4 rounded text-brand-500 focus:ring-0"
+              className="w-4 h-4 rounded text-navara-sage accent-[#aaab87] focus:ring-0"
             />
             <span>SPF 50+ Sunscreen</span>
           </label>
 
-          <label className="flex items-center gap-2 p-2.5 rounded-lg bg-slate-950/60 border border-slate-800 text-xs text-slate-300 cursor-pointer hover:border-slate-700 transition">
+          <label className="flex items-center gap-2.5 p-3 rounded-xl bg-[#1c1f1a]/70 border border-white/10 text-xs text-navara-cream/90 cursor-pointer hover:border-navara-sage/40 transition">
             <input
               type="checkbox"
               checked={amMoisturizer}
               onChange={(e) => setAmMoisturizer(e.target.checked)}
-              className="w-4 h-4 rounded text-brand-500 focus:ring-0"
+              className="w-4 h-4 rounded text-navara-sage accent-[#aaab87] focus:ring-0"
             />
             <span>Cica Barrier Cream</span>
           </label>
 
-          <label className="flex items-center gap-2 p-2.5 rounded-lg bg-slate-950/60 border border-slate-800 text-xs text-slate-300 cursor-pointer hover:border-slate-700 transition">
+          <label className="flex items-center gap-2.5 p-3 rounded-xl bg-[#1c1f1a]/70 border border-white/10 text-xs text-navara-cream/90 cursor-pointer hover:border-navara-sage/40 transition">
             <input
               type="checkbox"
               checked={pmActive}
               onChange={(e) => setPmActive(e.target.checked)}
-              className="w-4 h-4 rounded text-brand-500 focus:ring-0"
+              className="w-4 h-4 rounded text-navara-sage accent-[#aaab87] focus:ring-0"
             />
             <span>PM Active Treatment</span>
           </label>
@@ -181,7 +184,7 @@ export const SkinJourneyTimeline: React.FC<SkinJourneyTimelineProps> = ({ isAuth
           <div className="flex justify-end pt-2">
             <button
               onClick={handleLogRoutine}
-              className="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition shadow"
+              className="px-5 py-2.5 rounded-full bg-navara-alabaster hover:bg-white text-navara-dark font-mono-clinical font-semibold text-xs flex items-center gap-2 transition shadow-lg hover:shadow-xl"
             >
               <span>Log Habits & Keep Streak</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -203,24 +206,29 @@ export const SkinJourneyTimeline: React.FC<SkinJourneyTimelineProps> = ({ isAuth
       />
 
       {/* Longitudinal Scans Cards */}
-      <div className="space-y-3">
-        <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider font-mono">
-          Clinical Photographic Progression
-        </h4>
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h4 className="text-xs font-mono-clinical uppercase tracking-wider text-navara-sage">
+            Clinical Milestone Archive (Lóvi Continuous Scan)
+          </h4>
+          <span className="text-[11px] font-mono-clinical text-navara-cream/50">
+            {timeline.length} Scans Indexed
+          </span>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {timeline.slice(0, 3).map((item, idx) => (
             <div
               key={item.assessment_id || idx}
-              className={`glass-card rounded-xl p-4 border transition ${
+              className={`rounded-2xl p-5 border transition backdrop-blur-md ${
                 idx === timeline.length - 1
-                  ? 'border-brand-500/40 bg-brand-950/10 shadow-lg shadow-brand-500/5'
-                  : 'border-slate-800'
+                  ? 'border-navara-sage/40 bg-[#232e1b]/50 shadow-xl'
+                  : 'border-white/10 bg-[#1c1f1a]/70 hover:border-white/20'
               }`}
             >
               <div className="flex items-center justify-between text-xs">
-                <span className="font-mono text-brand-400 font-semibold">{item.phase_label}</span>
-                <span className="text-[11px] text-slate-500 flex items-center gap-1">
+                <span className="font-mono-clinical text-navara-sage font-medium">{item.phase_label}</span>
+                <span className="text-[11px] font-mono-clinical text-navara-cream/60 flex items-center gap-1.5">
                   <Calendar className="w-3 h-3" />
                   {item.date}
                 </span>
@@ -228,7 +236,7 @@ export const SkinJourneyTimeline: React.FC<SkinJourneyTimelineProps> = ({ isAuth
 
               {/* Photo Preview if available */}
               {item.image_url ? (
-                <div className="mt-2.5 h-28 rounded-lg overflow-hidden bg-slate-900 border border-slate-800">
+                <div className="mt-3.5 h-32 rounded-xl overflow-hidden bg-black/40 border border-white/10">
                   <img
                     src={item.image_url}
                     alt={item.phase_label}
@@ -236,23 +244,23 @@ export const SkinJourneyTimeline: React.FC<SkinJourneyTimelineProps> = ({ isAuth
                   />
                 </div>
               ) : (
-                <div className="mt-2.5 h-20 rounded-lg bg-slate-900/80 border border-slate-800/80 flex items-center justify-center text-slate-500 text-xs">
+                <div className="mt-3.5 h-24 rounded-xl bg-[#232e1b]/30 border border-white/10 flex items-center justify-center text-navara-cream/50 text-xs font-mono-clinical">
                   <span>Photo Check-in Verified</span>
                 </div>
               )}
 
-              <div className="mt-3 flex items-baseline justify-between">
+              <div className="mt-4 flex items-baseline justify-between">
                 <div>
-                  <div className="text-2xl font-extrabold text-white tracking-tight">
+                  <div className="font-serif-luxury text-2xl text-navara-alabaster font-normal">
                     {item.health_score}
-                    <span className="text-xs font-normal text-slate-400">/100</span>
+                    <span className="text-xs font-mono-clinical text-navara-cream/50"> /100</span>
                   </div>
-                  <div className="text-[11px] font-medium text-slate-300 mt-0.5">
+                  <div className="text-xs text-navara-cream/80 mt-0.5">
                     {item.primary_concern}
                   </div>
                 </div>
 
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                <span className="text-[10px] font-mono-clinical px-2.5 py-1 rounded-full bg-[#232e1b] text-navara-cream/90 border border-white/10">
                   {item.acne_severity}
                 </span>
               </div>
@@ -262,13 +270,13 @@ export const SkinJourneyTimeline: React.FC<SkinJourneyTimelineProps> = ({ isAuth
       </div>
 
       {!isAuthenticated && (
-        <div className="p-4 rounded-xl bg-slate-900/80 border border-brand-500/20 text-center space-y-2">
-          <p className="text-xs text-slate-300">
-            Sign in with Supabase to link your selfie scans to your personal medical profile and unlock the side-by-side comparison slider.
+        <div className="p-5 rounded-2xl bg-[#232e1b]/40 border border-navara-sage/20 text-center space-y-3">
+          <p className="text-xs text-navara-cream/80 max-w-lg mx-auto leading-relaxed">
+            Link your medical profile to maintain an encrypted longitudinal record, compare follicular recovery across all visits, and receive customized clinical adjustments.
           </p>
           <button
             onClick={onOpenAuth}
-            className="px-4 py-1.5 rounded-lg bg-brand-500 hover:bg-brand-400 text-slate-950 font-bold text-xs transition"
+            className="px-5 py-2.5 rounded-full bg-navara-alabaster hover:bg-white text-navara-dark font-mono-clinical font-semibold text-xs transition shadow-lg"
           >
             Sign In or Create Account
           </button>

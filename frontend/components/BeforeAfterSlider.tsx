@@ -47,33 +47,33 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
   };
 
   return (
-    <div className="rounded-2xl bg-slate-950/80 border border-slate-800 p-4 sm:p-6 space-y-4 shadow-xl">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-        <div className="flex items-center gap-2">
-          <span className="p-1.5 rounded-lg bg-brand-500/10 border border-brand-500/20 text-brand-400">
+    <div className="rounded-2xl bg-[#1c1f1a]/85 border border-white/10 p-4 sm:p-6 space-y-4 shadow-2xl backdrop-blur-xl">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <span className="p-2 rounded-xl bg-navara-moss/40 border border-navara-sage/20 text-navara-sage">
             <ArrowLeftRight className="w-4 h-4" />
           </span>
           <div>
-            <h4 className="text-sm font-bold text-white tracking-tight flex items-center gap-2">
-              Interactive Healing Comparison
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+            <h4 className="font-serif-luxury text-base text-navara-alabaster tracking-tight flex items-center gap-2">
+              Photographic Healing Progression
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-mono-clinical bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-normal">
                 +{afterScore - beforeScore} pts
               </span>
             </h4>
-            <p className="text-xs text-slate-400">
-              Drag the clinical divider to inspect follicular clearance and barrier restoration
+            <p className="text-xs text-navara-cream/60">
+              Drag clinical divider to inspect barrier recovery & follicular clearing
             </p>
           </div>
         </div>
 
         {/* Delta Badges */}
-        <div className="flex items-center gap-2 text-xs font-mono">
-          <div className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-400">
-            <span className="text-rose-400 font-semibold">{beforeDate}: {beforeScore}/100</span>
+        <div className="flex items-center gap-2 text-xs font-mono-clinical">
+          <div className="px-3 py-1.5 rounded-xl bg-[#232e1b]/70 border border-white/10 text-navara-cream/70">
+            <span className="text-navara-terracotta font-semibold">{beforeDate}: {beforeScore}/100</span>
           </div>
-          <span className="text-slate-600">→</span>
-          <div className="px-2.5 py-1 rounded-lg bg-slate-900 border border-brand-500/30 text-slate-300">
-            <span className="text-emerald-400 font-bold">{afterDate}: {afterScore}/100</span>
+          <span className="text-navara-sage/40">→</span>
+          <div className="px-3 py-1.5 rounded-xl bg-[#232e1b]/70 border border-navara-sage/30 text-navara-alabaster">
+            <span className="text-emerald-400 font-semibold">{afterDate}: {afterScore}/100</span>
           </div>
         </div>
       </div>
@@ -81,7 +81,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
       {/* Main Slider Canvas */}
       <div
         ref={containerRef}
-        className="relative w-full h-72 sm:h-96 rounded-xl overflow-hidden select-none cursor-ew-resize border border-slate-800 shadow-inner group"
+        className="relative w-full h-72 sm:h-96 rounded-xl overflow-hidden select-none cursor-ew-resize border border-white/10 shadow-inner group"
         onMouseDown={() => setIsDragging(true)}
         onMouseUp={() => setIsDragging(false)}
         onMouseLeave={() => setIsDragging(false)}
@@ -96,7 +96,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
           alt="After treatment"
           className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
         />
-        <div className="absolute top-3 right-3 z-10 px-2.5 py-1 rounded-md bg-slate-950/80 backdrop-blur-md border border-emerald-500/30 text-[11px] font-bold text-emerald-400 shadow">
+        <div className="absolute top-3 right-3 z-10 px-3 py-1 rounded-full bg-[#1c1f1a]/85 backdrop-blur-md border border-emerald-500/30 text-[11px] font-mono-clinical font-semibold text-emerald-400 shadow">
           {afterLabel} ({afterScore}/100)
         </div>
 
@@ -111,7 +111,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
             className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
             style={{ width: containerRef.current?.offsetWidth || '100%', maxWidth: 'none' }}
           />
-          <div className="absolute top-3 left-3 z-10 px-2.5 py-1 rounded-md bg-slate-950/80 backdrop-blur-md border border-rose-500/30 text-[11px] font-bold text-rose-400 shadow">
+          <div className="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-[#1c1f1a]/85 backdrop-blur-md border border-navara-terracotta/40 text-[11px] font-mono-clinical font-semibold text-navara-terracotta shadow">
             {beforeLabel} ({beforeScore}/100)
           </div>
         </div>
@@ -122,33 +122,33 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
           style={{ left: `${sliderPos}%` }}
         >
           {/* Vertical Glowing Line */}
-          <div className="absolute top-0 bottom-0 -ml-[1px] w-[2px] bg-gradient-to-b from-brand-400 via-white to-brand-400 shadow-[0_0_10px_rgba(20,184,166,0.8)]" />
+          <div className="absolute top-0 bottom-0 -ml-[1px] w-[2px] bg-gradient-to-b from-navara-sage via-navara-alabaster to-navara-sage shadow-[0_0_12px_rgba(170,171,135,0.7)]" />
 
           {/* Centered Circular Handle */}
-          <div className="absolute top-1/2 -mt-5 -ml-5 w-10 h-10 rounded-full bg-slate-950/90 border-2 border-brand-400 text-brand-300 shadow-2xl flex items-center justify-center pointer-events-auto cursor-grab active:cursor-grabbing backdrop-blur-md transition-transform group-hover:scale-110">
-            <ArrowLeftRight className="w-4 h-4 text-brand-300 animate-pulse" />
+          <div className="absolute top-1/2 -mt-5 -ml-5 w-10 h-10 rounded-full bg-[#1c1f1a] border-2 border-navara-sage text-navara-alabaster shadow-2xl flex items-center justify-center pointer-events-auto cursor-grab active:cursor-grabbing backdrop-blur-md transition-transform group-hover:scale-110">
+            <ArrowLeftRight className="w-4 h-4 text-navara-sage animate-pulse" />
           </div>
         </div>
 
         {/* Micro Hint at bottom */}
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 px-3 py-1 rounded-full bg-slate-950/70 backdrop-blur-md border border-slate-700/60 text-[10px] text-slate-300 pointer-events-none">
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 px-3 py-1 rounded-full bg-[#1c1f1a]/80 backdrop-blur-md border border-white/10 text-[10px] text-navara-cream/70 font-mono-clinical pointer-events-none">
           Drag horizontally to compare
         </div>
       </div>
 
       {/* Clinical Biomarker Progression Indicators */}
       <div className="grid grid-cols-3 gap-2 sm:gap-3 text-center pt-1">
-        <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
-          <div className="text-[10px] font-mono uppercase text-slate-400">Inflammatory Acne</div>
-          <div className="text-sm font-bold text-emerald-400 mt-0.5">-68% Clearance</div>
+        <div className="p-3 rounded-xl bg-[#232e1b]/40 border border-white/10">
+          <div className="text-[10px] font-mono-clinical uppercase text-navara-cream/60 tracking-wider">Acne Clearance</div>
+          <div className="text-sm font-semibold text-emerald-400 mt-1">-68% Papules</div>
         </div>
-        <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
-          <div className="text-[10px] font-mono uppercase text-slate-400">Barrier Lipid Index</div>
-          <div className="text-sm font-bold text-brand-400 mt-0.5">+42% Hydration</div>
+        <div className="p-3 rounded-xl bg-[#232e1b]/40 border border-white/10">
+          <div className="text-[10px] font-mono-clinical uppercase text-navara-cream/60 tracking-wider">Barrier Moisture</div>
+          <div className="text-sm font-semibold text-navara-sage mt-1">+42% Hydration</div>
         </div>
-        <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
-          <div className="text-[10px] font-mono uppercase text-slate-400">Erythema Variance</div>
-          <div className="text-sm font-bold text-emerald-400 mt-0.5">-55% Calm</div>
+        <div className="p-3 rounded-xl bg-[#232e1b]/40 border border-white/10">
+          <div className="text-[10px] font-mono-clinical uppercase text-navara-cream/60 tracking-wider">Erythema Calm</div>
+          <div className="text-sm font-semibold text-emerald-400 mt-1">-55% Redness</div>
         </div>
       </div>
     </div>

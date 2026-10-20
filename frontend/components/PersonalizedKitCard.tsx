@@ -14,7 +14,8 @@ import {
   UserCheck,
   Download,
   HeartHandshake,
-  BookOpen
+  BookOpen,
+  Award
 } from 'lucide-react';
 import { RecommendationResponse } from '../services/api';
 
@@ -38,7 +39,7 @@ export const PersonalizedKitCard: React.FC<PersonalizedKitCardProps> = ({
 
   const products = [
     {
-      step: 'Step 1 • Cleanse',
+      step: 'Step 01 • Cleanse',
       time: 'AM & PM',
       name: 'Gentle Purifying Sebum Cleanser',
       active: 'Zinc PCA + Salicylic Acid 1%',
@@ -47,7 +48,7 @@ export const PersonalizedKitCard: React.FC<PersonalizedKitCardProps> = ({
       badge: 'Sulfate-Free'
     },
     {
-      step: 'Step 2 • Treat (Key Active)',
+      step: 'Step 02 • Treat (Key Active)',
       time: 'PM Only',
       name: primaryActiveName,
       active: primaryActiveConc,
@@ -56,7 +57,7 @@ export const PersonalizedKitCard: React.FC<PersonalizedKitCardProps> = ({
       badge: 'Key Therapeutic Active'
     },
     {
-      step: 'Step 3 • Repair',
+      step: 'Step 03 • Repair',
       time: 'AM & PM',
       name: 'Cica Ceramide Barrier Cream',
       active: 'Ceramide NP + Madecassoside / Centella',
@@ -65,7 +66,7 @@ export const PersonalizedKitCard: React.FC<PersonalizedKitCardProps> = ({
       badge: 'Barrier Defense'
     },
     {
-      step: 'Step 4 • Protect',
+      step: 'Step 04 • Protect',
       time: 'AM Only',
       name: 'Broad-Spectrum Matte Fluid Sunscreen',
       active: 'SPF 50+ • PA++++ Multi-filter',
@@ -77,72 +78,71 @@ export const PersonalizedKitCard: React.FC<PersonalizedKitCardProps> = ({
 
   const handleDownloadRegimen = () => {
     setIsSaved(true);
-    // Trigger printable clinical summary
     window.print();
   };
 
   return (
-    <div className="rounded-2xl bg-gradient-to-b from-slate-900/90 to-slate-950 border border-brand-500/30 p-5 sm:p-7 space-y-6 shadow-2xl">
-      {/* Open Source Healthcare Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
-        <div className="space-y-1">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] font-semibold">
+    <div className="glass-panel rounded-3xl border border-navara-border p-6 sm:p-8 space-y-6 shadow-2xl">
+      {/* Header with Navara Botanical Touch */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-navara-borderSubtle pb-5">
+        <div className="space-y-1.5">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navara-panel border border-navara-sage/40 text-navara-matcha text-[10px] font-mono font-bold uppercase tracking-wider">
             <HeartHandshake className="w-3.5 h-3.5" />
-            <span>100% Free & Open-Source Clinical Regimen</span>
+            <span>100% Brand-Neutral Clinical Prescription</span>
           </div>
-          <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight flex items-center gap-2">
+          <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-navara-ivory tracking-tight">
             Your Personalized Skincare Regimen
           </h3>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-navara-stone font-mono">
             Formulated for {patientName} • {skinType} Skin Profile • Free Pharmacy & Active Guide
           </p>
         </div>
 
         {/* Doctor Review Verification Stamp */}
-        <div className="px-3 py-2 rounded-xl bg-slate-950/80 border border-slate-800 flex items-center gap-2.5 self-start sm:self-auto">
-          <div className="w-8 h-8 rounded-full bg-brand-500/20 border border-brand-500/40 flex items-center justify-center text-brand-400 font-bold text-xs">
+        <div className="px-3.5 py-2.5 rounded-2xl bg-[#141712] border border-navara-borderSubtle flex items-center gap-3 self-start sm:self-auto shadow-inner">
+          <div className="w-8 h-8 rounded-full bg-navara-matcha/20 border border-navara-matcha/40 flex items-center justify-center text-navara-matcha font-mono font-bold text-xs">
             MD
           </div>
           <div className="text-left text-[11px]">
-            <div className="text-slate-200 font-semibold">Dr. Ananya S., MD</div>
-            <div className="text-slate-500 text-[10px] font-mono">Reg #KA-48192 • Clinical Review</div>
+            <div className="text-navara-ivory font-bold">Dr. Nadia K., MD & Chemist</div>
+            <div className="text-navara-stone text-[10px] font-mono">Lóvi Medical Board • Review Verified</div>
           </div>
         </div>
       </div>
 
       {/* 4 Step Skincare Regimen Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {products.map((prod, idx) => (
           <div
             key={idx}
-            className="p-4 rounded-xl bg-slate-900/60 border border-slate-800/90 hover:border-brand-500/30 transition flex flex-col justify-between space-y-3 group"
+            className="p-5 rounded-2xl bg-[#1c2219]/70 border border-navara-borderSubtle hover:border-navara-border transition flex flex-col justify-between space-y-3 group"
           >
             <div>
               <div className="flex items-center justify-between text-[10px] font-mono">
-                <span className="text-brand-400 font-bold uppercase">{prod.step}</span>
-                <span className="flex items-center gap-1 text-slate-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
-                  {prod.time.includes('AM') && <Sun className="w-3 h-3 text-amber-400" />}
-                  {prod.time.includes('PM') && <Moon className="w-3 h-3 text-indigo-400" />}
+                <span className="text-navara-matcha font-bold uppercase">{prod.step}</span>
+                <span className="flex items-center gap-1 text-navara-stone bg-[#141712] px-2.5 py-0.5 rounded-full border border-navara-borderSubtle">
+                  {prod.time.includes('AM') && <Sun className="w-3 h-3 text-amber-300" />}
+                  {prod.time.includes('PM') && <Moon className="w-3 h-3 text-navara-cream" />}
                   {prod.time}
                 </span>
               </div>
 
-              <h4 className="text-sm font-bold text-white mt-1.5 group-hover:text-brand-300 transition">
+              <h4 className="font-serif-luxury text-base font-bold text-navara-ivory mt-2 group-hover:text-navara-matcha transition">
                 {prod.name}
               </h4>
 
-              <div className="inline-block mt-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-brand-500/10 text-brand-300 border border-brand-500/20">
+              <div className="inline-block mt-1.5 px-2.5 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-[#232e1b] text-navara-matcha border border-navara-sage/30">
                 Active: {prod.active}
               </div>
 
-              <p className="text-[11px] text-slate-400 mt-2 leading-relaxed">
+              <p className="text-xs text-navara-stone mt-2 leading-relaxed">
                 {prod.purpose}
               </p>
             </div>
 
             {/* Local Pharmacy Equivalent Tip */}
-            <div className="p-2 rounded-lg bg-slate-950/70 border border-slate-800 text-[10px] text-slate-400">
-              <span className="text-brand-300 font-semibold">Chemist Guidance: </span>
+            <div className="p-3 rounded-xl bg-[#141712]/80 border border-navara-borderSubtle text-[11px] text-navara-stone">
+              <span className="text-navara-matcha font-bold font-mono">Chemist Guidance: </span>
               <span>{prod.otcAdvice}</span>
             </div>
           </div>
@@ -150,24 +150,24 @@ export const PersonalizedKitCard: React.FC<PersonalizedKitCardProps> = ({
       </div>
 
       {/* Free Open Source Prescription Card */}
-      <div className="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-brand-950/40 via-slate-950 to-slate-900 border border-brand-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div>
+      <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-[#232e1b] to-[#141712] border border-navara-border flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+        <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="text-base font-bold text-white">Free Open-Access Healthcare</span>
-            <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">
-              100% FREE
+            <span className="font-serif-luxury text-base font-bold text-navara-ivory">Free Open-Access Skincare Education</span>
+            <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-mono font-bold border border-emerald-500/30">
+              100% Brand-Free
             </span>
           </div>
-          <p className="text-[11px] text-slate-400 mt-0.5">
-            DermaNova is free and open-source. Buy generic actives at any local drugstore or pharmacy without commercial markups.
+          <p className="text-xs text-navara-stone max-w-xl">
+            Lóvi and Navara are non-affiliated with any beauty conglomerate. Buy generic active ingredients at your local pharmacy with zero markup.
           </p>
         </div>
 
         <button
           onClick={handleDownloadRegimen}
-          className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-500 to-teal-400 hover:opacity-95 text-slate-950 font-bold text-xs flex items-center justify-center gap-2 transition shadow-xl shadow-brand-500/20 active:scale-95"
+          className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-navara-ivory hover:bg-navara-cream text-navara-dark font-extrabold text-xs flex items-center justify-center gap-2 transition shadow-xl shrink-0"
         >
-          <Download className="w-4 h-4" />
+          <Download className="w-4 h-4 text-navara-terracotta" />
           <span>{isSaved ? 'Print / Saved' : 'Print / Save Regimen'}</span>
         </button>
       </div>
