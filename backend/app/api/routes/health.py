@@ -14,6 +14,7 @@ from backend.app.core.config import settings
 from backend.app.database.session import SessionLocal
 from backend.app.ml.model_loader import model_loader
 from backend.app.services.storage_service import storage_service
+from ml_pipeline.inference.predictor import predictor_service
 
 logger = logging.getLogger("dermanova.api.health")
 
@@ -40,14 +41,19 @@ async def health_check():
         logger.error(f"Health check DB failure: {e}")
         services["database"] = f"unhealthy: {str(e)}"
 
-    # 2. ML Inference readiness
-    if model_loader.is_loaded:
+    # 2. ML Inference readiness (PyTorch or ONNX Runtime)
+    if getattr(model_loader, "is_loaded", False) or getattr(predictor_service, "is_model_loaded", False):
         services["ml_inference"] = "operational"
     else:
         # Check if lazy load is possible
         try:
-            model_loader.load()
-            services["ml_inference"] = "operational"
+            if getattr(model_loader, "has_torch", False):
+                model_loader.load()
+                services["ml_inference"] = "operational"
+            elif getattr(predictor_service, "is_model_loaded", False):
+                services["ml_inference"] = "operational"
+            else:
+                services["ml_inference"] = "unavailable: no weights loaded"
         except Exception as e:
             services["ml_inference"] = f"unavailable: {str(e)}"
 

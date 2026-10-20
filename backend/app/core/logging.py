@@ -26,7 +26,7 @@ class SanitizedFormatter(logging.Formatter):
     def format(self, record: logging.LogRecord) -> str:
         msg = super().format(record)
         for pattern in SENSITIVE_PATTERNS:
-            msg = pattern.sub(r"\1***REDACTED***\2" if len(pattern.groups) > 1 else r"\1***REDACTED***", msg)
+            msg = pattern.sub(r"\1***REDACTED***\2" if pattern.groups > 1 else r"\1***REDACTED***", msg)
         return msg
 
 

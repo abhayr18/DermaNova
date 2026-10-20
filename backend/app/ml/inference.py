@@ -6,10 +6,18 @@ and extracts Grad-CAM saliency heatmaps.
 """
 
 import logging
-from typing import Dict, Any, Tuple, Optional
+from typing import Dict, Any, Tuple, Optional, Union
 import numpy as np
-import torch
-import torch.nn.functional as F
+from PIL import Image
+
+try:
+    import torch
+    import torch.nn.functional as F
+    HAS_TORCH = True
+except ImportError:
+    torch = None
+    F = None
+    HAS_TORCH = False
 
 from backend.app.ml.model_loader import model_loader, ModelLoader
 from backend.app.ml.class_mapping import (
@@ -32,14 +40,34 @@ class InferenceEngine:
 
     def predict_tensor(
         self,
-        input_tensor: torch.Tensor,
+        input_tensor: Any,
         compute_gradcam: bool = True
     ) -> Dict[str, Any]:
         """
-        Executes inference on a preprocessed PyTorch image tensor (1, 3, 224, 224).
-        Returns raw condition probabilities, predicted severity, predicted skin type,
-        and optional Grad-CAM attention weights.
+        Executes inference on a preprocessed image tensor (1, 3, 224, 224).
+        Falls back to ONNX Runtime if PyTorch is not installed in the environment.
         """
+        if not HAS_TORCH or torch is None:
+            logger.info("PyTorch is not available; routing tensor inference to ONNX Runtime Engine.")
+            from ml_pipeline.inference.predictor import predictor_service
+            if isinstance(input_tensor, np.ndarray):
+                arr = input_tensor
+            else:
+                arr = np.array(input_tensor)
+            if arr.ndim == 4:
+                arr = arr.squeeze(0)
+            if arr.shape[0] == 3 and arr.shape[1] == 224:
+                arr = np.transpose(arr, (1, 2, 0))
+            pil_img = Image.fromarray((np.clip(arr, 0, 1) * 255).astype(np.uint8))
+            pred = predictor_service.predict(pil_img)
+            cond_map = {k: v.probability for k, v in pred.conditions.items()}
+            return {
+                "condition_probabilities": cond_map,
+                "severity_grade": pred.severity_grade.value if hasattr(pred.severity_grade, "value") else str(pred.severity_grade),
+                "skin_type": pred.detected_skin_type.value if hasattr(pred.detected_skin_type, "value") else str(pred.detected_skin_type),
+                "saliency_map": None,
+                "model_version": pred.model_version
+            }
         if not self.loader.is_loaded:
             # Attempt lazy load
             self.loader.load()

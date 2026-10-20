@@ -57,15 +57,20 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.error(f"Database schema initialization warning: {e}")
 
-    # 3. Model readiness (PyTorch singleton)
+    # 3. Model readiness (PyTorch singleton or ONNX Runtime)
     try:
-        model_loader.load()
-        logger.info(
-            f"PyTorch Model loaded and verified on device: {model_loader.device}. "
-            f"Trained epoch: {model_loader.checkpoint_metadata.get('epoch')}"
-        )
+        if getattr(model_loader, "has_torch", False):
+            model_loader.load()
+            logger.info(
+                f"PyTorch Model loaded and verified on device: {model_loader.device}. "
+                f"Trained epoch: {model_loader.checkpoint_metadata.get('epoch')}"
+            )
+        else:
+            logger.info("PyTorch not installed; utilizing ONNX Runtime inference engine.")
+            if predictor_service.is_model_loaded:
+                logger.info(f"ONNX Model engine loaded: {predictor_service.active_model_type}")
     except Exception as e:
-        logger.warning(f"PyTorch model loader initialization notice: {e}")
+        logger.warning(f"Model loader initialization notice: {e}")
 
     # 4. Cloud storage check
     if storage_service.is_configured:

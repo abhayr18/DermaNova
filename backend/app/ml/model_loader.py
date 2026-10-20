@@ -13,7 +13,14 @@ import os
 import logging
 from pathlib import Path
 from typing import Optional, Dict, Any, Tuple
-import torch
+from pathlib import Path
+
+try:
+    import torch
+    HAS_TORCH = True
+except ImportError:
+    torch = None
+    HAS_TORCH = False
 
 from backend.app.ml.model_factory import create_dermanova_model, DermaNovaMultiTaskModel
 from backend.app.ml.class_mapping import CHECKPOINT_CLASS_NAMES, DERMANOVA_CONDITION_KEYS
@@ -32,15 +39,18 @@ class ModelLoader:
             else self.root_dir / "ml_pipeline" / "models" / "saved_models" / "dermanova_best_weights.pth"
         )
         self.preferred_device = preferred_device
-        self.device = self._resolve_device(preferred_device)
+        self.has_torch = HAS_TORCH
+        self.device = self._resolve_device(preferred_device) if HAS_TORCH else "cpu"
 
-        self.model: Optional[DermaNovaMultiTaskModel] = None
+        self.model: Optional[Any] = None
         self.checkpoint_metadata: Dict[str, Any] = {}
         self.is_loaded: bool = False
         self.load_error: Optional[str] = None
         self.model_version: str = "2.0.0-efficientnet-b0"
 
-    def _resolve_device(self, preferred: str) -> torch.device:
+    def _resolve_device(self, preferred: str) -> Any:
+        if not HAS_TORCH or torch is None:
+            return "cpu"
         pref = preferred.lower()
         if pref == "cuda" and torch.cuda.is_available():
             dev = torch.device("cuda")
@@ -55,11 +65,17 @@ class ModelLoader:
             return dev
         return torch.device("cpu")
 
-    def load(self) -> DermaNovaMultiTaskModel:
+    def load(self) -> Optional[Any]:
         """
         Loads the trained PyTorch checkpoint using weights_only=True and strict=True.
         Performs a warm-up inference pass and verifies output shapes.
         """
+        if not HAS_TORCH or torch is None:
+            logger.info("PyTorch is not installed in this environment; skipping PyTorch checkpoint load (ONNX Runtime active).")
+            self.load_error = "PyTorch not installed"
+            self.is_loaded = False
+            return None
+
         if self.is_loaded and self.model is not None:
             return self.model
 

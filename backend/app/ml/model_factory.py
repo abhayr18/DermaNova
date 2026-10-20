@@ -19,14 +19,25 @@ Architecture:
 5. Grad-CAM feature hooks on features[-1]
 """
 
-from typing import Tuple, Optional
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torchvision.models as models
+from typing import Tuple, Optional, Any
+
+try:
+    import torch
+    import torch.nn as nn
+    import torch.nn.functional as F
+    import torchvision.models as models
+    HAS_TORCH = True
+    _ModuleBase = nn.Module
+except ImportError:
+    torch = None
+    nn = None
+    F = None
+    models = None
+    HAS_TORCH = False
+    _ModuleBase = object
 
 
-class DermaNovaMultiTaskModel(nn.Module):
+class DermaNovaMultiTaskModel(_ModuleBase):
     def __init__(
         self,
         num_conditions: int = 8,

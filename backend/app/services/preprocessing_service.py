@@ -16,10 +16,16 @@ Reproduces the exact training preprocessing pipeline:
 """
 
 import logging
-from typing import Tuple, Union
+from typing import Tuple, Union, Any
 import numpy as np
 from PIL import Image
-import torch
+
+try:
+    import torch
+    HAS_TORCH = True
+except ImportError:
+    torch = None
+    HAS_TORCH = False
 
 try:
     import cv2
@@ -106,9 +112,11 @@ class PreprocessingService:
 
         # Step 4: Transpose from (H, W, C) to (C, H, W) and add batch dimension (1, C, H, W)
         tensor_chw = np.transpose(img_norm, (2, 0, 1))
-        tensor = torch.from_numpy(tensor_chw).float().unsqueeze(0)
-
-        return tensor
+        if HAS_TORCH and torch is not None:
+            tensor = torch.from_numpy(tensor_chw).float().unsqueeze(0)
+            return tensor
+        # Return float32 numpy array with batch dim for ONNX
+        return np.expand_dims(tensor_chw, axis=0).astype(np.float32)
 
 
 # Global service instance
