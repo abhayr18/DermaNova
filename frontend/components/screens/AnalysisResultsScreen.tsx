@@ -346,9 +346,9 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             {concernList.map((concern) => {
               const liveScore = getConditionScore(concern.id);
-              const isDetected = liveScore ? liveScore.isDetected : concern.isDetectedInDemo;
-              const confidence = liveScore ? liveScore.probability : concern.sampleConfidence;
-              const severity = liveScore ? liveScore.severity : concern.sampleSeverity;
+              const isDetected = liveScore ? liveScore.isDetected : false;
+              const confidence = liveScore ? liveScore.probability : 0;
+              const severity = liveScore ? liveScore.severity : 'Clear';
 
               return (
                 <div

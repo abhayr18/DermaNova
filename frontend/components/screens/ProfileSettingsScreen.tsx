@@ -32,10 +32,10 @@ export const ProfileSettingsScreen: React.FC<ProfileSettingsScreenProps> = ({
   const [activeTab, setActiveTab] = useState<'preferences' | 'notifications' | 'account' | 'privacy'>('preferences');
 
   // Form states
-  const [fullName, setFullName] = useState(currentUser?.full_name || 'Dr. Maya Patel');
-  const [email, setEmail] = useState(currentUser?.email || 'maya.patel@example.com');
-  const [skinType, setSkinType] = useState('Combination');
-  const [hasSensitivity, setHasSensitivity] = useState(true);
+  const [fullName, setFullName] = useState(currentUser?.full_name || '');
+  const [email, setEmail] = useState(currentUser?.email || '');
+  const [skinType, setSkinType] = useState(currentUser?.profile?.baseline_skin_type || 'Combination');
+  const [hasSensitivity, setHasSensitivity] = useState(currentUser?.profile?.has_sensitive_skin ?? false);
 
   // Notification toggles
   const [notifMorning, setNotifMorning] = useState(true);

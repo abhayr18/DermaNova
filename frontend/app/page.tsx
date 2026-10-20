@@ -280,10 +280,10 @@ export default function DermaNovaApp() {
                 </div>
                 <div className="truncate">
                   <div className="font-mono text-xs font-semibold text-[#252923] truncate">
-                    {currentUser?.full_name || 'Maya Patel'}
+                    {currentUser?.full_name || 'Guest Explorer'}
                   </div>
                   <div className="text-[10px] text-[#777D76] font-mono">
-                    Barrier: Optimal (84)
+                    {analysisResult ? `Health Score: ${analysisResult.overall_health_score}` : 'No Scan Recorded'}
                   </div>
                 </div>
               </div>
@@ -382,6 +382,8 @@ export default function DermaNovaApp() {
           {activeConcernDetail && (
             <ConcernDetailModal
               concernId={activeConcernDetail}
+              analysis={analysisResult}
+              displayImage={selectedImage}
               onClose={() => setActiveConcernDetail(null)}
               onNavigateToRoutine={() => {
                 setActiveConcernDetail(null);
@@ -394,10 +396,12 @@ export default function DermaNovaApp() {
           {currentScreen === 'detail' && (
             <div className="space-y-4">
               <div className="p-4 rounded-2xl bg-[#E8EFE9] text-[#304D40] text-xs font-mono">
-                Screen 7 Demonstration: Viewing Detailed Report for Inflammatory Acne & Erythema
+                Viewing Detailed Clinical Concern Profile: {activeConcernDetail || 'Acne'}
               </div>
               <ConcernDetailModal
                 concernId={activeConcernDetail || 'acne'}
+                analysis={analysisResult}
+                displayImage={selectedImage}
                 onClose={() => setCurrentScreen('results')}
                 onNavigateToRoutine={() => setCurrentScreen('routine')}
               />
@@ -410,11 +414,17 @@ export default function DermaNovaApp() {
               recommendations={recommendations}
               skinType={analysisResult?.detected_skin_type || 'Combination'}
               onEditPreferences={() => setCurrentScreen('settings')}
+              onStartScan={() => setCurrentScreen('capture')}
             />
           )}
 
           {/* SCREEN 9: PROGRESS TRACKING AND SCAN HISTORY */}
-          {currentScreen === 'progress' && <ProgressTrackingScreen />}
+          {currentScreen === 'progress' && (
+            <ProgressTrackingScreen
+              latestAnalysis={analysisResult}
+              onStartNewAnalysis={() => setCurrentScreen('capture')}
+            />
+          )}
 
           {/* SCREEN 10: PROFILE, PREFERENCES, AND PRIVACY SETTINGS */}
           {currentScreen === 'settings' && (
@@ -433,6 +443,8 @@ export default function DermaNovaApp() {
           {currentScreen === 'telehealth' && (
             <TelehealthBookingScreen
               onBackToDashboard={() => setCurrentScreen('dashboard')}
+              analysis={analysisResult}
+              currentUser={currentUser}
             />
           )}
 
@@ -442,6 +454,8 @@ export default function DermaNovaApp() {
               onBackToDashboard={() => setCurrentScreen('dashboard')}
               onOpenAnalysisResults={() => setCurrentScreen('results')}
               onOpenConsultation={() => setCurrentScreen('telehealth')}
+              latestAnalysis={analysisResult}
+              currentUser={currentUser}
             />
           )}
         </main>

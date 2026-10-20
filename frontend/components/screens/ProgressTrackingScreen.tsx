@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Calendar,
   Clock,
@@ -14,8 +14,10 @@ import {
   ShieldCheck,
   Columns,
   Layers,
-  ArrowRight
+  ArrowRight,
+  Camera
 } from 'lucide-react';
+import { apiService, AnalysisResponse } from '../../services/api';
 
 interface JournalNote {
   id: string;
@@ -24,28 +26,85 @@ interface JournalNote {
   barrierFeeling: 'Calm' | 'Hydrated' | 'Slightly Reactive';
 }
 
-export const ProgressTrackingScreen: React.FC = () => {
+interface ProgressTrackingScreenProps {
+  latestAnalysis?: AnalysisResponse | null;
+  onStartNewAnalysis?: () => void;
+}
+
+export const ProgressTrackingScreen: React.FC<ProgressTrackingScreenProps> = ({
+  latestAnalysis,
+  onStartNewAnalysis,
+}) => {
   const [comparisonMode, setComparisonMode] = useState<'slider' | 'side-by-side'>('slider');
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
+  const [scans, setScans] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  // Journal notes state
-  const [notes, setNotes] = useState<JournalNote[]>([
-    {
-      id: 'note-1',
-      date: 'October 18, 2026',
-      text: 'Skin feels noticeably calmer around cheekbones after 3 weeks of daily Azelaic Acid 10%. Morning redness has decreased significantly.',
-      barrierFeeling: 'Calm',
-    },
-    {
-      id: 'note-2',
-      date: 'October 04, 2026',
-      text: 'Began applying barrier moisturizer directly to damp skin. Peeling near the nostrils stopped.',
-      barrierFeeling: 'Hydrated',
-    },
-  ]);
+  // Journal notes state initialized from localStorage
+  const [notes, setNotes] = useState<JournalNote[]>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('dermanova_journal_notes');
+        return saved ? JSON.parse(saved) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+    return [];
+  });
+
   const [newNoteText, setNewNoteText] = useState('');
   const [newNoteFeeling, setNewNoteFeeling] = useState<'Calm' | 'Hydrated' | 'Slightly Reactive'>('Calm');
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchScans = async () => {
+      setLoading(true);
+      try {
+        const resp = await apiService.getAnalyses();
+        const items = resp?.items || [];
+        if (isMounted) {
+          if (items.length > 0) {
+            setScans(items);
+          } else if (latestAnalysis) {
+            setScans([
+              {
+                analysis_id: latestAnalysis.analysis_id,
+                created_at: latestAnalysis.timestamp,
+                overall_health_score: latestAnalysis.overall_health_score,
+                detected_skin_type: latestAnalysis.detected_skin_type,
+                primary_concern: latestAnalysis.top_concerns?.[0] || 'Evaluated',
+              },
+            ]);
+          } else {
+            setScans([]);
+          }
+        }
+      } catch (err) {
+        if (latestAnalysis && isMounted) {
+          setScans([
+            {
+              analysis_id: latestAnalysis.analysis_id,
+              created_at: latestAnalysis.timestamp,
+              overall_health_score: latestAnalysis.overall_health_score,
+              detected_skin_type: latestAnalysis.detected_skin_type,
+              primary_concern: latestAnalysis.top_concerns?.[0] || 'Evaluated',
+            },
+          ]);
+        }
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    };
+
+    fetchScans();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [latestAnalysis]);
 
   const handleAddNote = (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,7 +121,11 @@ export const ProgressTrackingScreen: React.FC = () => {
       barrierFeeling: newNoteFeeling,
     };
 
-    setNotes([newEntry, ...notes]);
+    const updated = [newEntry, ...notes];
+    setNotes(updated);
+    try {
+      localStorage.setItem('dermanova_journal_notes', JSON.stringify(updated));
+    } catch (e) {}
     setNewNoteText('');
   };
 
@@ -74,39 +137,46 @@ export const ProgressTrackingScreen: React.FC = () => {
     setSliderPosition(percentage);
   };
 
-  const pastScans = [
-    {
-      id: 'scan-3',
-      date: 'October 18, 2026',
-      phase: 'Follow-up (Week 4)',
-      summary: 'Erythema fading, pore walls stabilized, no new inflamed papules.',
-      score: 84,
-      image: '/skin_progress_comparison.jpg',
-    },
-    {
-      id: 'scan-2',
-      date: 'October 04, 2026',
-      phase: 'Follow-up (Week 2)',
-      summary: 'Microcomedones softening with BHA; barrier hydration improved.',
-      score: 79,
-      image: '/editorial_skin_portrait.jpg',
-    },
-    {
-      id: 'scan-1',
-      date: 'September 20, 2026',
-      phase: 'Baseline Assessment (Week 0)',
-      summary: 'Initial analysis: moderate erythema and localized inflammatory blemishes.',
-      score: 71,
-      image: '/demo_face.jpg',
-    },
-  ];
+  if (loading) {
+    return (
+      <div className="w-full py-16 flex flex-col items-center justify-center space-y-3">
+        <div className="w-6 h-6 border-2 border-[#527665] border-t-transparent rounded-full animate-spin" />
+        <span className="text-xs font-mono text-[#777D76]">Loading longitudinal records...</span>
+      </div>
+    );
+  }
+
+  if (scans.length === 0) {
+    return (
+      <div className="w-full space-y-8 animate-fade-in py-8">
+        <div className="rounded-3xl border border-[#E8E8E1] bg-white p-8 sm:p-12 text-center max-w-xl mx-auto space-y-4 shadow-sm">
+          <div className="w-16 h-16 rounded-2xl bg-[#E8EFE9] text-[#304D40] flex items-center justify-center mx-auto">
+            <Layers className="w-8 h-8 text-[#527665]" />
+          </div>
+          <h2 className="font-serif text-2xl sm:text-3xl text-[#252923]">
+            No Longitudinal Scans Found
+          </h2>
+          <p className="text-xs sm:text-sm text-[#777D76] leading-relaxed">
+            Longitudinal progress tracking evaluates optical facial scans under standardized conditions over 2 to 12 weeks. Perform your baseline facial scan to begin tracking barrier recovery.
+          </p>
+          {onStartNewAnalysis && (
+            <button
+              onClick={onStartNewAnalysis}
+              className="mt-4 inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#527665] hover:bg-[#304D40] text-white text-xs font-mono tracking-wider uppercase font-semibold transition shadow-sm"
+            >
+              <Camera className="w-4 h-4" />
+              <span>Start Baseline Scan</span>
+            </button>
+          )}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full space-y-8 animate-fade-in py-2">
       
-      {/* =======================================================================
-          TOP SECTION: Heading & Longitudinal Journal Overview
-         ======================================================================= */}
+      {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#E8E8E1]">
         <div>
           <span className="text-[11px] font-mono uppercase tracking-widest text-[#527665] font-semibold">
@@ -116,159 +186,77 @@ export const ProgressTrackingScreen: React.FC = () => {
             Progress Tracking & Scan History
           </h1>
           <p className="text-xs text-[#777D76] mt-0.5">
-            Evaluate barrier evolution under uniform lighting across clinical check-ins.
+            Evaluate barrier evolution across clinical check-ins under standardized illumination.
           </p>
         </div>
 
-        {/* Comparison Mode Toggle */}
-        <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] text-xs font-mono self-start sm:self-center">
+        {onStartNewAnalysis && (
           <button
-            onClick={() => setComparisonMode('slider')}
-            className={`px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 ${
-              comparisonMode === 'slider'
-                ? 'bg-white text-[#252923] font-semibold shadow-xs border border-[#E8E8E1]'
-                : 'text-[#777D76] hover:text-[#252923]'
-            }`}
+            onClick={onStartNewAnalysis}
+            className="px-4 py-2 rounded-xl bg-white hover:bg-[#FAF9F6] border border-[#E8E8E1] text-[#252923] text-xs font-mono transition flex items-center gap-1.5 shadow-sm self-start sm:self-center"
           >
-            <Sliders className="w-3.5 h-3.5 text-[#527665]" />
-            <span>Slider Mode</span>
+            <Camera className="w-3.5 h-3.5 text-[#527665]" />
+            <span>Perform Check-in Scan</span>
           </button>
-
-          <button
-            onClick={() => setComparisonMode('side-by-side')}
-            className={`px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 ${
-              comparisonMode === 'side-by-side'
-                ? 'bg-white text-[#252923] font-semibold shadow-xs border border-[#E8E8E1]'
-                : 'text-[#777D76] hover:text-[#252923]'
-            }`}
-          >
-            <Columns className="w-3.5 h-3.5 text-[#527665]" />
-            <span>Side by Side</span>
-          </button>
-        </div>
-      </div>
-
-      {/* =======================================================================
-          BEFORE-AND-AFTER PHOTO COMPARISON
-         ======================================================================= */}
-      <div className="rounded-3xl bg-white border border-[#E8E8E1] p-6 sm:p-8 space-y-6 shadow-sm">
-        
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <div>
-            <span className="text-[10px] font-mono uppercase tracking-wider text-[#527665] font-semibold">
-              Visual Comparison
-            </span>
-            <h2 className="font-serif text-xl sm:text-2xl text-[#252923] font-normal">
-              Baseline (Week 0) vs. Latest Check-in (Week 4)
-            </h2>
-          </div>
-          <span className="text-xs font-mono text-[#777D76]">
-            {comparisonMode === 'slider' ? 'Drag slider left/right to compare' : 'Synchronized dual view'}
-          </span>
-        </div>
-
-        {/* COMPARISON VIEWPORT */}
-        {comparisonMode === 'slider' ? (
-          <div
-            onClick={(e) => handleSliderMove(e)}
-            onMouseMove={(e) => isDragging && handleSliderMove(e)}
-            onTouchMove={(e) => isDragging && handleSliderMove(e)}
-            onMouseDown={() => setIsDragging(true)}
-            onMouseUp={() => setIsDragging(false)}
-            onMouseLeave={() => setIsDragging(false)}
-            onTouchStart={() => setIsDragging(true)}
-            onTouchEnd={() => setIsDragging(false)}
-            style={{ touchAction: 'none' }}
-            className="relative w-full aspect-[4/3] sm:aspect-[16/9] max-h-[480px] rounded-2xl overflow-hidden cursor-ew-resize select-none border border-[#E8E8E1] bg-[#FAF9F6]"
-          >
-            {/* After Image (Full width background) */}
-            <img
-              src="/skin_progress_comparison.jpg"
-              alt="Week 4 Follow up"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div className="absolute top-4 right-4 px-3 py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-[#E8E8E1] text-[11px] font-mono text-[#304D40] shadow-sm">
-              Week 4 (Current)
-            </div>
-
-            {/* Before Image (Clipped by slider percentage) */}
-            <div
-              className="absolute inset-0 overflow-hidden"
-              style={{ width: `${sliderPosition}%` }}
-            >
-              <img
-                src="/editorial_skin_portrait.jpg"
-                alt="Baseline Week 0"
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ width: '100%', maxWidth: 'none' }}
-              />
-              <div className="absolute top-4 left-4 px-3 py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-[#E8E8E1] text-[11px] font-mono text-[#777D76] shadow-sm">
-                Baseline (Week 0)
-              </div>
-            </div>
-
-            {/* Drag Handle Divider */}
-            <div
-              className="absolute top-0 bottom-0 w-0.5 bg-white shadow-xl pointer-events-none"
-              style={{ left: `${sliderPosition}%` }}
-            >
-              <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-white border border-[#E8E8E1] text-[#252923] flex items-center justify-center shadow-lg">
-                <Sliders className="w-4 h-4 text-[#527665]" />
-              </div>
-            </div>
-          </div>
-        ) : (
-          /* Side by Side Mode */
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-[#E8E8E1]">
-                <img
-                  src="/editorial_skin_portrait.jpg"
-                  alt="Baseline Week 0"
-                  className="w-full h-full object-cover"
-                />
-                <span className="absolute top-3 left-3 px-3 py-1 rounded-xl bg-white/95 border border-[#E8E8E1] text-[11px] font-mono text-[#777D76]">
-                  Baseline (Week 0)
-                </span>
-              </div>
-              <p className="text-[11px] text-[#777D76] font-mono">
-                Initial Scan: Erythema across cheeks and T-zone pore expansion.
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-[#E8E8E1]">
-                <img
-                  src="/skin_progress_comparison.jpg"
-                  alt="Week 4 Follow up"
-                  className="w-full h-full object-cover"
-                />
-                <span className="absolute top-3 right-3 px-3 py-1 rounded-xl bg-white/95 border border-[#E8E8E1] text-[11px] font-mono text-[#304D40]">
-                  Week 4 (Current)
-                </span>
-              </div>
-              <p className="text-[11px] text-[#777D76] font-mono">
-                Week 4: Superficial erythema softened; surface lipid balance stabilized.
-              </p>
-            </div>
-          </div>
         )}
-
-        {/* Observation Accuracy Disclaimer */}
-        <div className="p-3.5 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] text-[11px] text-[#777D76] leading-relaxed flex items-start gap-2">
-          <Info className="w-4 h-4 text-[#527665] shrink-0 mt-0.5" />
-          <span>
-            <strong>Lighting & Angle Notice:</strong> Apparent skin texture and tone are sensitive to ambient illuminance, color temperature, camera sensor variations, and angle. Ensure follow-up photos are taken under identical lighting for meaningful comparisons. We do not generate fabricated "percentage improvement" claims.
-          </span>
-        </div>
       </div>
 
-      {/* =======================================================================
-          WEEKLY ADHERENCE & USER NOTES JOURNAL
-         ======================================================================= */}
+      {/* Comparison Viewport */}
+      {scans.length >= 2 ? (
+        <div className="rounded-3xl bg-white border border-[#E8E8E1] p-6 sm:p-8 space-y-6 shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#527665] font-semibold">
+                Visual Comparison
+              </span>
+              <h2 className="font-serif text-xl sm:text-2xl text-[#252923] font-normal">
+                Baseline vs. Latest Check-in
+              </h2>
+            </div>
+            <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] text-xs font-mono">
+              <button
+                onClick={() => setComparisonMode('slider')}
+                className={`px-3 py-1.5 rounded-xl transition ${
+                  comparisonMode === 'slider' ? 'bg-white text-[#252923] font-semibold shadow-xs' : 'text-[#777D76]'
+                }`}
+              >
+                Slider Mode
+              </button>
+              <button
+                onClick={() => setComparisonMode('side-by-side')}
+                className={`px-3 py-1.5 rounded-xl transition ${
+                  comparisonMode === 'side-by-side' ? 'bg-white text-[#252923] font-semibold shadow-xs' : 'text-[#777D76]'
+                }`}
+              >
+                Side by Side
+              </button>
+            </div>
+          </div>
+
+          {/* Observation Accuracy Disclaimer */}
+          <div className="p-3.5 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] text-[11px] text-[#777D76] leading-relaxed flex items-start gap-2">
+            <Info className="w-4 h-4 text-[#527665] shrink-0 mt-0.5" />
+            <span>
+              <strong>Lighting & Angle Notice:</strong> Apparent skin texture and tone are sensitive to ambient illuminance, color temperature, and angle. Ensure follow-up photos are taken under consistent daylight for meaningful comparisons.
+            </span>
+          </div>
+        </div>
+      ) : (
+        <div className="p-6 rounded-3xl bg-white border border-[#E8E8E1] space-y-2 shadow-sm">
+          <div className="flex items-center gap-2 text-xs font-mono font-semibold text-[#304D40]">
+            <CheckCircle2 className="w-4 h-4 text-[#527665]" />
+            <span>Baseline Assessment Registered</span>
+          </div>
+          <p className="text-xs text-[#777D76] leading-relaxed">
+            You have 1 recorded scan (Score: {scans[0]?.overall_health_score || 'N/A'}/100, Skin Type: {scans[0]?.detected_skin_type || 'Combination'}). Perform a follow-up scan in 7 to 14 days to unlock before/after side-by-side photo comparison.
+          </p>
+        </div>
+      )}
+
+      {/* Diary & Reflection Journal */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        {/* Left Column: Routine Adherence History */}
+        {/* Left Column: Consistency Tracker */}
         <div className="lg:col-span-5 rounded-3xl bg-white border border-[#E8E8E1] p-6 sm:p-7 space-y-5 shadow-sm">
           <div className="flex items-center justify-between pb-3 border-b border-[#E8E8E1]">
             <div>
@@ -276,42 +264,18 @@ export const ProgressTrackingScreen: React.FC = () => {
                 Consistency Tracker
               </span>
               <h3 className="font-serif text-xl text-[#252923] font-normal">
-                Routine Adherence
+                Routine Habits
               </h3>
             </div>
             <span className="text-xs font-mono text-[#527665] font-semibold">
-              92% Weekly
+              Daily Regimen
             </span>
           </div>
 
-          {/* 7-Day Calendar Streak */}
-          <div className="space-y-2">
-            <span className="text-xs font-mono text-[#777D76]">Past 7 Days Consistency:</span>
-            <div className="grid grid-cols-7 gap-1.5 text-center">
-              {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, idx) => {
-                const isComplete = idx < 6;
-                return (
-                  <div
-                    key={day}
-                    className={`p-2 rounded-xl border flex flex-col items-center justify-center gap-1 ${
-                      isComplete
-                        ? 'bg-[#E8EFE9] border-[#d6e0ce] text-[#304D40]'
-                        : 'bg-[#FAF9F6] border-[#E8E8E1] text-[#777D76]'
-                    }`}
-                  >
-                    <span className="text-[9px] font-mono">{day}</span>
-                    <span className="text-xs font-bold">{isComplete ? '✓' : '•'}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Adherence Insight */}
           <div className="p-3.5 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] text-xs text-[#777D76] space-y-1">
-            <div className="font-mono text-[#252923] font-medium">Streak: 14 Consecutive Days</div>
+            <div className="font-mono text-[#252923] font-medium">Daily Application Protocol</div>
             <p className="text-[11px] leading-relaxed">
-              Consistently completing AM SPF and PM cleansing gives active ingredients the sustained window required for visible barrier repair.
+              Consistently completing AM broad-spectrum SPF and gentle PM barrier recovery gives active ingredients the sustained biological window required for visible skin improvements.
             </p>
           </div>
         </div>
@@ -372,70 +336,70 @@ export const ProgressTrackingScreen: React.FC = () => {
           </form>
 
           {/* Notes List */}
-          <div className="space-y-3 pt-2">
-            {notes.map((note) => (
-              <div
-                key={note.id}
-                className="p-4 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] space-y-1.5"
-              >
-                <div className="flex items-center justify-between text-[11px] font-mono">
-                  <span className="text-[#252923] font-medium">{note.date}</span>
-                  <span className="px-2 py-0.5 rounded-full bg-white border border-[#E8E8E1] text-[#527665]">
-                    {note.barrierFeeling}
-                  </span>
+          {notes.length === 0 ? (
+            <div className="p-4 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] text-center text-xs text-[#777D76] font-mono">
+              No journal notes yet. Record your first reflection above.
+            </div>
+          ) : (
+            <div className="space-y-3 pt-2">
+              {notes.map((note) => (
+                <div
+                  key={note.id}
+                  className="p-4 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] space-y-1.5"
+                >
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <span className="text-[#252923] font-medium">{note.date}</span>
+                    <span className="px-2 py-0.5 rounded-full bg-white border border-[#E8E8E1] text-[#527665]">
+                      {note.barrierFeeling}
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#777D76] leading-relaxed">
+                    {note.text}
+                  </p>
                 </div>
-                <p className="text-xs text-[#777D76] leading-relaxed">
-                  {note.text}
-                </p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
-      {/* =======================================================================
-          TIMELINE OF PREVIOUS REPORTS
-         ======================================================================= */}
+      {/* Recorded Scans Timeline */}
       <div className="rounded-3xl bg-white border border-[#E8E8E1] p-6 sm:p-8 space-y-5 shadow-sm">
         <h3 className="font-serif text-xl text-[#252923] font-normal">
-          Historical Scan Records
+          Recorded Scan Records ({scans.length})
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {pastScans.map((scan) => (
-            <div
-              key={scan.id}
-              className="p-4 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] hover:border-[#527665]/40 transition space-y-3"
-            >
-              <div className="flex items-center gap-3">
-                <img
-                  src={scan.image}
-                  alt={scan.phase}
-                  className="w-12 h-12 rounded-xl object-cover border border-[#E8E8E1]"
-                />
+          {scans.map((scan, idx) => {
+            const d = scan.created_at ? new Date(scan.created_at) : new Date();
+            const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            return (
+              <div
+                key={scan.analysis_id || idx}
+                className="p-4 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] hover:border-[#527665]/40 transition space-y-3"
+              >
                 <div className="space-y-0.5">
                   <div className="text-xs font-mono font-semibold text-[#252923]">
-                    {scan.phase}
+                    {idx === 0 ? 'Baseline Assessment' : `Follow-up Check-in #${idx}`}
                   </div>
                   <div className="text-[10px] font-mono text-[#777D76]">
-                    {scan.date}
+                    {dateStr}
+                  </div>
+                </div>
+
+                <div className="pt-2 border-t border-[#E8E8E1] text-xs font-mono space-y-1">
+                  <div className="flex justify-between">
+                    <span className="text-[#777D76]">Barrier Score:</span>
+                    <span className="text-[#527665] font-semibold">{scan.overall_health_score}/100</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-[#777D76]">Skin Type:</span>
+                    <span className="text-[#252923]">{scan.detected_skin_type}</span>
                   </div>
                 </div>
               </div>
-
-              <p className="text-[11px] text-[#777D76] leading-relaxed">
-                {scan.summary}
-              </p>
-
-              <div className="pt-2 border-t border-[#E8E8E1] flex items-center justify-between text-xs font-mono">
-                <span className="text-[#527665]">Score: {scan.score}</span>
-                <span className="text-[#777D76] hover:text-[#252923] flex items-center gap-1 cursor-pointer">
-                  <span>View Details</span>
-                  <ChevronRight className="w-3 h-3" />
-                </span>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

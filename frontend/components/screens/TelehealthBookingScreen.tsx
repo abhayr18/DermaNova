@@ -16,16 +16,30 @@ import {
   Sparkles,
   ArrowRight
 } from 'lucide-react';
+import { AnalysisResponse, UserAccount } from '../../services/api';
 
 interface TelehealthBookingScreenProps {
   onBackToDashboard?: () => void;
+  analysis?: AnalysisResponse | null;
+  currentUser?: UserAccount | null;
 }
 
 export const TelehealthBookingScreen: React.FC<TelehealthBookingScreenProps> = ({
   onBackToDashboard,
+  analysis,
+  currentUser,
 }) => {
   const [selectedSpecialist, setSelectedSpecialist] = useState<string>('doc-1');
-  const [selectedDate, setSelectedDate] = useState<string>('Tomorrow, Oct 21');
+  
+  // Dynamic dates starting from tomorrow
+  const dateOptions = [
+    { label: 'Tomorrow', date: new Date(Date.now() + 86400000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', weekday: 'short' }) },
+    { label: 'In 2 Days', date: new Date(Date.now() + 2 * 86400000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', weekday: 'short' }) },
+    { label: 'In 3 Days', date: new Date(Date.now() + 3 * 86400000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', weekday: 'short' }) },
+    { label: 'Next Week', date: new Date(Date.now() + 5 * 86400000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', weekday: 'short' }) },
+  ];
+
+  const [selectedDate, setSelectedDate] = useState<string>(dateOptions[0].date);
   const [selectedSlot, setSelectedSlot] = useState<string>('10:30 AM');
   const [isBooked, setIsBooked] = useState<boolean>(false);
 
@@ -38,7 +52,7 @@ export const TelehealthBookingScreen: React.FC<TelehealthBookingScreenProps> = (
       rating: '4.98',
       reviews: '312 consultations',
       fee: '$85 / 20-min consult',
-      availability: 'Available Tomorrow',
+      availability: 'Available ' + dateOptions[0].label,
       bio: 'Former clinical faculty at Northwestern Dermatology. Specializes in translating computerized facial telemetry into gentle, non-irritating barrier recovery plans.',
       avatar: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=260&q=80',
     },
@@ -50,7 +64,7 @@ export const TelehealthBookingScreen: React.FC<TelehealthBookingScreenProps> = (
       rating: '4.95',
       reviews: '240 consultations',
       fee: '$90 / 20-min consult',
-      availability: 'Available Thursday',
+      availability: 'Available ' + dateOptions[1].label,
       bio: 'Expert in cutaneous barrier pharmacology and minimizing post-inflammatory hyperpigmentation through low-irritation actives.',
       avatar: 'https://images.unsplash.com/photo-1594824813579-a764d27dc68f?auto=format&fit=crop&w=260&q=80',
     },
@@ -71,32 +85,44 @@ export const TelehealthBookingScreen: React.FC<TelehealthBookingScreenProps> = (
             Telehealth Dermatologist Consultation
           </h1>
           <p className="text-xs text-[#777D76] mt-0.5">
-            Connect your 56-day optical scan records directly with board-certified dermatologists.
+            Connect your biometric scan records directly with board-certified dermatologists.
           </p>
         </div>
 
         <button
-          onClick={() => alert('Downloading your complete DermaNova Clinical Pre-Consult Packet (PDF) including facial telemetry and INCI logs.')}
+          onClick={() => alert('Downloading your clinical summary dossier (PDF) with optical findings and active ingredient sensitivities.')}
           className="px-4 py-2 rounded-xl bg-white hover:bg-[#FAF9F6] border border-[#E8E8E1] text-[#252923] text-xs font-mono transition flex items-center gap-1.5 shadow-sm self-start sm:self-center"
         >
           <Download className="w-3.5 h-3.5 text-[#527665]" />
-          <span>Download Pre-Consult PDF</span>
+          <span>Download Clinical Dossier</span>
         </button>
       </div>
 
-      {/* Biometric Diagnostic Dossier Banner (Stitch AI Feature) */}
+      {/* Biometric Diagnostic Dossier Banner */}
       <div className="p-5 sm:p-6 rounded-3xl bg-[#E8EFE9]/60 border border-[#d6e0ce] space-y-2 shadow-sm">
         <div className="flex items-center gap-2">
           <ShieldCheck className="w-4 h-4 text-[#527665]" />
           <span className="font-mono text-xs font-bold text-[#304D40] uppercase tracking-wider">
-            Biometric Telemetry Dossier Ready
+            {analysis ? 'Biometric Telemetry Dossier Ready' : 'Biometric Telemetry Consultation'}
           </span>
           <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white text-[#304D40] border border-[#cbd7c1]">
             Encrypted AES-256
           </span>
         </div>
         <p className="text-xs text-[#777D76] leading-relaxed">
-          Consolidating your latest scan findings (Overall Barrier Health: <strong>84</strong>, Malar Erythema: <strong>82%</strong>, Pore Density: <strong>71%</strong>), daily routine compliance logs, and localized weather factors for clinical review.
+          {analysis ? (
+            <>
+              Consolidating your latest scan findings (Overall Health Score: <strong>{analysis.overall_health_score}</strong>, Detected Skin Type: <strong>{analysis.detected_skin_type}</strong>
+              {analysis.top_concerns && analysis.top_concerns.length > 0 && (
+                <>, Top Concerns: <strong>{analysis.top_concerns.join(', ')}</strong></>
+              )}
+              ), daily routine compliance logs, and localized environmental factors for physician review.
+            </>
+          ) : (
+            <>
+              Connect directly with dermatologists to review your skincare concerns and formulation plan. Complete a facial analysis scan to attach quantitative telemetry to your appointment.
+            </>
+          )}
         </p>
       </div>
 
@@ -180,18 +206,19 @@ export const TelehealthBookingScreen: React.FC<TelehealthBookingScreenProps> = (
           <div className="space-y-2">
             <label className="text-xs font-mono text-[#252923] font-medium block">Select Date</label>
             <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-              {['Tomorrow, Oct 21', 'Thursday, Oct 22', 'Friday, Oct 23', 'Monday, Oct 26'].map((d) => (
+              {dateOptions.map((opt) => (
                 <button
-                  key={d}
+                  key={opt.date}
                   type="button"
-                  onClick={() => setSelectedDate(d)}
+                  onClick={() => setSelectedDate(opt.date)}
                   className={`p-2.5 rounded-xl border text-center transition ${
-                    selectedDate === d
+                    selectedDate === opt.date
                       ? 'bg-[#E8EFE9] border-[#527665] text-[#304D40] font-semibold'
                       : 'border-[#E8E8E1] text-[#777D76] hover:bg-[#FAF9F6]'
                   }`}
                 >
-                  {d}
+                  <div className="font-semibold">{opt.label}</div>
+                  <div className="text-[10px] text-[#777D76]">{opt.date}</div>
                 </button>
               ))}
             </div>
@@ -229,8 +256,8 @@ export const TelehealthBookingScreen: React.FC<TelehealthBookingScreenProps> = (
               <span className="font-semibold text-[#252923]">{selectedDate} @ {selectedSlot}</span>
             </div>
             <div className="flex items-center justify-between font-mono pt-1 border-t border-[#E8E8E1]">
-              <span className="text-[#777D76]">Telemetry Transfer:</span>
-              <span className="text-[#527665] font-semibold">Included (Zero Extra Fee)</span>
+              <span className="text-[#777D76]">Patient:</span>
+              <span className="font-semibold text-[#252923]">{currentUser?.full_name || 'Registered Patient'}</span>
             </div>
           </div>
 
@@ -242,7 +269,7 @@ export const TelehealthBookingScreen: React.FC<TelehealthBookingScreenProps> = (
                 <span>Appointment Confirmed!</span>
               </div>
               <p className="text-[11px] text-[#777D76]">
-                Calendar invitation and secure video link dispatched to your email.
+                Calendar invitation and secure video link dispatched to {currentUser?.email || 'your email'}.
               </p>
             </div>
           ) : (

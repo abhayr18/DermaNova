@@ -122,30 +122,15 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
         }, 600);
       }
     } catch (err: any) {
-      console.warn('Auth fallback mode:', err);
-      // Fallback local mock session for graceful demo
-      const mockUser: UserAccount = {
-        id: 'usr_demo_101',
-        email,
-        full_name: fullName || (isLogin ? 'Valued Member' : 'New Member'),
-        role: 'patient',
-        profile: {
-          age: 26,
-          primary_skin_concern: 'Acne',
-          baseline_skin_type: 'Combination',
-          has_sensitive_skin: true,
-          known_allergies: [],
-          sun_exposure_level: 'moderate',
-          water_intake_liters: 2.5,
-          sleep_hours: 7.5,
-          is_pregnant_or_nursing: false,
-        },
-      };
-      onAuthenticated(mockUser);
-      setAuthSuccess('Signed in! Proceeding to your onboarding...');
-      setTimeout(() => {
-        setActiveMode('onboarding');
-      }, 500);
+      console.error('Auth error:', err);
+      const serverMsg =
+        err?.response?.data?.detail ||
+        err?.response?.data?.message ||
+        err?.message ||
+        (isLogin
+          ? 'Failed to sign in. Please verify your email and password.'
+          : 'Failed to create account. Please try again.');
+      setAuthError(typeof serverMsg === 'string' ? serverMsg : JSON.stringify(serverMsg));
     } finally {
       setAuthLoading(false);
     }
@@ -370,17 +355,7 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
           <button
             type="button"
             onClick={() => {
-              setAuthSuccess('Google Single Sign-On initiated. Connecting your account...');
-              setTimeout(() => {
-                const mockUser: UserAccount = {
-                  id: 'usr_google_102',
-                  email: 'google.user@example.com',
-                  full_name: 'Google User',
-                  role: 'patient',
-                };
-                onAuthenticated(mockUser);
-                setActiveMode('onboarding');
-              }, 600);
+              setAuthError('Google Single Sign-On is currently disabled. Please sign in with your email and password.');
             }}
             className="w-full py-3 rounded-xl bg-white hover:bg-[#FAF9F6] border border-[#E8E8E1] text-xs font-mono text-[#252923] flex items-center justify-center gap-2.5 transition shadow-sm"
           >

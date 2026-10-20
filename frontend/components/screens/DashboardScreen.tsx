@@ -39,38 +39,36 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
 }) => {
   const userName = currentUser?.full_name?.split(' ')[0] || 'Friend';
 
-  // Sample data fallback if no scan run yet
+  const hasAnalysis = Boolean(latestAnalysis);
   const scanDate = latestAnalysis
     ? new Date(latestAnalysis.timestamp || Date.now()).toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
         year: 'numeric',
       })
-    : 'October 18, 2026';
+    : null;
 
-  const isDemo = !latestAnalysis;
+  const skinType = latestAnalysis?.detected_skin_type || 'Unspecified';
+  const overallScore = latestAnalysis?.overall_health_score;
 
-  const skinType = latestAnalysis?.detected_skin_type || 'Combination (T-Zone)';
-  const overallScore = latestAnalysis?.overall_health_score || 84;
-
-  const topConcerns = latestAnalysis?.conditions ? (
-    Object.entries(latestAnalysis.conditions)
-      .map(([k, v]) => ({
-        id: k === 'dark_spots' ? 'darkSpots' : k === 'pores' ? 'visiblePores' : k,
-        label: v.display_name,
-        status: `${v.severity_level || 'Detected'} (${Math.round(v.probability * 100)}%)`,
-        probability: v.probability,
-        isDetected: v.is_detected,
-        indicator: v.probability >= 0.75 ? 'bg-[#EEEAF5] text-[#304D40] border-[#d5cbe4]' : v.probability >= 0.40 ? 'bg-[#F3E5E2] text-[#252923] border-[#d6c4c0]' : 'bg-[#E8EFE9] text-[#304D40] border-[#cbd7c1]'
-      }))
-      .sort((a, b) => b.probability - a.probability)
-      .slice(0, 4)
-  ) : [
-    { id: 'acne', label: 'Acne (Papules)', status: 'Mild (74%)', indicator: 'bg-[#F3E5E2] text-[#252923] border-[#d6c4c0]' },
-    { id: 'redness', label: 'Facial Redness', status: 'Moderate (82%)', indicator: 'bg-[#EEEAF5] text-[#252923] border-[#d5cbe4]' },
-    { id: 'visiblePores', label: 'Dilated Pores', status: 'Mild (71%)', indicator: 'bg-[#E8EFE9] text-[#304D40] border-[#cbd7c1]' },
-    { id: 'darkSpots', label: 'Post-Acne Marks', status: 'Mild (68%)', indicator: 'bg-[#FAF9F6] text-[#777D76] border-[#E8E8E1]' },
-  ];
+  const topConcerns = latestAnalysis?.conditions
+    ? Object.entries(latestAnalysis.conditions)
+        .map(([k, v]) => ({
+          id: k === 'dark_spots' ? 'darkSpots' : k === 'pores' ? 'visiblePores' : k,
+          label: v.display_name,
+          status: `${v.severity_level || 'Detected'} (${Math.round(v.probability * 100)}%)`,
+          probability: v.probability,
+          isDetected: v.is_detected,
+          indicator:
+            v.probability >= 0.75
+              ? 'bg-[#EEEAF5] text-[#304D40] border-[#d5cbe4]'
+              : v.probability >= 0.40
+              ? 'bg-[#F3E5E2] text-[#252923] border-[#d6c4c0]'
+              : 'bg-[#E8EFE9] text-[#304D40] border-[#cbd7c1]',
+        }))
+        .sort((a, b) => b.probability - a.probability)
+        .slice(0, 4)
+    : [];
 
   return (
     <div className="w-full space-y-8 animate-fade-in">
@@ -90,11 +88,6 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
         </div>
 
         <div className="flex items-center gap-2">
-          {isDemo && (
-            <span className="px-3 py-1 rounded-full bg-[#FAF9F6] border border-[#E8E8E1] text-[#777D76] text-[11px] font-mono">
-              Sample Demo Mode
-            </span>
-          )}
           <button
             onClick={onStartNewAnalysis}
             className="px-5 py-2.5 rounded-2xl bg-[#304D40] hover:bg-[#253d33] text-white font-mono text-xs font-medium flex items-center gap-2 transition shadow-sm"
@@ -113,13 +106,15 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
           <div className="md:col-span-8 space-y-3">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8EFE9] text-[#304D40] text-[11px] font-mono font-medium">
               <Calendar className="w-3.5 h-3.5 text-[#527665]" />
-              Weekly Skin Check In
+              Skin Diagnostics
             </div>
             <h2 className="font-serif text-2xl sm:text-3xl text-[#252923] font-normal">
-              Ready for your next skin check?
+              {hasAnalysis ? 'Ready for your next skin check?' : 'Begin Your Clinical Skin Assessment'}
             </h2>
             <p className="text-xs sm:text-sm text-[#777D76] leading-relaxed max-w-xl">
-              Tracking your cutaneous response every 7–14 days allows our spatial model to visualize inflammation calming and barrier lipids recovering.
+              {hasAnalysis
+                ? 'Tracking your cutaneous response every 7–14 days allows our spatial model to visualize inflammation calming and barrier lipids recovering.'
+                : 'Upload or capture a clear facial photograph to run multi-target neural network diagnosis across 8 dermatological markers.'}
             </p>
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <button
@@ -127,24 +122,30 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
                 className="px-6 py-3 rounded-2xl bg-[#304D40] hover:bg-[#253d33] text-white font-mono text-xs font-medium flex items-center gap-2 transition shadow-sm"
               >
                 <Camera className="w-4 h-4" />
-                <span>Capture New Scan</span>
+                <span>{hasAnalysis ? 'Capture New Scan' : 'Run First Analysis'}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
-              <button
-                onClick={() => onNavigateTab('regimen')}
-                className="px-5 py-3 rounded-2xl bg-white hover:bg-[#FAF9F6] border border-[#E8E8E1] text-[#252923] font-mono text-xs font-medium flex items-center gap-1.5 transition"
-              >
-                <FileText className="w-3.5 h-3.5 text-[#527665]" />
-                <span>View Today's Routine</span>
-              </button>
+              {hasAnalysis && (
+                <button
+                  onClick={() => onNavigateTab('regimen')}
+                  className="px-5 py-3 rounded-2xl bg-white hover:bg-[#FAF9F6] border border-[#E8E8E1] text-[#252923] font-mono text-xs font-medium flex items-center gap-1.5 transition"
+                >
+                  <FileText className="w-3.5 h-3.5 text-[#527665]" />
+                  <span>View Today's Routine</span>
+                </button>
+              )}
             </div>
           </div>
 
           <div className="md:col-span-4 flex justify-center">
-            <div className="w-36 h-36 rounded-full border-4 border-[#E8EFE9] flex flex-col items-center justify-center text-center p-4 bg-[#FAF9F6]">
+            <div className="w-36 h-36 rounded-full border-4 border-[#E8E8E1] flex flex-col items-center justify-center text-center p-4 bg-[#FAF9F6]">
               <span className="text-[10px] font-mono uppercase text-[#777D76]">Barrier Score</span>
-              <span className="font-serif text-3xl text-[#304D40] font-normal">{overallScore}</span>
-              <span className="text-[10px] font-mono text-[#527665]">Optimal Calibrated</span>
+              <span className="font-serif text-3xl text-[#304D40] font-normal">
+                {overallScore !== undefined ? overallScore : '—'}
+              </span>
+              <span className="text-[10px] font-mono text-[#527665]">
+                {overallScore !== undefined ? 'Clinical Telemetry' : 'Awaiting Scan'}
+              </span>
             </div>
           </div>
         </div>
@@ -164,57 +165,79 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
                 Skin Concern Overview
               </h3>
             </div>
-            <div className="text-right">
-              <div className="text-xs font-mono text-[#252923] font-medium">{scanDate}</div>
-              <div className="text-[10px] font-mono text-[#777D76]">
-                {isDemo ? 'Sample Portrait' : 'Live Capture'}
+            {scanDate && (
+              <div className="text-right">
+                <div className="text-xs font-mono text-[#252923] font-medium">{scanDate}</div>
+                <div className="text-[10px] font-mono text-[#777D76]">Verified Scan</div>
               </div>
-            </div>
+            )}
           </div>
 
-          {/* Skin Type Badge & Summary */}
-          <div className="p-4 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] flex items-center justify-between">
-            <div className="space-y-0.5">
-              <span className="text-[10px] font-mono uppercase text-[#777D76]">Identified Skin Profile</span>
-              <div className="font-serif text-base text-[#252923]">{skinType}</div>
+          {!hasAnalysis ? (
+            <div className="py-8 text-center space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] flex items-center justify-center mx-auto text-[#527665]">
+                <Camera className="w-6 h-6" />
+              </div>
+              <h4 className="font-serif text-lg text-[#252923]">No Scan Recorded Yet</h4>
+              <p className="text-xs text-[#777D76] max-w-sm mx-auto">
+                Capture or upload a facial photograph to evaluate your skin health, view detected conditions, and receive a personalized clinical routine.
+              </p>
+              <button
+                onClick={onStartNewAnalysis}
+                className="px-5 py-2.5 rounded-xl bg-[#304D40] hover:bg-[#253d33] text-white font-mono text-xs font-medium transition"
+              >
+                Run Your First Analysis
+              </button>
             </div>
-            <span className="px-3 py-1 rounded-full bg-[#E8EFE9] text-[#304D40] text-xs font-mono font-medium">
-              Hydration: 86%
-            </span>
-          </div>
-
-          {/* Concern Visual Indicators */}
-          <div className="space-y-2.5">
-            <div className="text-xs font-mono text-[#777D76]">Observed visible patterns:</div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              {topConcerns.map((c) => (
-                <div
-                  key={c.id}
-                  onClick={() => onOpenConcernDetail(c.id)}
-                  className="p-3 rounded-xl border border-[#E8E8E1] bg-white hover:border-[#527665]/40 transition cursor-pointer flex items-center justify-between group"
-                >
-                  <div className="space-y-0.5">
-                    <div className="text-xs font-mono font-medium text-[#252923] group-hover:text-[#527665] transition">
-                      {c.label}
-                    </div>
-                    <div className="text-[11px] text-[#777D76]">{c.status}</div>
-                  </div>
-                  <ChevronRight className="w-3.5 h-3.5 text-[#777D76] group-hover:translate-x-0.5 transition" />
+          ) : (
+            <>
+              {/* Skin Type Badge & Summary */}
+              <div className="p-4 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <span className="text-[10px] font-mono uppercase text-[#777D76]">Identified Skin Profile</span>
+                  <div className="font-serif text-base text-[#252923]">{skinType}</div>
                 </div>
-              ))}
-            </div>
-          </div>
+                {latestAnalysis?.acne_severity_grade && (
+                  <span className="px-3 py-1 rounded-full bg-[#E8EFE9] text-[#304D40] text-xs font-mono font-medium">
+                    Acne: {latestAnalysis.acne_severity_grade}
+                  </span>
+                )}
+              </div>
 
-          <div className="pt-2 flex justify-between items-center text-xs font-mono">
-            <button
-              onClick={() => onNavigateTab('scan')}
-              className="text-[#527665] font-semibold hover:underline flex items-center gap-1"
-            >
-              <span>View Full AI Report Dashboard</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-            <span className="text-[11px] text-[#777D76]">8 conditions tracked</span>
-          </div>
+              {/* Concern Visual Indicators */}
+              <div className="space-y-2.5">
+                <div className="text-xs font-mono text-[#777D76]">Observed visible patterns:</div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {topConcerns.map((c) => (
+                    <div
+                      key={c.id}
+                      onClick={() => onOpenConcernDetail(c.id)}
+                      className="p-3 rounded-xl border border-[#E8E8E1] bg-white hover:border-[#527665]/40 transition cursor-pointer flex items-center justify-between group"
+                    >
+                      <div className="space-y-0.5">
+                        <div className="text-xs font-mono font-medium text-[#252923] group-hover:text-[#527665] transition">
+                          {c.label}
+                        </div>
+                        <div className="text-[11px] text-[#777D76]">{c.status}</div>
+                      </div>
+                      <ChevronRight className="w-3.5 h-3.5 text-[#777D76] group-hover:translate-x-0.5 transition" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="pt-2 flex justify-between items-center text-xs font-mono">
+                <button
+                  onClick={() => onNavigateTab('scan')}
+                  className="text-[#527665] font-semibold hover:underline flex items-center gap-1"
+                >
+                  <span>View Full AI Report Dashboard</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+                <span className="text-[11px] text-[#777D76]">8 conditions tracked</span>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Right: Today's Routine Preview */}

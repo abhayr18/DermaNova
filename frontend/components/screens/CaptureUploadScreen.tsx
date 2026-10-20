@@ -154,14 +154,6 @@ export const CaptureUploadScreen: React.FC<CaptureUploadScreenProps> = ({
     }
   };
 
-  const handleDemoTrigger = () => {
-    setSelectedImage('/editorial_skin_portrait.jpg');
-    setSelectedFile(null);
-    setConsentGiven(true);
-    setUseWebcam(false);
-    onUseSampleImage();
-  };
-
   return (
     <div className="w-full max-w-4xl mx-auto space-y-8 animate-fade-in py-2">
       
@@ -346,16 +338,6 @@ export const CaptureUploadScreen: React.FC<CaptureUploadScreenProps> = ({
                 >
                   <Camera className="w-4 h-4 text-[#527665]" />
                   <span>Use Camera</span>
-                </button>
-              </div>
-
-              <div className="pt-2">
-                <button
-                  type="button"
-                  onClick={handleDemoTrigger}
-                  className="text-[11px] font-mono text-[#527665] hover:underline"
-                >
-                  Or test with high-resolution Sample Face Portrait ➔
                 </button>
               </div>
             </div>
