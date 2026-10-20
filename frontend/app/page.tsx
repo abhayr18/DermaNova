@@ -162,7 +162,7 @@ const FALLBACK_DEMO_ANALYSIS: AnalysisResponse = {
       severity: "Mild-to-Moderate",
       location_label: "Nasal Crest & Malar Area",
       box: { x: 42, y: 48, width: 16, height: 15 },
-      color: "#d4a373",
+      color: "#c15c3d",
       clinical_finding: "Superficial capillary congestion indicating slight cutaneous barrier compromise.",
       recommended_active: "10% Azelaic Acid + Centella Asiatica & Ceramide NP"
     },
@@ -174,7 +174,7 @@ const FALLBACK_DEMO_ANALYSIS: AnalysisResponse = {
       severity: "Mild",
       location_label: "Lower Right Jawline",
       box: { x: 62, y: 64, width: 12, height: 12 },
-      color: "#aaab87",
+      color: "#8a7d55",
       clinical_finding: "Post-inflammatory hyperpigmented macule with residual melanin deposition.",
       recommended_active: "Niacinamide 5% + Tranexamic Acid 3% Serum"
     },
@@ -186,7 +186,7 @@ const FALLBACK_DEMO_ANALYSIS: AnalysisResponse = {
       severity: "Mild",
       location_label: "Central T-Zone",
       box: { x: 43, y: 28, width: 14, height: 12 },
-      color: "#8fa382",
+      color: "#637852",
       clinical_finding: "Enlarged follicular infundibula associated with localized sebum pooling.",
       recommended_active: "Niacinamide 2% + Zinc PCA 1% Clarifying Fluid"
     }
@@ -319,13 +319,13 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-navara-dark text-navara-cream flex flex-col font-sans selection:bg-navara-sage selection:text-navara-dark">
+    <div className="min-h-screen bg-[#faf9f5] text-[#1a2217] flex flex-col font-sans selection:bg-[#eef2ea] selection:text-[#1c2417]">
       
       {/* =========================================================================
-          NAVARA BOTANICAL LUXURY NAVIGATION HEADER
-          Deep charcoal olive, alabaster typography, refined micro-borders
+          MINIMAL ELEGANT NAVIGATION HEADER
+          White canvas, subtle botanical border, refined typography
          ========================================================================= */}
-      <header className="sticky top-0 z-40 bg-[#1c1f1a]/95 backdrop-blur-xl border-b border-white/10 shadow-lg">
+      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-[#e6e2d8] shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
           
           {/* Brand Logo & Name */}
@@ -334,53 +334,53 @@ export default function Home() {
               onClick={() => setActiveTab('home')}
               className="flex items-center gap-3 text-left group"
             >
-              <div className="w-10 h-10 rounded-2xl bg-[#232e1b] border border-navara-sage/30 flex items-center justify-center text-navara-alabaster font-serif-luxury text-base shadow-lg shadow-black/40 group-hover:border-navara-sage transition-all">
-                N
+              <div className="w-10 h-10 rounded-2xl bg-[#1c2417] text-white flex items-center justify-center font-serif-luxury text-base shadow-sm group-hover:bg-[#2d3b25] transition-all">
+                D
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-serif-luxury text-lg sm:text-xl text-navara-alabaster tracking-tight font-normal">
-                    Navara <span className="font-sans text-xs uppercase tracking-widest text-navara-sage font-semibold">Derm</span>
+                  <span className="font-serif-luxury text-xl text-[#1a2217] tracking-tight font-normal">
+                    DermaNova
                   </span>
-                  <span className="hidden sm:inline-flex items-center gap-1 text-[9px] font-mono-clinical px-2 py-0.5 rounded-full bg-[#232e1b] text-navara-sage border border-navara-sage/30">
-                    <Leaf className="w-2.5 h-2.5" /> Lóvi Intelligence
+                  <span className="hidden sm:inline-flex items-center gap-1 text-[9px] font-mono-clinical px-2 py-0.5 rounded-full bg-[#eef2ea] text-[#425335] border border-[#cbd7c1]">
+                    <Leaf className="w-2.5 h-2.5" /> Clinical Botanical AI
                   </span>
                 </div>
-                <div className="text-[10px] sm:text-[11px] text-navara-cream/60 font-mono-clinical">
+                <div className="text-[10px] sm:text-[11px] text-[#6b7764] font-mono-clinical">
                   {currentUser
                     ? `Patient: ${currentUser.full_name?.split(' ')[0] || 'User'}`
-                    : 'Botanical Sanctuary & 11+ Conditions AI Engine'}
+                    : 'Evidence-Based Dermatology & Spatial Facial Diagnostics'}
                 </div>
               </div>
             </button>
           </div>
 
           {/* Desktop Navigation Tabs */}
-          <nav className="hidden md:flex items-center gap-1 p-1.5 rounded-full bg-[#232e1b]/60 border border-white/10 text-xs font-mono-clinical">
+          <nav className="hidden md:flex items-center gap-1 p-1 rounded-full bg-[#f4f3ed] border border-[#e2ded4] text-xs font-mono-clinical">
             <button
               onClick={() => setActiveTab('home')}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-full transition ${
                 activeTab === 'home'
-                  ? 'bg-navara-alabaster text-navara-dark font-semibold shadow-md'
-                  : 'text-navara-cream/70 hover:text-navara-alabaster hover:bg-white/5'
+                  ? 'bg-white text-[#1a2217] font-semibold shadow-sm border border-[#ded9cd]'
+                  : 'text-[#6b7764] hover:text-[#1a2217] hover:bg-white/60'
               }`}
             >
               <HomeIcon className="w-3.5 h-3.5" />
-              <span>Sanctuary</span>
+              <span>Overview</span>
             </button>
 
             <button
               onClick={() => setActiveTab('scan')}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-full transition relative ${
                 activeTab === 'scan'
-                  ? 'bg-navara-alabaster text-navara-dark font-semibold shadow-md'
-                  : 'text-navara-cream/70 hover:text-navara-alabaster hover:bg-white/5'
+                  ? 'bg-white text-[#1a2217] font-semibold shadow-sm border border-[#ded9cd]'
+                  : 'text-[#6b7764] hover:text-[#1a2217] hover:bg-white/60'
               }`}
             >
               <Camera className="w-3.5 h-3.5" />
               <span>Face Scan</span>
               {analysisResult && (
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping ml-0.5" />
+                <span className="w-2 h-2 rounded-full bg-emerald-600 animate-ping ml-0.5" />
               )}
             </button>
 
@@ -388,14 +388,14 @@ export default function Home() {
               onClick={() => setActiveTab('fit')}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-full transition ${
                 activeTab === 'fit'
-                  ? 'bg-navara-alabaster text-navara-dark font-semibold shadow-md'
-                  : 'text-navara-cream/70 hover:text-navara-alabaster hover:bg-white/5'
+                  ? 'bg-white text-[#1a2217] font-semibold shadow-sm border border-[#ded9cd]'
+                  : 'text-[#6b7764] hover:text-[#1a2217] hover:bg-white/60'
               }`}
             >
               <SlidersHorizontal className="w-3.5 h-3.5" />
               <span>Cosmetics Fit Score</span>
-              <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-navara-sage/20 text-navara-sage">
-                0% Affiliation
+              <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-[#eef2ea] text-[#425335]">
+                Neutral
               </span>
             </button>
 
@@ -403,8 +403,8 @@ export default function Home() {
               onClick={() => setActiveTab('regimen')}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-full transition ${
                 activeTab === 'regimen'
-                  ? 'bg-navara-alabaster text-navara-dark font-semibold shadow-md'
-                  : 'text-navara-cream/70 hover:text-navara-alabaster hover:bg-white/5'
+                  ? 'bg-white text-[#1a2217] font-semibold shadow-sm border border-[#ded9cd]'
+                  : 'text-[#6b7764] hover:text-[#1a2217] hover:bg-white/60'
               }`}
             >
               <FileText className="w-3.5 h-3.5" />
@@ -415,8 +415,8 @@ export default function Home() {
               onClick={() => setActiveTab('journey')}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-full transition ${
                 activeTab === 'journey'
-                  ? 'bg-navara-alabaster text-navara-dark font-semibold shadow-md'
-                  : 'text-navara-cream/70 hover:text-navara-alabaster hover:bg-white/5'
+                  ? 'bg-white text-[#1a2217] font-semibold shadow-sm border border-[#ded9cd]'
+                  : 'text-[#6b7764] hover:text-[#1a2217] hover:bg-white/60'
               }`}
             >
               <Clock className="w-3.5 h-3.5" />
@@ -427,31 +427,31 @@ export default function Home() {
           {/* Right Header Badges / Auth Controls */}
           <div className="flex items-center gap-2 sm:gap-3">
             {/* Streak Badge */}
-            <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-[#232e1b] border border-white/10 text-navara-cream text-xs font-mono-clinical">
-              <Flame className="w-3.5 h-3.5 text-navara-terracotta fill-navara-terracotta/20 animate-pulse" />
-              <span>14d</span>
+            <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-[#fbf0eb] border border-[#f3d3c7] text-[#b85c3c] text-xs font-mono-clinical font-semibold">
+              <Flame className="w-3.5 h-3.5 text-[#b85c3c] fill-[#b85c3c]/20 animate-pulse" />
+              <span>14d streak</span>
             </div>
 
             {/* Skin Profile Quiz (Desktop) */}
             <button
               onClick={() => setIsIntakeOpen(true)}
-              className="hidden lg:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#232e1b]/70 hover:bg-[#232e1b] border border-white/10 text-navara-cream text-xs font-mono-clinical transition"
+              className="hidden lg:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white hover:bg-[#f4f3ed] border border-[#e2ded4] text-[#1a2217] text-xs font-mono-clinical transition shadow-sm"
             >
-              <HeartPulse className="w-3.5 h-3.5 text-navara-sage" />
-              <span>Skin Profile Quiz</span>
+              <HeartPulse className="w-3.5 h-3.5 text-[#637852]" />
+              <span>Skin Profile</span>
             </button>
 
             {currentUser ? (
               <div className="flex items-center gap-2">
-                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#232e1b] border border-white/10 text-xs text-navara-alabaster">
-                  <div className="w-5 h-5 rounded-full bg-navara-moss border border-navara-sage/40 flex items-center justify-center text-[10px] font-mono-clinical text-navara-sage uppercase">
+                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#e2ded4] text-xs text-[#1a2217] shadow-sm">
+                  <div className="w-5 h-5 rounded-full bg-[#eef2ea] border border-[#cbd7c1] flex items-center justify-center text-[10px] font-mono-clinical text-[#425335] uppercase">
                     {currentUser.full_name?.charAt(0) || 'P'}
                   </div>
-                  <span className="font-mono-clinical text-xs">{currentUser.full_name?.split(' ')[0]}</span>
+                  <span className="font-mono-clinical text-xs font-medium">{currentUser.full_name?.split(' ')[0]}</span>
                 </div>
                 <button
                   onClick={handleLogout}
-                  className="p-2 rounded-full bg-[#232e1b] border border-white/10 text-navara-cream/60 hover:text-navara-terracotta transition"
+                  className="p-2 rounded-full bg-white border border-[#e2ded4] text-[#6b7764] hover:text-[#b85c3c] transition shadow-sm"
                   title="Log out"
                 >
                   <LogOut className="w-3.5 h-3.5" />
@@ -460,7 +460,7 @@ export default function Home() {
             ) : (
               <button
                 onClick={() => setIsAuthOpen(true)}
-                className="px-4 py-2 rounded-full bg-navara-alabaster hover:bg-white text-navara-dark font-mono-clinical font-semibold text-xs transition shadow-md"
+                className="px-4 py-2 rounded-full bg-[#1c2417] hover:bg-[#2d3b25] text-white font-mono-clinical font-medium text-xs transition shadow-sm"
               >
                 Sign In
               </button>
@@ -472,11 +472,11 @@ export default function Home() {
       {/* Global Error Banner */}
       {errorMsg && (
         <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 mt-4">
-          <div className="p-4 rounded-2xl bg-rose-950/70 border border-rose-500/40 text-rose-200 text-xs flex items-center justify-between">
+          <div className="p-4 rounded-2xl bg-[#fff5f5] border border-[#fed7d7] text-[#9b2c2c] text-xs flex items-center justify-between">
             <span>{errorMsg}</span>
             <button
               onClick={() => setErrorMsg(null)}
-              className="text-xs text-rose-300 underline font-semibold ml-2"
+              className="text-xs text-[#9b2c2c] underline font-semibold ml-2"
             >
               Dismiss
             </button>
@@ -487,41 +487,41 @@ export default function Home() {
       {/* =========================================================================
           MAIN APPLICATION CONTENT AREA
          ========================================================================= */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 md:pb-12">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 md:pb-12">
         
         {/* =====================================================================
-            TAB 1: SANCTUARY HOME (NAVARA EDITORIAL + LOVI 3 SUPERPOWERS)
+            TAB 1: OVERVIEW HOME (CLEAN WHITE + BOTANICAL MINIMAL EDITORIAL)
            ===================================================================== */}
         {activeTab === 'home' && (
-          <div className="space-y-10 animate-fade-in">
+          <div className="space-y-12 animate-fade-in">
             
-            {/* HERO EDITORIAL SECTION (Navara Aesthetic + Lovi Engine) */}
-            <div className="relative rounded-3xl bg-[#232e1b]/40 border border-white/10 p-6 sm:p-12 overflow-hidden shadow-2xl backdrop-blur-xl">
-              {/* Subtle Botanical Glow */}
-              <div className="absolute top-0 right-0 w-96 h-96 bg-navara-moss/30 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-navara-terracotta/10 rounded-full blur-3xl pointer-events-none" />
+            {/* HERO EDITORIAL SECTION */}
+            <div className="relative rounded-3xl bg-white border border-[#e6e2d8] p-6 sm:p-12 overflow-hidden shadow-sm">
+              {/* Subtle Botanical Illumination */}
+              <div className="absolute top-0 right-0 w-96 h-96 bg-[#eef2ea]/70 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-[#fbf0eb]/50 rounded-full blur-3xl pointer-events-none" />
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-                {/* Left Column: Navara Editorial Headline */}
+                {/* Left Column: Editorial Headline & Actions */}
                 <div className="lg:col-span-7 space-y-5">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#232e1b] border border-navara-sage/30 text-navara-sage text-[10px] font-mono-clinical uppercase tracking-widest">
-                    <Leaf className="w-3 h-3 text-navara-sage" />
-                    Clinical Dermatology Meets Botanical Sanctuary
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f4f6f1] border border-[#d6e0ce] text-[#425335] text-[10px] font-mono-clinical uppercase tracking-widest font-medium">
+                    <Leaf className="w-3 h-3 text-[#637852]" />
+                    Clinical Dermatology & Botanical Care
                   </div>
 
-                  <h1 className="font-serif-luxury text-3xl sm:text-5xl text-navara-alabaster leading-[1.15] font-normal tracking-tight">
-                    A clinical standard for transformative, calm skin.
+                  <h1 className="font-serif-luxury text-3xl sm:text-5xl text-[#1a2217] leading-[1.18] font-normal tracking-tight">
+                    A clinical standard for calm, transformative skin health.
                   </h1>
 
-                  <p className="text-xs sm:text-sm text-navara-cream/80 leading-relaxed max-w-xl font-sans">
-                    Powered by Lóvi's 11+ skin conditions pinpointing engine, 0%-affiliation cosmetic fit scoring, and medical board protocols. No sponsored brands, no obscured lesion views, pure clinical clarity.
+                  <p className="text-xs sm:text-sm text-[#556050] leading-relaxed max-w-xl font-sans">
+                    Powered by DermaNova's 11+ skin conditions spatial engine, 100% brand-neutral cosmetics fit scoring, and board-certified medical board protocols. Pure scientific transparency with zero sponsored bias.
                   </p>
 
                   {/* CTA Buttons */}
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
                     <button
                       onClick={() => setActiveTab('scan')}
-                      className="px-6 py-3.5 rounded-full bg-navara-alabaster hover:bg-white text-navara-dark font-mono-clinical font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-xl shadow-black/30 active:scale-95"
+                      className="px-6 py-3.5 rounded-full bg-[#1c2417] hover:bg-[#2d3b25] text-white font-mono-clinical font-medium text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-md active:scale-95"
                     >
                       <Camera className="w-4 h-4" />
                       <span>Start 11+ Condition Scan</span>
@@ -530,57 +530,57 @@ export default function Home() {
 
                     <button
                       onClick={() => setActiveTab('fit')}
-                      className="px-5 py-3.5 rounded-full bg-[#1c1f1a]/80 hover:bg-[#232e1b] border border-navara-sage/30 text-navara-cream font-mono-clinical font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition"
+                      className="px-5 py-3.5 rounded-full bg-white hover:bg-[#f7f6f2] border border-[#ded9cd] text-[#1a2217] font-mono-clinical font-medium text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-sm"
                     >
-                      <SlidersHorizontal className="w-4 h-4 text-navara-sage" />
+                      <SlidersHorizontal className="w-4 h-4 text-[#637852]" />
                       <span>Check Cosmetics Fit Score</span>
                     </button>
                   </div>
 
-                  {/* Micro Trust Stats */}
-                  <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-2 text-[11px] font-mono-clinical text-navara-cream/60">
+                  {/* Trust Micro-Indicators */}
+                  <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-2 text-[11px] font-mono-clinical text-[#6b7764]">
                     <span className="flex items-center gap-1.5">
-                      <Check className="w-3.5 h-3.5 text-navara-sage" /> 11+ Conditions Detected
+                      <Check className="w-3.5 h-3.5 text-[#637852]" /> 11+ Conditions Detected
                     </span>
                     <span className="flex items-center gap-1.5">
-                      <Check className="w-3.5 h-3.5 text-navara-sage" /> 0% Brand Affiliation
+                      <Check className="w-3.5 h-3.5 text-[#637852]" /> 100% Brand-Neutral
                     </span>
                     <span className="flex items-center gap-1.5">
-                      <Check className="w-3.5 h-3.5 text-navara-sage" /> 582ms Inference
+                      <Check className="w-3.5 h-3.5 text-[#637852]" /> 582ms Inference
                     </span>
                   </div>
                 </div>
 
-                {/* Right Column: Visual Showcase Card */}
+                {/* Right Column: Visual Showcase Preview */}
                 <div className="lg:col-span-5 hidden sm:block">
                   <div
                     onClick={() => setActiveTab('scan')}
-                    className="p-4 rounded-3xl bg-[#1c1f1a]/90 border border-white/10 shadow-2xl relative cursor-pointer group hover:border-navara-sage/40 transition"
+                    className="p-3 rounded-3xl bg-[#faf9f5] border border-[#e6e2d8] shadow-md relative cursor-pointer group hover:border-[#637852]/50 transition"
                   >
-                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-black/40">
+                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-white">
                       <img
                         src="/demo_face.jpg"
-                        alt="AI Disease Pinpointing Demonstration"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
+                        alt="Facial Diagnostic Pinpointing Demonstration"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                       
                       {/* Reticle Callout 1 */}
-                      <div className="absolute top-[38%] left-[58%] w-14 h-14 border-2 border-navara-terracotta rounded-xl bg-navara-terracotta/20 flex items-center justify-center ring-2 ring-white/40">
-                        <span className="absolute -top-3.5 px-2 py-0.5 rounded-full bg-navara-terracotta text-white text-[9px] font-mono-clinical font-semibold">
+                      <div className="absolute top-[38%] left-[58%] w-14 h-14 border-2 border-[#b85c3c] rounded-xl bg-[#b85c3c]/15 flex items-center justify-center ring-2 ring-white">
+                        <span className="absolute -top-3.5 px-2 py-0.5 rounded-full bg-[#b85c3c] text-white text-[9px] font-mono-clinical font-semibold shadow">
                           Acne 94%
                         </span>
                       </div>
 
                       {/* Reticle Callout 2 */}
-                      <div className="absolute top-[48%] left-[42%] w-16 h-14 border-2 border-navara-sage rounded-xl bg-navara-sage/20 flex items-center justify-center ring-2 ring-white/40">
-                        <span className="absolute -top-3.5 px-2 py-0.5 rounded-full bg-navara-sage text-navara-dark text-[9px] font-mono-clinical font-semibold">
+                      <div className="absolute top-[48%] left-[42%] w-16 h-14 border-2 border-[#637852] rounded-xl bg-[#637852]/15 flex items-center justify-center ring-2 ring-white">
+                        <span className="absolute -top-3.5 px-2 py-0.5 rounded-full bg-[#637852] text-white text-[9px] font-mono-clinical font-semibold shadow">
                           Redness 82%
                         </span>
                       </div>
 
-                      <div className="absolute bottom-3 inset-x-3 px-3.5 py-2.5 rounded-xl bg-[#1c1f1a]/90 backdrop-blur-md border border-white/10 text-xs text-navara-cream flex items-center justify-between">
-                        <span className="font-mono-clinical text-navara-alabaster">Unobstructed Pinpoint Canvas</span>
-                        <span className="text-navara-sage font-mono-clinical text-[11px]">Interactive Mode ➔</span>
+                      <div className="absolute bottom-3 inset-x-3 px-3.5 py-2.5 rounded-xl bg-white/95 backdrop-blur-md border border-[#e6e2d8] text-xs text-[#1a2217] flex items-center justify-between shadow-sm">
+                        <span className="font-mono-clinical text-[#1a2217] font-medium">Unobstructed Spatial Canvas</span>
+                        <span className="text-[#637852] font-mono-clinical text-[11px] font-semibold">Interactive ➔</span>
                       </div>
                     </div>
                   </div>
@@ -589,89 +589,89 @@ export default function Home() {
             </div>
 
             {/* =================================================================
-                LOVI'S 3 SUPERPOWERS SHOWCASE (As featured on lovi.care)
+                THE THREE PILLARS OF DERMANOVA
                ================================================================= */}
             <div className="space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 px-1">
                 <div>
-                  <span className="text-[10px] font-mono-clinical uppercase tracking-widest text-navara-sage">
-                    The 3 Core Superpowers
+                  <span className="text-[10px] font-mono-clinical uppercase tracking-widest text-[#637852] font-semibold">
+                    Clinical Architecture
                   </span>
-                  <h2 className="font-serif-luxury text-2xl sm:text-3xl text-navara-alabaster font-normal tracking-tight">
-                    How Lóvi & Navara Transform Your Routine
+                  <h2 className="font-serif-luxury text-2xl sm:text-3xl text-[#1a2217] font-normal tracking-tight">
+                    The Three Pillars of DermaNova
                   </h2>
                 </div>
-                <p className="text-xs text-navara-cream/60 max-w-sm">
-                  Clinical precision without commercial bias, designed for barrier longevity.
+                <p className="text-xs text-[#6b7764] max-w-sm">
+                  Precision spatial diagnostics and evidence-based skincare designed for cutaneous barrier longevity.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2">
                 
-                {/* Superpower 1: 11+ Conditions Scanner */}
+                {/* Pillar 1: 11+ Conditions Scanner */}
                 <div
                   onClick={() => setActiveTab('scan')}
-                  className="rounded-3xl bg-[#1c1f1a]/80 border border-white/10 p-6 sm:p-7 space-y-4 cursor-pointer hover:border-navara-sage/40 transition group"
+                  className="rounded-3xl bg-white border border-[#e6e2d8] p-6 sm:p-7 space-y-4 cursor-pointer hover:border-[#637852]/50 hover:shadow-md transition group"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono-clinical text-navara-sage">SUPERPOWER 01</span>
-                    <span className="w-8 h-8 rounded-full bg-[#232e1b] border border-white/10 flex items-center justify-center text-navara-alabaster group-hover:scale-110 transition">
+                    <span className="text-xs font-mono-clinical text-[#637852] font-semibold">PILLAR 01</span>
+                    <span className="w-9 h-9 rounded-full bg-[#f4f6f1] border border-[#d6e0ce] flex items-center justify-center text-[#425335] group-hover:scale-110 transition">
                       <Camera className="w-4 h-4" />
                     </span>
                   </div>
-                  <h3 className="font-serif-luxury text-xl text-navara-alabaster font-normal">
+                  <h3 className="font-serif-luxury text-xl text-[#1a2217] font-normal">
                     11+ Skin Conditions AI Face Scanner
                   </h3>
-                  <p className="text-xs text-navara-cream/70 leading-relaxed">
+                  <p className="text-xs text-[#556050] leading-relaxed">
                     Instantly detects inflammatory acne, erythema, hyperpigmentation, dilated pores, blackheads, whiteheads, fine lines, and dehydration with spatial coordinates and unobstructed focus.
                   </p>
-                  <div className="pt-2 flex items-center gap-1.5 text-xs font-mono-clinical text-navara-sage group-hover:text-navara-alabaster transition">
+                  <div className="pt-2 flex items-center gap-1.5 text-xs font-mono-clinical text-[#637852] group-hover:text-[#1a2217] transition font-medium">
                     <span>Try Face Scanner</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
 
-                {/* Superpower 2: Cosmetics Fit Score */}
+                {/* Pillar 2: Cosmetics Fit Score */}
                 <div
                   onClick={() => setActiveTab('fit')}
-                  className="rounded-3xl bg-[#1c1f1a]/80 border border-white/10 p-6 sm:p-7 space-y-4 cursor-pointer hover:border-navara-sage/40 transition group"
+                  className="rounded-3xl bg-white border border-[#e6e2d8] p-6 sm:p-7 space-y-4 cursor-pointer hover:border-[#637852]/50 hover:shadow-md transition group"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono-clinical text-navara-sage">SUPERPOWER 02</span>
-                    <span className="w-8 h-8 rounded-full bg-[#232e1b] border border-white/10 flex items-center justify-center text-navara-alabaster group-hover:scale-110 transition">
+                    <span className="text-xs font-mono-clinical text-[#637852] font-semibold">PILLAR 02</span>
+                    <span className="w-9 h-9 rounded-full bg-[#f4f6f1] border border-[#d6e0ce] flex items-center justify-center text-[#425335] group-hover:scale-110 transition">
                       <SlidersHorizontal className="w-4 h-4" />
                     </span>
                   </div>
-                  <h3 className="font-serif-luxury text-xl text-navara-alabaster font-normal">
-                    0% Affiliation Cosmetics Fit Score
+                  <h3 className="font-serif-luxury text-xl text-[#1a2217] font-normal">
+                    100% Brand-Neutral Cosmetics Fit Score
                   </h3>
-                  <p className="text-xs text-navara-cream/70 leading-relaxed">
-                    Check if your cleanser, serum, or moisturizer truly fits your barrier. We carry zero brand sponsorships and match safer, better-fit alternative formulations based on INCI toxicological safety.
+                  <p className="text-xs text-[#556050] leading-relaxed">
+                    Check if your cleanser, serum, or moisturizer truly matches your barrier. With zero sponsored brands, we match safer, better-fit alternative formulations based on INCI toxicological safety.
                   </p>
-                  <div className="pt-2 flex items-center gap-1.5 text-xs font-mono-clinical text-navara-sage group-hover:text-navara-alabaster transition">
+                  <div className="pt-2 flex items-center gap-1.5 text-xs font-mono-clinical text-[#637852] group-hover:text-[#1a2217] transition font-medium">
                     <span>Scan Product Fit</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
 
-                {/* Superpower 3: 24/7 AI Cosmetologist */}
+                {/* Pillar 3: 24/7 AI Cosmetologist */}
                 <div
                   onClick={() => setIsChatOpen(true)}
-                  className="rounded-3xl bg-[#1c1f1a]/80 border border-white/10 p-6 sm:p-7 space-y-4 cursor-pointer hover:border-navara-sage/40 transition group"
+                  className="rounded-3xl bg-white border border-[#e6e2d8] p-6 sm:p-7 space-y-4 cursor-pointer hover:border-[#637852]/50 hover:shadow-md transition group"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono-clinical text-navara-sage">SUPERPOWER 03</span>
-                    <span className="w-8 h-8 rounded-full bg-[#232e1b] border border-white/10 flex items-center justify-center text-navara-alabaster group-hover:scale-110 transition">
+                    <span className="text-xs font-mono-clinical text-[#637852] font-semibold">PILLAR 03</span>
+                    <span className="w-9 h-9 rounded-full bg-[#f4f6f1] border border-[#d6e0ce] flex items-center justify-center text-[#425335] group-hover:scale-110 transition">
                       <MessageSquare className="w-4 h-4" />
                     </span>
                   </div>
-                  <h3 className="font-serif-luxury text-xl text-navara-alabaster font-normal">
+                  <h3 className="font-serif-luxury text-xl text-[#1a2217] font-normal">
                     24/7 AI Cosmetologist & UV Defense
                   </h3>
-                  <p className="text-xs text-navara-cream/70 leading-relaxed">
+                  <p className="text-xs text-[#556050] leading-relaxed">
                     Daily skin feeling check-ins (Great / Fine / Not good), local UV Index defense alerts, ingredient layering conflict checks, and board-certified medical guidance in real time.
                   </p>
-                  <div className="pt-2 flex items-center gap-1.5 text-xs font-mono-clinical text-navara-sage group-hover:text-navara-alabaster transition">
+                  <div className="pt-2 flex items-center gap-1.5 text-xs font-mono-clinical text-[#637852] group-hover:text-[#1a2217] transition font-medium">
                     <span>Open Consultation</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </div>
@@ -682,49 +682,49 @@ export default function Home() {
             {/* =================================================================
                 MEDICAL BOARD & BOTANICAL INGREDIENT STANDARDS
                ================================================================= */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-[#232e1b]/30 border border-white/10 flex flex-col lg:flex-row lg:items-center justify-between gap-6 backdrop-blur-md">
+            <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e6e2d8] flex flex-col lg:flex-row lg:items-center justify-between gap-6 shadow-sm">
               <div className="space-y-2 max-w-xl">
-                <span className="text-[10px] font-mono-clinical uppercase tracking-widest text-navara-sage">
+                <span className="text-[10px] font-mono-clinical uppercase tracking-widest text-[#637852] font-semibold">
                   Medical Board & Formulations
                 </span>
-                <h3 className="font-serif-luxury text-2xl text-navara-alabaster font-normal">
+                <h3 className="font-serif-luxury text-2xl text-[#1a2217] font-normal">
                   Supervised by Dermatologists & Cosmetic Chemists
                 </h3>
-                <p className="text-xs text-navara-cream/70 leading-relaxed">
+                <p className="text-xs text-[#556050] leading-relaxed">
                   Every recommendation adheres to CIR (Cosmetic Ingredient Review), ECHA, and FDA safety regulations. Our multi-label deep learning models are calibrated against over 10,000+ biopsy-verified dermatological cases.
                 </p>
               </div>
 
               <div className="flex flex-wrap items-center gap-3">
-                <div className="px-4 py-2 rounded-2xl bg-[#1c1f1a]/80 border border-white/10 text-center">
-                  <div className="font-serif-luxury text-xl text-navara-alabaster">50+</div>
-                  <div className="text-[10px] font-mono-clinical text-navara-sage">Panel MDs</div>
+                <div className="px-5 py-3 rounded-2xl bg-[#faf9f5] border border-[#e6e2d8] text-center">
+                  <div className="font-serif-luxury text-xl text-[#1a2217]">50+</div>
+                  <div className="text-[10px] font-mono-clinical text-[#637852]">Panel MDs</div>
                 </div>
-                <div className="px-4 py-2 rounded-2xl bg-[#1c1f1a]/80 border border-white/10 text-center">
-                  <div className="font-serif-luxury text-xl text-navara-alabaster">0%</div>
-                  <div className="text-[10px] font-mono-clinical text-navara-sage">Sponsored Bias</div>
+                <div className="px-5 py-3 rounded-2xl bg-[#faf9f5] border border-[#e6e2d8] text-center">
+                  <div className="font-serif-luxury text-xl text-[#1a2217]">0%</div>
+                  <div className="text-[10px] font-mono-clinical text-[#637852]">Brand Bias</div>
                 </div>
-                <div className="px-4 py-2 rounded-2xl bg-[#1c1f1a]/80 border border-white/10 text-center">
-                  <div className="font-serif-luxury text-xl text-navara-alabaster">11+</div>
-                  <div className="text-[10px] font-mono-clinical text-navara-sage">Conditions</div>
+                <div className="px-5 py-3 rounded-2xl bg-[#faf9f5] border border-[#e6e2d8] text-center">
+                  <div className="font-serif-luxury text-xl text-[#1a2217]">11+</div>
+                  <div className="text-[10px] font-mono-clinical text-[#637852]">Conditions</div>
                 </div>
               </div>
             </div>
 
             {/* Quick Consultation Intake Quiz Trigger */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#232e1b]/80 to-[#1c1f1a]/90 border border-navara-sage/30 flex flex-col sm:flex-row sm:items-center justify-between gap-5 shadow-2xl">
+            <div className="p-6 sm:p-8 rounded-3xl bg-[#f4f6f1] border border-[#d6e0ce] flex flex-col sm:flex-row sm:items-center justify-between gap-5 shadow-sm">
               <div className="space-y-1.5">
-                <span className="text-[10px] font-mono-clinical uppercase tracking-widest text-navara-sage">Personalized Triage</span>
-                <h4 className="font-serif-luxury text-xl text-navara-alabaster font-normal">
+                <span className="text-[10px] font-mono-clinical uppercase tracking-widest text-[#637852] font-semibold">Personalized Triage</span>
+                <h4 className="font-serif-luxury text-xl text-[#1a2217] font-normal">
                   Medical Consultation & Barrier Sensitivity Questionnaire
                 </h4>
-                <p className="text-xs text-navara-cream/70 max-w-xl">
+                <p className="text-xs text-[#556050] max-w-xl">
                   Inform the diagnostic engine regarding retinoid tolerance, pregnancy safety, and daily sun exposure habits.
                 </p>
               </div>
               <button
                 onClick={() => setIsIntakeOpen(true)}
-                className="px-6 py-3 rounded-full bg-navara-alabaster hover:bg-white text-navara-dark font-mono-clinical font-semibold text-xs sm:text-sm transition shrink-0 shadow-lg"
+                className="px-6 py-3 rounded-full bg-[#1c2417] hover:bg-[#2d3b25] text-white font-mono-clinical font-medium text-xs sm:text-sm transition shrink-0 shadow-sm"
               >
                 Complete 2-Min Quiz
               </button>
@@ -746,13 +746,13 @@ export default function Home() {
 
             {/* Loading Spinner */}
             {isLoading && (
-              <div className="p-8 sm:p-12 rounded-3xl bg-[#1c1f1a]/90 border border-white/10 text-center space-y-4 shadow-2xl">
-                <div className="w-12 h-12 border-3 border-navara-sage/20 border-t-navara-sage rounded-full animate-spin mx-auto" />
-                <h3 className="font-serif-luxury text-lg text-navara-alabaster font-normal">
+              <div className="p-8 sm:p-12 rounded-3xl bg-white border border-[#e6e2d8] text-center space-y-4 shadow-sm">
+                <div className="w-12 h-12 border-3 border-[#637852]/20 border-t-[#637852] rounded-full animate-spin mx-auto" />
+                <h3 className="font-serif-luxury text-lg text-[#1a2217] font-normal">
                   Detecting Disease Sites & Bounding Coordinates...
                 </h3>
-                <p className="text-xs font-mono-clinical text-navara-cream/60">
-                  Lóvi Multi-Task Convolutional Inference + Localized Spatial Peak Reticles (582ms)
+                <p className="text-xs font-mono-clinical text-[#6b7764]">
+                  Multi-Task Convolutional Inference + Localized Spatial Peak Reticles (582ms)
                 </p>
               </div>
             )}
@@ -766,18 +766,18 @@ export default function Home() {
                 />
 
                 {recommendations && (
-                  <div className="p-6 rounded-3xl bg-[#232e1b]/50 border border-navara-sage/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
+                  <div className="p-6 rounded-3xl bg-[#f4f6f1] border border-[#d6e0ce] flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
                     <div className="space-y-1">
-                      <div className="font-serif-luxury text-lg text-navara-alabaster">
+                      <div className="font-serif-luxury text-lg text-[#1a2217]">
                         Your Doctor-Verified Botanical & Active Regimen is Ready
                       </div>
-                      <div className="text-xs text-navara-cream/70">
+                      <div className="text-xs text-[#556050]">
                         Targeted spot actives, barrier lipids, and AM/PM sequence formulated for your skin profile.
                       </div>
                     </div>
                     <button
                       onClick={() => setActiveTab('regimen')}
-                      className="px-6 py-3 rounded-full bg-navara-alabaster hover:bg-white text-navara-dark font-mono-clinical font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-lg shrink-0"
+                      className="px-6 py-3 rounded-full bg-[#1c2417] hover:bg-[#2d3b25] text-white font-mono-clinical font-medium text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-sm shrink-0"
                     >
                       <span>View Custom Regimen</span>
                       <ArrowRight className="w-4 h-4" />
@@ -790,7 +790,7 @@ export default function Home() {
         )}
 
         {/* =====================================================================
-            TAB 3: COSMETICS FIT SCANNER (LOVI'S FLAGSHIP 0% AFFILIATION ENGINE)
+            TAB 3: COSMETICS FIT SCANNER (100% BRAND-NEUTRAL ENGINE)
            ===================================================================== */}
         {activeTab === 'fit' && (
           <div className="space-y-6 animate-fade-in">
@@ -819,19 +819,19 @@ export default function Home() {
                 />
               </>
             ) : (
-              <div className="p-10 rounded-3xl bg-[#1c1f1a]/80 border border-white/10 text-center space-y-4 max-w-lg mx-auto shadow-2xl">
-                <div className="w-14 h-14 rounded-2xl bg-navara-moss/40 border border-navara-sage/20 text-navara-sage flex items-center justify-center mx-auto">
+              <div className="p-10 rounded-3xl bg-white border border-[#e6e2d8] text-center space-y-4 max-w-lg mx-auto shadow-sm">
+                <div className="w-14 h-14 rounded-2xl bg-[#f4f6f1] border border-[#d6e0ce] text-[#637852] flex items-center justify-center mx-auto">
                   <FileText className="w-7 h-7" />
                 </div>
                 <div>
-                  <h2 className="font-serif-luxury text-xl text-navara-alabaster">No Regimen Formulated Yet</h2>
-                  <p className="text-xs text-navara-cream/60 mt-1 max-w-xs mx-auto">
+                  <h2 className="font-serif-luxury text-xl text-[#1a2217]">No Regimen Formulated Yet</h2>
+                  <p className="text-xs text-[#6b7764] mt-1 max-w-xs mx-auto">
                     Complete a 1-photo skin scan or check sample face to generate your doctor-reviewed routine.
                   </p>
                 </div>
                 <button
                   onClick={() => setActiveTab('scan')}
-                  className="px-5 py-2.5 rounded-full bg-navara-alabaster hover:bg-white text-navara-dark font-mono-clinical font-semibold text-xs"
+                  className="px-5 py-2.5 rounded-full bg-[#1c2417] hover:bg-[#2d3b25] text-white font-mono-clinical font-medium text-xs shadow-sm"
                 >
                   Start Skin Scan Now
                 </button>
@@ -856,11 +856,11 @@ export default function Home() {
       {/* Floating 24/7 AI Cosmetologist Assistant Button */}
       <button
         onClick={() => setIsChatOpen(true)}
-        className="fixed bottom-20 md:bottom-8 right-4 md:right-8 z-30 w-14 h-14 rounded-full bg-navara-alabaster hover:bg-white text-navara-dark shadow-2xl flex items-center justify-center font-bold transition transform active:scale-95 hover:scale-105 p-3.5 border border-navara-sage/40"
-        title="Chat with 24/7 AI Cosmetologist"
+        className="fixed bottom-20 md:bottom-8 right-4 md:right-8 z-30 w-14 h-14 rounded-full bg-[#1c2417] hover:bg-[#2d3b25] text-white shadow-xl flex items-center justify-center font-bold transition transform active:scale-95 hover:scale-105 p-3.5 border border-white/20"
+        title="Chat with DermaNova AI Cosmetologist"
       >
-        <MessageSquare className="w-6 h-6 text-navara-dark" />
-        <span className="absolute -top-1 -right-1 w-4 h-4 bg-navara-terracotta text-white rounded-full text-[10px] font-mono-clinical flex items-center justify-center font-bold">
+        <MessageSquare className="w-6 h-6 text-white" />
+        <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#b85c3c] text-white rounded-full text-[10px] font-mono-clinical flex items-center justify-center font-bold">
           1
         </span>
       </button>
@@ -868,31 +868,31 @@ export default function Home() {
       {/* =========================================================================
           MOBILE BOTTOM NAVIGATION BAR (FIXED ON MOBILE ONLY: md:hidden)
          ========================================================================= */}
-      <nav className="md:hidden fixed bottom-0 inset-x-0 z-40 h-16 bg-[#1c1f1a]/95 backdrop-blur-xl border-t border-white/10 flex items-center justify-around px-2 shadow-2xl">
+      <nav className="md:hidden fixed bottom-0 inset-x-0 z-40 h-16 bg-white/95 backdrop-blur-xl border-t border-[#e6e2d8] flex items-center justify-around px-2 shadow-lg">
         <button
           onClick={() => setActiveTab('home')}
           className={`flex flex-col items-center justify-center gap-1 flex-1 py-1 transition ${
-            activeTab === 'home' ? 'text-navara-alabaster font-semibold' : 'text-navara-cream/50 hover:text-navara-cream'
+            activeTab === 'home' ? 'text-[#1a2217] font-semibold' : 'text-[#8b9784] hover:text-[#1a2217]'
           }`}
         >
           <HomeIcon className="w-4 h-4" />
-          <span className="text-[9px] font-mono-clinical">Sanctuary</span>
+          <span className="text-[9px] font-mono-clinical">Home</span>
         </button>
 
         <button
           onClick={() => setActiveTab('scan')}
           className={`flex flex-col items-center justify-center gap-1 flex-1 py-1 transition ${
-            activeTab === 'scan' ? 'text-navara-alabaster font-semibold' : 'text-navara-cream/50 hover:text-navara-cream'
+            activeTab === 'scan' ? 'text-[#1a2217] font-semibold' : 'text-[#8b9784] hover:text-[#1a2217]'
           }`}
         >
           <Camera className="w-4 h-4" />
-          <span className="text-[9px] font-mono-clinical">Face Scan</span>
+          <span className="text-[9px] font-mono-clinical">Scan</span>
         </button>
 
         <button
           onClick={() => setActiveTab('fit')}
           className={`flex flex-col items-center justify-center gap-1 flex-1 py-1 transition ${
-            activeTab === 'fit' ? 'text-navara-alabaster font-semibold' : 'text-navara-cream/50 hover:text-navara-cream'
+            activeTab === 'fit' ? 'text-[#1a2217] font-semibold' : 'text-[#8b9784] hover:text-[#1a2217]'
           }`}
         >
           <SlidersHorizontal className="w-4 h-4" />
@@ -902,7 +902,7 @@ export default function Home() {
         <button
           onClick={() => setActiveTab('regimen')}
           className={`flex flex-col items-center justify-center gap-1 flex-1 py-1 transition ${
-            activeTab === 'regimen' ? 'text-navara-alabaster font-semibold' : 'text-navara-cream/50 hover:text-navara-cream'
+            activeTab === 'regimen' ? 'text-[#1a2217] font-semibold' : 'text-[#8b9784] hover:text-[#1a2217]'
           }`}
         >
           <FileText className="w-4 h-4" />
@@ -912,7 +912,7 @@ export default function Home() {
         <button
           onClick={() => setActiveTab('journey')}
           className={`flex flex-col items-center justify-center gap-1 flex-1 py-1 transition ${
-            activeTab === 'journey' ? 'text-navara-alabaster font-semibold' : 'text-navara-cream/50 hover:text-navara-cream'
+            activeTab === 'journey' ? 'text-[#1a2217] font-semibold' : 'text-[#8b9784] hover:text-[#1a2217]'
           }`}
         >
           <Clock className="w-4 h-4" />

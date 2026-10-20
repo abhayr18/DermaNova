@@ -14,40 +14,42 @@ module.exports = {
         sans: ['Inter', 'Satoshi', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       colors: {
-        navara: {
-          bg: '#1c1f1a',          // Deep botanical obsidian / charcoal olive
-          dark: '#141712',        // Deepest forest black
-          panel: '#232e1b',       // Botanical evergreen olive
-          olive: '#2a3b19',       // Deep moss olive
-          card: '#242a20',        // Warm dark olive card
-          cardInner: '#1c2219',   // Inner card tone
-          ivory: '#f4f1ea',       // Luminous alabaster / warm parchment
-          cream: '#e8e4db',       // Soft linen cream
-          stone: '#c9c4b5',       // Muted clay beige
-          sage: '#aaab87',        // Soft herbal sage
-          matcha: '#d4e0bc',      // Pale matcha accent
-          border: 'rgba(244, 241, 234, 0.12)',
-          borderSubtle: 'rgba(244, 241, 234, 0.06)',
-          terracotta: '#b85c3c',  // Botanical terracotta active highlight
-          terracottaSoft: 'rgba(184, 92, 60, 0.15)',
+        botanical: {
+          bg: '#faf9f5',          // Luminous warm alabaster white
+          surface: '#ffffff',     // Pure crisp white card surface
+          card: '#ffffff',        // Crisp white cards
+          cardMuted: '#f5f4ee',   // Soft warm linen card
+          subtle: '#f0ede4',      // Delicate warm tone
+          border: '#e6e2d8',      // Elegant delicate border
+          borderSubtle: '#eeebe3',
+          text: '#1a2217',        // Deep forest charcoal text
+          textMuted: '#586352',   // Refined muted olive text
+          textSubtle: '#808c79',  // Light herbal stone text
+          sage: '#637852',        // Herbal sage green
+          sageLight: '#eef2ea',   // Pale sage pill background
+          sageBorder: '#cbd7c1',  // Pale sage border
+          moss: '#2d3b25',        // Deep botanical moss
+          mossDark: '#1c2417',    // Forest obsidian
+          terracotta: '#b85c3c',  // Botanical terracotta highlight
+          terracottaLight: '#fbf0eb', // Pale terracotta pill background
         },
         brand: {
-          50: '#f7f6f2',
-          100: '#eeebe1',
-          200: '#ded7c5',
-          300: '#c7bca1',
-          400: '#aaab87',
-          500: '#8f9a72',
-          600: '#6d7853',
-          700: '#525c3e',
-          800: '#3a4a2f',
-          900: '#232e1b',
-          950: '#1c1f1a',
+          50: '#f7f9f5',
+          100: '#edf2e9',
+          200: '#dae4d2',
+          300: '#bdd1b1',
+          400: '#94b383',
+          500: '#637852',
+          600: '#526642',
+          700: '#425335',
+          800: '#2d3b25',
+          900: '#1c2417',
+          950: '#12190f',
         },
         slate: {
-          850: '#181c16',
-          900: '#1c1f1a',
-          950: '#141712',
+          850: '#1a2118',
+          900: '#141a12',
+          950: '#0e120d',
         }
       },
       animation: {

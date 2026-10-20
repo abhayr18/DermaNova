@@ -5,64 +5,63 @@
 @tailwind utilities;
 
 :root {
-  --navara-bg: #1c1f1a;
-  --navara-dark: #141712;
-  --navara-panel: #232e1b;
-  --navara-card: #242a20;
-  --navara-ivory: #f4f1ea;
-  --navara-cream: #e8e4db;
-  --navara-stone: #c9c4b5;
-  --navara-sage: #aaab87;
-  --navara-matcha: #d4e0bc;
-  --navara-terracotta: #b85c3c;
-  --navara-border: rgba(244, 241, 234, 0.12);
+  --botanical-bg: #faf9f5;
+  --botanical-surface: #ffffff;
+  --botanical-card: #ffffff;
+  --botanical-card-muted: #f5f4ee;
+  --botanical-text: #1a2217;
+  --botanical-text-muted: #586352;
+  --botanical-sage: #637852;
+  --botanical-moss: #2d3b25;
+  --botanical-border: #e6e2d8;
+  --botanical-terracotta: #b85c3c;
 }
 
 body {
-  color: #f4f1ea;
-  background-color: #1c1f1a;
+  color: #1a2217;
+  background-color: #faf9f5;
   background-image: 
-    radial-gradient(ellipse at 50% 0%, rgba(58, 74, 47, 0.35) 0%, rgba(28, 31, 26, 0.95) 60%, #141712 100%),
-    radial-gradient(circle at 10% 30%, rgba(42, 59, 25, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 90% 70%, rgba(184, 92, 60, 0.08) 0%, transparent 40%);
+    radial-gradient(ellipse at 50% 0%, rgba(99, 120, 82, 0.06) 0%, rgba(250, 249, 245, 0.8) 50%, #faf9f5 100%),
+    radial-gradient(circle at 10% 20%, rgba(184, 92, 60, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(45, 59, 37, 0.04) 0%, transparent 40%);
   min-height: 100vh;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Navara Luxury Glassmorphism Utilities */
+/* Botanical Luxury Minimal Surfaces */
 .glass-panel {
-  background: rgba(35, 46, 27, 0.65);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(244, 241, 234, 0.10);
+  border: 1px solid #e6e2d8;
+  box-shadow: 0 4px 20px -2px rgba(28, 36, 23, 0.04), 0 2px 6px -1px rgba(28, 36, 23, 0.02);
 }
 
 .glass-panel-subtle {
-  background: rgba(28, 34, 25, 0.55);
+  background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(244, 241, 234, 0.08);
+  border: 1px solid #eeebe3;
 }
 
 .glass-card {
-  background: rgba(36, 42, 32, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(244, 241, 234, 0.08);
+  background: #ffffff;
+  border: 1px solid #e6e2d8;
+  box-shadow: 0 2px 12px -2px rgba(28, 36, 23, 0.04);
 }
 
 .glass-input {
-  background: rgba(20, 23, 18, 0.85);
-  border: 1px solid rgba(244, 241, 234, 0.14);
-  color: #f4f1ea;
+  background: #ffffff;
+  border: 1px solid #dcd7cb;
+  color: #1a2217;
 }
 
 .glass-input:focus {
-  border-color: rgba(212, 224, 188, 0.6);
+  border-color: #637852;
   outline: none;
-  box-shadow: 0 0 15px rgba(212, 224, 188, 0.15);
+  box-shadow: 0 0 0 3px rgba(99, 120, 82, 0.15);
 }
 
 /* Serif Headings */
@@ -82,14 +81,14 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #141712;
+  background: #faf9f5;
 }
 ::-webkit-scrollbar-thumb {
-  background: #3a4a2f;
+  background: #cbd7c1;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #aaab87;
+  background: #94b383;
 }
 
 .no-scrollbar::-webkit-scrollbar {

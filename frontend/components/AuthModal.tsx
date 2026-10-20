@@ -43,25 +43,25 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthent
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in">
-      <div className="relative w-full max-w-md glass-panel rounded-2xl border border-slate-800 p-6 sm:p-8 space-y-6 shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
+      <div className="relative w-full max-w-md bg-white rounded-3xl border border-[#e6e2d8] p-6 sm:p-8 space-y-6 shadow-2xl">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition"
+          className="absolute top-4 right-4 text-[#8b9784] hover:text-[#1a2217] p-1.5 rounded-full hover:bg-[#faf9f5] transition"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Header */}
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-400 flex items-center justify-center mx-auto shadow-lg shadow-brand-500/20">
-            <Sparkles className="w-6 h-6 text-slate-950" />
+          <div className="w-12 h-12 rounded-2xl bg-[#1c2417] text-white flex items-center justify-center mx-auto shadow-sm font-serif-luxury text-lg">
+            D
           </div>
-          <h2 className="text-xl font-bold text-white tracking-tight">
+          <h2 className="text-xl font-normal text-[#1a2217] font-serif-luxury tracking-tight">
             {isLoginMode ? 'Welcome Back to DermaNova' : 'Create Your Clinical Skin Profile'}
           </h2>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-[#6b7764]">
             {isLoginMode
               ? 'Access your longitudinal skin scans, personalized routines, and healing timeline.'
               : 'Join DermaNova for cloud-synchronized AI skin tracking and dermatologist guidance.'}
@@ -69,12 +69,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthent
         </div>
 
         {/* Tab Switcher */}
-        <div className="flex rounded-xl bg-slate-900/90 p-1 border border-slate-800">
+        <div className="flex rounded-full bg-[#f4f3ed] p-1 border border-[#e2ded4] text-xs font-mono-clinical">
           <button
             type="button"
             onClick={() => { setIsLoginMode(true); setErrorMsg(null); }}
-            className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition ${
-              isLoginMode ? 'bg-brand-500 text-white shadow' : 'text-slate-400 hover:text-white'
+            className={`flex-1 py-1.5 font-semibold rounded-full transition ${
+              isLoginMode ? 'bg-[#1c2417] text-white shadow-sm' : 'text-[#6b7764] hover:text-[#1a2217]'
             }`}
           >
             Sign In
@@ -82,8 +82,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthent
           <button
             type="button"
             onClick={() => { setIsLoginMode(false); setErrorMsg(null); }}
-            className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition ${
-              !isLoginMode ? 'bg-brand-500 text-white shadow' : 'text-slate-400 hover:text-white'
+            className={`flex-1 py-1.5 font-semibold rounded-full transition ${
+              !isLoginMode ? 'bg-[#1c2417] text-white shadow-sm' : 'text-[#6b7764] hover:text-[#1a2217]'
             }`}
           >
             Create Account
@@ -92,7 +92,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthent
 
         {/* Error Alert */}
         {errorMsg && (
-          <div className="p-3 rounded-lg bg-rose-950/60 border border-rose-500/30 text-rose-300 text-xs">
+          <div className="p-3 rounded-2xl bg-[#fff5f5] border border-[#fed7d7] text-[#9b2c2c] text-xs font-mono-clinical">
             {errorMsg}
           </div>
         )}
@@ -101,8 +101,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthent
         <form onSubmit={handleSubmit} className="space-y-4">
           {!isLoginMode && (
             <div className="space-y-1.5">
-              <label className="text-xs font-medium text-slate-300 flex items-center gap-1.5">
-                <User className="w-3.5 h-3.5 text-brand-400" />
+              <label className="text-xs font-medium text-[#1a2217] flex items-center gap-1.5 font-mono-clinical">
+                <User className="w-3.5 h-3.5 text-[#637852]" />
                 Full Name
               </label>
               <input
@@ -111,14 +111,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthent
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Dr. / Patient Full Name"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs placeholder:text-slate-500 focus:outline-none focus:border-brand-400 transition"
+                className="w-full px-3.5 py-2.5 rounded-2xl bg-[#faf9f5] border border-[#ded9cd] text-[#1a2217] text-xs placeholder:text-[#8b9784] focus:outline-none focus:ring-2 focus:ring-[#637852]/20 focus:border-[#637852] transition font-sans"
               />
             </div>
           )}
 
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-slate-300 flex items-center gap-1.5">
-              <Mail className="w-3.5 h-3.5 text-brand-400" />
+            <label className="text-xs font-medium text-[#1a2217] flex items-center gap-1.5 font-mono-clinical">
+              <Mail className="w-3.5 h-3.5 text-[#637852]" />
               Email Address
             </label>
             <input
@@ -127,13 +127,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthent
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="patient@example.com"
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs placeholder:text-slate-500 focus:outline-none focus:border-brand-400 transition"
+              className="w-full px-3.5 py-2.5 rounded-2xl bg-[#faf9f5] border border-[#ded9cd] text-[#1a2217] text-xs placeholder:text-[#8b9784] focus:outline-none focus:ring-2 focus:ring-[#637852]/20 focus:border-[#637852] transition font-sans"
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-slate-300 flex items-center gap-1.5">
-              <Lock className="w-3.5 h-3.5 text-brand-400" />
+            <label className="text-xs font-medium text-[#1a2217] flex items-center gap-1.5 font-mono-clinical">
+              <Lock className="w-3.5 h-3.5 text-[#637852]" />
               Password
             </label>
             <input
@@ -142,21 +142,21 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthent
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••••••"
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs placeholder:text-slate-500 focus:outline-none focus:border-brand-400 transition"
+              className="w-full px-3.5 py-2.5 rounded-2xl bg-[#faf9f5] border border-[#ded9cd] text-[#1a2217] text-xs placeholder:text-[#8b9784] focus:outline-none focus:ring-2 focus:ring-[#637852]/20 focus:border-[#637852] transition font-sans"
             />
           </div>
 
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-brand-500 to-cyan-400 text-slate-950 font-bold text-xs shadow-lg shadow-brand-500/20 hover:opacity-90 transition disabled:opacity-50"
+            className="w-full py-3 px-4 rounded-full bg-[#1c2417] hover:bg-[#2d3b25] text-white font-mono-clinical font-semibold text-xs shadow-md transition disabled:opacity-50"
           >
             {isLoading ? 'Processing...' : isLoginMode ? 'Sign In' : 'Create Free Account'}
           </button>
         </form>
 
         {/* Security Note */}
-        <p className="text-[10px] text-center text-slate-500">
+        <p className="text-[10px] text-center text-[#8b9784] font-mono-clinical">
           🔒 Encrypted on Supabase Cloud Infrastructure • HIPAA & DPDP Compliant
         </p>
       </div>

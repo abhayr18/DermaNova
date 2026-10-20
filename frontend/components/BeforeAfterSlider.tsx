@@ -47,20 +47,20 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
   };
 
   return (
-    <div className="rounded-2xl bg-[#1c1f1a]/85 border border-white/10 p-4 sm:p-6 space-y-4 shadow-2xl backdrop-blur-xl">
+    <div className="rounded-3xl bg-white border border-[#e6e2d8] p-4 sm:p-6 space-y-4 shadow-sm">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <span className="p-2 rounded-xl bg-navara-moss/40 border border-navara-sage/20 text-navara-sage">
+          <span className="p-2 rounded-xl bg-[#f4f6f1] border border-[#d6e0ce] text-[#425335]">
             <ArrowLeftRight className="w-4 h-4" />
           </span>
           <div>
-            <h4 className="font-serif-luxury text-base text-navara-alabaster tracking-tight flex items-center gap-2">
+            <h4 className="font-serif-luxury text-base text-[#1a2217] tracking-tight flex items-center gap-2">
               Photographic Healing Progression
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-mono-clinical bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-normal">
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-mono-clinical bg-emerald-50 border border-emerald-200 text-emerald-700 font-semibold">
                 +{afterScore - beforeScore} pts
               </span>
             </h4>
-            <p className="text-xs text-navara-cream/60">
+            <p className="text-xs text-[#6b7764]">
               Drag clinical divider to inspect barrier recovery & follicular clearing
             </p>
           </div>
@@ -68,12 +68,12 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
 
         {/* Delta Badges */}
         <div className="flex items-center gap-2 text-xs font-mono-clinical">
-          <div className="px-3 py-1.5 rounded-xl bg-[#232e1b]/70 border border-white/10 text-navara-cream/70">
-            <span className="text-navara-terracotta font-semibold">{beforeDate}: {beforeScore}/100</span>
+          <div className="px-3 py-1.5 rounded-xl bg-[#fbf0eb] border border-[#f3d3c7] text-[#b85c3c]">
+            <span className="font-semibold">{beforeDate}: {beforeScore}/100</span>
           </div>
-          <span className="text-navara-sage/40">→</span>
-          <div className="px-3 py-1.5 rounded-xl bg-[#232e1b]/70 border border-navara-sage/30 text-navara-alabaster">
-            <span className="text-emerald-400 font-semibold">{afterDate}: {afterScore}/100</span>
+          <span className="text-[#8b9784]">→</span>
+          <div className="px-3 py-1.5 rounded-xl bg-[#f4f6f1] border border-[#cbd7c1] text-[#425335]">
+            <span className="font-semibold">{afterDate}: {afterScore}/100</span>
           </div>
         </div>
       </div>
@@ -81,7 +81,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
       {/* Main Slider Canvas */}
       <div
         ref={containerRef}
-        className="relative w-full h-72 sm:h-96 rounded-xl overflow-hidden select-none cursor-ew-resize border border-white/10 shadow-inner group"
+        className="relative w-full h-72 sm:h-96 rounded-2xl overflow-hidden select-none cursor-ew-resize border border-[#e6e2d8] shadow-inner group"
         onMouseDown={() => setIsDragging(true)}
         onMouseUp={() => setIsDragging(false)}
         onMouseLeave={() => setIsDragging(false)}
@@ -96,7 +96,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
           alt="After treatment"
           className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
         />
-        <div className="absolute top-3 right-3 z-10 px-3 py-1 rounded-full bg-[#1c1f1a]/85 backdrop-blur-md border border-emerald-500/30 text-[11px] font-mono-clinical font-semibold text-emerald-400 shadow">
+        <div className="absolute top-3 right-3 z-10 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-emerald-200 text-[11px] font-mono-clinical font-semibold text-emerald-700 shadow-sm">
           {afterLabel} ({afterScore}/100)
         </div>
 
@@ -111,7 +111,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
             className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
             style={{ width: containerRef.current?.offsetWidth || '100%', maxWidth: 'none' }}
           />
-          <div className="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-[#1c1f1a]/85 backdrop-blur-md border border-navara-terracotta/40 text-[11px] font-mono-clinical font-semibold text-navara-terracotta shadow">
+          <div className="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-[#f3d3c7] text-[11px] font-mono-clinical font-semibold text-[#b85c3c] shadow-sm">
             {beforeLabel} ({beforeScore}/100)
           </div>
         </div>
@@ -122,33 +122,33 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
           style={{ left: `${sliderPos}%` }}
         >
           {/* Vertical Glowing Line */}
-          <div className="absolute top-0 bottom-0 -ml-[1px] w-[2px] bg-gradient-to-b from-navara-sage via-navara-alabaster to-navara-sage shadow-[0_0_12px_rgba(170,171,135,0.7)]" />
+          <div className="absolute top-0 bottom-0 -ml-[1px] w-[2px] bg-gradient-to-b from-[#637852] via-white to-[#637852] shadow-[0_0_12px_rgba(99,120,82,0.6)]" />
 
           {/* Centered Circular Handle */}
-          <div className="absolute top-1/2 -mt-5 -ml-5 w-10 h-10 rounded-full bg-[#1c1f1a] border-2 border-navara-sage text-navara-alabaster shadow-2xl flex items-center justify-center pointer-events-auto cursor-grab active:cursor-grabbing backdrop-blur-md transition-transform group-hover:scale-110">
-            <ArrowLeftRight className="w-4 h-4 text-navara-sage animate-pulse" />
+          <div className="absolute top-1/2 -mt-5 -ml-5 w-10 h-10 rounded-full bg-white border-2 border-[#1c2417] text-[#1c2417] shadow-xl flex items-center justify-center pointer-events-auto cursor-grab active:cursor-grabbing backdrop-blur-md transition-transform group-hover:scale-110">
+            <ArrowLeftRight className="w-4 h-4 text-[#1c2417]" />
           </div>
         </div>
 
         {/* Micro Hint at bottom */}
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 px-3 py-1 rounded-full bg-[#1c1f1a]/80 backdrop-blur-md border border-white/10 text-[10px] text-navara-cream/70 font-mono-clinical pointer-events-none">
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 px-3.5 py-1 rounded-full bg-white/90 backdrop-blur-md border border-[#e6e2d8] text-[10px] text-[#556050] font-mono-clinical pointer-events-none shadow-sm">
           Drag horizontally to compare
         </div>
       </div>
 
       {/* Clinical Biomarker Progression Indicators */}
       <div className="grid grid-cols-3 gap-2 sm:gap-3 text-center pt-1">
-        <div className="p-3 rounded-xl bg-[#232e1b]/40 border border-white/10">
-          <div className="text-[10px] font-mono-clinical uppercase text-navara-cream/60 tracking-wider">Acne Clearance</div>
-          <div className="text-sm font-semibold text-emerald-400 mt-1">-68% Papules</div>
+        <div className="p-3 rounded-2xl bg-[#faf9f5] border border-[#e6e2d8]">
+          <div className="text-[10px] font-mono-clinical uppercase text-[#6b7764] tracking-wider font-semibold">Acne Clearance</div>
+          <div className="text-sm font-semibold text-emerald-700 mt-1 font-mono-clinical">-68% Papules</div>
         </div>
-        <div className="p-3 rounded-xl bg-[#232e1b]/40 border border-white/10">
-          <div className="text-[10px] font-mono-clinical uppercase text-navara-cream/60 tracking-wider">Barrier Moisture</div>
-          <div className="text-sm font-semibold text-navara-sage mt-1">+42% Hydration</div>
+        <div className="p-3 rounded-2xl bg-[#faf9f5] border border-[#e6e2d8]">
+          <div className="text-[10px] font-mono-clinical uppercase text-[#6b7764] tracking-wider font-semibold">Barrier Moisture</div>
+          <div className="text-sm font-semibold text-[#425335] mt-1 font-mono-clinical">+42% Hydration</div>
         </div>
-        <div className="p-3 rounded-xl bg-[#232e1b]/40 border border-white/10">
-          <div className="text-[10px] font-mono-clinical uppercase text-navara-cream/60 tracking-wider">Erythema Calm</div>
-          <div className="text-sm font-semibold text-emerald-400 mt-1">-55% Redness</div>
+        <div className="p-3 rounded-2xl bg-[#faf9f5] border border-[#e6e2d8]">
+          <div className="text-[10px] font-mono-clinical uppercase text-[#6b7764] tracking-wider font-semibold">Erythema Calm</div>
+          <div className="text-sm font-semibold text-emerald-700 mt-1 font-mono-clinical">-55% Redness</div>
         </div>
       </div>
     </div>

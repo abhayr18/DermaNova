@@ -45,7 +45,7 @@ export const DermChatDrawer: React.FC<DermChatDrawerProps> = ({
   const [messages, setMessages] = useState<Message[]>([
     {
       sender: 'advisor',
-      text: `Hello ${patientName}! I’m your Lóvi 24/7 AI Cosmetologist. I have reviewed your facial scan and barrier health. How does your skin feel today?`,
+      text: `Hello ${patientName}! I’m your DermaNova AI Cosmetologist. I have reviewed your facial scan and barrier health. How does your skin feel today?`,
       time: 'Just now'
     }
   ]);
@@ -119,7 +119,7 @@ export const DermChatDrawer: React.FC<DermChatDrawerProps> = ({
       let fitCard: any = null;
 
       if (query.includes('evening') || query.includes('night') || query.includes('routine')) {
-        reply = 'Based on your SkinID and current scan, your evening routine is where restoration happens. Consider adding a stabilized retinoid or azelaic acid to speed cellular turnover while your skin regenerates:';
+        reply = 'Based on your skin profile and current scan, your evening routine is where restoration happens. Consider adding a stabilized retinoid or azelaic acid to speed cellular turnover while your skin regenerates:';
         fitCard = {
           name: 'Retinol 0.5% in Squalane',
           brand: 'The Ordinary',
@@ -130,16 +130,16 @@ export const DermChatDrawer: React.FC<DermChatDrawerProps> = ({
       } else if (query.includes('spf') || query.includes('sunscreen') || query.includes('sun')) {
         reply = 'UV index is elevated today! For acne-prone and reactive skin, look for mineral zinc or lightweight fluid multi-filter sunscreens that leave zero white cast and do not clog pores:';
         fitCard = {
-          name: 'Anthelios Melt-In Sunscreen Milk SPF 60',
+          name: 'Anthelios Clear Skin Dry Touch SPF 60',
           brand: 'La Roche-Posay',
-          fitScore: 94,
-          price: '$25.99',
+          fitScore: 95,
+          price: '$21.99',
           why: 'Photostable UVA/UVB defense prevents dark post-inflammatory hyperpigmentation (PIH).'
         };
       } else if (query.includes('purge') || query.includes('purging') || query.includes('breakout')) {
         reply = 'Mild purging is completely expected during weeks 1–3 as active ingredients clear micro-comedones. If the bumps are in your usual acne pinpoint zones, do not pick them—maintain hydration and barrier defense!';
       } else if (query.includes('pregnant') || query.includes('pregnancy')) {
-        reply = 'High-dose retinoids and salicylic acid (>2%) are contraindicated in pregnancy. Lóvi automatically filters your recommendations to 100% pregnancy-safe Azelaic Acid, Niacinamide, and Centella Asiatica.';
+        reply = 'High-dose retinoids and salicylic acid (>2%) are contraindicated in pregnancy. DermaNova automatically filters your recommendations to 100% pregnancy-safe Azelaic Acid, Niacinamide, and Centella Asiatica.';
       } else {
         reply = 'Thank you for your question! Every recommendation is reviewed by our medical board of cosmetic chemists and dermatologists, guaranteed 100% brand-neutral. Apply spot treatments after cleansing, and let your barrier rest overnight.';
       }
@@ -160,72 +160,72 @@ export const DermChatDrawer: React.FC<DermChatDrawerProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-navara-dark/80 backdrop-blur-md animate-fade-in">
-      <div className="w-full max-w-md h-full bg-[#181d15] border-l border-navara-border flex flex-col shadow-2xl">
+    <div className="fixed inset-0 z-50 flex justify-end bg-black/40 backdrop-blur-sm animate-fade-in">
+      <div className="w-full max-w-md h-full bg-white border-l border-[#e6e2d8] flex flex-col shadow-2xl">
         
-        {/* Drawer Header (Navara Botanical + Lovi AI Style) */}
-        <div className="p-4 border-b border-navara-border bg-[#1c2219] flex items-center justify-between">
+        {/* Drawer Header */}
+        <div className="p-4 border-b border-[#e6e2d8] bg-[#faf9f5] flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-[#3a4a2f] to-[#aaab87] flex items-center justify-center text-navara-dark font-black shadow-lg">
-              <Bot className="w-5 h-5 text-navara-ivory" />
+            <div className="w-9 h-9 rounded-2xl bg-[#1c2417] text-white flex items-center justify-center font-bold shadow-sm">
+              <Bot className="w-5 h-5 text-white" />
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-serif-luxury text-sm font-bold text-navara-ivory">
-                  Lóvi AI Cosmetologist
+                <span className="font-serif-luxury text-sm font-normal text-[#1a2217]">
+                  DermaNova AI Cosmetologist
                 </span>
-                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-navara-matcha/20 text-navara-matcha border border-navara-matcha/30 font-bold">
+                <span className="text-[9px] font-mono-clinical px-1.5 py-0.5 rounded-full bg-[#f4f6f1] text-[#425335] border border-[#cbd7c1] font-semibold">
                   24/7 Live
                 </span>
               </div>
-              <div className="text-[11px] font-mono text-navara-stone">
-                USMLE-Level Medical Reasoning • 0% Brand Hype
+              <div className="text-[11px] font-mono-clinical text-[#6b7764]">
+                Clinical Medical Reasoning • 0% Brand Bias
               </div>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-xl bg-[#232e1b] hover:bg-[#2c3a22] text-navara-stone hover:text-navara-ivory transition"
+            className="p-1.5 rounded-xl bg-white hover:bg-[#f4f3ed] text-[#556050] hover:text-[#1a2217] transition border border-[#e6e2d8]"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Live Environmental UV Index Widget */}
-        <div className="px-4 py-2 bg-gradient-to-r from-[#2a3b19] to-[#1c2219] border-b border-navara-borderSubtle flex items-center justify-between text-xs">
-          <div className="flex items-center gap-2 text-navara-cream">
-            <Sun className="w-4 h-4 text-amber-300 animate-spin-slow" />
-            <span>UV Index: <strong className="text-navara-ivory">7.2 (High)</strong> • Wear SPF 50+</span>
+        <div className="px-4 py-2.5 bg-[#f4f6f1] border-b border-[#e6e2d8] flex items-center justify-between text-xs">
+          <div className="flex items-center gap-2 text-[#1a2217] font-mono-clinical">
+            <Sun className="w-4 h-4 text-amber-600 animate-spin-slow" />
+            <span>UV Index: <strong className="font-bold">7.2 (High)</strong> • Wear SPF 50+</span>
           </div>
-          <span className="text-[10px] font-mono text-navara-matcha font-bold">Live Sensor</span>
+          <span className="text-[10px] font-mono-clinical text-[#637852] font-semibold">Live Sensor</span>
         </div>
 
         {/* Chat Messages Feed */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           
           {/* Daily Feeling Check-in Prompt */}
-          <div className="p-3.5 rounded-2xl bg-[#232e1b]/70 border border-navara-border space-y-2">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-navara-sage flex items-center gap-1">
-              <Heart className="w-3 h-3 text-navara-terracotta" /> Daily Skin Check-In
+          <div className="p-3.5 rounded-2xl bg-[#faf9f5] border border-[#e6e2d8] space-y-2">
+            <span className="text-[10px] font-mono-clinical font-semibold uppercase tracking-wider text-[#637852] flex items-center gap-1">
+              <Heart className="w-3 h-3 text-[#b85c3c]" /> Daily Skin Check-In
             </span>
-            <p className="text-xs text-navara-cream">How does your skin feel right now?</p>
+            <p className="text-xs text-[#1a2217]">How does your skin feel right now?</p>
             <div className="flex items-center gap-2 pt-1">
               <button
                 onClick={() => handleSkinFeeling('Great')}
-                className="px-3 py-1 rounded-xl bg-[#1c2219] hover:bg-[#283221] border border-navara-borderSubtle text-xs text-navara-ivory transition"
+                className="px-3 py-1 rounded-xl bg-white hover:bg-[#f4f6f1] border border-[#ded9cd] text-xs font-mono-clinical text-[#1a2217] transition shadow-sm"
               >
                 ✨ Great
               </button>
               <button
                 onClick={() => handleSkinFeeling('Fine')}
-                className="px-3 py-1 rounded-xl bg-[#1c2219] hover:bg-[#283221] border border-navara-borderSubtle text-xs text-navara-ivory transition"
+                className="px-3 py-1 rounded-xl bg-white hover:bg-[#f4f6f1] border border-[#ded9cd] text-xs font-mono-clinical text-[#1a2217] transition shadow-sm"
               >
                 🌿 It's fine
               </button>
               <button
                 onClick={() => handleSkinFeeling('Not good')}
-                className="px-3 py-1 rounded-xl bg-[#1c2219] hover:bg-[#283221] border border-navara-borderSubtle text-xs text-navara-ivory transition"
+                className="px-3 py-1 rounded-xl bg-white hover:bg-[#f4f6f1] border border-[#ded9cd] text-xs font-mono-clinical text-[#1a2217] transition shadow-sm"
               >
                 💧 Tight / Reactive
               </button>
@@ -240,39 +240,39 @@ export const DermChatDrawer: React.FC<DermChatDrawerProps> = ({
               <div
                 className={`max-w-[85%] p-3.5 rounded-2xl text-xs leading-relaxed space-y-2.5 ${
                   msg.sender === 'user'
-                    ? 'bg-navara-ivory text-navara-dark font-medium rounded-br-none shadow-md'
-                    : 'bg-[#232e1b] border border-navara-border text-navara-cream rounded-bl-none shadow-sm'
+                    ? 'bg-[#1c2417] text-white font-medium rounded-br-none shadow-sm'
+                    : 'bg-[#faf9f5] border border-[#e6e2d8] text-[#1a2217] rounded-bl-none shadow-sm'
                 }`}
               >
                 <p>{msg.text}</p>
 
                 {/* Optional Embedded Fit Score Card */}
                 {msg.fitCard && (
-                  <div className="p-3 rounded-xl bg-[#181d15] border border-navara-borderSubtle text-xs space-y-1.5 mt-2 text-navara-ivory">
+                  <div className="p-3 rounded-xl bg-white border border-[#e6e2d8] text-xs space-y-1.5 mt-2 text-[#1a2217] shadow-sm">
                     <div className="flex items-center justify-between">
-                      <div className="font-bold text-navara-ivory">
+                      <div className="font-bold text-[#1a2217]">
                         {msg.fitCard.name}
                       </div>
-                      <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono font-bold text-[10px] border border-emerald-500/30">
+                      <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-mono-clinical font-bold text-[10px] border border-emerald-200">
                         {msg.fitCard.fitScore}% Fit
                       </span>
                     </div>
-                    <div className="text-[10px] text-navara-stone">{msg.fitCard.brand} • {msg.fitCard.price}</div>
-                    <p className="text-[10px] text-navara-sage leading-snug">{msg.fitCard.why}</p>
+                    <div className="text-[10px] text-[#6b7764] font-mono-clinical">{msg.fitCard.brand} • {msg.fitCard.price}</div>
+                    <p className="text-[10px] text-[#556050] leading-snug">{msg.fitCard.why}</p>
                   </div>
                 )}
               </div>
-              <span className="text-[9px] font-mono text-navara-stone/80 mt-1 px-1">
+              <span className="text-[9px] font-mono-clinical text-[#8b9784] mt-1 px-1">
                 {msg.time}
               </span>
             </div>
           ))}
 
           {isTyping && (
-            <div className="flex items-center gap-1.5 p-3 rounded-2xl bg-[#232e1b] border border-navara-border w-24">
-              <span className="w-1.5 h-1.5 rounded-full bg-navara-sage animate-bounce" />
-              <span className="w-1.5 h-1.5 rounded-full bg-navara-sage animate-bounce delay-100" />
-              <span className="w-1.5 h-1.5 rounded-full bg-navara-sage animate-bounce delay-200" />
+            <div className="flex items-center gap-1.5 p-3 rounded-2xl bg-[#faf9f5] border border-[#e6e2d8] w-20">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#637852] animate-bounce" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#637852] animate-bounce delay-100" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#637852] animate-bounce delay-200" />
             </div>
           )}
 
@@ -280,41 +280,41 @@ export const DermChatDrawer: React.FC<DermChatDrawerProps> = ({
         </div>
 
         {/* Quick Suggestion Chips */}
-        <div className="p-2.5 border-t border-navara-borderSubtle bg-[#1c2219]/90 flex items-center gap-1.5 overflow-x-auto no-scrollbar text-xs">
+        <div className="p-2.5 border-t border-[#f0ede6] bg-[#faf9f5] flex items-center gap-1.5 overflow-x-auto no-scrollbar text-xs">
           <button
             onClick={() => handleQuickQuestion('How can I improve my evening routine?')}
-            className="px-2.5 py-1 rounded-xl bg-[#232e1b] hover:bg-[#2e3d23] border border-navara-borderSubtle text-navara-cream whitespace-nowrap text-[11px]"
+            className="px-3 py-1 rounded-full bg-white hover:bg-[#f4f6f1] border border-[#ded9cd] text-[#1a2217] whitespace-nowrap text-[11px] font-mono-clinical shadow-sm"
           >
-            🌙 Improve evening routine
+            🌙 Evening routine
           </button>
           <button
-            onClick={() => handleQuickQuestion('What are the TOP-3 SPFs for my skin?')}
-            className="px-2.5 py-1 rounded-xl bg-[#232e1b] hover:bg-[#2e3d23] border border-navara-borderSubtle text-navara-cream whitespace-nowrap text-[11px]"
+            onClick={() => handleQuickQuestion('What are the best SPFs for my skin?')}
+            className="px-3 py-1 rounded-full bg-white hover:bg-[#f4f6f1] border border-[#ded9cd] text-[#1a2217] whitespace-nowrap text-[11px] font-mono-clinical shadow-sm"
           >
-            ☀️ Top 3 SPFs for my skin
+            ☀️ Best SPFs for skin
           </button>
           <button
             onClick={() => handleQuickQuestion('Why is my skin purging or peeling?')}
-            className="px-2.5 py-1 rounded-xl bg-[#232e1b] hover:bg-[#2e3d23] border border-navara-borderSubtle text-navara-cream whitespace-nowrap text-[11px]"
+            className="px-3 py-1 rounded-full bg-white hover:bg-[#f4f6f1] border border-[#ded9cd] text-[#1a2217] whitespace-nowrap text-[11px] font-mono-clinical shadow-sm"
           >
-            💧 Why is my skin peeling?
+            💧 Why is skin peeling?
           </button>
         </div>
 
         {/* Chat Input Bar */}
-        <div className="p-3 border-t border-navara-border bg-[#181d15] flex items-center gap-2">
+        <div className="p-3 border-t border-[#e6e2d8] bg-white flex items-center gap-2">
           <input
             type="text"
-            placeholder="Ask Lóvi anything about your skin or ingredients..."
+            placeholder="Ask DermaNova anything about your skin or ingredients..."
             value={inputVal}
             onChange={(e) => setInputVal(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-            className="flex-1 px-4 py-2.5 rounded-2xl glass-input text-xs font-sans placeholder:text-navara-stone/50"
+            className="flex-1 px-4 py-2.5 rounded-full bg-[#faf9f5] border border-[#ded9cd] text-xs font-sans text-[#1a2217] placeholder:text-[#8b9784] focus:outline-none focus:ring-2 focus:ring-[#637852]/20 focus:border-[#637852]"
           />
           <button
             onClick={() => sendMessage()}
             disabled={!inputVal.trim()}
-            className="p-2.5 rounded-2xl bg-navara-ivory hover:bg-navara-cream disabled:opacity-40 text-navara-dark transition shadow-lg shrink-0"
+            className="p-2.5 rounded-full bg-[#1c2417] hover:bg-[#2d3b25] disabled:opacity-40 text-white transition shadow-sm shrink-0"
           >
             <Send className="w-4 h-4" />
           </button>

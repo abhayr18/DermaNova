@@ -1,23 +1,21 @@
 'use client';
 
 import React, { useState } from 'react';
+import { RecommendationResponse } from '../services/api';
 import {
-  FileText,
+  Sparkles,
   ShieldCheck,
   CheckCircle2,
-  Sparkles,
-  Droplets,
+  Download,
+  Share2,
+  Calendar,
+  Clock,
+  Pill,
   Sun,
   Moon,
-  Clock,
-  ArrowRight,
-  UserCheck,
-  Download,
-  HeartHandshake,
-  BookOpen,
-  Award
+  Droplets,
+  HeartHandshake
 } from 'lucide-react';
-import { RecommendationResponse } from '../services/api';
 
 interface PersonalizedKitCardProps {
   recommendations: RecommendationResponse;
@@ -32,80 +30,95 @@ export const PersonalizedKitCard: React.FC<PersonalizedKitCardProps> = ({
 }) => {
   const [isSaved, setIsSaved] = useState(false);
 
-  // Derive products from recommendation actives
-  const actives = recommendations.primary_active_ingredients || [];
-  const primaryActiveName = actives.length > 0 ? actives[0].name : 'Target Clarifying Blemish Complex';
-  const primaryActiveConc = actives.length > 0 ? actives[0].recommended_strength : 'Clinical Strength';
-
-  const products = [
-    {
-      step: 'Step 01 • Cleanse',
-      time: 'AM & PM',
-      name: 'Gentle Purifying Sebum Cleanser',
-      active: 'Zinc PCA + Salicylic Acid 1%',
-      purpose: 'Removes cellular debris, clears follicular openings without stripping barrier lipids.',
-      otcAdvice: 'Available at any pharmacy as generic 1% BHA Foaming Face Wash',
-      badge: 'Sulfate-Free'
-    },
-    {
-      step: 'Step 02 • Treat (Key Active)',
-      time: 'PM Only',
-      name: primaryActiveName,
-      active: primaryActiveConc,
-      purpose: actives.length > 0 ? actives[0].mechanism_of_action : 'Inhibits micro-comedone formation and targets hyperpigmentation.',
-      otcAdvice: `Ask pharmacist for generic ${primaryActiveName} (${primaryActiveConc}) gel or serum`,
-      badge: 'Key Therapeutic Active'
-    },
-    {
-      step: 'Step 03 • Repair',
-      time: 'AM & PM',
-      name: 'Cica Ceramide Barrier Cream',
-      active: 'Ceramide NP + Madecassoside / Centella',
-      purpose: 'Replenishes intercellular lipid matrix and prevents transepidermal water loss (TEWL).',
-      otcAdvice: 'Any non-comedogenic ceramide lotion or barrier relief cream',
-      badge: 'Barrier Defense'
-    },
-    {
-      step: 'Step 04 • Protect',
-      time: 'AM Only',
-      name: 'Broad-Spectrum Matte Fluid Sunscreen',
-      active: 'SPF 50+ • PA++++ Multi-filter',
-      purpose: 'Prevents UV-induced post-inflammatory hyperpigmentation (PIH) and photoaging.',
-      otcAdvice: 'Generic pharmacy gel sunscreen (oil-free, non-greasy finish)',
-      badge: 'Zero White Cast'
-    }
-  ];
+  // Extract products from prescription or construct from curated products
+  const products = recommendations.curated_products?.length > 0
+    ? recommendations.curated_products.map((p, idx) => ({
+        step: `Step ${idx + 1}: ${p.category}`,
+        time: idx === 0 ? 'AM & PM' : idx % 2 === 1 ? 'AM Daily' : 'PM Daily',
+        name: p.product_name,
+        active: p.key_actives.join(', '),
+        purpose: p.description,
+        otcAdvice: `${p.brand} (${p.price_range})`
+      }))
+    : [
+        {
+          step: 'Step 1: Cleanse',
+          time: 'AM & PM',
+          name: 'Hydrating Ceramide Barrier Cleanser',
+          active: 'Ceramide NP + Glycerin',
+          purpose: 'Preserves the acid mantle without stripping stratum corneum intercellular lipids.',
+          otcAdvice: 'Generic CeraVe Hydrating Cleanser or Cetaphil Gentle Cleanser ($9-$14 at CVS/Walgreens).'
+        },
+        {
+          step: 'Step 2: AM Active Treatment',
+          time: 'AM Daily',
+          name: '10% Azelaic Acid + Centella Asiatica Serum',
+          active: 'Azelaic Acid 10%',
+          purpose: 'Inhibits follicular micro-erythema, diminishes inflammatory papules, and reduces PIH dark macules.',
+          otcAdvice: 'Generic 10% Azelaic Acid suspension or The Ordinary ($10 at Target/Sephora).'
+        },
+        {
+          step: 'Step 3: PM Active Spot Target',
+          time: 'PM Daily',
+          name: '2.5% Micronized Benzoyl Peroxide / Salicylic Acid 2%',
+          active: 'BHA 2% + Micronized BPO',
+          purpose: 'Directly eradicates follicular Cutibacterium acnes colonies with minimal barrier drying.',
+          otcAdvice: 'AcneFree 2.5% Spot Treatment or Paula\'s Choice 2% BHA ($8-$35 at pharmacies).'
+        },
+        {
+          step: 'Step 4: Protect & Restore',
+          time: 'AM SPF / PM Cream',
+          name: 'Cica Barrier Repair Balm + Mineral SPF 50',
+          active: 'Madecassoside + Zinc Oxide 12%',
+          purpose: 'Restores lipid bilamellar matrix and provides UVA/UVB photoprotection against post-inflammatory darkening.',
+          otcAdvice: 'La Roche-Posay Cicaplast Baume B5 + Mineral Fluid SPF 50 ($16-$22 at pharmacy).'
+        }
+      ];
 
   const handleDownloadRegimen = () => {
     setIsSaved(true);
-    window.print();
+    const content = `DermaNova Doctor-Reviewed Clinical Skincare Regimen\n` +
+      `Patient: ${patientName}\n` +
+      `Skin Type: ${skinType}\n` +
+      `Date Formulated: ${new Date().toLocaleDateString()}\n\n` +
+      products.map((p, i) => `${i + 1}. ${p.step} (${p.time})\nProduct: ${p.name}\nActive: ${p.active}\nPurpose: ${p.purpose}\nChemist Recommendation: ${p.otcAdvice}\n`).join('\n') +
+      `\nMedical Board Supervision: Dr. Nadia K., MD & Formulation Chemist (DermaNova Clinical Board)`;
+
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `DermaNova-Regimen-${patientName.replace(/\s+/g, '-')}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
-    <div className="glass-panel rounded-3xl border border-navara-border p-6 sm:p-8 space-y-6 shadow-2xl">
-      {/* Header with Navara Botanical Touch */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-navara-borderSubtle pb-5">
-        <div className="space-y-1.5">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navara-panel border border-navara-sage/40 text-navara-matcha text-[10px] font-mono font-bold uppercase tracking-wider">
-            <HeartHandshake className="w-3.5 h-3.5" />
-            <span>100% Brand-Neutral Clinical Prescription</span>
+    <div className="rounded-3xl p-6 sm:p-8 bg-white border border-[#e6e2d8] space-y-6 shadow-sm">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#f0ede6] pb-5">
+        <div className="space-y-1">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f4f6f1] text-[#425335] text-[10px] font-mono-clinical uppercase tracking-wider font-semibold border border-[#cbd7c1]">
+            <HeartHandshake className="w-3.5 h-3.5 text-[#637852]" />
+            <span>100% Brand-Neutral Clinical Guidance</span>
           </div>
-          <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-navara-ivory tracking-tight">
+          <h3 className="font-serif-luxury text-2xl sm:text-3xl font-normal text-[#1a2217] tracking-tight">
             Your Personalized Skincare Regimen
           </h3>
-          <p className="text-xs text-navara-stone font-mono">
+          <p className="text-xs text-[#6b7764] font-mono-clinical">
             Formulated for {patientName} • {skinType} Skin Profile • Free Pharmacy & Active Guide
           </p>
         </div>
 
         {/* Doctor Review Verification Stamp */}
-        <div className="px-3.5 py-2.5 rounded-2xl bg-[#141712] border border-navara-borderSubtle flex items-center gap-3 self-start sm:self-auto shadow-inner">
-          <div className="w-8 h-8 rounded-full bg-navara-matcha/20 border border-navara-matcha/40 flex items-center justify-center text-navara-matcha font-mono font-bold text-xs">
+        <div className="px-3.5 py-2.5 rounded-2xl bg-[#faf9f5] border border-[#e6e2d8] flex items-center gap-3 self-start sm:self-auto shadow-sm">
+          <div className="w-8 h-8 rounded-full bg-[#f4f6f1] border border-[#cbd7c1] flex items-center justify-center text-[#425335] font-mono-clinical font-bold text-xs">
             MD
           </div>
           <div className="text-left text-[11px]">
-            <div className="text-navara-ivory font-bold">Dr. Nadia K., MD & Chemist</div>
-            <div className="text-navara-stone text-[10px] font-mono">Lóvi Medical Board • Review Verified</div>
+            <div className="text-[#1a2217] font-semibold">Dr. Nadia K., MD & Chemist</div>
+            <div className="text-[#6b7764] text-[10px] font-mono-clinical">DermaNova Medical Board • Verified</div>
           </div>
         </div>
       </div>
@@ -115,34 +128,34 @@ export const PersonalizedKitCard: React.FC<PersonalizedKitCardProps> = ({
         {products.map((prod, idx) => (
           <div
             key={idx}
-            className="p-5 rounded-2xl bg-[#1c2219]/70 border border-navara-borderSubtle hover:border-navara-border transition flex flex-col justify-between space-y-3 group"
+            className="p-5 rounded-2xl bg-[#faf9f5] border border-[#e6e2d8] hover:border-[#cbd7c1] hover:bg-white transition flex flex-col justify-between space-y-3 group shadow-sm"
           >
             <div>
-              <div className="flex items-center justify-between text-[10px] font-mono">
-                <span className="text-navara-matcha font-bold uppercase">{prod.step}</span>
-                <span className="flex items-center gap-1 text-navara-stone bg-[#141712] px-2.5 py-0.5 rounded-full border border-navara-borderSubtle">
-                  {prod.time.includes('AM') && <Sun className="w-3 h-3 text-amber-300" />}
-                  {prod.time.includes('PM') && <Moon className="w-3 h-3 text-navara-cream" />}
+              <div className="flex items-center justify-between text-[10px] font-mono-clinical">
+                <span className="text-[#637852] font-semibold uppercase">{prod.step}</span>
+                <span className="flex items-center gap-1 text-[#6b7764] bg-white px-2.5 py-0.5 rounded-full border border-[#e6e2d8]">
+                  {prod.time.includes('AM') && <Sun className="w-3 h-3 text-amber-600" />}
+                  {prod.time.includes('PM') && <Moon className="w-3 h-3 text-[#425335]" />}
                   {prod.time}
                 </span>
               </div>
 
-              <h4 className="font-serif-luxury text-base font-bold text-navara-ivory mt-2 group-hover:text-navara-matcha transition">
+              <h4 className="font-serif-luxury text-base font-normal text-[#1a2217] mt-2 group-hover:text-[#425335] transition">
                 {prod.name}
               </h4>
 
-              <div className="inline-block mt-1.5 px-2.5 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-[#232e1b] text-navara-matcha border border-navara-sage/30">
+              <div className="inline-block mt-1.5 px-2.5 py-0.5 rounded-lg text-[10px] font-mono-clinical font-semibold bg-[#f4f6f1] text-[#425335] border border-[#cbd7c1]">
                 Active: {prod.active}
               </div>
 
-              <p className="text-xs text-navara-stone mt-2 leading-relaxed">
+              <p className="text-xs text-[#556050] mt-2 leading-relaxed font-sans">
                 {prod.purpose}
               </p>
             </div>
 
             {/* Local Pharmacy Equivalent Tip */}
-            <div className="p-3 rounded-xl bg-[#141712]/80 border border-navara-borderSubtle text-[11px] text-navara-stone">
-              <span className="text-navara-matcha font-bold font-mono">Chemist Guidance: </span>
+            <div className="p-3 rounded-xl bg-white border border-[#e6e2d8] text-[11px] text-[#556050]">
+              <span className="text-[#637852] font-semibold font-mono-clinical">Chemist Guidance: </span>
               <span>{prod.otcAdvice}</span>
             </div>
           </div>
@@ -150,24 +163,24 @@ export const PersonalizedKitCard: React.FC<PersonalizedKitCardProps> = ({
       </div>
 
       {/* Free Open Source Prescription Card */}
-      <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-[#232e1b] to-[#141712] border border-navara-border flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+      <div className="p-5 sm:p-6 rounded-2xl bg-[#f4f6f1] border border-[#d6e0ce] flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="font-serif-luxury text-base font-bold text-navara-ivory">Free Open-Access Skincare Education</span>
-            <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-mono font-bold border border-emerald-500/30">
-              100% Brand-Free
+            <span className="font-serif-luxury text-base font-normal text-[#1a2217]">Free Open-Access Skincare Education</span>
+            <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-mono-clinical font-semibold border border-emerald-200">
+              100% Brand-Neutral
             </span>
           </div>
-          <p className="text-xs text-navara-stone max-w-xl">
-            Lóvi and Navara are non-affiliated with any beauty conglomerate. Buy generic active ingredients at your local pharmacy with zero markup.
+          <p className="text-xs text-[#556050] max-w-xl">
+            DermaNova is 100% non-affiliated with any beauty conglomerate. Buy generic active ingredients at your local pharmacy with zero commercial markup.
           </p>
         </div>
 
         <button
           onClick={handleDownloadRegimen}
-          className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-navara-ivory hover:bg-navara-cream text-navara-dark font-extrabold text-xs flex items-center justify-center gap-2 transition shadow-xl shrink-0"
+          className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#1c2417] hover:bg-[#2d3b25] text-white font-mono-clinical font-semibold text-xs flex items-center justify-center gap-2 transition shadow-sm shrink-0"
         >
-          <Download className="w-4 h-4 text-navara-terracotta" />
+          <Download className="w-4 h-4 text-[#b85c3c]" />
           <span>{isSaved ? 'Print / Saved' : 'Print / Save Regimen'}</span>
         </button>
       </div>
