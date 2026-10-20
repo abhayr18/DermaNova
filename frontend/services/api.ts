@@ -7,16 +7,15 @@ const getApiBaseUrl = (): string => {
   if (process.env.NEXT_PUBLIC_API_URL) {
     return process.env.NEXT_PUBLIC_API_URL.replace(/\/$/, '');
   }
+  // In browser, using relative '/api/v1' routes through Next.js proxy rewrite
+  // to avoid cross-origin preflights, IPv6 issues, and CORS network errors
   if (typeof window !== 'undefined') {
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      return 'http://localhost:8000/api/v1';
-    }
     return '/api/v1';
   }
   if (process.env.BACKEND_URL) {
     return `${process.env.BACKEND_URL.replace(/\/$/, '')}/api/v1`;
   }
-  return 'http://localhost:8000/api/v1';
+  return 'http://127.0.0.1:8000/api/v1';
 };
 
 const API_BASE_URL = getApiBaseUrl();
@@ -24,6 +23,7 @@ const API_BASE_URL = getApiBaseUrl();
 // Configure Axios with Auth Token Interceptor
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
+  timeout: 45000,
 });
 
 apiClient.interceptors.request.use((config) => {
@@ -38,6 +38,17 @@ apiClient.interceptors.request.use((config) => {
   }
   return config;
 });
+
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.message === 'Network Error' || !error.response) {
+      error.friendlyMessage =
+        'Unable to connect to the DermaNova AI backend. Please verify that the backend server is running on http://127.0.0.1:8000.';
+    }
+    return Promise.reject(error);
+  }
+);
 
 export interface ConditionScore {
   condition_id: string;

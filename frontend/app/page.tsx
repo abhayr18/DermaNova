@@ -122,9 +122,12 @@ export default function DermaNovaApp() {
       setCurrentScreen('capture');
 
       const serverDetail =
-        err?.response?.data?.detail ||
         err?.response?.data?.message ||
-        err?.message ||
+        err?.response?.data?.detail ||
+        err?.friendlyMessage ||
+        (err?.message === 'Network Error'
+          ? 'Unable to connect to the backend server. Please ensure the backend is running on http://127.0.0.1:8000.'
+          : err?.message) ||
         'Could not analyze photo. Please ensure you upload a clear, well-lit photograph of a human face.';
 
       setErrorMsg(typeof serverDetail === 'string' ? serverDetail : JSON.stringify(serverDetail));
