@@ -59,7 +59,7 @@ export default function DermaNovaApp() {
 
   useEffect(() => {
     const saved = apiService.getCustomBackendUrl();
-    if (saved) setBackendInputUrl(saved);
+    setBackendInputUrl(saved || apiService.getBaseUrl());
   }, []);
 
   const handleTestAndSaveBackend = async () => {
@@ -150,12 +150,13 @@ export default function DermaNovaApp() {
       setIsLoading(false);
       setCurrentScreen('capture');
 
+      const activeUrl = apiService.getBaseUrl();
       const serverDetail =
         err?.response?.data?.message ||
         err?.response?.data?.detail ||
         err?.friendlyMessage ||
         (err?.message === 'Network Error'
-          ? 'Unable to connect to the backend server. Please ensure the backend is running on http://127.0.0.1:8000.'
+          ? `Cannot connect to AI backend at ${activeUrl}. If the Render instance is spinning up from sleep, please wait 30 seconds and retry.`
           : err?.message) ||
         'Could not analyze photo. Please ensure you upload a clear, well-lit photograph of a human face.';
 
@@ -231,14 +232,14 @@ export default function DermaNovaApp() {
             {showBackendConfig && (
               <div className="pt-2 border-t border-[#fed7d7] space-y-2 text-[#252923]">
                 <div className="text-[11px] text-[#777D76]">
-                  On Vercel, the frontend connects to your deployed FastAPI backend. Paste your live backend URL below (Render, Railway, or localtunnel/ngrok):
+                  Production backend is deployed at <strong>https://dermanova.onrender.com/api/v1</strong>. You can verify the connection or connect an alternate backend:
                 </div>
                 <div className="flex flex-col sm:flex-row gap-2">
                   <input
                     type="url"
                     value={backendInputUrl}
                     onChange={(e) => setBackendInputUrl(e.target.value)}
-                    placeholder="https://your-backend.onrender.com/api/v1"
+                    placeholder="https://dermanova.onrender.com/api/v1"
                     className="flex-1 px-3.5 py-2 rounded-xl border border-[#E8E8E1] bg-white text-xs font-mono focus:outline-none focus:border-[#527665]"
                   />
                   <button

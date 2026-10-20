@@ -1,25 +1,41 @@
 import axios from 'axios';
 
-// Resolve API Base URL for Vercel Services multi-service routing:
-// 1. Server-side (Vercel runtime functions / SSR): uses bound BACKEND_URL injected by Vercel service binding
-// 2. Client-side (Browser): uses relative '/api/v1' routed by Vercel top-level rewrites, or NEXT_PUBLIC_API_URL
+// Production Render Cloud Backend URL (with active ML inference & CORS enabled)
+const RENDER_BACKEND_URL = 'https://dermanova.onrender.com/api/v1';
+
+// Resolve API Base URL:
+// 1. User manual override stored in localStorage (validated)
+// 2. Explicit environment variable (NEXT_PUBLIC_API_URL / BACKEND_URL)
+// 3. Localhost in development, or live Render cloud backend in production / Vercel
 export const getApiBaseUrl = (): string => {
   if (typeof window !== 'undefined') {
     const saved = localStorage.getItem('dermanova_backend_url');
     if (saved) {
-      return saved.replace(/\/$/, '');
+      const isCloudHost = !['localhost', '127.0.0.1'].includes(window.location.hostname);
+      const isLocalSaved = saved.includes('localhost') || saved.includes('127.0.0.1');
+      // If user is on a cloud domain (e.g. Vercel), discard any stale localhost override
+      if (!(isCloudHost && isLocalSaved)) {
+        return saved.replace(/\/$/, '');
+      }
     }
   }
+
   if (process.env.NEXT_PUBLIC_API_URL) {
     return process.env.NEXT_PUBLIC_API_URL.replace(/\/$/, '');
   }
+
   if (typeof window !== 'undefined') {
-    return '/api/v1';
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return 'http://localhost:8000/api/v1';
+    }
+    return RENDER_BACKEND_URL;
   }
+
   if (process.env.BACKEND_URL) {
     return `${process.env.BACKEND_URL.replace(/\/$/, '')}/api/v1`;
   }
-  return 'http://127.0.0.1:8000/api/v1';
+
+  return RENDER_BACKEND_URL;
 };
 
 const API_BASE_URL = getApiBaseUrl();
@@ -27,7 +43,7 @@ const API_BASE_URL = getApiBaseUrl();
 // Configure Axios with Auth Token Interceptor
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 45000,
+  timeout: 60000,
 });
 
 apiClient.interceptors.request.use((config) => {
@@ -45,13 +61,15 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.message === 'Network Error' || !error.response) {
-      const isVercel = typeof window !== 'undefined' && window.location.hostname.includes('vercel.app');
-      if (isVercel) {
+      const activeUrl = getApiBaseUrl();
+      const isRender = activeUrl.includes('onrender.com');
+      if (isRender) {
         error.friendlyMessage =
-          'Cannot reach the AI Backend. Your Vercel frontend needs a live cloud backend URL. Please set NEXT_PUBLIC_API_URL in Vercel Project Settings, or connect a live backend URL.';
+          `Cannot reach the DermaNova AI backend at ${activeUrl}. ` +
+          `Render free-tier instances may sleep after inactivity and take ~30-40 seconds to spin up. Please retry momentarily.`;
       } else {
         error.friendlyMessage =
-          'Unable to connect to the DermaNova AI backend. Please verify that the backend server is running on http://127.0.0.1:8000.';
+          `Cannot reach the DermaNova AI backend at ${activeUrl}. Please ensure your backend server is running and accessible.`;
       }
     }
     return Promise.reject(error);
@@ -379,12 +397,16 @@ export const apiService = {
     return null;
   },
 
+  getBaseUrl(): string {
+    return getApiBaseUrl();
+  },
+
   async testConnection(testUrl?: string): Promise<{ success: boolean; latencyMs: number; status?: any; error?: string }> {
     const raw = (testUrl || getApiBaseUrl()).replace(/\/$/, '');
     const url = raw.endsWith('/api/v1') ? `${raw}/health` : `${raw}/api/v1/health`;
     const start = Date.now();
     try {
-      const resp = await axios.get(url, { timeout: 10000 });
+      const resp = await axios.get(url, { timeout: 35000 });
       return {
         success: resp.status === 200,
         latencyMs: Date.now() - start,
