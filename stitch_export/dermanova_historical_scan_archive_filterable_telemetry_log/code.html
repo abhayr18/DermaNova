@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "outline": "#717974", "secondary-container": "#c9ead8", "on-primary": "#ffffff", "surface-bright": "#f7fbf1", "on-surface-variant": "#414844", "background": "#f7fbf1", "error": "#ba1a1a", "on-secondary-fixed-variant": "#304d40", "secondary-fixed": "#c9ead8", "on-background": "#191d17", "on-tertiary": "#ffffff", "tertiary-container": "#6f6d76", "inverse-primary": "#a8cfbb", "on-secondary": "#ffffff", "surface-dim": "#d8dbd2", "surface-container-lowest": "#ffffff", "surface-container-highest": "#e0e4da", "primary-fixed": "#c4ebd7", "surface": "#f7fbf1", "on-error": "#ffffff", "secondary-fixed-dim": "#adcebd", "on-surface": "#191d17", "tertiary-fixed-dim": "#c8c5cf", "surface-container-low": "#f2f5eb", "on-tertiary-fixed-variant": "#47464e", "primary": "#3a5d4d", "on-secondary-fixed": "#022016", "surface-variant": "#e0e4da", "surface-tint": "#426655", "on-primary-fixed": "#002115", "on-error-container": "#93000a", "surface-container": "#ecefe6", "on-tertiary-container": "#f5f0fb", "on-primary-fixed-variant": "#2a4e3e", "error-container": "#ffdad6", "outline-variant": "#c1c8c2", "tertiary": "#56555e", "inverse-on-surface": "#eff2e8", "tertiary-fixed": "#e5e1ec", "secondary": "#476557", "primary-fixed-dim": "#a8cfbb", "surface-container-high": "#e6e9e0", "on-secondary-container": "#4d6b5d", "on-primary-container": "#d4fce6", "inverse-surface": "#2e322b", "on-tertiary-fixed": "#1b1b22", "primary-container": "#527665" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-lg": "1.5rem", "margin-mobile": "1.25rem", "gutter": "1.5rem", "space-md": "1rem", "margin": "3rem", "space-sm": "0.5rem", "space-xl": "2.5rem", "gutter-mobile": "1rem", "space-xs": "0.25rem" }, "fontFamily": { "title-sm": [ "Manrope" ], "body-md": [ "Manrope" ], "title-md": [ "Manrope" ], "headline-sm": [ "Newsreader" ], "display-hero-mobile": [ "Newsreader" ], "label-xs": [ "Manrope" ], "body-sm": [ "Manrope" ], "headline-lg": [ "Newsreader" ], "body-lg": [ "Manrope" ], "headline-md": [ "Newsreader" ], "headline-lg-mobile": [ "Newsreader" ], "label-md": [ "Manrope" ], "display-hero": [ "Newsreader" ] }, "fontSize": { "title-sm": [ "16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" } ], "body-md": [ "14px", { "lineHeight": "22px", "letterSpacing": "0.01em", "fontWeight": "400" } ], "title-md": [ "18px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "600" } ], "headline-sm": [ "22px", { "lineHeight": "30px", "letterSpacing": "-0.005em", "fontWeight": "500" } ], "display-hero-mobile": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "400" } ], "label-xs": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700" } ], "body-sm": [ "13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" } ], "headline-lg": [ "40px", { "lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "400" } ], "body-lg": [ "16px", { "lineHeight": "26px", "letterSpacing": "0.005em", "fontWeight": "400" } ], "headline-md": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "headline-lg-mobile": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "label-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" } ], "display-hero": [ "56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col justify-between p-space-lg shadow-[0_1px_8px_rgba(48,77,64,0.04)]"><div class="flex flex-col gap-space-lg"><div class="flex items-center gap-space-sm px-space-xs"><img alt="DermaNova Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1X9eBMJTAGKrCQbC0ORXApSsES0TFCfXEn6QbsHMO_ZHWSpU_BVuKPyjrzpu_ePPofDPGSBRyyAqefWjdhGo-uWBk_KOb5CRQ2ZVT4nzqtT-ME0aUAr58HECwZOU5M4uXR_ID_GVeR7WBhOhJHe4pi30OneqLvUDNGLYkGupmgJov-vzeLsCAM3Z1xVaQgJSRe73Bm20x0Tj9ItSiFAg9GZdeazBIUQdpOQSmKAZVCy-CCQWn9cVY-_Tg7b"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface leading-tight">DermaNova</span><span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Clinical Vision AI</span></div></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-fixed font-semibold"><a class="flex items-center px-space-md py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="overview" href="#">Overview</a><a class="flex items-center px-space-md py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="skin-analysis" href="#">Skin Analysis</a><a class="flex items-center px-space-md py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="my-routine" href="#">My Routine</a><a class="flex items-center px-space-md py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="progress" href="#">Progress</a><a class="flex items-center px-space-md py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="scan-history" href="#">Scan History</a><a class="flex items-center px-space-md py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="settings" href="#">Settings</a></nav></div><div class="flex flex-col gap-space-md pt-space-md"><div class="bg-surface-container p-space-md rounded-xl flex flex-col gap-space-xs"><div class="flex items-center gap-space-xs text-primary"><span class="material-symbols-outlined text-[16px]">lock</span><span class="font-label-md text-label-md tracking-wider uppercase text-on-surface">Encrypted &amp; Private</span></div><p class="font-body-sm text-body-sm text-on-surface-variant leading-snug">Biometric sensory scans remain strictly HIPAA-grade and locally tokenized. Informational scope only.</p></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-20 bg-surface/80 backdrop-blur-xl z-40 px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(48,77,64,0.04)]"><div class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-2 rounded-full"><span class="material-symbols-outlined text-outline text-[18px]">verified_user</span><span class="font-label-md text-label-md text-on-surface-variant">Optical Neural Engine: Optimal Fidelity</span></div><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-xs text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer"><span class="material-symbols-outlined text-[20px]">search</span></div><div class="relative cursor-pointer text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-0 right-0 w-2 h-2 rounded-full bg-primary"></span></div><div class="flex items-center gap-space-sm pl-space-sm"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7MJvyS5iRhhZhcqfoD7EEtsOnHYo9v0c70TmVrfZdLjYySJuNxPiGzocG5iwueAsOJXO_eI9nScoGn75D4ep1wgp5NV231TDOeqbBWigMAnTrsaHZVFt8_z75WpselF25SgQvP5BkoZVKHQ5lU-5MnOUWAEHVcDGppggsr2BQmXBkWa2nSrXTzA0VZdDXj74p-s2dhZvHsjMJMn5f9BJI08rXb7hpuprdJpPMpYX2lHFTNWaI8YQ6Sg"/><div class="flex flex-col text-left"><span class="font-title-sm text-title-sm text-on-surface font-semibold leading-tight">Elena Vance</span><span class="font-label-xs text-label-xs text-outline">Dermal Tier I</span></div></div></div></header><main class="relative pt-20 bg-surface min-h-screen px-space-xl py-space-xl"><div class="flex flex-col w-full">
+<!-- Script to ensure Scan History sidebar link is active -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const navLinks = document.querySelectorAll("aside nav a");
+      navLinks.forEach(link => {
+        if (link.getAttribute("data-path") === "scan-history") {
+          link.className = "flex items-center px-space-md py-3 rounded-lg bg-secondary-container text-on-secondary-fixed font-semibold font-body-md text-body-md transition-colors shadow-sm";
+        } else {
+          link.className = "flex items-center px-space-md py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md";
+        }
+      });
+    });
+  </script>
+<!-- Section 1: Header & Quick Analytics Bar -->
+<div class="flex flex-col gap-space-lg mb-space-xl">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs max-w-3xl">
+<div class="flex items-center gap-space-xs text-outline">
+<span class="font-label-xs text-label-xs uppercase tracking-widest text-secondary">Telemetry Vault</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant">Biometric Longitudinal Log</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Calibration Archive &amp; Telemetry Log</h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          Complete longitudinal repository of 18 calibrated multi-spectral biometric scans, chromatic daylight normalizations, and localized biomarker telemetry across 56 days of circadian observation.
+        </p>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center flex-wrap gap-space-sm self-start md:self-end">
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-high transition-all shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-secondary">download</span>
+<span class="font-body-md text-body-md font-semibold">Export Dataset (CSV/PDF)</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-high transition-all shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-secondary">tune</span>
+<span class="font-body-md text-body-md font-semibold">Bulk Calibrate</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-lg py-2.5 rounded-lg bg-primary text-on-primary hover:bg-primary-container transition-all shadow-md">
+<span class="material-symbols-outlined text-[18px]">add_a_photo</span>
+<span class="font-body-md text-body-md font-semibold">New Biometric Scan</span>
+</button>
+</div>
+</div>
+<!-- High-Level Telemetry Metrics Strip -->
+<div class="grid grid-cols-2 md:grid-cols-5 gap-space-sm bg-surface-container-low p-space-md rounded-xl shadow-sm">
+<div class="flex flex-col gap-space-xs p-space-sm bg-surface-container-lowest rounded-lg shadow-sm">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline flex items-center justify-between">
+          Scans Logged
+          <span class="material-symbols-outlined text-secondary text-[16px]">folder_special</span>
+</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">18</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Captures</span>
+</div>
+<span class="font-label-xs text-label-xs text-secondary font-medium">8 consecutive cohorts</span>
+</div>
+<div class="flex flex-col gap-space-xs p-space-sm bg-surface-container-lowest rounded-lg shadow-sm">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline flex items-center justify-between">
+          Earliest Baseline
+          <span class="material-symbols-outlined text-outline text-[16px]">history</span>
+</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-title-sm text-title-sm text-on-surface">Oct 04</span>
+<span class="font-label-xs text-label-xs text-outline">#DN-7910</span>
+</div>
+<span class="font-label-xs text-label-xs text-outline-variant font-medium">Initial Barrier 68/100</span>
+</div>
+<div class="flex flex-col gap-space-xs p-space-sm bg-surface-container-lowest rounded-lg shadow-sm">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline flex items-center justify-between">
+          Latest Calibrated
+          <span class="material-symbols-outlined text-primary text-[16px]">verified</span>
+</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-title-sm text-title-sm text-primary font-bold">Nov 29</span>
+<span class="font-label-xs text-label-xs text-primary font-semibold">#DN-8841</span>
+</div>
+<span class="font-label-xs text-label-xs text-primary font-medium">Active Barrier 89/100</span>
+</div>
+<div class="flex flex-col gap-space-xs p-space-sm bg-surface-container-lowest rounded-lg shadow-sm">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline flex items-center justify-between">
+          TEWL Flux (Mean)
+          <span class="material-symbols-outlined text-secondary text-[16px]">water_drop</span>
+</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-secondary font-semibold">-43.5%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Vapor Loss</span>
+</div>
+<span class="font-label-xs text-label-xs text-secondary font-medium">Consistent lipid repletion</span>
+</div>
+<div class="flex flex-col gap-space-xs p-space-sm bg-surface-container-lowest rounded-lg shadow-sm col-span-2 md:col-span-1">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline flex items-center justify-between">
+          Chromatic Match
+          <span class="material-symbols-outlined text-secondary text-[16px]">wb_sunny</span>
+</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-title-sm text-title-sm text-on-surface">100%</span>
+<span class="font-body-sm text-body-sm text-secondary font-medium">5400K Verified</span>
+</div>
+<span class="font-label-xs text-label-xs text-outline font-medium">ΔE &lt; 0.38 tolerance</span>
+</div>
+</div>
+</div>
+<!-- Section 2: Search, Filter & Multi-Dimensional Sorting Toolbar -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm mb-space-lg flex flex-col gap-space-md">
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
+<!-- Search Input -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-space-md top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full h-12 pl-12 pr-space-md bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_#3a5d4d] transition-all" placeholder="Search by Scan ID (e.g. #DN-8841), notes, biomarker flags, or environmental triggers..." type="text"/>
+</div>
+<!-- View Switcher -->
+<div class="flex items-center gap-space-xs bg-surface-container-low p-1 rounded-lg self-start lg:self-auto">
+<button class="flex items-center gap-space-xs px-space-md py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-primary">table_chart</span>
+<span>Telemetry Matrix</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+<span>Visual Cards</span>
+</button>
+</div>
+</div>
+<!-- Filter Pills Row -->
+<div class="flex flex-wrap items-center gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-full bg-surface-container text-on-surface-variant text-label-md font-label-md">
+<span class="material-symbols-outlined text-[16px] text-secondary">date_range</span>
+<span>Cohort: <strong>All 8 Weeks</strong></span>
+<span class="material-symbols-outlined text-[16px] cursor-pointer">arrow_drop_down</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-full bg-surface-container text-on-surface-variant text-label-md font-label-md">
+<span class="material-symbols-outlined text-[16px] text-secondary">biotech</span>
+<span>Biomarker: <strong>All 5 Channels</strong></span>
+<span class="material-symbols-outlined text-[16px] cursor-pointer">arrow_drop_down</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-full bg-surface-container text-on-surface-variant text-label-md font-label-md">
+<span class="material-symbols-outlined text-[16px] text-secondary">filter_vintage</span>
+<span>Quality: <strong>5400K Daylight ΔE &lt; 0.5</strong></span>
+<span class="material-symbols-outlined text-[16px] cursor-pointer">arrow_drop_down</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-full bg-surface-container text-on-surface-variant text-label-md font-label-md">
+<span class="material-symbols-outlined text-[16px] text-secondary">flag</span>
+<span>Context: <strong>All Regimen Events</strong></span>
+<span class="material-symbols-outlined text-[16px] cursor-pointer">arrow_drop_down</span>
+</div>
+<div class="ml-auto text-label-xs font-label-xs text-outline uppercase tracking-wider flex items-center gap-space-xs">
+<span>Showing 6 of 18 scans</span>
+<span class="cursor-pointer text-primary hover:underline lowercase font-medium">(reset filters)</span>
+</div>
+</div>
+</div>
+<!-- Section 3: Comprehensive Telemetry Data Table & Longitudinal Log -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden mb-space-xl">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-xs text-label-xs uppercase tracking-wider">
+<th class="py-space-md px-space-lg font-semibold">Scan Record &amp; Profile</th>
+<th class="py-space-md px-space-md font-semibold">Barrier Integrity</th>
+<th class="py-space-md px-space-md font-semibold">Corneum Hydration</th>
+<th class="py-space-md px-space-md font-semibold">Malar Erythema</th>
+<th class="py-space-md px-space-md font-semibold">Ostia Purity</th>
+<th class="py-space-md px-space-md font-semibold">Microclimate &amp; Context</th>
+<th class="py-space-md px-space-lg font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high font-body-md text-body-md text-on-surface">
+<!-- Row 1: Active Latest (#DN-8841) -->
+<tr class="bg-secondary-container/20 hover:bg-secondary-container/30 transition-colors">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="relative w-12 h-12 rounded-lg overflow-hidden shrink-0 shadow-sm">
+<img alt="Biometric scan portrait" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1UR0nDiC02I81WcfAOtxkbCSwZQoQ647J4KVG41bpHIJJKEVN3tJKpEC9tmoPNsugQqmtm99Wyni0uho6XFvCxdUmApZqpxV7zIrX4z4O03a1aLBj4jX_HUDTjFmiI5iQBsMB8Ra7HV43_IvxSgdw7m4c28DzFs28PQCXEX6jkmA8OFulRrjbM_fNt-daHeSrzw5XzBku2QD9xYn2ZAlJffaR2TE7ahBb1awg025UFjJpBJvQ9m4djWd3NX"/>
+<span class="absolute bottom-0.5 right-0.5 w-2 h-2 rounded-full bg-primary ring-2 ring-surface-container-lowest"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm text-primary font-bold">#DN-8841</span>
+<span class="px-1.5 py-0.5 rounded-full bg-primary text-on-primary font-label-xs text-label-xs uppercase tracking-wider">Active Baseline</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Nov 29, 2024 • 08:42 PST</span>
+<span class="font-label-xs text-label-xs text-outline">D65 Neutral • ISO 100 • Pol. Cross</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">89</span>
+<div class="flex flex-col">
+<span class="px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-fixed font-label-xs text-label-xs font-bold">+4 Δ</span>
+<span class="font-label-xs text-label-xs text-secondary font-medium">Optimal</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between text-body-sm">
+<span class="font-semibold text-primary">84%</span>
+<span class="font-label-xs text-label-xs text-outline">TEWL 8.2 g/m²h</span>
+</div>
+<div class="w-24 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 84%;"></div>
+</div>
+<span class="font-label-xs text-label-xs text-secondary">Homeostatic lipid seal</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">12% Coverage</span>
+<span class="font-label-xs text-label-xs text-secondary font-medium">Normative Vascularity</span>
+<span class="font-label-xs text-label-xs text-outline">-16% vs Day 0</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-semibold">78</span>
+<span class="font-body-sm text-body-sm text-outline">/100</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">trending_up</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1 font-body-sm text-body-sm text-on-surface font-medium">
+<span class="material-symbols-outlined text-[14px] text-outline">thermostat</span>
+<span>Seattle • RH 44%</span>
+</div>
+<span class="font-label-xs text-label-xs text-outline">Formulation Batch 04 active</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" title="Inspect Full Telemetry">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" title="Compare Scan">
+<span class="material-symbols-outlined text-[20px]">compare</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" title="Export PDF">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: #DN-8622 (Week 7) -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden shrink-0 shadow-sm flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[24px]">face</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">#DN-8622</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Nov 22, 2024 • 09:15 PST</span>
+<span class="font-label-xs text-label-xs text-outline">D65 Neutral • ISO 100</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">85</span>
+<div class="flex flex-col">
+<span class="px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-fixed font-label-xs text-label-xs font-bold">+3 Δ</span>
+<span class="font-label-xs text-label-xs text-secondary font-medium">Optimal</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between text-body-sm">
+<span class="font-semibold text-primary">81%</span>
+<span class="font-label-xs text-label-xs text-outline">TEWL 9.4 g/m²h</span>
+</div>
+<div class="w-24 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 81%;"></div>
+</div>
+<span class="font-label-xs text-label-xs text-secondary">Balanced lipid layer</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">14% Coverage</span>
+<span class="font-label-xs text-label-xs text-secondary font-medium">Mild Flushing</span>
+<span class="font-label-xs text-label-xs text-outline">-14% vs Day 0</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-semibold">76</span>
+<span class="font-body-sm text-body-sm text-outline">/100</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">trending_up</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1 font-body-sm text-body-sm text-on-surface font-medium">
+<span class="material-symbols-outlined text-[14px] text-outline">thermostat</span>
+<span>Seattle • RH 40%</span>
+</div>
+<span class="font-label-xs text-label-xs text-outline">Evening Squalane adjustment</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">compare</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: #DN-8420 (Week 6 - EXPANDED TELEMETRY ROW) -->
+<tr class="bg-surface-container-low/70">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden shrink-0 shadow-sm flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[24px]">face</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">#DN-8420</span>
+<span class="px-1.5 py-0.2 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-xs text-label-xs">Flight Transit</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Nov 15, 2024 • 21:04 EST</span>
+<span class="font-label-xs text-label-xs text-outline">D65 Calibrated Mobile Pod</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">82</span>
+<div class="flex flex-col">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface font-label-xs text-label-xs font-bold">+3 Δ</span>
+<span class="font-label-xs text-label-xs text-secondary font-medium">Stable</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between text-body-sm">
+<span class="font-semibold text-tertiary">74%</span>
+<span class="font-label-xs text-label-xs text-outline">TEWL 13.8 g/m²h</span>
+</div>
+<div class="w-24 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 74%;"></div>
+</div>
+<span class="font-label-xs text-label-xs text-outline">Moderate flight stress</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">17% Coverage</span>
+<span class="font-label-xs text-label-xs text-tertiary font-medium">Mild Flushing</span>
+<span class="font-label-xs text-label-xs text-outline">Transient Altitude Flux</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-semibold">73</span>
+<span class="font-body-sm text-body-sm text-outline">/100</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">trending_up</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1 font-body-sm text-body-sm text-on-surface font-medium">
+<span class="material-symbols-outlined text-[14px] text-error">flight</span>
+<span class="text-error">Cabin RH 14%</span>
+</div>
+<span class="font-label-xs text-label-xs text-outline">JFK &gt; SEA • 35,000 ft</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-1.5 rounded-lg bg-surface-container text-primary font-label-xs text-label-xs font-semibold flex items-center gap-1">
+<span>Collapse</span>
+<span class="material-symbols-outlined text-[16px]">expand_less</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Expanded Detail Drawer for #DN-8420 -->
+<tr class="bg-surface-container-low/40">
+<td class="p-space-lg" colspan="7">
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">analytics</span>
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Deep Telemetry &amp; Localized Coordinates (#DN-8420)</span>
+</div>
+<span class="font-label-xs text-label-xs text-outline">Spectrophotometric Log ID: 0x9f4a21e7c</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Col 1: Anatomical Quadrant Readings -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-md rounded-lg">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline font-semibold">Zonal Corneum Delta</span>
+<div class="flex justify-between items-center text-body-sm py-1 border-b border-surface-container-high">
+<span>Frontal Forehead</span>
+<span class="font-semibold text-on-surface">76% (Stable)</span>
+</div>
+<div class="flex justify-between items-center text-body-sm py-1 border-b border-surface-container-high">
+<span>Left Malar Cheek</span>
+<span class="font-semibold text-secondary">69% (Dessication -5%)</span>
+</div>
+<div class="flex justify-between items-center text-body-sm py-1 border-b border-surface-container-high">
+<span>Right Malar Cheek</span>
+<span class="font-semibold text-secondary">71% (Dessication -4%)</span>
+</div>
+<div class="flex justify-between items-center text-body-sm py-1">
+<span>Perioral Zone</span>
+<span class="font-semibold text-on-surface">78% (Resilient)</span>
+</div>
+</div>
+<!-- Col 2: Optical Calibration Metrology -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-md rounded-lg">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline font-semibold">Sensor Metrology</span>
+<div class="flex justify-between items-center text-body-sm py-1 border-b border-surface-container-high">
+<span>Correlated Color Temp</span>
+<span class="font-mono text-body-sm">5412K (Nominal)</span>
+</div>
+<div class="flex justify-between items-center text-body-sm py-1 border-b border-surface-container-high">
+<span>Color Accuracy Error (ΔE)</span>
+<span class="font-mono text-body-sm">0.27 (Studio Grade)</span>
+</div>
+<div class="flex justify-between items-center text-body-sm py-1 border-b border-surface-container-high">
+<span>Specular Reflection Reject</span>
+<span class="font-mono text-body-sm">99.4% (Pol. Matched)</span>
+</div>
+<div class="flex justify-between items-center text-body-sm py-1">
+<span>Dynamic Luminance</span>
+<span class="font-mono text-body-sm">480 nits calibrated</span>
+</div>
+</div>
+<!-- Col 3: Clinical Regimen Note Synopsis -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-md rounded-lg">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline font-semibold">Regimen Response Synopsis</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+                      Severe atmospheric dehydration experienced during 5.5h flight transit. Ceramide-precursor film preserved baseline barrier index above critical threshold (82 vs target 75). Advised topical occlusive re-layering within 60 minutes post-landing.
+                    </p>
+<div class="flex items-center gap-space-xs mt-auto pt-space-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+<span class="font-label-xs text-label-xs text-secondary font-medium">Verified by AI Optical Engine</span>
+</div>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 4: #DN-8290 (Week 4) -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden shrink-0 shadow-sm flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[24px]">face</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">#DN-8290</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Nov 01, 2024 • 08:30 PDT</span>
+<span class="font-label-xs text-label-xs text-outline">D65 Neutral • ISO 100</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">79</span>
+<div class="flex flex-col">
+<span class="px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-fixed font-label-xs text-label-xs font-bold">+3 Δ</span>
+<span class="font-label-xs text-label-xs text-secondary font-medium">Rebuilding</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between text-body-sm">
+<span class="font-semibold text-primary">76%</span>
+<span class="font-label-xs text-label-xs text-outline">TEWL 11.8 g/m²h</span>
+</div>
+<div class="w-24 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 76%;"></div>
+</div>
+<span class="font-label-xs text-label-xs text-outline">Hydration ramp active</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">19% Coverage</span>
+<span class="font-label-xs text-label-xs text-tertiary font-medium">Moderate Flush</span>
+<span class="font-label-xs text-label-xs text-outline">-9% vs Day 0</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-semibold">71</span>
+<span class="font-body-sm text-body-sm text-outline">/100</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">trending_up</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1 font-body-sm text-body-sm text-on-surface font-medium">
+<span class="material-symbols-outlined text-[14px] text-outline">thermostat</span>
+<span>Seattle • RH 52%</span>
+</div>
+<span class="font-label-xs text-label-xs text-outline">Centella asiatica introduced</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">compare</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: #DN-8115 (Week 2) -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden shrink-0 shadow-sm flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[24px]">face</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">#DN-8115</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Oct 18, 2024 • 08:50 PDT</span>
+<span class="font-label-xs text-label-xs text-outline">D65 Neutral • ISO 100</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">74</span>
+<div class="flex flex-col">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface font-label-xs text-label-xs font-bold">+6 Δ</span>
+<span class="font-label-xs text-label-xs text-outline font-medium">Progressive</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between text-body-sm">
+<span class="font-semibold text-tertiary">68%</span>
+<span class="font-label-xs text-label-xs text-outline">TEWL 14.5 g/m²h</span>
+</div>
+<div class="w-24 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 68%;"></div>
+</div>
+<span class="font-label-xs text-label-xs text-outline">Mild dehydration noted</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">23% Coverage</span>
+<span class="font-label-xs text-label-xs text-tertiary font-medium">Reactive Flare</span>
+<span class="font-label-xs text-label-xs text-outline">-5% vs Day 0</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-semibold">67</span>
+<span class="font-body-sm text-body-sm text-outline">/100</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">trending_up</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1 font-body-sm text-body-sm text-on-surface font-medium">
+<span class="material-symbols-outlined text-[14px] text-outline">thermostat</span>
+<span>Outdoor Cold • 8°C</span>
+</div>
+<span class="font-label-xs text-label-xs text-outline">Windburn exposure logged</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">compare</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 6: Initial Baseline #DN-7910 (Day 0) -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-lowest">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden shrink-0 shadow-sm flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[24px]">flag</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">#DN-7910</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-xs text-label-xs">Cohort Baseline</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Oct 04, 2024 • 09:12 PDT</span>
+<span class="font-label-xs text-label-xs text-outline">Clinical Baseline Intake</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">68</span>
+<div class="flex flex-col">
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-outline font-label-xs text-label-xs font-bold">0.0 Δ</span>
+<span class="font-label-xs text-label-xs text-outline font-medium">Depleted</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between text-body-sm">
+<span class="font-semibold text-error">52%</span>
+<span class="font-label-xs text-label-xs text-outline">TEWL 19.8 g/m²h</span>
+</div>
+<div class="w-24 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-error rounded-full" style="width: 52%;"></div>
+</div>
+<span class="font-label-xs text-label-xs text-error">Severe lipid leakage</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">28% Coverage</span>
+<span class="font-label-xs text-label-xs text-error font-medium">Elevated Erythema</span>
+<span class="font-label-xs text-label-xs text-outline">Initial state marker</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-semibold">64</span>
+<span class="font-body-sm text-body-sm text-outline">/100</span>
+<span class="material-symbols-outlined text-[16px] text-outline">remove</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1 font-body-sm text-body-sm text-on-surface font-medium">
+<span class="material-symbols-outlined text-[14px] text-outline">assignment_ind</span>
+<span>Intake Physical</span>
+</div>
+<span class="font-label-xs text-label-xs text-outline">Over-exfoliation history</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">compare</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination & Metadata Footer -->
+<div class="p-space-md bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-space-sm text-body-sm text-on-surface-variant">
+<div class="flex items-center gap-space-xs font-label-xs text-label-xs text-outline uppercase tracking-wider">
+<span>Displaying Scans 1-6 of 18 Logged Captures</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface transition-colors font-body-sm text-body-sm shadow-sm disabled:opacity-50">
+          Previous
+        </button>
+<button class="px-3 py-1.5 rounded-lg bg-primary text-on-primary font-body-sm text-body-sm shadow-sm">
+          1
+        </button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface transition-colors font-body-sm text-body-sm shadow-sm">
+          2
+        </button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface transition-colors font-body-sm text-body-sm shadow-sm">
+          3
+        </button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface transition-colors font-body-sm text-body-sm shadow-sm">
+          Next
+        </button>
+</div>
+</div>
+</div>
+<!-- Section 4: Multi-Scan Direct Comparison Drawer / Utility Tray -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-md mb-space-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-[20px]">compare_arrows</span>
+<span class="font-title-sm text-title-sm font-semibold text-on-surface">Longitudinal Trajectory Comparison Tray</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        Select up to 3 captures to generate chromatic spectral overlays, lipid differential heatmaps, and biomarker delta lines.
+      </p>
+</div>
+<!-- Active Selection Badges -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-secondary-container text-on-secondary-fixed text-body-sm shadow-sm">
+<span class="font-semibold">#DN-8841 (Week 8 - Today)</span>
+<span class="material-symbols-outlined text-[16px] cursor-pointer hover:text-primary">close</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-surface-container text-on-surface-variant text-body-sm shadow-sm">
+<span class="font-semibold">#DN-7910 (Day 0 - Baseline)</span>
+<span class="material-symbols-outlined text-[16px] cursor-pointer hover:text-on-surface">close</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-md py-1.5 rounded-full border border-dashed border-outline-variant text-outline text-body-sm">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>Add 3rd Scan...</span>
+</div>
+<a class="flex items-center gap-space-xs px-space-lg py-2.5 rounded-lg bg-secondary text-on-secondary hover:bg-primary transition-all font-body-md text-body-md font-semibold shadow-sm ml-auto md:ml-space-md" href="#">
+<span class="material-symbols-outlined text-[18px]">splitscreen</span>
+<span>Launch Split Curtain Comparator</span>
+</a>
+</div>
+</div>
+<!-- Section 5: Ephemeral Vault & Clinical Compliance Banner -->
+<div class="bg-surface-container-low p-space-lg rounded-xl flex flex-col md:flex-row items-start md:items-center gap-space-md shadow-sm">
+<div class="p-space-sm rounded-full bg-secondary-container text-primary shrink-0">
+<span class="material-symbols-outlined text-[28px]">enhanced_encryption</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Zero-Knowledge Biometric Vault &amp; Regulatory Protocol</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-xs text-label-xs uppercase tracking-wider">HIPAA / GDPR Tokenized</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+        All photogrammetric coordinates, 3D facial mesh matrices, and subsurface spectral captures are encrypted via client-side keys prior to cloud indexing. Raw RGB imagery is discarded after biomarker vectorization. DermaNova biometric analyses are engineered strictly for cosmetic and physiological routine optimization, not clinical disease diagnosis.
+      </p>
+</div>
+<div class="shrink-0 self-start md:self-center ml-auto">
+<a class="font-label-md text-label-md text-primary font-semibold hover:underline flex items-center gap-1" href="#">
+<span>Security Whitepaper</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+</div>
+</div>
+</div></main></div></body></html>

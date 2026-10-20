@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><title>Dermanova — Mobile Progress Tracking & Longitudinal Journal</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&family=Newsreader:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#f7fbf1;color:#191d17;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 350,'GRAD' 0,'opsz' 24;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "surface": "#f7fbf1", "secondary-fixed": "#c9ead8", "surface-container": "#ecefe6", "on-tertiary-container": "#f5f0fb", "surface-container-highest": "#e0e4da", "inverse-surface": "#2e322b", "on-tertiary": "#ffffff", "on-secondary-fixed-variant": "#304d40", "on-secondary-fixed": "#022016", "on-background": "#191d17", "on-error": "#ffffff", "surface-container-lowest": "#ffffff", "tertiary": "#56555e", "surface-bright": "#f7fbf1", "surface-container-low": "#f2f5eb", "inverse-primary": "#a8cfbb", "surface-tint": "#426655", "on-secondary-container": "#4d6b5d", "on-tertiary-fixed": "#1b1b22", "surface-dim": "#d8dbd2", "secondary-container": "#c9ead8", "outline-variant": "#c1c8c2", "tertiary-container": "#6f6d76", "surface-container-high": "#e6e9e0", "background": "#f7fbf1", "error-container": "#ffdad6", "tertiary-fixed-dim": "#c8c5cf", "surface-variant": "#e0e4da", "inverse-on-surface": "#eff2e8", "secondary-fixed-dim": "#adcebd", "on-primary": "#ffffff", "primary-container": "#527665", "on-primary-container": "#d4fce6", "primary-fixed": "#c4ebd7", "tertiary-fixed": "#e5e1ec", "on-primary-fixed-variant": "#2a4e3e", "primary-fixed-dim": "#a8cfbb", "on-secondary": "#ffffff", "on-error-container": "#93000a", "on-tertiary-fixed-variant": "#47464e", "secondary": "#476557", "primary": "#3a5d4d", "on-surface": "#191d17", "error": "#ba1a1a", "on-primary-fixed": "#002115", "on-surface-variant": "#414844", "outline": "#717974" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "margin": "3rem", "space-md": "1rem", "margin-mobile": "1.25rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "gutter": "1.5rem", "space-lg": "1.5rem", "gutter-mobile": "1rem" }, fontFamily: { "title-sm": ["Manrope"], "title-md": ["Manrope"], "label-md": ["Manrope"], "headline-lg": ["Newsreader"], "body-md": ["Manrope"], "body-lg": ["Manrope"], "headline-md": ["Newsreader"], "headline-sm": ["Newsreader"], "display-hero-mobile": ["Newsreader"], "label-xs": ["Manrope"], "display-hero": ["Newsreader"], "body-sm": ["Manrope"], "headline-lg-mobile": ["Newsreader"] }, fontSize: { "title-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" }], "title-md": ["18px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "400" }], "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0.01em", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "0.005em", "fontWeight": "400" }], "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-sm": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.005em", "fontWeight": "500" }], "display-hero-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "400" }], "label-xs": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700" }], "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "400" }], "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "400" }] } } } };</script><style>body { min-height: max(884px, 100dvh); }</style></head><body class="bg-surface font-body-md text-on-surface flex flex-col antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(48,77,64,0.04)]"><div class="h-16 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Editorial beauty portrait showcasing natural radiant skin" class="h-8 w-8 object-cover rounded-full ring-1 ring-outline-variant/40" src="https://lh3.googleusercontent.com/aida/AEtjO1UR0nDiC02I81WcfAOtxkbCSwZQoQ647J4KVG41bpHIJJKEVN3tJKpEC9tmoPNsugQqmtm99Wyni0uho6XFvCxdUmApZqpxV7zIrX4z4O03a1aLBj4jX_HUDTjFmiI5iQBsMB8Ra7HV43_IvxSgdw7m4c28DzFs28PQCXEX6jkmA8OFulRrjbM_fNt-daHeSrzw5XzBku2QD9xYn2ZAlJffaR2TE7ahBb1awg025UFjJpBJvQ9m4djWd3NX"/><div class="flex flex-col justify-center"><span class="font-title-sm text-title-sm text-primary tracking-tight">DermaNova</span><span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-widest">PROGRESS</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Notifications" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- SECTION 1: HEADER & CONTEXT BADGE -->
+<section class="px-gutter-mobile pt-space-md pb-space-lg">
+<!-- Clinical Cohort Tag & Protocol Status -->
+<div class="flex flex-col gap-space-xs mb-space-sm">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs tracking-wider uppercase font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+          Chronological Dermal Archive • 8-Week Barrier Journey
+        </span>
+</div>
+<div class="inline-flex items-center gap-1.5 text-primary text-label-md font-label-md">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span>94% Protocol Consistency • 56 Days Active</span>
+</div>
+</div>
+<!-- Editorial Headline & Clinical Scope -->
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface tracking-tight mb-space-xs">
+      Longitudinal Progress & Barrier Journal
+    </h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-space-md">
+      Objective side-by-side photographic telemetry and barrier recovery trajectory calibrated under 5400K daylight chromatic standards.
+    </p>
+<!-- Header Actions Row -->
+<div class="flex items-center gap-space-sm">
+<button class="flex-1 flex items-center justify-center gap-1.5 h-11 px-space-md rounded-xl bg-primary text-on-primary font-title-sm text-title-sm shadow-sm hover:bg-primary-container active:scale-[0.98] transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Log Entry</span>
+</button>
+<button class="flex items-center justify-center gap-1.5 h-11 px-space-md rounded-xl bg-surface-container text-on-surface-variant font-title-sm text-title-sm hover:bg-surface-container-high active:scale-[0.98] transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+<span class="hidden xs:inline">Export</span>
+</button>
+<button class="flex items-center justify-center gap-1 h-11 px-space-md rounded-xl bg-secondary-container text-on-secondary-fixed-variant font-title-sm text-title-sm hover:bg-secondary-fixed active:scale-[0.98] transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">camera</span>
+<span>Scan</span>
+</button>
+</div>
+</section>
+<!-- SECTION 2: ACTIVE EVALUATION INTERVAL & SELECTOR -->
+<section class="px-gutter-mobile pb-space-lg">
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant">Active Evaluation Interval</span>
+<span class="font-label-xs text-label-xs text-primary font-semibold">T-56 Days delta</span>
+</div>
+<p class="font-title-sm text-title-sm text-on-surface mb-space-sm">
+        Baseline <span class="text-on-surface-variant font-normal">(Oct 04)</span> vs. Week 8 <span class="text-primary font-semibold">(Today • Nov 29)</span>
+</p>
+<!-- Horizontal Pill Selector -->
+<div class="flex items-center gap-space-xs overflow-x-auto no-scrollbar pb-0.5">
+<button class="px-3 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md whitespace-nowrap shadow-sm" type="button">
+          Baseline vs W8 (Active)
+        </button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md whitespace-nowrap hover:bg-surface-container-high" type="button">
+          W4 vs W8
+        </button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md whitespace-nowrap hover:bg-surface-container-high" type="button">
+          All Milestones (5)
+        </button>
+</div>
+</div>
+</section>
+<!-- SECTION 3: DUAL PHOTOMETRIC REGISTRATION -->
+<section class="px-gutter-mobile pb-space-xl">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-md">
+<!-- Section Header with Alignment Telemetry -->
+<div class="flex flex-col gap-1 mb-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[20px]">center_focus_strong</span>
+<span class="font-title-sm text-title-sm text-on-surface">Dual Photometric Registration</span>
+</div>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-semibold">
+            Δ 0.4° dev
+          </span>
+</div>
+<p class="font-label-xs text-label-xs text-on-surface-variant">
+          Orthogonal alignment verified. Rigid dermal landmark lock on 68 points.
+        </p>
+</div>
+<!-- View Mode Segmented Controls -->
+<div class="flex items-center p-1 rounded-xl bg-surface-container-low mb-space-md">
+<button class="flex-1 py-1.5 text-center rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md font-semibold shadow-sm" type="button">
+          Side-by-Side
+        </button>
+<button class="flex-1 py-1.5 text-center rounded-lg text-on-surface-variant font-label-md text-label-md hover:text-on-surface" type="button">
+          Curtain Slider
+        </button>
+<button class="flex-1 py-1.5 text-center rounded-lg text-on-surface-variant font-label-md text-label-md hover:text-on-surface" type="button">
+          Erythema Heatmap
+        </button>
+</div>
+<!-- Comparative Frames Container (Optimized Stacked / Twin Panels) -->
+<div class="flex flex-col gap-space-md">
+<!-- FRAME A: BASELINE -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden p-space-sm flex flex-col">
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-surface-dim">
+<img alt="Authentic patient portrait showing baseline skin state" class="w-full h-full object-cover filter contrast-[1.02] brightness-95" src="https://lh3.googleusercontent.com/aida/AEtjO1UR0nDiC02I81WcfAOtxkbCSwZQoQ647J4KVG41bpHIJJKEVN3tJKpEC9tmoPNsugQqmtm99Wyni0uho6XFvCxdUmApZqpxV7zIrX4z4O03a1aLBj4jX_HUDTjFmiI5iQBsMB8Ra7HV43_IvxSgdw7m4c28DzFs28PQCXEX6jkmA8OFulRrjbM_fNt-daHeSrzw5XzBku2QD9xYn2ZAlJffaR2TE7ahBb1awg025UFjJpBJvQ9m4djWd3NX"/>
+<!-- Baseline State Label -->
+<div class="absolute top-2 left-2 px-2 py-1 rounded bg-inverse-surface/80 backdrop-blur-md text-inverse-on-surface font-label-xs text-label-xs uppercase tracking-wider">
+              Frame A • Baseline (Day 0)
+            </div>
+<div class="absolute top-2 right-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-xs text-label-xs">
+              Scan #DN-7910 • Oct 04
+            </div>
+<!-- Overlaid Clinical Pinpoints -->
+<div class="absolute top-1/3 left-6 flex items-center gap-1.5">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-error opacity-60"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-error"></span>
+</span>
+<div class="px-2 py-0.5 rounded bg-inverse-surface/85 backdrop-blur-sm text-inverse-on-surface font-label-xs text-label-xs shadow-sm">
+                Cheek Erythema: 28% reactive
+              </div>
+</div>
+<div class="absolute bottom-6 right-6 flex items-center gap-1.5">
+<span class="h-2.5 w-2.5 rounded-full bg-amber-500"></span>
+<div class="px-2 py-0.5 rounded bg-inverse-surface/85 backdrop-blur-sm text-inverse-on-surface font-label-xs text-label-xs shadow-sm">
+                Corneum Hydration: 52% depleted
+              </div>
+</div>
+</div>
+<!-- Frame A Metrics Strip -->
+<div class="pt-space-sm px-1">
+<div class="flex items-center justify-between mb-1.5">
+<span class="font-label-xs text-label-xs text-on-surface-variant font-medium">Pre-barrier protocol baseline</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">ISO 100 • 5400K</span>
+</div>
+<div class="grid grid-cols-3 gap-1.5 text-center">
+<div class="bg-surface-container rounded-lg p-2">
+<span class="block font-label-xs text-label-xs text-on-surface-variant">Barrier Index</span>
+<span class="font-title-sm text-title-sm text-on-surface">68<span class="text-label-xs text-on-surface-variant">/100</span></span>
+</div>
+<div class="bg-surface-container rounded-lg p-2">
+<span class="block font-label-xs text-label-xs text-on-surface-variant">TEWL Rate</span>
+<span class="font-title-sm text-title-sm text-on-surface">21.4 <span class="text-[10px] text-on-surface-variant">g/m²h</span></span>
+</div>
+<div class="bg-surface-container rounded-lg p-2">
+<span class="block font-label-xs text-label-xs text-on-surface-variant">Malar Smooth</span>
+<span class="font-title-sm text-title-sm text-on-surface">64<span class="text-label-xs text-on-surface-variant">/100</span></span>
+</div>
+</div>
+</div>
+</div>
+<!-- COMPARATIVE DIVIDER ICON -->
+<div class="flex items-center justify-center -my-2 relative z-10">
+<div class="h-7 w-7 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[16px]">compare_arrows</span>
+</div>
+</div>
+<!-- FRAME B: CURRENT WEEK 8 -->
+<div class="bg-surface-container rounded-xl overflow-hidden p-space-sm flex flex-col">
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-surface-dim">
+<img alt="Authentic patient portrait showing week 8 recovered skin barrier" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1UR0nDiC02I81WcfAOtxkbCSwZQoQ647J4KVG41bpHIJJKEVN3tJKpEC9tmoPNsugQqmtm99Wyni0uho6XFvCxdUmApZqpxV7zIrX4z4O03a1aLBj4jX_HUDTjFmiI5iQBsMB8Ra7HV43_IvxSgdw7m4c28DzFs28PQCXEX6jkmA8OFulRrjbM_fNt-daHeSrzw5XzBku2QD9xYn2ZAlJffaR2TE7ahBb1awg025UFjJpBJvQ9m4djWd3NX"/>
+<!-- Current State Label -->
+<div class="absolute top-2 left-2 px-2 py-1 rounded bg-primary text-on-primary font-label-xs text-label-xs uppercase tracking-wider font-semibold">
+              Frame B • Week 8 (Today)
+            </div>
+<div class="absolute top-2 right-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-xs text-label-xs">
+              Scan #DN-8841 • Nov 29
+            </div>
+<!-- Overlaid Resolved Pinpoints -->
+<div class="absolute top-1/3 left-6 flex items-center gap-1.5">
+<span class="h-2.5 w-2.5 rounded-full bg-primary"></span>
+<div class="px-2 py-0.5 rounded bg-inverse-surface/85 backdrop-blur-sm text-inverse-on-surface font-label-xs text-label-xs shadow-sm">
+                Erythema Resolved (-16%): 12% norm
+              </div>
+</div>
+<div class="absolute bottom-6 right-6 flex items-center gap-1.5">
+<span class="h-2.5 w-2.5 rounded-full bg-primary"></span>
+<div class="px-2 py-0.5 rounded bg-inverse-surface/85 backdrop-blur-sm text-inverse-on-surface font-label-xs text-label-xs shadow-sm">
+                Stratum Corneum (+32%): 84% opt
+              </div>
+</div>
+</div>
+<!-- Frame B Metrics Strip with positive deltas -->
+<div class="pt-space-sm px-1">
+<div class="flex items-center justify-between mb-1.5">
+<span class="font-label-xs text-label-xs text-primary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">task_alt</span>
+                Lipid matrix fully reconstituted
+              </span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">56 Days Kinetic</span>
+</div>
+<div class="grid grid-cols-3 gap-1.5 text-center">
+<div class="bg-surface-container-lowest rounded-lg p-2 shadow-sm">
+<span class="block font-label-xs text-label-xs text-on-surface-variant">Barrier Index</span>
+<span class="font-title-sm text-title-sm text-primary">89 <span class="text-[10px] font-bold text-primary-container">(+21)</span></span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-2 shadow-sm">
+<span class="block font-label-xs text-label-xs text-on-surface-variant">TEWL Rate</span>
+<span class="font-title-sm text-title-sm text-primary">12.1 <span class="text-[10px] font-bold text-primary-container">(-43%)</span></span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-2 shadow-sm">
+<span class="block font-label-xs text-label-xs text-on-surface-variant">Malar Smooth</span>
+<span class="font-title-sm text-title-sm text-primary">78 <span class="text-[10px] font-bold text-primary-container">(+14)</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Calibration & Authenticity Guarantee -->
+<div class="mt-space-md p-space-sm rounded-lg bg-surface-container-low flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">lock_reset</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+<strong class="font-semibold text-on-surface">Non-Generative Photographic Guarantee:</strong> Controlled 5400K daylight chromatic normalization. Zero algorithmic pixel smoothing or virtual beautification. ISO 12233 compliant registration.
+        </p>
+</div>
+</div>
+</section>
+<!-- SECTION 4: QUANTIFIED BIO-KINETICS (BIOMARKER TRAJECTORY CARDS) -->
+<section class="px-gutter-mobile pb-space-xl">
+<div class="flex items-center justify-between mb-space-sm">
+<div>
+<span class="font-label-xs text-label-xs uppercase tracking-widest text-primary font-bold">Quantified Bio-Kinetics</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Longitudinal Biomarkers</h2>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">ssid_chart</span>
+</div>
+<!-- 2x2 Biomarker Cards Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<!-- 1. Corneum Hydration -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider">Hydration Index</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-xs text-label-xs font-semibold">+32% Gain</span>
+</div>
+<div class="flex items-baseline gap-2 mb-2">
+<span class="font-headline-md text-headline-md text-on-surface">84%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">from 52% baseline</span>
+</div>
+<!-- Sparkline SVG Upward -->
+<div class="w-full h-10 py-1">
+<svg class="w-full h-full text-primary" fill="none" preserveaspectratio="none" viewbox="0 0 100 24">
+<path d="M0 22 C20 20, 35 16, 50 12 C70 8, 85 4, 100 2" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path>
+<circle cx="100" cy="2" fill="currentColor" r="2.5"></circle>
+</svg>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pt-2 leading-relaxed">
+          Consistent cellular lipid saturation following Ceramide NP addition.
+        </p>
+</div>
+<!-- 2. Malar Erythema Flux -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider">Malar Erythema</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-xs text-label-xs font-semibold">-16% Flux</span>
+</div>
+<div class="flex items-baseline gap-2 mb-2">
+<span class="font-headline-md text-headline-md text-on-surface">12%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">from 28% peak</span>
+</div>
+<!-- Sparkline SVG Downward -->
+<div class="w-full h-10 py-1">
+<svg class="w-full h-full text-primary" fill="none" preserveaspectratio="none" viewbox="0 0 100 24">
+<path d="M0 4 C20 6, 40 10, 60 16 C80 20, 90 21, 100 22" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path>
+<circle cx="100" cy="22" fill="currentColor" r="2.5"></circle>
+</svg>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pt-2 leading-relaxed">
+          Centella Asiatica + Zinc Oxide has suppressed wind-chill triggered malar flushing.
+        </p>
+</div>
+<!-- 3. Texture Uniformity -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider">Texture Smoothness</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-xs text-label-xs font-semibold">+14 Pts</span>
+</div>
+<div class="flex items-baseline gap-2 mb-2">
+<span class="font-headline-md text-headline-md text-on-surface">78<span class="text-body-md text-on-surface-variant">/100</span></span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">from 64 baseline</span>
+</div>
+<!-- Sparkline SVG Ascending -->
+<div class="w-full h-10 py-1">
+<svg class="w-full h-full text-primary" fill="none" preserveaspectratio="none" viewbox="0 0 100 24">
+<path d="M0 20 C25 18, 45 15, 65 10 C85 6, 95 4, 100 3" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path>
+<circle cx="100" cy="3" fill="currentColor" r="2.5"></circle>
+</svg>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pt-2 leading-relaxed">
+          Gentle PHA pacing accelerated cellular desquamation without thinning.
+        </p>
+</div>
+<!-- 4. Freckle Ephelide Index -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider">Ephelide Stability</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-xs text-label-xs font-semibold">0 Darkening</span>
+</div>
+<div class="flex items-baseline gap-2 mb-2">
+<span class="font-headline-md text-headline-md text-on-surface">Stable</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">98% Neutral</span>
+</div>
+<!-- Sparkline SVG Flat -->
+<div class="w-full h-10 py-1">
+<svg class="w-full h-full text-primary" fill="none" preserveaspectratio="none" viewbox="0 0 100 24">
+<path d="M0 12 Q25 10 50 12 T100 12" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path>
+<circle cx="100" cy="12" fill="currentColor" r="2.5"></circle>
+</svg>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pt-2 leading-relaxed">
+          Ephelides maintained natural contrast without sun-induced coalescence.
+        </p>
+</div>
+</div>
+</section>
+<!-- SECTION 5: SUBJECTIVE BARRIER LOGS & TIMELINE JOURNAL -->
+<section class="px-gutter-mobile pb-space-xl">
+<div class="flex items-center justify-between mb-space-sm">
+<div>
+<span class="font-label-xs text-label-xs uppercase tracking-widest text-primary font-bold">Personal Notes</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Barrier Logs & Observations</h2>
+</div>
+<button class="flex items-center gap-1 text-primary hover:text-primary-container" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span class="font-label-md text-label-md">Filter</span>
+</button>
+</div>
+<!-- Timeline Entries -->
+<div class="flex flex-col gap-space-sm relative before:absolute before:top-3 before:bottom-3 before:left-3.5 before:w-0.5 before:bg-surface-container-highest">
+<!-- Entry 1 -->
+<div class="relative pl-8">
+<div class="absolute left-2 top-2 w-3 h-3 rounded-full bg-primary ring-4 ring-surface"></div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-1.5 flex-wrap gap-1">
+<span class="font-title-sm text-title-sm text-on-surface">Nov 26 • Week 8 <span class="text-on-surface-variant font-normal">(Day 53)</span></span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-xs text-label-xs font-semibold">Protocol Adhered</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface leading-relaxed mb-space-xs">
+            “Introduced Zinc Oxide Veil consistently every morning. Outdoor malar flushing during cold wind drops significantly within 15 minutes instead of lingering for hours.”
+          </p>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-xs text-label-xs flex-wrap">
+<span class="inline-flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">thermostat</span> 4°C</span>
+<span>•</span>
+<span class="inline-flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">humidity_mid</span> RH 32%</span>
+<span>•</span>
+<span class="text-primary font-semibold">Regimen: Zinc Mineral Shield</span>
+</div>
+</div>
+</div>
+<!-- Entry 2 -->
+<div class="relative pl-8">
+<div class="absolute left-2 top-2 w-3 h-3 rounded-full bg-secondary-container ring-4 ring-surface"></div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-1.5 flex-wrap gap-1">
+<span class="font-title-sm text-title-sm text-on-surface">Nov 14 • Week 6 <span class="text-on-surface-variant font-normal">(Day 41)</span></span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-xs text-label-xs font-semibold">Formula Adjustment</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface leading-relaxed mb-space-xs">
+            “Switching to PHA 4% Mist every other night reduced dry flaking around nasal folds without triggering stinging. Pores look significantly flatter.”
+          </p>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-xs text-label-xs flex-wrap">
+<span class="inline-flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">thermostat</span> 9°C</span>
+<span>•</span>
+<span class="inline-flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">humidity_mid</span> RH 40%</span>
+<span>•</span>
+<span class="text-primary font-semibold">Regimen: PHA Gluconolactone</span>
+</div>
+</div>
+</div>
+<!-- Entry 3 -->
+<div class="relative pl-8">
+<div class="absolute left-2 top-2 w-3 h-3 rounded-full bg-surface-container-highest ring-4 ring-surface"></div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-1.5 flex-wrap gap-1">
+<span class="font-title-sm text-title-sm text-on-surface">Oct 28 • Week 3 <span class="text-on-surface-variant font-normal">(Day 24)</span></span>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-xs text-label-xs font-semibold">Exogenous Stress</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface leading-relaxed mb-space-xs">
+            “Mild trans-epidermal dehydration noted after 6-hour flight; bolstered lipid squalane balm for 48 hours to prevent erythema rebound.”
+          </p>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-xs text-label-xs flex-wrap">
+<span class="inline-flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">flight</span> Cabin RH 14%</span>
+<span>•</span>
+<span class="text-primary font-semibold">SOS Balm Protocol</span>
+</div>
+</div>
+</div>
+</div>
+<!-- View All Button -->
+<button class="w-full mt-space-sm py-2.5 rounded-xl bg-surface-container text-on-surface font-title-sm text-title-sm hover:bg-surface-container-high transition-colors text-center" type="button">
+      View Complete 56-Day Diary Archive
+    </button>
+</section>
+<!-- SECTION 6: MICROCLIMATE & INGREDIENT EFFICACY -->
+<section class="px-gutter-mobile pb-space-xl">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
+<!-- Ambient Exposure Telemetry -->
+<div>
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[20px]">air</span>
+<span class="font-title-sm text-title-sm text-on-surface">Microclimate & Exposure Sync</span>
+</div>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Seattle, WA</span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs mb-3">
+<div class="bg-surface-container-low rounded-lg p-2.5">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-xs text-label-xs text-on-surface-variant">Relative Humidity</span>
+<span class="material-symbols-outlined text-[16px] text-amber-600">warning</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface">38%</div>
+<span class="font-label-xs text-label-xs text-amber-700">Dessication Risk</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-2.5">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-xs text-label-xs text-on-surface-variant">UV Index</span>
+<span class="material-symbols-outlined text-[16px] text-primary">wb_sunny</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface">3.2</div>
+<span class="font-label-xs text-label-xs text-primary">Moderate Filter</span>
+</div>
+</div>
+<!-- Dynamic Autonomous Regimen Notice -->
+<div class="p-2.5 rounded-lg bg-secondary-container/60 text-on-secondary-fixed-variant flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] shrink-0 mt-0.5">smart_toy</span>
+<span class="font-body-sm text-body-sm leading-snug">
+            Low indoor dew point detected. Morning lipid veil increased by 2 drops Phytosqualane.
+          </span>
+</div>
+</div>
+<!-- Ingredient Efficacy Progress Bars -->
+<div class="pt-space-xs">
+<h3 class="font-title-sm text-title-sm text-on-surface mb-space-sm">8-Week Empirical Ingredient Efficacy</h3>
+<div class="flex flex-col gap-3">
+<!-- Item 1 -->
+<div>
+<div class="flex justify-between font-body-sm text-body-sm mb-1">
+<span class="text-on-surface font-medium">Ceramide NP + AP Lipids</span>
+<span class="text-primary font-semibold">92%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 92%;"></div>
+</div>
+</div>
+<!-- Item 2 -->
+<div>
+<div class="flex justify-between font-body-sm text-body-sm mb-1">
+<span class="text-on-surface font-medium">Centella Asiatica Triterpenes</span>
+<span class="text-primary font-semibold">88%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 88%;"></div>
+</div>
+</div>
+<!-- Item 3 -->
+<div>
+<div class="flex justify-between font-body-sm text-body-sm mb-1">
+<span class="text-on-surface font-medium">Gluconolactone (PHA 4%)</span>
+<span class="text-primary font-semibold">79%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 79%;"></div>
+</div>
+</div>
+<!-- Item 4 -->
+<div>
+<div class="flex justify-between font-body-sm text-body-sm mb-1">
+<span class="text-on-surface font-medium">Zinc Oxide Physical Veil</span>
+<span class="text-primary font-semibold">95%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 95%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 7: HISTORICAL MILESTONE SCANS CAROUSEL -->
+<section class="pb-space-xl">
+<div class="px-gutter-mobile flex items-center justify-between mb-space-sm">
+<div>
+<span class="font-label-xs text-label-xs uppercase tracking-widest text-primary font-bold">Chronological Archive</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Milestone Scans</h2>
+</div>
+<button class="flex items-center gap-1 text-primary hover:text-primary-container" type="button">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+<span class="font-label-md text-label-md">Lab Note</span>
+</button>
+</div>
+<!-- Horizontal Swipeable List -->
+<div class="flex gap-space-sm overflow-x-auto no-scrollbar px-gutter-mobile pb-2">
+<!-- Milestone 1 (Current) -->
+<div class="min-w-[210px] w-[210px] bg-surface-container-lowest rounded-xl p-space-sm shadow-sm flex flex-col justify-between shrink-0">
+<div>
+<div class="relative w-full h-28 rounded-lg overflow-hidden bg-surface-dim mb-2">
+<img alt="Thumbnail of current scan" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1UR0nDiC02I81WcfAOtxkbCSwZQoQ647J4KVG41bpHIJJKEVN3tJKpEC9tmoPNsugQqmtm99Wyni0uho6XFvCxdUmApZqpxV7zIrX4z4O03a1aLBj4jX_HUDTjFmiI5iQBsMB8Ra7HV43_IvxSgdw7m4c28DzFs28PQCXEX6jkmA8OFulRrjbM_fNt-daHeSrzw5XzBku2QD9xYn2ZAlJffaR2TE7ahBb1awg025UFjJpBJvQ9m4djWd3NX"/>
+<div class="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded bg-primary text-on-primary font-label-xs text-label-xs">
+              Current
+            </div>
+</div>
+<div class="flex items-center justify-between mb-0.5">
+<span class="font-title-sm text-title-sm text-on-surface">Week 8</span>
+<span class="font-label-md text-label-md text-primary font-bold">89/100</span>
+</div>
+<p class="font-label-xs text-label-xs text-on-surface-variant mb-2">Nov 29, 2024 • #DN-8841</p>
+</div>
+<button class="w-full py-1.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors" type="button">
+          Inspect Telemetry
+        </button>
+</div>
+<!-- Milestone 2 -->
+<div class="min-w-[210px] w-[210px] bg-surface-container-lowest rounded-xl p-space-sm shadow-sm flex flex-col justify-between shrink-0">
+<div>
+<div class="relative w-full h-28 rounded-lg bg-surface-container flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-outline text-[32px]">photo_camera</span>
+</div>
+<div class="flex items-center justify-between mb-0.5">
+<span class="font-title-sm text-title-sm text-on-surface">Week 6</span>
+<span class="font-label-md text-label-md text-primary font-bold">82/100</span>
+</div>
+<p class="font-label-xs text-label-xs text-on-surface-variant mb-2">Nov 15, 2024 • #DN-8420</p>
+</div>
+<button class="w-full py-1.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors" type="button">
+          Inspect Telemetry
+        </button>
+</div>
+<!-- Milestone 3 -->
+<div class="min-w-[210px] w-[210px] bg-surface-container-lowest rounded-xl p-space-sm shadow-sm flex flex-col justify-between shrink-0">
+<div>
+<div class="relative w-full h-28 rounded-lg bg-surface-container flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-outline text-[32px]">photo_camera</span>
+</div>
+<div class="flex items-center justify-between mb-0.5">
+<span class="font-title-sm text-title-sm text-on-surface">Week 4</span>
+<span class="font-label-md text-label-md text-primary font-bold">76/100</span>
+</div>
+<p class="font-label-xs text-label-xs text-on-surface-variant mb-2">Nov 01, 2024 • #DN-8115</p>
+</div>
+<button class="w-full py-1.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors" type="button">
+          Inspect Telemetry
+        </button>
+</div>
+<!-- Milestone 4 (Baseline) -->
+<div class="min-w-[210px] w-[210px] bg-surface-container-lowest rounded-xl p-space-sm shadow-sm flex flex-col justify-between shrink-0">
+<div>
+<div class="relative w-full h-28 rounded-lg bg-surface-container flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-outline text-[32px]">photo_camera</span>
+</div>
+<div class="flex items-center justify-between mb-0.5">
+<span class="font-title-sm text-title-sm text-on-surface">Baseline</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-bold">68/100</span>
+</div>
+<p class="font-label-xs text-label-xs text-on-surface-variant mb-2">Oct 04, 2024 • #DN-7910</p>
+</div>
+<button class="w-full py-1.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors" type="button">
+          Inspect Telemetry
+        </button>
+</div>
+</div>
+</section>
+<!-- SECTION 8: CLINICAL WELLNESS REGULATORY NOTICE -->
+<section class="px-gutter-mobile pb-space-lg">
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px] shrink-0 mt-0.5">verified_user</span>
+<div class="flex flex-col gap-1">
+<span class="font-title-sm text-title-sm text-on-surface">Longitudinal Assessment Scope • Non-Diagnostic Protocol</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Observed shifts represent surface optical variations, localized spectral reflection, and hydration kinetics captured under standardized ambient calibration (5400K neutral chromatic field). DermaNova computer-vision evaluations are informational and wellness-directed; they do not establish pharmaceutical diagnostic efficacy or replace in-person dermatological consultations.
+        </p>
+</div>
+</div>
+</section>
+</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-2px_16px_rgba(48,77,64,0.06)]" data-active-classes="text-primary font-semibold"><div class="flex items-center justify-around h-16 px-space-xs"><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="derma-nova-mobile-user-dashboard-overview" href="#"><span class="material-symbols-outlined text-[22px]">view_quilt</span><span class="font-label-xs text-label-xs mt-0.5">Overview</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="derma-nova-mobile-skin-analysis-results" href="#"><span class="material-symbols-outlined text-[22px]">biotech</span><span class="font-label-xs text-label-xs mt-0.5">Analysis</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="derma-nova-mobile-personalized-skincare-routine" href="#"><span class="material-symbols-outlined text-[22px]">spa</span><span class="font-label-xs text-label-xs mt-0.5">Routine</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="derma-nova-mobile-progress-tracking-longitudinal-journal" href="#"><span class="material-symbols-outlined text-[22px]">monitoring</span><span class="font-label-xs text-label-xs mt-0.5">Progress</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="vault" href="#"><span class="material-symbols-outlined text-[22px]">inventory_2</span><span class="font-label-xs text-label-xs mt-0.5">Vault</span></a></div></nav></body></html>

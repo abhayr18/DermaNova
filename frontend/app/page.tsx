@@ -22,6 +22,7 @@ import { ConcernDetailModal } from '../components/screens/ConcernDetailModal';
 import { PersonalizedRoutineScreen } from '../components/screens/PersonalizedRoutineScreen';
 import { ProgressTrackingScreen } from '../components/screens/ProgressTrackingScreen';
 import { ProfileSettingsScreen } from '../components/screens/ProfileSettingsScreen';
+import { TelehealthBookingScreen } from '../components/screens/TelehealthBookingScreen';
 import {
   Camera,
   Home as HomeIcon,
@@ -458,6 +459,13 @@ export default function DermaNovaApp() {
                   setCurrentUser({ ...currentUser, ...up });
                 }
               }}
+            />
+          )}
+
+          {/* SCREEN 11: TELEHEALTH DERMATOLOGIST CONSULTATION (Stitch AI Feature) */}
+          {currentScreen === 'telehealth' && (
+            <TelehealthBookingScreen
+              onBackToDashboard={() => setCurrentScreen('dashboard')}
             />
           )}
         </main>

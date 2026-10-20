@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><title>DermaNova Clinical Vision AI</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&family=Newsreader:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#f7fbf1;color:#191d17;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 350,'GRAD' 0,'opsz' 24;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "surface": "#f7fbf1", "secondary-fixed": "#c9ead8", "surface-container": "#ecefe6", "on-tertiary-container": "#f5f0fb", "surface-container-highest": "#e0e4da", "inverse-surface": "#2e322b", "on-tertiary": "#ffffff", "on-secondary-fixed-variant": "#304d40", "on-secondary-fixed": "#022016", "on-background": "#191d17", "on-error": "#ffffff", "surface-container-lowest": "#ffffff", "tertiary": "#56555e", "surface-bright": "#f7fbf1", "surface-container-low": "#f2f5eb", "inverse-primary": "#a8cfbb", "surface-tint": "#426655", "on-secondary-container": "#4d6b5d", "on-tertiary-fixed": "#1b1b22", "surface-dim": "#d8dbd2", "secondary-container": "#c9ead8", "outline-variant": "#c1c8c2", "tertiary-container": "#6f6d76", "surface-container-high": "#e6e9e0", "background": "#f7fbf1", "error-container": "#ffdad6", "tertiary-fixed-dim": "#c8c5cf", "surface-variant": "#e0e4da", "inverse-on-surface": "#eff2e8", "secondary-fixed-dim": "#adcebd", "on-primary": "#ffffff", "primary-container": "#527665", "on-primary-container": "#d4fce6", "primary-fixed": "#c4ebd7", "tertiary-fixed": "#e5e1ec", "on-primary-fixed-variant": "#2a4e3e", "primary-fixed-dim": "#a8cfbb", "on-secondary": "#ffffff", "on-error-container": "#93000a", "on-tertiary-fixed-variant": "#47464e", "secondary": "#476557", "primary": "#3a5d4d", "on-surface": "#191d17", "error": "#ba1a1a", "on-primary-fixed": "#002115", "on-surface-variant": "#414844", "outline": "#717974" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "margin": "3rem", "space-md": "1rem", "margin-mobile": "1.25rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "gutter": "1.5rem", "space-lg": "1.5rem", "gutter-mobile": "1rem" }, fontFamily: { "title-sm": ["Manrope"], "title-md": ["Manrope"], "label-md": ["Manrope"], "headline-lg": ["Newsreader"], "body-md": ["Manrope"], "body-lg": ["Manrope"], "headline-md": ["Newsreader"], "headline-sm": ["Newsreader"], "display-hero-mobile": ["Newsreader"], "label-xs": ["Manrope"], "display-hero": ["Newsreader"], "body-sm": ["Manrope"], "headline-lg-mobile": ["Newsreader"] }, fontSize: { "title-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" }], "title-md": ["18px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "400" }], "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0.01em", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "0.005em", "fontWeight": "400" }], "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-sm": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.005em", "fontWeight": "500" }], "display-hero-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "400" }], "label-xs": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700" }], "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "400" }], "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "400" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface flex flex-col antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(48,77,64,0.04)]"><div class="h-16 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Close-up editorial beauty portrait of an authentic woman with natural skin texture, freckles, real pores, soft clean lighting, neutral warm background, calm serene expression, luxury skincare brand photography aesthetic, no artificial retouching or heavy makeup." class="h-8 w-auto object-contain rounded-full" src="https://lh3.googleusercontent.com/aida/AEtjO1UR0nDiC02I81WcfAOtxkbCSwZQoQ647J4KVG41bpHIJJKEVN3tJKpEC9tmoPNsugQqmtm99Wyni0uho6XFvCxdUmApZqpxV7zIrX4z4O03a1aLBj4jX_HUDTjFmiI5iQBsMB8Ra7HV43_IvxSgdw7m4c28DzFs28PQCXEX6jkmA8OFulRrjbM_fNt-daHeSrzw5XzBku2QD9xYn2ZAlJffaR2TE7ahBb1awg025UFjJpBJvQ9m4djWd3NX"/><div class="flex flex-col justify-center"><span class="font-title-sm text-title-sm text-primary tracking-tight">DermaNova</span><span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-widest">Overview</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Notifications" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full px-margin-mobile pb-space-lg gap-space-lg">
+<!-- Editorial Welcome & Sensor Calibration Hub -->
+<section class="flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+        Scan #DN-8841 Active • 5400K Calibrated
+      </span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs">
+        Day 56
+      </span>
+</div>
+<div class="flex flex-col">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Welcome back, Elena</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
+        Fitzpatrick Type II • Normo-Alipic Baseline
+      </p>
+</div>
+<div class="flex items-center gap-space-sm pt-1">
+<button class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-primary text-on-primary font-title-sm text-title-sm shadow-sm active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-[18px]">add_a_photo</span>
+<span>+ New Biometric Scan</span>
+</button>
+<button aria-label="Download Telemetry PDF" class="flex items-center justify-center gap-1.5 py-3 px-3.5 rounded-xl bg-surface-container text-on-surface-variant font-label-md text-label-md shadow-sm active:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]">clinical_notes</span>
+<span>PDF</span>
+</button>
+</div>
+</section>
+<!-- 4-Pillar Dermal Telemetry 2x2 Grid -->
+<section class="grid grid-cols-2 gap-space-sm">
+<!-- Metric 1 -->
+<div class="flex flex-col p-3.5 rounded-xl bg-surface-container-lowest shadow-[0_2px_8px_-2px_rgba(48,77,64,0.04)]">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Barrier Index</span>
+<span class="material-symbols-outlined text-[16px] text-primary">verified_user</span>
+</div>
+<div class="flex items-baseline gap-1 mt-1.5">
+<span class="font-headline-sm text-headline-sm text-primary">89</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">/100</span>
+</div>
+<div class="flex items-center gap-1 mt-1">
+<span class="font-label-xs text-label-xs text-primary font-bold">+21 pts gain</span>
+<!-- Sparkline SVG -->
+<svg class="w-10 h-3 stroke-primary fill-none ml-auto" preserveaspectratio="none" viewbox="0 0 40 12">
+<path d="M0,10 L8,9 L16,7 L24,5 L32,3 L40,1" stroke-linecap="round" stroke-width="1.5"></path>
+</svg>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="flex flex-col p-3.5 rounded-xl bg-surface-container-lowest shadow-[0_2px_8px_-2px_rgba(48,77,64,0.04)]">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Corneum Turgor</span>
+<span class="material-symbols-outlined text-[16px] text-primary">water_drop</span>
+</div>
+<div class="flex items-baseline gap-1 mt-1.5">
+<span class="font-headline-sm text-headline-sm text-on-surface">84%</span>
+</div>
+<div class="flex items-center justify-between mt-1">
+<span class="px-1.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-xs text-[9px] uppercase font-bold">Low TEWL</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Optimal</span>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="flex flex-col p-3.5 rounded-xl bg-surface-container-lowest shadow-[0_2px_8px_-2px_rgba(48,77,64,0.04)]">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Vascular Flux</span>
+<span class="material-symbols-outlined text-[16px] text-tertiary">device_thermostat</span>
+</div>
+<div class="flex items-baseline gap-1 mt-1.5">
+<span class="font-headline-sm text-headline-sm text-on-surface">12%</span>
+</div>
+<div class="flex items-center gap-1 mt-1">
+<span class="font-label-xs text-label-xs text-primary font-bold">-16% malar flux</span>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="flex flex-col p-3.5 rounded-xl bg-surface-container-lowest shadow-[0_2px_8px_-2px_rgba(48,77,64,0.04)]">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Adherence</span>
+<span class="material-symbols-outlined text-[16px] text-primary">calendar_month</span>
+</div>
+<div class="flex items-baseline gap-1 mt-1.5">
+<span class="font-headline-sm text-headline-sm text-on-surface">14</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Days</span>
+</div>
+<div class="flex items-center gap-1 mt-1">
+<span class="font-label-xs text-label-xs text-on-surface-variant">94% 8-Wk pace</span>
+</div>
+</div>
+</section>
+<!-- Latest Biometric Snapshot Card with Real-time Landmark Chips -->
+<section class="flex flex-col rounded-xl bg-surface-container-lowest p-4 shadow-[0_2px_8px_-2px_rgba(48,77,64,0.04)] gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">center_focus_strong</span>
+<span class="font-title-sm text-title-sm text-on-surface">Optical Topography</span>
+</div>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Today, 08:14 AM</span>
+</div>
+<!-- Annotated Optical Face Canvas -->
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Close-up editorial beauty portrait of Elena Vance with natural skin texture, freckles, real pores, soft clean lighting, neutral warm background, calm serene expression, luxury skincare brand photography aesthetic, no artificial retouching or heavy makeup." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVUEc5Qcc-fNDAMTUvbofzVPyMNCi6MHbLppJpRZKHOXq9jVm_wlMzTjmjWAFZMGF6eDzLQJ5ZhtQTU5lM-nFw_lBzLwjXputK7DdnB9kZYm0lPzDG_DaSGzj_hu2ypCw5GfcLu9tMFCcJmiJYqYbFxPayLEcUDg2oBaRZ9I3BlTUH3xlhuPPNuWYiZytGRYn06rqYTi39xBqcbmRDnsI1Pwm9Xb7FSD50YU9NuhlZyoB-SMEBzOY7Cw"/>
+<!-- Subtle Optical Grid Mesh Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/40 via-transparent to-transparent pointer-events-none"></div>
+<!-- Landmark Pin 1: Forehead -->
+<div class="absolute top-[22%] left-[46%] -translate-x-1/2 flex items-center gap-1.5">
+<div class="relative flex items-center justify-center">
+<span class="w-3.5 h-3.5 rounded-full bg-secondary-fixed/80 animate-ping absolute"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-primary border-2 border-surface-container-lowest"></span>
+</div>
+<div class="bg-surface-container-lowest/90 backdrop-blur-md px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+<span class="font-label-xs text-label-xs font-semibold text-primary">Hydration 84%</span>
+</div>
+</div>
+<!-- Landmark Pin 2: Malar Apex (Cheek) -->
+<div class="absolute top-[52%] left-[28%] -translate-x-1/2 flex items-center gap-1.5">
+<div class="relative flex items-center justify-center">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary border-2 border-surface-container-lowest"></span>
+</div>
+<div class="bg-surface-container-lowest/90 backdrop-blur-md px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+<span class="font-label-xs text-label-xs font-semibold text-secondary">Malar 12% Erythema</span>
+</div>
+</div>
+<!-- Calibration badge in corner -->
+<div class="absolute bottom-2.5 left-2.5 px-2 py-1 rounded bg-inverse-surface/80 backdrop-blur-md text-inverse-on-surface font-label-xs text-[10px] flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-fixed"></span>
+        Sub-dermal Multispectral
+      </div>
+</div>
+<!-- 8-Week Vector Progress Sparkline -->
+<div class="flex flex-col gap-1.5 pt-1">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">8-Week Vector Trajectory</span>
+<span class="font-label-xs text-label-xs text-primary font-bold">+30.8% Total Gain</span>
+</div>
+<!-- SVG Trajectory Curve -->
+<div class="w-full bg-surface-container-low rounded-lg p-2.5 flex items-center gap-3">
+<div class="flex flex-col">
+<span class="font-label-xs text-[10px] text-on-surface-variant">W0 Baseline</span>
+<span class="font-title-sm text-title-sm text-on-surface">68</span>
+</div>
+<div class="flex-1 h-7">
+<svg class="w-full h-full stroke-primary fill-none overflow-visible" preserveaspectratio="none" viewbox="0 0 160 30">
+<defs>
+<lineargradient id="gradVector" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#3a5d4d" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#3a5d4d" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,24 Q 40,20 80,12 T 160,4" stroke-linecap="round" stroke-width="2"></path>
+<circle cx="0" cy="24" fill="#3a5d4d" r="3"></circle>
+<circle cx="80" cy="12" fill="#3a5d4d" r="3"></circle>
+<circle cx="160" cy="4" fill="#3a5d4d" r="3.5"></circle>
+</svg>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-xs text-[10px] text-primary font-bold">W8 Now</span>
+<span class="font-title-sm text-title-sm text-primary font-bold">89</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2.5 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors flex items-center justify-between text-on-surface font-label-md text-label-md">
+<span>View Full Optical Analysis Breakdown</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</section>
+<!-- Ambient Microclimate & Sensory Telemetry -->
+<section class="flex flex-col p-4 rounded-xl bg-surface-container-low shadow-[0_2px_8px_-2px_rgba(48,77,64,0.03)] gap-2.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-secondary">wb_twilight</span>
+<span class="font-label-xs text-label-xs font-semibold uppercase tracking-wider">Atmospheric Microclimate</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-xs text-[10px]">
+        Seattle, WA
+      </span>
+</div>
+<div class="flex items-center justify-between gap-2 py-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-tertiary">humidity_low</span>
+<div>
+<p class="font-label-xs text-[10px] text-on-surface-variant">Relative Humidity</p>
+<p class="font-body-md text-body-md font-semibold text-on-surface">38% (Dry)</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary">solar_power</span>
+<div>
+<p class="font-label-xs text-[10px] text-on-surface-variant">Solar Irradiation</p>
+<p class="font-body-md text-body-md font-semibold text-on-surface">UV Index 3.2</p>
+</div>
+</div>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-lowest text-on-surface flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">tips_and_updates</span>
+<p class="font-body-sm text-body-sm leading-tight text-on-surface">
+<span class="font-semibold text-primary">Radiator heating active.</span> Blend +2 drops of cold-pressed Phytosqualane into your PM barrier balm tonight.
+      </p>
+</div>
+</section>
+<!-- Today's Regimen & Step Progress Tracker -->
+<section class="flex flex-col p-4 rounded-xl bg-surface-container-lowest shadow-[0_2px_8px_-2px_rgba(48,77,64,0.04)] gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">spa</span>
+<span class="font-title-sm text-title-sm text-on-surface">Today's Regimen</span>
+</div>
+<span class="font-label-xs text-label-xs text-primary font-bold">3 of 6 Completed</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full transition-all duration-500" style="width: 50%;"></div>
+</div>
+<!-- Active Step Focus Card -->
+<div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col gap-2.5 transition-colors duration-300" id="stepCard">
+<div class="flex items-start justify-between gap-3">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-xs text-[10px] uppercase font-bold">Current Step</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">AM 03</span>
+</div>
+<h2 class="font-title-sm text-title-sm text-on-surface mt-1">Micronized Zinc Oxide Mineral Veil SPF 50+</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Photostable broad-spectrum with 5% Niacinamide</p>
+</div>
+<button aria-label="Mark Step AM 03 Complete" class="w-7 h-7 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm hover:scale-105 active:scale-95 transition-all mt-1" id="stepCheckbox" onclick="toggleRegimenStep(this)">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</button>
+</div>
+<div class="flex items-center gap-3 pt-1 text-on-surface-variant font-label-xs text-label-xs">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">timer</span> 2 min absorption</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">science</span> 1/4 tsp dosage</span>
+</div>
+</div>
+<!-- Evening Queued Indicator -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-tertiary">nights_stay</span>
+<span class="font-body-sm text-body-sm">Evening Restoration (3 Steps Queued)</span>
+</div>
+<span class="font-label-xs text-label-xs font-semibold">8:30 PM</span>
+</div>
+<a class="font-label-md text-label-md text-primary font-semibold flex items-center gap-1 self-start" href="#">
+<span>Open Routine Architect</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</section>
+<!-- Clinician Oversight & Consultation Card -->
+<section class="flex flex-col p-4 rounded-xl bg-surface-container-lowest shadow-[0_2px_8px_-2px_rgba(48,77,64,0.04)] gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-primary">clinical_notes</span>
+<span class="font-label-xs text-label-xs uppercase font-bold tracking-wider">Supervising Dermatologist</span>
+</div>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+</div>
+<div class="flex items-center gap-3 mt-1">
+<div class="w-11 h-11 rounded-full bg-surface-container flex items-center justify-center text-primary font-title-sm text-title-sm flex-shrink-0">
+        MT
+      </div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-sm text-title-sm text-on-surface truncate">Dr. Marcus Thorne, MD, FAAD</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Harborview Dermatology Sciences</span>
+</div>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low text-on-surface flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px] mt-0.5">mark_chat_read</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+<span class="font-semibold text-on-surface">Biometrics synced 1h ago:</span> "Erythema index stable. Continue Day 56 zinc-barrier protocol without revision."
+      </p>
+</div>
+<div class="flex items-center gap-space-sm pt-1">
+<button class="flex-1 py-2.5 px-3 rounded-xl bg-secondary-fixed text-on-secondary-fixed-variant font-label-md text-label-md text-center hover:opacity-90 active:scale-[0.99] transition-all">
+        Book Video Tele-Consult ($145)
+      </button>
+<button aria-label="Send direct message" class="py-2.5 px-3 rounded-xl bg-surface-container text-on-surface font-label-md text-label-md flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+</button>
+</div>
+</section>
+<!-- Confidentiality Compliance Micro-Footer -->
+<footer class="flex items-center justify-center gap-2 py-2 text-on-surface-variant/70 font-label-xs text-[10px]">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+<span>256-bit Encrypted Telemetry • HIPAA Compliant Diagnostic Sandbox</span>
+</footer>
+</div>
+<script>
+  function toggleRegimenStep(btn) {
+    const card = document.getElementById('stepCard');
+    const isCompleted = btn.classList.contains('bg-primary');
+    
+    if (!isCompleted) {
+      btn.classList.remove('bg-surface-container-lowest', 'text-primary');
+      btn.classList.add('bg-primary', 'text-on-primary');
+      card.classList.add('opacity-75');
+    } else {
+      btn.classList.remove('bg-primary', 'text-on-primary');
+      btn.classList.add('bg-surface-container-lowest', 'text-primary');
+      card.classList.remove('opacity-75');
+    }
+  }
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-2px_16px_rgba(48,77,64,0.06)]" data-active-classes="text-primary font-semibold"><div class="flex items-center justify-around h-16 px-space-xs"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] h-11 transition-colors text-primary font-semibold" data-path="overview" href="#"><span class="material-symbols-outlined text-[22px]">view_quilt</span><span class="font-label-xs text-label-xs mt-0.5">Overview</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="analysis" href="#"><span class="material-symbols-outlined text-[22px]">csv</span><span class="font-label-xs text-label-xs mt-0.5">Analysis</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="routine" href="#"><span class="material-symbols-outlined text-[22px]">spa</span><span class="font-label-xs text-label-xs mt-0.5">Routine</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="progress" href="#"><span class="material-symbols-outlined text-[22px]">monitoring</span><span class="font-label-xs text-label-xs mt-0.5">Progress</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="vault" href="#"><span class="material-symbols-outlined text-[22px]">inventory_2</span><span class="font-label-xs text-label-xs mt-0.5">Vault</span></a></div></nav></body></html>

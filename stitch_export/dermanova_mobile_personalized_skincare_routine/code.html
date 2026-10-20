@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><title>DermaNova Clinical Vision AI</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&family=Newsreader:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#f7fbf1;color:#191d17;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 350,'GRAD' 0,'opsz' 24;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "surface": "#f7fbf1", "secondary-fixed": "#c9ead8", "surface-container": "#ecefe6", "on-tertiary-container": "#f5f0fb", "surface-container-highest": "#e0e4da", "inverse-surface": "#2e322b", "on-tertiary": "#ffffff", "on-secondary-fixed-variant": "#304d40", "on-secondary-fixed": "#022016", "on-background": "#191d17", "on-error": "#ffffff", "surface-container-lowest": "#ffffff", "tertiary": "#56555e", "surface-bright": "#f7fbf1", "surface-container-low": "#f2f5eb", "inverse-primary": "#a8cfbb", "surface-tint": "#426655", "on-secondary-container": "#4d6b5d", "on-tertiary-fixed": "#1b1b22", "surface-dim": "#d8dbd2", "secondary-container": "#c9ead8", "outline-variant": "#c1c8c2", "tertiary-container": "#6f6d76", "surface-container-high": "#e6e9e0", "background": "#f7fbf1", "error-container": "#ffdad6", "tertiary-fixed-dim": "#c8c5cf", "surface-variant": "#e0e4da", "inverse-on-surface": "#eff2e8", "secondary-fixed-dim": "#adcebd", "on-primary": "#ffffff", "primary-container": "#527665", "on-primary-container": "#d4fce6", "primary-fixed": "#c4ebd7", "tertiary-fixed": "#e5e1ec", "on-primary-fixed-variant": "#2a4e3e", "primary-fixed-dim": "#a8cfbb", "on-secondary": "#ffffff", "on-error-container": "#93000a", "on-tertiary-fixed-variant": "#47464e", "secondary": "#476557", "primary": "#3a5d4d", "on-surface": "#191d17", "error": "#ba1a1a", "on-primary-fixed": "#002115", "on-surface-variant": "#414844", "outline": "#717974" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "margin": "3rem", "space-md": "1rem", "margin-mobile": "1.25rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "gutter": "1.5rem", "space-lg": "1.5rem", "gutter-mobile": "1rem" }, fontFamily: { "title-sm": ["Manrope"], "title-md": ["Manrope"], "label-md": ["Manrope"], "headline-lg": ["Newsreader"], "body-md": ["Manrope"], "body-lg": ["Manrope"], "headline-md": ["Newsreader"], "headline-sm": ["Newsreader"], "display-hero-mobile": ["Newsreader"], "label-xs": ["Manrope"], "display-hero": ["Newsreader"], "body-sm": ["Manrope"], "headline-lg-mobile": ["Newsreader"] }, fontSize: { "title-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" }], "title-md": ["18px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "400" }], "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0.01em", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "0.005em", "fontWeight": "400" }], "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-sm": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.005em", "fontWeight": "500" }], "display-hero-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "400" }], "label-xs": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700" }], "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "400" }], "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "400" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface flex flex-col antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(48,77,64,0.04)]"><div class="h-16 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Close-up editorial beauty portrait of an authentic woman with natural skin texture, freckles, real pores, soft clean lighting, neutral warm background, calm serene expression, luxury skincare brand photography aesthetic, no artificial retouching or heavy makeup." class="h-8 w-auto object-contain rounded-full" src="https://lh3.googleusercontent.com/aida/AEtjO1UR0nDiC02I81WcfAOtxkbCSwZQoQ647J4KVG41bpHIJJKEVN3tJKpEC9tmoPNsugQqmtm99Wyni0uho6XFvCxdUmApZqpxV7zIrX4z4O03a1aLBj4jX_HUDTjFmiI5iQBsMB8Ra7HV43_IvxSgdw7m4c28DzFs28PQCXEX6jkmA8OFulRrjbM_fNt-daHeSrzw5XzBku2QD9xYn2ZAlJffaR2TE7ahBb1awg025UFjJpBJvQ9m4djWd3NX"/><div class="flex flex-col justify-center"><span class="font-title-sm text-title-sm text-primary tracking-tight">DermaNova</span><span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-widest">Routine</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Notifications" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Top Profile & Diagnostic Telemetry Brief -->
+<div class="px-margin-mobile pt-4 pb-2">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-space-sm">
+<div class="relative w-11 h-11 rounded-full overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Intimate close-up beauty portrait of Elena Vance with warm natural skin, subtle freckles across nose and cheeks, soft natural diffused light, neutral warm oatmeal background, calm and radiant expression, authentic unretouched skin texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVUOoO5qEWbb7Ohj5Bh2t3CSU17vOTOkhpLqn8lnSSrLOlgGdR7-UFHtqEoxId6O7qFRTvhiQf_DdUV6eFgUBcwb4VlicqxFwCMLzLRMwVFo9O3UfQTP1DZzgsAVtEkdNl2pOVJHaDRC4Tls9m_SnTAWKCjuFBwLpCUOb3cf6YPmsu5o91yaVree4chOpCi4ZyrT-L-EcrDB9lc1hhV8nQSXK3Nlic3nclOOWvv7L0qqdgl5XdJzt51w"/>
+<div class="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-title-sm text-title-sm text-on-surface">Elena Vance</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+</div>
+<span class="font-label-xs text-label-xs text-primary tracking-wide uppercase">Fitzpatrick II • Malar Reactivity</span>
+</div>
+</div>
+<div class="bg-secondary-container px-3 py-1 rounded-full">
+<span class="font-label-xs text-label-xs text-on-secondary-fixed-variant uppercase tracking-wider">Telemetry #DN-8841</span>
+</div>
+</div>
+<!-- Microclimate Environmental Sync Strip -->
+<div class="bg-surface-container-high rounded-xl p-3 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[18px]">thermostat</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider">Dynamic Microclimate Sync</span>
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">Seattle Ambient RH 38% • Winter Arc</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px]">sync</span>
+</div>
+<!-- Regimen Adherence & Bio-Compatibility Metrics -->
+<div class="grid grid-cols-3 gap-2 mt-3">
+<div class="bg-surface-container-lowest p-3 rounded-xl shadow-sm flex flex-col justify-between">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase">Adherence</span>
+<div class="mt-1 flex items-baseline gap-1">
+<span class="font-headline-sm text-headline-sm text-primary font-serif">100%</span>
+</div>
+<span class="font-label-xs text-label-xs text-secondary mt-0.5">14d Perfect Streak</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-xl shadow-sm flex flex-col justify-between">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase">Bio-Compat</span>
+<div class="mt-1 flex items-baseline gap-1">
+<span class="font-headline-sm text-headline-sm text-primary font-serif">98%</span>
+</div>
+<span class="font-label-xs text-label-xs text-primary mt-0.5">Cellular Harmony</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-xl shadow-sm flex flex-col justify-between">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase">Protocol</span>
+<div class="mt-1 flex items-baseline gap-1">
+<span class="font-headline-sm text-headline-sm text-primary font-serif">6</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">steps</span>
+</div>
+<span class="font-label-xs text-label-xs text-on-surface-variant mt-0.5">AM: 3 / PM: 3</span>
+</div>
+</div>
+</div>
+<!-- Interactive AM / PM Architecture Segmented Controller -->
+<div class="px-margin-mobile mt-3">
+<div class="bg-surface-container-highest p-1 rounded-xl flex items-center justify-between" id="regimen-mode-toggle">
+<button class="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-surface-container-lowest text-primary shadow-sm transition-all duration-200" id="btn-am-tab" onclick="switchRegimen('AM')">
+<span class="material-symbols-outlined text-[18px]">light_mode</span>
+<div class="flex items-center gap-1.5">
+<span class="font-title-sm text-title-sm">Morning Protocol</span>
+<span class="font-label-xs text-label-xs px-1.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-bold">3 Steps</span>
+</div>
+</button>
+<button class="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-on-surface-variant hover:text-primary transition-all duration-200" id="btn-pm-tab" onclick="switchRegimen('PM')">
+<span class="material-symbols-outlined text-[18px]">dark_mode</span>
+<div class="flex items-center gap-1.5">
+<span class="font-title-sm text-title-sm">Evening Restoration</span>
+<span class="font-label-xs text-label-xs px-1.5 py-0.5 rounded-full bg-surface-container text-tertiary font-bold">3 Steps</span>
+</div>
+</button>
+</div>
+</div>
+<!-- AM Routine Stream -->
+<div class="px-margin-mobile mt-4 space-y-3.5" id="am-regimen-content">
+<!-- Header of the Tab Stream -->
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">Vascular Calming Routine</span>
+</div>
+<span class="font-label-xs text-label-xs text-secondary uppercase font-bold tracking-wider">Step 2 of 3 Done</span>
+</div>
+<!-- Step AM 01 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm relative overflow-hidden transition-all duration-200">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-2.5">
+<span class="w-6 h-6 rounded-full bg-secondary-fixed text-on-secondary-fixed font-title-sm text-title-sm flex items-center justify-center text-xs">01</span>
+<div class="flex flex-col">
+<span class="font-label-xs text-label-xs text-secondary uppercase font-bold tracking-wider">Phyto-Actives • pH 5.4</span>
+<span class="font-title-sm text-title-sm text-on-surface mt-0.5">Centella & Madecassoside Dermal Serum</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary text-[22px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="grid grid-cols-12 gap-3 mt-3 pt-3 border-t-0">
+<div class="col-span-8 flex flex-col justify-between">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Downregulates acute micro-capillary vasodilation across malar cheek flush nodes.</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-surface-container-low text-on-surface font-medium">3-4 Drops</span>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-surface-container-low text-on-surface font-medium">Gentle Press</span>
+</div>
+</div>
+<div class="col-span-4 h-20 rounded-lg overflow-hidden relative shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Minimalist pharmaceutical dropper bottle with amber glass, containing botanical green calming centella asiatica facial serum, soft clean morning sunlight on pale travertine marble surface, luxury skincare apothecary aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0yzziSEunHXdsE1lvvmvanIansuyU9XMOA0DfmgG_HeWhfJGm3i-7a-dSAcQr52FiDKeGYChTUKoGMO2PQy4MXcIoQpTou1SICAEJmjScgcKIPEWCxweBjipMr3sGxmjSdx3N5S1Cbx-bzr514Qot2Qalic3mXT9l_guXVs9gLutnmn6dxfbqPaYR2mll6vxCSxhQ1E3JbBcsJLJfgUMIF1VFEn8kBvWEw7SiPfEy4hPv0G73oT-bbQ"/>
+</div>
+</div>
+<div class="mt-3 bg-surface-container-low rounded-lg px-3 py-2 flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[16px]">done_all</span>
+<span class="font-label-xs text-label-xs">Completed today at 07:42 AM</span>
+</div>
+<span class="font-label-xs text-label-xs text-on-surface-variant font-medium">0.8% Active Assay</span>
+</div>
+</div>
+<!-- Step AM 02 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm relative overflow-hidden transition-all duration-200">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-2.5">
+<span class="w-6 h-6 rounded-full bg-secondary-fixed text-on-secondary-fixed font-title-sm text-title-sm flex items-center justify-center text-xs">02</span>
+<div class="flex flex-col">
+<span class="font-label-xs text-label-xs text-secondary uppercase font-bold tracking-wider">Barrier Matrix • 3:1:1 Lipids</span>
+<span class="font-title-sm text-title-sm text-on-surface mt-0.5">Ceramide NP & Phytoceramide Tri-Lipid</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary text-[22px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="grid grid-cols-12 gap-3 mt-3 pt-3">
+<div class="col-span-8 flex flex-col justify-between">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Replenishes stratum corneum intercellular lipid bilayers to resist wind chill & low moisture.</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-surface-container-low text-on-surface font-medium">1.5 Pumps</span>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-surface-container-low text-on-surface font-medium">Full Face & Neck</span>
+</div>
+</div>
+<div class="col-span-4 h-20 rounded-lg overflow-hidden relative shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Creamy luxury white lipid emulsion dispensing onto architectural glass dish, ultra clean cosmetic texture macro photography, natural daylight, soft focus aesthetic, muted sage and cream tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQ0Ia8IVXclZQsA5KNSY_HXMTG_d4k22qySCsPhQXzhMlW38zsIaUiXfqZLbdqGNV0336qRf7OGkY6rrTIdC7xjuDOyG0JBhMlGJqX4VBGMpeFy79pS3oO144KLqekleSMDzCnXfObKQ2OgqXKtSNzmoD0sA5JE69yoCN5M-3CbCV1qlvCw-Y1gFJWPnD18bU0MiaEp56hJmDfMUVzRWG8Bm3JN95FsQb1elfP3ytJrmzBfnscpFwf6Q"/>
+</div>
+</div>
+<div class="mt-3 bg-surface-container-low rounded-lg px-3 py-2 flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[16px]">done_all</span>
+<span class="font-label-xs text-label-xs">Completed today at 07:44 AM</span>
+</div>
+<span class="font-label-xs text-label-xs text-on-surface-variant font-medium">Physiological pH 5.6</span>
+</div>
+</div>
+<!-- Step AM 03 (Pending Action) -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-md relative overflow-hidden transition-all duration-200" id="step-3-container">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-2.5">
+<span class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface font-title-sm text-title-sm flex items-center justify-center text-xs">03</span>
+<div class="flex flex-col">
+<span class="font-label-xs text-label-xs text-primary font-bold uppercase tracking-wider">Physical Photoprotection</span>
+<span class="font-title-sm text-title-sm text-on-surface mt-0.5">Micronized Zinc Mineral Veil SPF 50+</span>
+</div>
+</div>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-bold" id="step-3-badge">Pending</span>
+</div>
+<div class="grid grid-cols-12 gap-3 mt-3 pt-3">
+<div class="col-span-8 flex flex-col justify-between">
+<p class="font-body-sm text-body-sm text-on-surface-variant">18.5% Non-Nano physical block shields sensitive erythema hotspots from thermal flare & UV-A/B.</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-surface-container text-on-surface font-medium">Two-Finger Rule</span>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-surface-container text-on-surface font-medium">Reapply at 1:00 PM</span>
+</div>
+</div>
+<div class="col-span-4 h-20 rounded-lg overflow-hidden relative shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Sophisticated ceramic tube of luxury clinical mineral sunscreen with subtle botanical logo, resting beside soft white linen and smooth stones, architectural lighting, quiet luxury feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7-twbgww-iV7J0Vr8SuEV8MLNT8mBrMxGjdEBLcqnMs2s5oMMCdl1Y6lo7mLpPHTbCl0pXeix2tLyNjm_cbw63vEjFNZVTcPSscgAieVI7x1oDpIKbymzB_mxF_4OMs2TqAl-1eOgTwIU15Z6ZJzJk5q2go062kss8TXbsn59VJJq7Ac5AImGN80JXBM3Jww5qdZfXknU4ri3kHP-k-GhDX7ZsBaSAnlGOc4D5akAX6SwOInwThScrw"/>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<button class="flex-1 bg-primary hover:bg-primary-container text-on-primary py-2.5 rounded-lg flex items-center justify-center gap-2 shadow-sm transition-all duration-200" id="complete-step-3-btn" onclick="completeStep3()">
+<span class="material-symbols-outlined text-[18px]">check</span>
+<span class="font-body-md text-body-md font-semibold">Mark Step 03 Completed</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" onclick="toggleStepInfo()">
+<span class="material-symbols-outlined text-[20px]">info</span>
+</button>
+</div>
+<div class="hidden mt-3 p-3 rounded-lg bg-surface-container-low text-on-surface" id="step-3-guide">
+<span class="font-label-xs text-label-xs text-primary uppercase font-bold tracking-wider">Clinical Application Protocol</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Dispense two continuous lengths along your index and middle fingers. Warm lightly between palms before pressing gently outward across cheekbones to avoid friction-induced vascular dilation.</p>
+</div>
+</div>
+</div>
+<!-- PM Routine Stream (Hidden by Default) -->
+<div class="hidden px-margin-mobile mt-4 space-y-3.5" id="pm-regimen-content">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">Nocturnal Recovery Architecture</span>
+</div>
+<span class="font-label-xs text-label-xs text-tertiary uppercase font-bold tracking-wider">Begins at 09:30 PM</span>
+</div>
+<!-- Step PM 01 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm relative overflow-hidden">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-2.5">
+<span class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface font-title-sm text-title-sm flex items-center justify-center text-xs">01</span>
+<div class="flex flex-col">
+<span class="font-label-xs text-label-xs text-tertiary uppercase font-bold tracking-wider">Non-Stripping Purifier</span>
+<span class="font-title-sm text-title-sm text-on-surface mt-0.5">Squalane Cleansing Botanical Milk</span>
+</div>
+</div>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-surface-container text-tertiary font-bold">Scheduled</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2.5">Dissolves particulate airborne dust and physical mineral filters without disrupting intercellular acid mantle.</p>
+<div class="mt-2.5 flex items-center gap-2">
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-surface-container-low text-on-surface font-medium">Lukewarm Water (28°C)</span>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-surface-container-low text-on-surface font-medium">Pat Dry, No Rubbing</span>
+</div>
+</div>
+<!-- Step PM 02 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm relative overflow-hidden">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-2.5">
+<span class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface font-title-sm text-title-sm flex items-center justify-center text-xs">02</span>
+<div class="flex flex-col">
+<span class="font-label-xs text-label-xs text-primary font-bold uppercase tracking-wider">Cellular Density • Micro-Dosed</span>
+<span class="font-title-sm text-title-sm text-on-surface mt-0.5">Encapsulated Retinaldehyde Liposome (0.03%)</span>
+</div>
+</div>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-bold">Targeted</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2.5">Time-released lipid-sphere encapsulation delivers bio-available collagen stimulation without activating vascular trigger pathways.</p>
+<div class="mt-2.5 flex items-center gap-2">
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-surface-container-low text-on-surface font-medium">Pea-Sized Amount</span>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-surface-container-low text-on-surface font-medium">Alternate Nights</span>
+</div>
+</div>
+<!-- Step PM 03 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm relative overflow-hidden">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-2.5">
+<span class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface font-title-sm text-title-sm flex items-center justify-center text-xs">03</span>
+<div class="flex flex-col">
+<span class="font-label-xs text-label-xs text-tertiary uppercase font-bold tracking-wider">Occlusive Sealant</span>
+<span class="font-title-sm text-title-sm text-on-surface mt-0.5">Blue Tansy & Beta-Glucan Night Cocoon</span>
+</div>
+</div>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-surface-container text-tertiary font-bold">Dynamic +2 Drops</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2.5">Chamazulene rich recovery balm creates a breathable hydro-lipidic reservoir over night.</p>
+</div>
+</div>
+<!-- Dynamic Formulation Adaptation & Synergies Module -->
+<div class="px-margin-mobile mt-4 space-y-3">
+<!-- Climate Adaptation Card -->
+<div class="bg-surface-container-low rounded-xl p-3.5 shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">tune</span>
+<span class="font-title-sm text-title-sm text-on-surface">Microclimate Adaptation</span>
+</div>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-semibold">Active AI Adjustment</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+        Seattle overnight humidity projected below 40%. The formulation engine suggests adding <strong class="text-on-surface font-semibold">+2 drops 100% Sugarcane Squalane</strong> into your PM Step 03 cocoon balm to counter overnight trans-epidermal water loss.
+      </p>
+<div class="mt-3 flex items-center justify-between pt-2">
+<span class="font-label-xs text-label-xs text-on-surface-variant">TEWL Prevention Gain: +18.4%</span>
+<button class="font-label-xs text-label-xs text-primary font-bold hover:underline flex items-center gap-1">
+          Apply to Regimen
+          <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Active Ingredients Compatibility & pH Synergy Matrix -->
+<div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm">
+<div class="flex items-center justify-between mb-2.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">science</span>
+<span class="font-title-sm text-title-sm text-on-surface">Actives Synergies Matrix</span>
+</div>
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span class="font-label-xs text-label-xs font-semibold">0 Collisions</span>
+</div>
+</div>
+<!-- Interactive Mini Matrix View -->
+<div class="space-y-2">
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">pH Dynamic Range</span>
+</div>
+<span class="font-label-xs text-label-xs text-on-surface-variant font-mono">5.2 — 5.8 (Target: 5.5)</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Niacinamide + Retinal Cross-Check</span>
+</div>
+<span class="font-label-xs text-label-xs text-secondary font-semibold">Buffered (Neutral)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Regimen Supply, Compounding Lab & Clinician Rx Access -->
+<div class="px-margin-mobile mt-4 mb-2">
+<div class="bg-surface-container-high rounded-xl p-4 shadow-sm">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider">Apothecary Lab Dispatch</span>
+<span class="font-title-sm text-title-sm text-on-surface mt-0.5">Compounded Batch #04</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Personalized Botanical Elixir arriving Dec 03</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[20px]">local_shipping</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex flex-col gap-2">
+<button class="w-full bg-primary text-on-primary py-2.5 rounded-lg font-body-md text-body-md font-semibold hover:bg-primary-container transition-colors shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">medical_services</span>
+<span>Request Clinician Rx Adjustment</span>
+</button>
+<button class="w-full bg-surface-container-lowest text-on-surface py-2 rounded-lg font-body-sm text-body-sm font-medium hover:bg-surface-container transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+<span>Manage Auto-Refill Frequency (Every 45 Days)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Medical & Algorithmic Regulatory Wellness Scope -->
+<div class="px-margin-mobile mt-3 pb-4">
+<div class="bg-surface-container-low rounded-lg p-3 flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary mt-0.5">shield</span>
+<p class="font-label-xs text-label-xs text-tertiary leading-normal">
+        DermaNova Regimen Engine is HIPAA-compliant and calibrated under dermatological supervision. Formulation alterations reflect biometric analysis and microclimate telemetry. For persistent erythrosis or cutaneous swelling, consult your board-certified physician immediately.
+      </p>
+</div>
+</div>
+<script>
+    function switchRegimen(mode) {
+      const amContent = document.getElementById('am-regimen-content');
+      const pmContent = document.getElementById('pm-regimen-content');
+      const btnAm = document.getElementById('btn-am-tab');
+      const btnPm = document.getElementById('btn-pm-tab');
+
+      if (mode === 'AM') {
+        amContent.classList.remove('hidden');
+        pmContent.classList.add('hidden');
+        
+        btnAm.className = 'flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-surface-container-lowest text-primary shadow-sm transition-all duration-200';
+        btnPm.className = 'flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-on-surface-variant hover:text-primary transition-all duration-200';
+      } else {
+        pmContent.classList.remove('hidden');
+        amContent.classList.add('hidden');
+        
+        btnPm.className = 'flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-surface-container-lowest text-primary shadow-sm transition-all duration-200';
+        btnAm.className = 'flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-on-surface-variant hover:text-primary transition-all duration-200';
+      }
+    }
+
+    function completeStep3() {
+      const btn = document.getElementById('complete-step-3-btn');
+      const badge = document.getElementById('step-3-badge');
+      const container = document.getElementById('step-3-container');
+
+      badge.textContent = 'Completed';
+      badge.className = 'font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-bold';
+      
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">done_all</span><span class="font-body-md text-body-md font-semibold">Done at ' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) + '</span>';
+      btn.className = 'flex-1 bg-surface-container-high text-secondary py-2.5 rounded-lg flex items-center justify-center gap-2 cursor-default transition-all duration-200';
+    }
+
+    function toggleStepInfo() {
+      const guide = document.getElementById('step-3-guide');
+      guide.classList.toggle('hidden');
+    }
+  </script>
+</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-2px_16px_rgba(48,77,64,0.06)]" data-active-classes="text-primary font-semibold"><div class="flex items-center justify-around h-16 px-space-xs"><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="overview" href="#"><span class="material-symbols-outlined text-[22px]">view_quilt</span><span class="font-label-xs text-label-xs mt-0.5">Overview</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="analysis" href="#"><span class="material-symbols-outlined text-[22px]">csv</span><span class="font-label-xs text-label-xs mt-0.5">Analysis</span></a><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] h-11 transition-colors text-primary font-semibold" data-path="routine" href="#"><span class="material-symbols-outlined text-[22px]">spa</span><span class="font-label-xs text-label-xs mt-0.5">Routine</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="progress" href="#"><span class="material-symbols-outlined text-[22px]">monitoring</span><span class="font-label-xs text-label-xs mt-0.5">Progress</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="vault" href="#"><span class="material-symbols-outlined text-[22px]">inventory_2</span><span class="font-label-xs text-label-xs mt-0.5">Vault</span></a></div></nav></body></html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><title>DermaNova Clinical Vision AI</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&amp;family=Newsreader:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#f7fbf1;color:#191d17;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 350,'GRAD' 0,'opsz' 24;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "surface": "#f7fbf1", "secondary-fixed": "#c9ead8", "surface-container": "#ecefe6", "on-tertiary-container": "#f5f0fb", "surface-container-highest": "#e0e4da", "inverse-surface": "#2e322b", "on-tertiary": "#ffffff", "on-secondary-fixed-variant": "#304d40", "on-secondary-fixed": "#022016", "on-background": "#191d17", "on-error": "#ffffff", "surface-container-lowest": "#ffffff", "tertiary": "#56555e", "surface-bright": "#f7fbf1", "surface-container-low": "#f2f5eb", "inverse-primary": "#a8cfbb", "surface-tint": "#426655", "on-secondary-container": "#4d6b5d", "on-tertiary-fixed": "#1b1b22", "surface-dim": "#d8dbd2", "secondary-container": "#c9ead8", "outline-variant": "#c1c8c2", "tertiary-container": "#6f6d76", "surface-container-high": "#e6e9e0", "background": "#f7fbf1", "error-container": "#ffdad6", "tertiary-fixed-dim": "#c8c5cf", "surface-variant": "#e0e4da", "inverse-on-surface": "#eff2e8", "secondary-fixed-dim": "#adcebd", "on-primary": "#ffffff", "primary-container": "#527665", "on-primary-container": "#d4fce6", "primary-fixed": "#c4ebd7", "tertiary-fixed": "#e5e1ec", "on-primary-fixed-variant": "#2a4e3e", "primary-fixed-dim": "#a8cfbb", "on-secondary": "#ffffff", "on-error-container": "#93000a", "on-tertiary-fixed-variant": "#47464e", "secondary": "#476557", "primary": "#3a5d4d", "on-surface": "#191d17", "error": "#ba1a1a", "on-primary-fixed": "#002115", "on-surface-variant": "#414844", "outline": "#717974" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "margin": "3rem", "space-md": "1rem", "margin-mobile": "1.25rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "gutter": "1.5rem", "space-lg": "1.5rem", "gutter-mobile": "1rem" }, fontFamily: { "title-sm": ["Manrope"], "title-md": ["Manrope"], "label-md": ["Manrope"], "headline-lg": ["Newsreader"], "body-md": ["Manrope"], "body-lg": ["Manrope"], "headline-md": ["Newsreader"], "headline-sm": ["Newsreader"], "display-hero-mobile": ["Newsreader"], "label-xs": ["Manrope"], "display-hero": ["Newsreader"], "body-sm": ["Manrope"], "headline-lg-mobile": ["Newsreader"] }, fontSize: { "title-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" }], "title-md": ["18px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "400" }], "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0.01em", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "0.005em", "fontWeight": "400" }], "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-sm": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.005em", "fontWeight": "500" }], "display-hero-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "400" }], "label-xs": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700" }], "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "400" }], "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "400" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(48,77,64,0.04)]"><div class="h-16 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Close-up editorial beauty portrait of an authentic woman with natural skin texture, freckles, real pores, soft clean lighting, neutral warm background, calm serene expression, luxury skincare brand photography aesthetic, no artificial retouching or heavy makeup." class="h-8 w-auto object-contain rounded-full" src="https://lh3.googleusercontent.com/aida/AEtjO1UR0nDiC02I81WcfAOtxkbCSwZQoQ647J4KVG41bpHIJJKEVN3tJKpEC9tmoPNsugQqmtm99Wyni0uho6XFvCxdUmApZqpxV7zIrX4z4O03a1aLBj4jX_HUDTjFmiI5iQBsMB8Ra7HV43_IvxSgdw7m4c28DzFs28PQCXEX6jkmA8OFulRrjbM_fNt-daHeSrzw5XzBku2QD9xYn2ZAlJffaR2TE7ahBb1awg025UFjJpBJvQ9m4djWd3NX"/><div class="flex flex-col justify-center"><span class="font-title-sm text-title-sm text-primary tracking-tight">DermaNova</span><span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-widest">Analysis</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Notifications" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full pb-12 space-y-5">
+<!-- 1. Top Sub-Navigation / Action Bar -->
+<section class="flex flex-col gap-3 px-margin-mobile pt-2">
+<div class="flex items-center justify-between">
+<button class="inline-flex items-center gap-1.5 py-1.5 px-2.5 -ml-2 rounded-lg text-primary hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span class="font-title-sm text-title-sm font-semibold tracking-tight">Analysis #DN-8841</span>
+</button>
+<div class="flex items-center gap-1.5">
+<button aria-label="Clinical PDF Download" class="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+</button>
+<button class="inline-flex items-center gap-1 h-9 px-3 rounded-full bg-secondary-container text-on-secondary-fixed text-label-md font-label-md tracking-tight hover:bg-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-[16px]">share</span>
+<span>Clinician</span>
+</button>
+</div>
+</div>
+<!-- Horizontal Concern Switcher Tabs -->
+<div class="flex items-center gap-2 overflow-x-auto pb-1 -mx-margin-mobile px-margin-mobile no-scrollbar text-nowrap">
+<button class="flex items-center gap-1.5 py-1.5 px-3.5 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed animate-pulse"></span>
+<span>Malar Erythema (12%)</span>
+</button>
+<button class="flex items-center gap-1.5 py-1.5 px-3.5 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">
+<span>Corneum Hydration (84%)</span>
+</button>
+<button class="flex items-center gap-1.5 py-1.5 px-3.5 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">
+<span>Pore Clearance (78/100)</span>
+</button>
+<button class="flex items-center gap-1.5 py-1.5 px-3.5 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">
+<span>Ephelides &amp; Tone</span>
+</button>
+</div>
+</section>
+<!-- 2. Hero Dermal Concern Overview -->
+<section class="px-margin-mobile">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-[0_2px_12px_rgba(48,77,64,0.05)] space-y-4">
+<div class="space-y-1.5">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs text-primary font-bold uppercase tracking-wider">SCAN #DN-8841-B • 91% FIDELITY</span>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed font-semibold">Active Cycle</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface leading-tight">
+          Malar Erythema &amp; Transient Vascular Reactivity
+        </h1>
+<div class="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>Physiological Vasodilation • Grade 1 (Superficial Flushing)</span>
+</div>
+</div>
+<!-- 4-Quadrant Telemetry Stat Card -->
+<div class="grid grid-cols-2 gap-2.5 pt-1">
+<div class="p-3 rounded-lg bg-surface-container-low flex flex-col justify-between">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase">Calibrated Flux</span>
+<div class="mt-1 flex items-baseline gap-1">
+<span class="font-headline-md text-headline-md font-semibold text-primary">12%</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">flux</span>
+</div>
+<span class="font-label-xs text-label-xs text-tertiary mt-1">Normative: 8%–15%</span>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-low flex flex-col justify-between">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase">8-Wk Shift</span>
+<div class="mt-1 flex items-baseline gap-1 text-primary">
+<span class="font-headline-md text-headline-md font-semibold">-16%</span>
+<span class="material-symbols-outlined text-[16px]">trending_down</span>
+</div>
+<span class="font-label-xs text-label-xs text-primary font-medium mt-1">Stable reduction</span>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-low flex flex-col justify-between">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase">Chromatic Ref</span>
+<div class="mt-1 font-title-sm text-title-sm text-on-surface">5400K</div>
+<span class="font-label-xs text-label-xs text-tertiary mt-1">Daylight standard</span>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-low flex flex-col justify-between">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase">Pattern Class</span>
+<div class="mt-1 inline-flex items-center gap-1 font-title-sm text-title-sm text-on-surface">
+<span>Transient</span>
+</div>
+<span class="font-label-xs text-label-xs text-secondary mt-1">Non-inflammatory</span>
+</div>
+</div>
+<!-- Optical Synthesis & Plain-Language Summary -->
+<div class="p-3.5 rounded-lg bg-surface-container-low flex gap-3 items-start">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">neurology</span>
+<div class="space-y-1">
+<h2 class="font-label-md text-label-md text-on-surface font-semibold">Clinical Synthesis</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Mild micro-vascular expansion localized across the mid-malar (cheek) plane. Consistent with reactive vasomotor responses to ambient shifts and trans-epidermal moisture fluctuations rather than persistent vascular dermatoses.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Micro-Surface Topography & Landmark Inspection Card -->
+<section class="px-margin-mobile">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-[0_2px_12px_rgba(48,77,64,0.05)] space-y-3.5">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-label-xs text-label-xs text-primary font-bold uppercase tracking-wider">Telemetry Mapping</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Left Malar Arch (ROI)</h2>
+</div>
+<span class="font-label-xs text-label-xs px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-fixed font-semibold">Live Mode</span>
+</div>
+<!-- Visual Layer Switchers -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+<button class="py-1 px-3 rounded-full bg-primary text-on-primary font-label-xs text-label-xs">Optical 5400K</button>
+<button class="py-1 px-3 rounded-full bg-surface-container-low text-on-surface-variant font-label-xs text-label-xs">Heat Map</button>
+<button class="py-1 px-3 rounded-full bg-surface-container-low text-on-surface-variant font-label-xs text-label-xs">Capillary Flow</button>
+<button class="py-1 px-3 rounded-full bg-surface-container-low text-on-surface-variant font-label-xs text-label-xs">Lipid Barrier</button>
+</div>
+<!-- Authentic Portrait with Dynamic PIN Landmark Overlays -->
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-surface-container-high shadow-inner">
+<img class="w-full h-full object-cover object-center" data-alt="Macro optical close-up clinical dermatology scan of a woman's cheek and malar arch, showing fine freckles, authentic dermal pores, soft natural skin texture, gentle diffuse light-rose vascular flush, calibrated 5400K clinical lighting, high precision editorial medical photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOeOEHu9zpjLIGXDcmzoe4oWJG93oBOTCcSILdysR2kQsKUDywYr8wc_jKeGXsMQaCRZ2YEyTVkJ4gL6O7mNM1HYyfrljQcjvcqkoGZwXsGjOYcr8ZUonvM4cs2MmGO-K771Q-kqq2llKsc8qdwGaP7ep3LkYH_TEO9ET7TkcbO_g6-FG-cZJ-0UxiIT9QuSaxBaoLtvjK4zfhLXdWFIh5NKQ27o0vk4uH5Wagb-QFo6OUeCKW4xG6gw"/>
+<!-- Landmark Pin 1: Zygomatic Apex -->
+<div class="absolute top-[32%] left-[46%] -translate-x-1/2 -translate-y-1/2 flex items-center group">
+<div class="relative flex items-center justify-center">
+<span class="animate-ping absolute inline-flex h-5 w-5 rounded-full bg-primary opacity-30"></span>
+<div class="w-4 h-4 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-md">
+<span class="w-1.5 h-1.5 rounded-full bg-on-primary-container"></span>
+</div>
+</div>
+<div class="ml-2 py-1 px-2.5 rounded bg-surface-container-lowest/95 backdrop-blur-md shadow-md text-left">
+<span class="block font-label-xs text-label-xs text-primary font-bold">PIN 01 • Apex</span>
+<span class="block font-label-xs text-label-xs text-on-surface">14% localized flux</span>
+</div>
+</div>
+<!-- Landmark Pin 2: Nasolabial Boundary -->
+<div class="absolute bottom-[28%] left-[26%] flex items-center">
+<div class="w-3.5 h-3.5 rounded-full bg-surface-container-lowest text-primary flex items-center justify-center shadow-md">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+</div>
+<div class="ml-1.5 py-0.5 px-2 rounded bg-surface-container-lowest/90 backdrop-blur-md shadow-sm">
+<span class="block font-label-xs text-label-xs text-tertiary">PIN 02: 9% (Norm)</span>
+</div>
+</div>
+<!-- Landmark Pin 3: Stratum Corneum -->
+<div class="absolute top-[22%] right-[12%] flex items-center">
+<div class="w-3 h-3 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow">
+<span class="w-1 rounded-full bg-on-secondary"></span>
+</div>
+<div class="ml-1.5 py-0.5 px-2 rounded bg-surface-container-lowest/90 backdrop-blur-md shadow-sm">
+<span class="block font-label-xs text-label-xs text-secondary font-semibold">PIN 03: Lipid Veil OK</span>
+</div>
+</div>
+<!-- Diagnostic HUD Pill overlay -->
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between px-2.5 py-1.5 rounded bg-inverse-surface/85 backdrop-blur-md text-inverse-on-surface">
+<span class="font-label-xs text-label-xs tracking-wider uppercase">Unfiltered Optical Mode</span>
+<span class="font-label-xs text-label-xs text-secondary-fixed">SONY IMX-Derma9</span>
+</div>
+</div>
+<!-- 8-Week Trendline Sparkline Graph -->
+<div class="p-3 rounded-lg bg-surface-container-low space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]">show_chart</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">8-Week Malar Flux Trendline</span>
+</div>
+<span class="font-label-xs text-label-xs text-primary font-semibold">W1 (18%) → Today (12%)</span>
+</div>
+<div class="w-full h-16 pt-1">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 320 64">
+<!-- Normative target safe zone -->
+<rect fill="#c9ead8" fill-opacity="0.35" height="32" rx="3" width="320" x="0" y="24"></rect>
+<line opacity="0.4" stroke="#476557" stroke-dasharray="3,3" stroke-width="0.8" x1="0" x2="320" y1="24" y2="24"></line>
+<text class="text-[9px] font-sans font-medium" fill="#476557" x="4" y="20">Upper Norm (15%)</text>
+<!-- Sparkline Trend Curve -->
+<path d="M 10 10 Q 75 18 120 28 T 230 42 T 310 46" fill="none" stroke="#3a5d4d" stroke-linecap="round" stroke-width="2.5"></path>
+<!-- Data Points -->
+<circle cx="10" cy="10" fill="#3a5d4d" r="3"></circle>
+<circle cx="90" cy="22" fill="#3a5d4d" r="3"></circle>
+<circle cx="170" cy="34" fill="#3a5d4d" r="3"></circle>
+<circle cx="250" cy="42" fill="#3a5d4d" r="3"></circle>
+<circle cx="310" cy="46" fill="#527665" r="4.5" stroke="#f7fbf1" stroke-width="1.5"></circle>
+</svg>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant font-label-xs text-label-xs pt-0.5">
+<span>Week 1 (18%)</span>
+<span>W3 (16%)</span>
+<span>W5 (14%)</span>
+<span>W7 (13%)</span>
+<span class="text-primary font-bold">Week 8 (12%)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Etiological Breakdown (Contributing Triggers) -->
+<section class="px-margin-mobile">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-[0_2px_12px_rgba(48,77,64,0.05)] space-y-3.5">
+<div>
+<span class="font-label-xs text-label-xs text-primary font-bold uppercase tracking-wider">Causal Decomposition</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Etiological Drivers</h2>
+</div>
+<div class="space-y-3">
+<!-- Factor 1: Thermal shifts -->
+<div class="p-3 rounded-lg bg-surface-container-low space-y-1.5">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Thermal &amp; Microclimate Shifts</span>
+<span class="font-label-md text-label-md font-bold text-primary">42% • High Impact</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 42%"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pt-0.5">
+            Alternation between low-humidity indoor heating and cold ambient outdoor air induces rapid arterial micro-dilation.
+          </p>
+</div>
+<!-- Factor 2: TEWL -->
+<div class="p-3 rounded-lg bg-surface-container-low space-y-1.5">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Trans-Epidermal Water Loss</span>
+<span class="font-label-md text-label-md font-bold text-secondary">28% • Moderate</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 28%"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pt-0.5">
+            Intermittent surface dryness lowers sensory threshold, rendering malar nerve endings sensitive to thermal flux.
+          </p>
+</div>
+<!-- Factor 3: Friction -->
+<div class="p-3 rounded-lg bg-surface-container-low space-y-1.5">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Topical Friction &amp; Cleansing</span>
+<span class="font-label-md text-label-md font-semibold text-tertiary">15% • Low Impact</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 15%"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pt-0.5">
+            Mechanical pressure during evening towel patting initiates local histamine release and transient flushing.
+          </p>
+</div>
+<!-- Factor 4: Genetics -->
+<div class="p-3 rounded-lg bg-surface-container-low space-y-1.5">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Fitzpatrick II Vasomotor Base</span>
+<span class="font-label-md text-label-md font-semibold text-tertiary">15% • Baseline</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 15%"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pt-0.5">
+            Natural epidermal translucency highlights the sub-papillary venous plexus without true pathologic inflammation.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Clinical Pharmacology & Curated Active Solutions -->
+<section class="px-margin-mobile">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-[0_2px_12px_rgba(48,77,64,0.05)] space-y-4">
+<div class="flex items-baseline justify-between">
+<div>
+<span class="font-label-xs text-label-xs text-primary font-bold uppercase tracking-wider">Precision Pathways</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Curated Active Solutions</h2>
+</div>
+<span class="font-label-xs text-label-xs text-on-surface-variant font-medium">3 Evidence Targets</span>
+</div>
+<div class="space-y-3">
+<!-- Solution 1 -->
+<div class="p-3 rounded-lg bg-surface-container-low space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm font-semibold text-on-surface">Madecassoside &amp; Centella</span>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed font-semibold">In Regimen (AM 01)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Concentration 0.5%–1.0%. Downregulates micro-vascular inflammation markers and strengthens endothelial integrity across malar loops.
+          </p>
+</div>
+<!-- Solution 2 -->
+<div class="p-3 rounded-lg bg-surface-container-low space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm font-semibold text-on-surface">Micronized Zinc Oxide (18.5%)</span>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed font-semibold">In Regimen (AM 03)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Provides complete physical photoprotection while shielding delicate vessels from near-infrared heat accumulation.
+          </p>
+</div>
+<!-- Solution 3 -->
+<div class="p-3 rounded-lg bg-surface-container-low space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm font-semibold text-on-surface">Gluconolactone PHA (4.0%)</span>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-semibold">Suggested Addition</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Ultra-gentle polyhydroxy acid delivering non-irritating barrier renewal without triggering vasomotor reflex dilation.
+          </p>
+</div>
+</div>
+<!-- Protocol Box -->
+<div class="p-3.5 rounded-lg bg-primary-container text-on-primary-container space-y-3">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[20px] text-primary-fixed shrink-0 mt-0.5">thermostat</span>
+<div class="space-y-1">
+<h3 class="font-title-sm text-title-sm font-semibold">Thermal Guard Protocol</h3>
+<p class="font-body-sm text-body-sm text-primary-fixed leading-relaxed">
+              Maintain Ceramide NP replenishment twice daily. Ensure water temperature remains strictly below 32°C during cleansing to avoid vasomotor reflex activation.
+            </p>
+</div>
+</div>
+<button class="w-full py-2.5 px-4 rounded-lg bg-primary-fixed text-on-primary-fixed font-title-sm text-title-sm font-semibold hover:bg-secondary-fixed transition-colors text-center">
+          Incorporate into Daily Routine →
+        </button>
+</div>
+</div>
+</section>
+<!-- 6. Clinical Practice Guardrails & When to Consult -->
+<section class="px-margin-mobile">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-[0_2px_12px_rgba(48,77,64,0.05)] space-y-4">
+<div>
+<span class="font-label-xs text-label-xs text-primary font-bold uppercase tracking-wider">Clinical Guidance</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Practice Guardrails</h2>
+</div>
+<div class="space-y-3">
+<!-- Normal Variations -->
+<div class="p-3 rounded-lg bg-surface-container-low space-y-2">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<h3 class="font-title-sm text-title-sm font-semibold">Normal Cosmetic Variation</h3>
+</div>
+<ul class="space-y-1.5 font-body-sm text-body-sm text-on-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">check</span>
+<span>Flushing triggered by mild heat or wind that resolves in 30–60 minutes.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">check</span>
+<span>Absence of pain, stinging, burning, or visible central follicular papules.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">check</span>
+<span>Smooth hydration responsiveness after rich lipid application.</span>
+</li>
+</ul>
+</div>
+<!-- Referral Indicators -->
+<div class="p-3 rounded-lg bg-error-container/40 space-y-2">
+<div class="flex items-center gap-1.5 text-error">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+<h3 class="font-title-sm text-title-sm font-semibold text-on-surface">When to Consult a Physician</h3>
+</div>
+<ul class="space-y-1.5 font-body-sm text-body-sm text-on-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-error shrink-0 mt-0.5">flag</span>
+<span>Fixed malar redness lasting over 4 hours without external heat triggers.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-error shrink-0 mt-0.5">flag</span>
+<span>Persistent stinging upon contact with plain room-temperature water.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-error shrink-0 mt-0.5">flag</span>
+<span>Emergence of telangiectasias (spider veins) or ocular burning/grittiness.</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Action Triggers -->
+<div class="flex flex-col gap-2 pt-1">
+<button class="w-full py-3 px-4 rounded-lg bg-primary text-on-primary font-title-sm text-title-sm font-semibold hover:bg-primary-container transition-colors shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+<span>Book Telehealth Dermatologist ($145)</span>
+</button>
+<button class="w-full py-2.5 px-4 rounded-lg bg-surface-container text-on-surface font-title-sm text-title-sm font-semibold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Prepare Clinical Summary PDF</span>
+</button>
+</div>
+</div>
+</section>
+<!-- 7. Regulatory Scope & Medical Disclaimer -->
+<section class="px-margin-mobile">
+<div class="p-3.5 rounded-lg bg-surface-container flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary text-[20px] shrink-0 mt-0.5">verified_user</span>
+<p class="font-body-sm text-body-sm text-tertiary leading-relaxed">
+        DermaNova optical computer-vision telemetry is designed strictly for aesthetic baseline tracking, barrier wellness education, and cosmetic formulation guidance. It is non-diagnostic and does not constitute a clinical assessment of rosacea, cutaneous lupus erythematosus, or vascular lesions. Always consult a licensed dermatologist for chronic redness.
+      </p>
+</div>
+</section>
+</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-2px_16px_rgba(48,77,64,0.06)]" data-active-classes="text-primary font-semibold"><div class="flex items-center justify-around h-16 px-space-xs"><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="overview" href="#"><span class="material-symbols-outlined text-[22px]">view_quilt</span><span class="font-label-xs text-label-xs mt-0.5">Overview</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="analysis" href="#"><span class="material-symbols-outlined text-[22px]">csv</span><span class="font-label-xs text-label-xs mt-0.5">Analysis</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="routine" href="#"><span class="material-symbols-outlined text-[22px]">spa</span><span class="font-label-xs text-label-xs mt-0.5">Routine</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="progress" href="#"><span class="material-symbols-outlined text-[22px]">monitoring</span><span class="font-label-xs text-label-xs mt-0.5">Progress</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="vault" href="#"><span class="material-symbols-outlined text-[22px]">inventory_2</span><span class="font-label-xs text-label-xs mt-0.5">Vault</span></a></div></nav></body></html>

@@ -1,0 +1,574 @@
+<!DOCTYPE html><html class="light" lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><title>DermaNova Clinical Vision AI</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&amp;family=Newsreader:wght@100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#f7fbf1;color:#191d17;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 350,'GRAD' 0,'opsz' 24;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "surface": "#f7fbf1", "secondary-fixed": "#c9ead8", "surface-container": "#ecefe6", "on-tertiary-container": "#f5f0fb", "surface-container-highest": "#e0e4da", "inverse-surface": "#2e322b", "on-tertiary": "#ffffff", "on-secondary-fixed-variant": "#304d40", "on-secondary-fixed": "#022016", "on-background": "#191d17", "on-error": "#ffffff", "surface-container-lowest": "#ffffff", "tertiary": "#56555e", "surface-bright": "#f7fbf1", "surface-container-low": "#f2f5eb", "inverse-primary": "#a8cfbb", "surface-tint": "#426655", "on-secondary-container": "#4d6b5d", "on-tertiary-fixed": "#1b1b22", "surface-dim": "#d8dbd2", "secondary-container": "#c9ead8", "outline-variant": "#c1c8c2", "tertiary-container": "#6f6d76", "surface-container-high": "#e6e9e0", "background": "#f7fbf1", "error-container": "#ffdad6", "tertiary-fixed-dim": "#c8c5cf", "surface-variant": "#e0e4da", "inverse-on-surface": "#eff2e8", "secondary-fixed-dim": "#adcebd", "on-primary": "#ffffff", "primary-container": "#527665", "on-primary-container": "#d4fce6", "primary-fixed": "#c4ebd7", "tertiary-fixed": "#e5e1ec", "on-primary-fixed-variant": "#2a4e3e", "primary-fixed-dim": "#a8cfbb", "on-secondary": "#ffffff", "on-error-container": "#93000a", "on-tertiary-fixed-variant": "#47464e", "secondary": "#476557", "primary": "#3a5d4d", "on-surface": "#191d17", "error": "#ba1a1a", "on-primary-fixed": "#002115", "on-surface-variant": "#414844", "outline": "#717974" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "margin": "3rem", "space-md": "1rem", "margin-mobile": "1.25rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "gutter": "1.5rem", "space-lg": "1.5rem", "gutter-mobile": "1rem" }, fontFamily: { "title-sm": ["Manrope"], "title-md": ["Manrope"], "label-md": ["Manrope"], "headline-lg": ["Newsreader"], "body-md": ["Manrope"], "body-lg": ["Manrope"], "headline-md": ["Newsreader"], "headline-sm": ["Newsreader"], "display-hero-mobile": ["Newsreader"], "label-xs": ["Manrope"], "display-hero": ["Newsreader"], "body-sm": ["Manrope"], "headline-lg-mobile": ["Newsreader"] }, fontSize: { "title-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" }], "title-md": ["18px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "400" }], "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0.01em", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "0.005em", "fontWeight": "400" }], "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-sm": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.005em", "fontWeight": "500" }], "display-hero-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "400" }], "label-xs": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700" }], "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "400" }], "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "400" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-surface font-body-md text-on-surface flex flex-col antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(48,77,64,0.04)]"><div class="h-16 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Close-up editorial beauty portrait of an authentic woman with natural skin texture, freckles, real pores, soft clean lighting, neutral warm background, calm serene expression, luxury skincare brand photography aesthetic, no artificial retouching or heavy makeup." class="h-8 w-auto object-contain rounded-full" src="https://lh3.googleusercontent.com/aida/AEtjO1UR0nDiC02I81WcfAOtxkbCSwZQoQ647J4KVG41bpHIJJKEVN3tJKpEC9tmoPNsugQqmtm99Wyni0uho6XFvCxdUmApZqpxV7zIrX4z4O03a1aLBj4jX_HUDTjFmiI5iQBsMB8Ra7HV43_IvxSgdw7m4c28DzFs28PQCXEX6jkmA8OFulRrjbM_fNt-daHeSrzw5XzBku2QD9xYn2ZAlJffaR2TE7ahBb1awg025UFjJpBJvQ9m4djWd3NX"><div class="flex flex-col justify-center"><span class="font-title-sm text-title-sm text-primary tracking-tight">DermaNova</span><span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-widest">Overview</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Notifications" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full pb-12 space-y-space-md">
+<!-- Dermal Telemetry Status Banner -->
+<div class="px-gutter-mobile pt-2">
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between gap-space-xs mb-1.5">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-widest font-semibold">
+          Chronological Biometric Vault • 12 Scans Logged
+        </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs">
+<span class="material-symbols-outlined text-[13px] text-primary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+          Zero-Knowledge Active
+        </span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface tracking-tight mt-1">
+        Historical Scan Archive
+      </h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed">
+        Filterable multi-spectral telemetry log and longitudinal barrier kinetics across your clinical treatment journey.
+      </p>
+<!-- Action Controls Row -->
+<div class="flex items-center gap-space-xs mt-space-md">
+<button class="flex items-center gap-1.5 px-3 py-2 bg-surface-container-lowest text-on-surface rounded-lg shadow-sm hover:bg-surface-container transition-colors" id="filterToggleBtn" onclick="document.getElementById('filterBottomSheet').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[18px] text-primary">tune</span>
+<span class="font-title-sm text-body-sm font-semibold">Filter</span>
+<span class="ml-0.5 px-1.5 py-0.2 rounded-full bg-primary text-on-primary font-label-xs text-label-xs">2</span>
+</button>
+<div class="relative flex-1">
+<button class="w-full flex items-center justify-between px-3 py-2 bg-surface-container-lowest text-on-surface rounded-lg shadow-sm font-body-sm text-body-sm text-left">
+<span class="truncate text-on-surface-variant">Sort: <strong class="text-on-surface font-semibold">Newest First</strong></span>
+<span class="material-symbols-outlined text-[18px] text-outline">expand_more</span>
+</button>
+</div>
+<button class="flex items-center gap-1.5 px-3.5 py-2 bg-primary text-on-primary rounded-lg shadow-sm hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">compare_arrows</span>
+<span class="font-title-sm text-body-sm font-semibold">Compare (2)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Search & Category Filters -->
+<div class="px-gutter-mobile space-y-2.5">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full h-11 pl-10 pr-4 bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded-xl focus:outline-none focus:bg-surface-container-lowest shadow-sm" placeholder="Search by date, scan ID, or biomarker..." type="search">
+</div>
+<!-- Scrollable Filter Chips -->
+<div class="flex items-center gap-2 overflow-x-auto pb-1 pt-0.5 no-scrollbar -mx-gutter-mobile px-gutter-mobile">
+<button class="shrink-0 px-3 py-1.5 rounded-full bg-primary text-on-primary font-label-xs text-label-xs shadow-sm">
+        All Scans (12)
+      </button>
+<button class="shrink-0 px-3 py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-xs text-label-xs shadow-sm">
+        Flagged Concerns (4)
+      </button>
+<button class="shrink-0 px-3 py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-xs text-label-xs shadow-sm">
+        Barrier Regimes (8)
+      </button>
+<button class="shrink-0 px-3 py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-xs text-label-xs shadow-sm">
+        Post-Consultation (3)
+      </button>
+<button class="shrink-0 px-3 py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-xs text-label-xs shadow-sm">
+        Erythema Shifts (5)
+      </button>
+<button class="shrink-0 px-3 py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-xs text-label-xs shadow-sm">
+        Winter Arc (6)
+      </button>
+</div>
+</div>
+<!-- Longitudinal Aggregate Dermal Vector Card -->
+<div class="px-gutter-mobile">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">ssid_chart</span>
+<span class="font-title-sm text-title-sm text-on-surface">Longitudinal Kinetic Trajectory</span>
+</div>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-semibold">56-Day Delta</span>
+</div>
+<!-- 3 Metrics Strip -->
+<div class="grid grid-cols-3 gap-2 py-2 bg-surface-container-low rounded-lg px-2 text-center">
+<div class="flex flex-col items-center">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase">Barrier Delta</span>
+<span class="font-title-sm text-title-sm text-primary font-bold mt-0.5">+21 pts</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant text-[10px]">68 → 89/100</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase">Calibrated TEWL</span>
+<span class="font-title-sm text-title-sm text-on-surface font-bold mt-0.5">14.2 g/m²h</span>
+<span class="font-label-xs text-label-xs text-primary text-[10px] font-semibold">-34% vs intake</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase">Adherence</span>
+<span class="font-title-sm text-title-sm text-secondary font-bold mt-0.5">100%</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant text-[10px]">14d Interval</span>
+</div>
+</div>
+<!-- Sparkline Trajectory -->
+<div class="mt-3.5 space-y-1.5">
+<div class="flex justify-between items-center text-on-surface-variant font-label-xs text-label-xs">
+<span class="">Baseline Barrier (68)</span>
+<span class="font-semibold text-primary">Current Level: 89 Tier I</span>
+</div>
+<div class="relative h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500" style="width: 89%;"></div>
+</div>
+<div class="flex justify-between text-[11px] text-outline font-label-xs">
+<span class="">Oct 04</span>
+<span class="">Oct 18</span>
+<span class="">Nov 01</span>
+<span class="">Nov 15</span>
+<span class="font-semibold text-primary">Today</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Telemetry Timeline Cards -->
+<div class="px-gutter-mobile space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs text-on-surface-variant font-semibold uppercase tracking-wider">Historical Captures</span>
+<span class="font-label-xs text-label-xs text-primary font-semibold">2 Selected for Differential</span>
+</div>
+<!-- Scan Card 1 (Day 56 / Current) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-3 relative overflow-hidden">
+<div class="flex items-start justify-between gap-2">
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Scan #DN-8841-B</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs">Verified 5400K</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Day 56 • Week 8 • Today, Nov 29</span>
+</div>
+<label class="flex items-center gap-1.5 cursor-pointer bg-surface-container-low px-2 py-1 rounded-lg">
+<input checked="" class="w-4 h-4 accent-primary rounded cursor-pointer" type="checkbox">
+<span class="font-label-xs text-label-xs text-primary font-bold">Compare</span>
+</label>
+</div>
+<div class="flex gap-3">
+<!-- Thumbnail -->
+<div class="relative w-20 h-24 rounded-lg overflow-hidden bg-surface-container shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Editorial macro dermatological portrait study of fair skin showing authentic freckles, refined epidermal texture, healthy stratum corneum, soft lighting, and serene facial contours in luxury studio aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpPslr_IzgwUunpSA5jZf0UvdpNTtt9HrP5Iw6D3mfsoshq3BMF1qmkAH1doUVg1aeN588y3XFhNkurEuSyLvMuVyQC52XkH457yB2RvSldzbvLQNcm458SJky8NgjQUxA7N8uN05vQUZ5EM1mB6y7pgcZ6Yfzfbb6XBYV-AUZ9FG3oWjP1Uk1-B-7AZlCs2XeCpCA5RfHWB3VUaJHiCaxXdve3gzP7Ygv48k9as7F3ACzL8Pd-OXYGA">
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/60 via-transparent to-transparent flex items-end p-1">
+<span class="font-label-xs text-label-xs text-inverse-on-surface font-semibold text-[9px] leading-tight">89 Resilient</span>
+</div>
+<!-- Biometric landmark target reticle -->
+<div class="absolute top-6 left-6 w-3 h-3 rounded-full bg-primary/30 border border-primary flex items-center justify-center animate-pulse">
+<div class="w-1 h-1 rounded-full bg-primary"></div>
+</div>
+</div>
+<!-- Telemetry Breakdown Grid -->
+<div class="flex-1 grid grid-cols-2 gap-1.5 text-left">
+<div class="p-1.5 bg-surface-container-low rounded-md">
+<span class="font-label-xs text-label-xs text-on-surface-variant block text-[10px]">Malar Erythema</span>
+<span class="font-title-sm text-body-sm text-primary font-semibold">12%</span>
+<span class="font-label-xs text-label-xs text-outline block text-[9px]">Normative</span>
+</div>
+<div class="p-1.5 bg-surface-container-low rounded-md">
+<span class="font-label-xs text-label-xs text-on-surface-variant block text-[10px]">Hydration Index</span>
+<span class="font-title-sm text-body-sm text-secondary font-semibold">84%</span>
+<span class="font-label-xs text-label-xs text-outline block text-[9px]">Optimal</span>
+</div>
+<div class="p-1.5 bg-surface-container-low rounded-md">
+<span class="font-label-xs text-label-xs text-on-surface-variant block text-[10px]">Ostia Purity</span>
+<span class="font-title-sm text-body-sm text-on-surface font-semibold">78/100</span>
+<span class="font-label-xs text-label-xs text-outline block text-[9px]">High Clarity</span>
+</div>
+<div class="p-1.5 bg-surface-container-low rounded-md">
+<span class="font-label-xs text-label-xs text-on-surface-variant block text-[10px]">Barrier Integrity</span>
+<span class="font-title-sm text-body-sm text-primary font-semibold">Tier I (89)</span>
+<span class="font-label-xs text-label-xs text-outline block text-[9px]">Stable Lipid Matrix</span>
+</div>
+</div>
+</div>
+<!-- Clinician Note -->
+<div class="p-2.5 rounded-lg bg-surface-container-low text-on-surface-variant flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">stethoscope</span>
+<p class="font-body-sm text-body-sm text-on-surface leading-snug">
+<strong class="font-semibold text-primary">Dr. M. Thorne reviewed:</strong> Erythema stabilized under micronized zinc veil protocol. Epidermal density showing 14% uplift.
+        </p>
+</div>
+<!-- Card Action Footer -->
+<div class="flex items-center justify-between pt-1">
+<button class="flex items-center gap-1 font-title-sm text-body-sm text-primary font-semibold hover:text-primary-container">
+<span class="">Inspect Telemetry</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+<button class="flex items-center gap-1 font-body-sm text-body-sm text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+<span class="">Dossier PDF</span>
+</button>
+</div>
+</div>
+<!-- Scan Card 2 (Day 42 / Week 6) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-3">
+<div class="flex items-start justify-between gap-2">
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Scan #DN-8620-A</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs">Verified 5400K</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Day 42 • Week 6 • Nov 15, 2024</span>
+</div>
+<label class="flex items-center gap-1.5 cursor-pointer bg-surface-container-low px-2 py-1 rounded-lg">
+<input checked="" class="w-4 h-4 accent-primary rounded cursor-pointer" type="checkbox">
+<span class="font-label-xs text-label-xs text-primary font-bold">Compare</span>
+</label>
+</div>
+<div class="flex gap-3">
+<div class="relative w-20 h-24 rounded-lg overflow-hidden bg-surface-container shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Natural macro skin capture focused on cheek and malar plane displaying soft natural freckles and minimal surface irritation under standardized warm clinical illumination." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzn2cTDiUZDGCNpWoJa-Fis93KSjABZ4THfjXW1-EDZW_qM71tRcUQ4H58uIoRpfpTULMJK588Rr6aicvTE9RlnsOEItqGulwrzvL4XuyPoPDbBY8lY25hW30x94GYk8ve7MdxQ-cOPUrugRWOT4gHUDCvYU4Jq7KvV6-86RMJHPmpsz5-Ww-ieGooOudJvUQ5WGx0S1njk6UpTTRcrBDj-gTshY7AaxZ3h5sJP-sELoX2KEhieUPu6Q">
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/60 via-transparent to-transparent flex items-end p-1">
+<span class="font-label-xs text-label-xs text-inverse-on-surface font-semibold text-[9px] leading-tight">82 Improving</span>
+</div>
+</div>
+<div class="flex-1 grid grid-cols-2 gap-1.5 text-left">
+<div class="p-1.5 bg-surface-container-low rounded-md">
+<span class="font-label-xs text-label-xs text-on-surface-variant block text-[10px]">Malar Erythema</span>
+<span class="font-title-sm text-body-sm text-on-surface font-semibold">14% <span class="text-primary text-[10px] font-normal">-2%</span></span>
+<span class="font-label-xs text-label-xs text-outline block text-[9px]">Sub-clinical</span>
+</div>
+<div class="p-1.5 bg-surface-container-low rounded-md">
+<span class="font-label-xs text-label-xs text-on-surface-variant block text-[10px]">Hydration Index</span>
+<span class="font-title-sm text-body-sm text-secondary font-semibold">76%</span>
+<span class="font-label-xs text-label-xs text-outline block text-[9px]">Sustained</span>
+</div>
+<div class="p-1.5 bg-surface-container-low rounded-md">
+<span class="font-label-xs text-label-xs text-on-surface-variant block text-[10px]">Ostia Purity</span>
+<span class="font-title-sm text-body-sm text-on-surface font-semibold">72/100</span>
+<span class="font-label-xs text-label-xs text-outline block text-[9px]">Moderate</span>
+</div>
+<div class="p-1.5 bg-surface-container-low rounded-md">
+<span class="font-label-xs text-label-xs text-on-surface-variant block text-[10px]">Barrier Integrity</span>
+<span class="font-title-sm text-body-sm text-primary font-semibold">82/100</span>
+<span class="font-label-xs text-label-xs text-outline block text-[9px]">Tier II High</span>
+</div>
+</div>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low text-on-surface-variant">
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+          Shifted to PHA 4% nightly. Cold snap outdoor exposure logged without reactive desquamation.
+        </p>
+</div>
+<div class="flex items-center justify-between pt-1">
+<button class="flex items-center gap-1 font-title-sm text-body-sm text-primary font-semibold hover:text-primary-container">
+<span class="">Inspect Telemetry</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+<span class="font-label-xs text-label-xs text-outline">Calibration Score: 99.4%</span>
+</div>
+</div>
+<!-- Scan Card 3 (Day 28 / Week 4) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-3">
+<div class="flex items-start justify-between gap-2">
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Scan #DN-8314-C</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-xs text-label-xs">Verified 5400K</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Day 28 • Week 4 • Nov 01, 2024</span>
+</div>
+<label class="flex items-center gap-1.5 cursor-pointer bg-surface-container-low px-2 py-1 rounded-lg">
+<input class="w-4 h-4 accent-primary rounded cursor-pointer" type="checkbox">
+<span class="font-label-xs text-label-xs text-on-surface-variant font-medium">Compare</span>
+</label>
+</div>
+<div class="flex gap-3">
+<div class="relative w-20 h-24 rounded-lg overflow-hidden bg-surface-container shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Close-up forensic medical skin imagery depicting mid-treatment skin surface with visible freckles and mild transient pink flush around nasal fold under balanced studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEvbVANELuUkj1smzSA7PGDx6ZwgiAf3kKLsXmzdZRWc49aYeq4SlK2Jr8yOSIIA0PSX77IH2u5I_QO8N0VNxRpPHBMH9Xb6_poh3rek4T_1mPhQSLbjA8Rjf5SqEQv3trQDXBIa9g4cAiB_COsyYFBOoaHluC_fycks_DUDdH6xOmRe-30KYc2RWIkcnBR92BlTESW1J1GFCCGqJ4tgezb3-nzGpYpqBHUcVSL2rJYr9qDYoV4O6u7Q">
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/60 via-transparent to-transparent flex items-end p-1">
+<span class="font-label-xs text-label-xs text-inverse-on-surface font-semibold text-[9px] leading-tight">75 Transitional</span>
+</div>
+</div>
+<div class="flex-1 grid grid-cols-2 gap-1.5 text-left">
+<div class="p-1.5 bg-surface-container-low rounded-md">
+<span class="font-label-xs text-label-xs text-on-surface-variant block text-[10px]">Malar Erythema</span>
+<span class="font-title-sm text-body-sm text-on-surface font-semibold">18%</span>
+<span class="font-label-xs text-label-xs text-outline block text-[9px]">Moderate</span>
+</div>
+<div class="p-1.5 bg-surface-container-low rounded-md">
+<span class="font-label-xs text-label-xs text-on-surface-variant block text-[10px]">Hydration Index</span>
+<span class="font-title-sm text-body-sm text-secondary font-semibold">69%</span>
+<span class="font-label-xs text-label-xs text-outline block text-[9px]">Recovery</span>
+</div>
+<div class="p-1.5 bg-surface-container-low rounded-md">
+<span class="font-label-xs text-label-xs text-on-surface-variant block text-[10px]">Ostia Purity</span>
+<span class="font-title-sm text-body-sm text-on-surface font-semibold">64/100</span>
+<span class="font-label-xs text-label-xs text-outline block text-[9px]">Mild Congestion</span>
+</div>
+<div class="p-1.5 bg-surface-container-low rounded-md">
+<span class="font-label-xs text-label-xs text-on-surface-variant block text-[10px]">Barrier Integrity</span>
+<span class="font-title-sm text-body-sm text-primary font-semibold">75/100</span>
+<span class="font-label-xs text-label-xs text-outline block text-[9px]">Tier II Early</span>
+</div>
+</div>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low text-on-surface-variant">
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+          Mid-cycle tele-consult completed. Formulated Centella 1.0% active serum introduced to mitigate micro-vascular tension.
+        </p>
+</div>
+<div class="flex items-center justify-between pt-1">
+<button class="flex items-center gap-1 font-title-sm text-body-sm text-primary font-semibold hover:text-primary-container">
+<span class="">Inspect Telemetry</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+<span class="font-label-xs text-label-xs text-outline">Calibration Score: 98.9%</span>
+</div>
+</div>
+<!-- Scan Card 4 (Day 0 Baseline) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-3">
+<div class="flex items-start justify-between gap-2">
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Scan #DN-7910-A</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs font-semibold">Intake Reference</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Baseline Day 0 • Oct 04, 2024</span>
+</div>
+<label class="flex items-center gap-1.5 cursor-pointer bg-surface-container-low px-2 py-1 rounded-lg">
+<input class="w-4 h-4 accent-primary rounded cursor-pointer" type="checkbox">
+<span class="font-label-xs text-label-xs text-on-surface-variant font-medium">Compare</span>
+</label>
+</div>
+<div class="flex gap-3">
+<div class="relative w-20 h-24 rounded-lg overflow-hidden bg-surface-container shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Editorial close-up of natural skin with noticeable cheek flushing, sensitive skin redness, authentic pores, and baseline dry corneum before dermatological intervention." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvo2b3QRApQEN1c6TdULly_nnhUyJ1yB7ivtp0d2YSbfNp0lAyBn6NzcSFQ5TS6xEcCrsGMec7i4P2kOx3Ihk-ddKiQQK_pJXbyhC7L0w6-Gm_6tu6p61lkGGm_EeH7MYO-nBYnOEiPckTl1XjgLiJZAAuhl0PumZ36XkOf9IpFvBXbY9o8JqwgBAfwe7Kd5SWijuIQqVTsc9F_skY5i4oozQ979fC4MOmLTJ2dlKviHmzIM6kn5S8Dw">
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/60 via-transparent to-transparent flex items-end p-1">
+<span class="font-label-xs text-label-xs text-inverse-on-surface font-semibold text-[9px] leading-tight">68 Reactive</span>
+</div>
+</div>
+<div class="flex-1 grid grid-cols-2 gap-1.5 text-left">
+<div class="p-1.5 bg-surface-container-low rounded-md">
+<span class="font-label-xs text-label-xs text-on-surface-variant block text-[10px]">Malar Erythema</span>
+<span class="font-title-sm text-body-sm text-error font-semibold">28%</span>
+<span class="font-label-xs text-label-xs text-error block text-[9px]">Grade 1 Flush</span>
+</div>
+<div class="p-1.5 bg-surface-container-low rounded-md">
+<span class="font-label-xs text-label-xs text-on-surface-variant block text-[10px]">Hydration Index</span>
+<span class="font-title-sm text-body-sm text-on-surface font-semibold">52%</span>
+<span class="font-label-xs text-label-xs text-outline block text-[9px]">Depleted</span>
+</div>
+<div class="p-1.5 bg-surface-container-low rounded-md">
+<span class="font-label-xs text-label-xs text-on-surface-variant block text-[10px]">Ostia Purity</span>
+<span class="font-title-sm text-body-sm text-on-surface font-semibold">58/100</span>
+<span class="font-label-xs text-label-xs text-outline block text-[9px]">Congested</span>
+</div>
+<div class="p-1.5 bg-surface-container-low rounded-md">
+<span class="font-label-xs text-label-xs text-on-surface-variant block text-[10px]">Barrier Integrity</span>
+<span class="font-title-sm text-body-sm text-error font-semibold">68/100</span>
+<span class="font-label-xs text-label-xs text-outline block text-[9px]">Compromised</span>
+</div>
+</div>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low text-on-surface-variant">
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+          Initial baseline intake calibration. High transepidermal moisture loss noted across mid-malar plane and perioral perimeter.
+        </p>
+</div>
+<div class="flex items-center justify-between pt-1">
+<button class="flex items-center gap-1 font-title-sm text-body-sm text-primary font-semibold hover:text-primary-container">
+<span class="">Inspect Telemetry</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+<span class="font-label-xs text-label-xs text-outline">Calibration Score: 99.8%</span>
+</div>
+</div>
+</div>
+<!-- Data Export & Cryptographic Retention Controls -->
+<div class="px-gutter-mobile">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">enhanced_encryption</span>
+<div>
+<h2 class="font-title-sm text-title-sm text-on-surface font-semibold">Biometric Telemetry Ledger &amp; Export</h2>
+<span class="font-label-xs text-label-xs text-on-surface-variant">HL7 / FHIR Standard V4 Compliant</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+        Export your complete longitudinal facial topography and chemical biomarker history for personal health dossiers or private clinical consultations.
+      </p>
+<div class="flex flex-col gap-2 pt-1">
+<button class="w-full h-11 flex items-center justify-center gap-2 bg-primary text-on-primary rounded-xl font-title-sm text-body-sm font-semibold shadow-sm hover:bg-primary-container transition-colors" onclick="document.getElementById('fhirExportModal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span class="">Export Clinical Dossier (FHIR / PDF)</span>
+</button>
+<button class="w-full h-11 flex items-center justify-center gap-2 bg-surface-container text-on-surface rounded-xl font-title-sm text-body-sm font-semibold hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[18px]">table_chart</span>
+<span class="">Download CSV Bio-Metrics Stream</span>
+</button>
+</div>
+<!-- Zero-Knowledge Security Notice -->
+<div class="p-3 bg-surface-container-low rounded-lg space-y-2 mt-2">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span class="font-label-xs text-label-xs font-bold uppercase tracking-wider">Zero-Knowledge Ephemeral Pipeline</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-normal">
+          Raw photometric RGB captures are cryptographically purged after landmark coordinate extraction. Only normalized numerical tensor vectors are retained in user-controlled volatile storage.
+        </p>
+<button class="font-label-xs text-label-xs text-error font-semibold hover:underline inline-flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]">delete_forever</span>
+<span class="">Purge All Historical Scan Data</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Regulatory Non-Diagnostic Disclaimer -->
+<div class="px-gutter-mobile">
+<div class="bg-surface-container-low rounded-xl p-3.5 space-y-1.5">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span class="font-label-xs text-label-xs font-bold uppercase tracking-wider">Clinical Scope &amp; Boundaries</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+        DermaNova Vision AI performs non-diagnostic cosmetic telemetry to track topical barrier recovery and micro-circulation indicators. It does not replace pathology, biopsies, or dermatological examinations. For suspicious pigmented lesions or progressive inflammatory rashes, consult a certified dermatologist immediately.
+      </p>
+</div>
+</div>
+</div>
+<script>
+  // Simple micro-interaction for filter chips toggle
+  document.querySelectorAll('.no-scrollbar button').forEach(button => {
+    button.addEventListener('click', function() {
+      document.querySelectorAll('.no-scrollbar button').forEach(b => {
+        b.className = 'shrink-0 px-3 py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-xs text-label-xs shadow-sm';
+      });
+      this.className = 'shrink-0 px-3 py-1.5 rounded-full bg-primary text-on-primary font-label-xs text-label-xs shadow-sm';
+    });
+  });
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-2px_16px_rgba(48,77,64,0.06)]" data-active-classes="text-primary font-semibold"><div class="flex items-center justify-around h-16 px-space-xs"><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="overview" href="#"><span class="material-symbols-outlined text-[22px]">view_quilt</span><span class="font-label-xs text-label-xs mt-0.5">Overview</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="analysis" href="#"><span class="material-symbols-outlined text-[22px]">csv</span><span class="font-label-xs text-label-xs mt-0.5">Analysis</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="routine" href="#"><span class="material-symbols-outlined text-[22px]">spa</span><span class="font-label-xs text-label-xs mt-0.5">Routine</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="progress" href="#"><span class="material-symbols-outlined text-[22px]">monitoring</span><span class="font-label-xs text-label-xs mt-0.5">Progress</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-primary transition-colors" data-path="vault" href="#"><span class="material-symbols-outlined text-[22px]">inventory_2</span><span class="font-label-xs text-label-xs mt-0.5">Vault</span></a></div></nav>
+<div class="fixed inset-0 z-50 flex flex-col justify-end bg-inverse-surface/60 backdrop-blur-sm transition-all duration-300 hidden" id="filterBottomSheet"><div class="absolute inset-0" onclick="document.getElementById('filterBottomSheet').classList.add('hidden')"></div><div class="relative w-full max-h-[88vh] bg-surface rounded-t-[28px] shadow-2xl flex flex-col overflow-hidden border-t border-surface-container-highest z-10"><div class="flex justify-center pt-3 pb-1 shrink-0"><div class="w-12 h-1.5 rounded-full bg-outline-variant/60"></div></div><div class="px-gutter-mobile py-2.5 flex items-center justify-between border-b border-surface-container-high shrink-0"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[22px]">tune</span><div><h2 class="font-headline-sm text-[20px] text-on-surface leading-snug">Biomarker Query Filters</h2><span class="font-label-xs text-label-xs text-on-surface-variant block">Refine telemetry by dermal parameters &amp; metrology</span></div></div><div class="flex items-center gap-2"><button class="font-label-xs text-label-xs text-primary font-semibold hover:underline px-2 py-1" type="button">Reset All</button><button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-colors" onclick="document.getElementById('filterBottomSheet').classList.add('hidden')" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button></div></div><div class="flex-1 overflow-y-auto px-gutter-mobile py-3.5 space-y-4 no-scrollbar"><section class="space-y-2"><div class="flex items-center justify-between"><span class="font-label-xs text-label-xs font-bold uppercase tracking-wider text-on-surface-variant">Biomarker Ranges</span><span class="font-label-xs text-[10px] text-primary font-semibold">3 Active Constraints</span></div><div class="bg-surface-container-lowest p-3 rounded-xl border border-surface-container-high space-y-3"><div class="space-y-1.5"><div class="flex justify-between items-center"><span class="font-body-sm text-[13px] font-semibold text-on-surface">Malar Erythema / Vascular Flux</span><span class="font-label-xs text-label-xs text-primary font-bold">≤ 15% (Normative)</span></div><div class="grid grid-cols-3 gap-1.5"><button class="py-1.5 px-2 rounded-lg bg-primary text-on-primary font-label-xs text-center font-medium shadow-sm" type="button">Normative &lt;15%</button><button class="py-1.5 px-2 rounded-lg bg-surface-container-low text-on-surface-variant font-label-xs text-center hover:bg-surface-container" type="button">Elevated 15-25%</button><button class="py-1.5 px-2 rounded-lg bg-surface-container-low text-on-surface-variant font-label-xs text-center hover:bg-surface-container" type="button">Reactive &gt;25%</button></div></div><div class="space-y-1.5"><div class="flex justify-between items-center"><span class="font-body-sm text-[13px] font-semibold text-on-surface">Barrier Integrity Index</span><span class="font-label-xs text-label-xs text-primary font-bold">Tier I &amp; II (≥ 70)</span></div><div class="grid grid-cols-3 gap-1.5"><button class="py-1.5 px-2 rounded-lg bg-secondary-fixed text-on-secondary-fixed font-label-xs text-center font-semibold border border-primary/30" type="button">Tier I: 80–100</button><button class="py-1.5 px-2 rounded-lg bg-secondary-fixed text-on-secondary-fixed font-label-xs text-center font-semibold border border-primary/30" type="button">Tier II: 60–79</button><button class="py-1.5 px-2 rounded-lg bg-surface-container-low text-on-surface-variant font-label-xs text-center opacity-60" type="button">Compromised &lt;60</button></div></div><div class="space-y-1.5"><div class="flex justify-between items-center"><span class="font-body-sm text-[13px] font-semibold text-on-surface">Epidermal Hydration</span><span class="font-label-xs text-label-xs text-secondary font-bold">&gt; 70% Optimal / Sustained</span></div><div class="grid grid-cols-3 gap-1.5"><button class="py-1.5 px-2 rounded-lg bg-primary text-on-primary font-label-xs text-center font-medium shadow-sm" type="button">&gt;80% Optimal</button><button class="py-1.5 px-2 rounded-lg bg-surface-container-low text-on-surface-variant font-label-xs text-center hover:bg-surface-container" type="button">60–80% Sustained</button><button class="py-1.5 px-2 rounded-lg bg-surface-container-low text-on-surface-variant font-label-xs text-center hover:bg-surface-container" type="button">&lt;60% Depleted</button></div></div></div></section><section class="space-y-2"><span class="font-label-xs text-label-xs font-bold uppercase tracking-wider text-on-surface-variant block">Capture Metrology &amp; Verification</span><div class="bg-surface-container-lowest p-3 rounded-xl border border-surface-container-high space-y-2.5"><span class="font-label-xs text-[11px] text-on-surface-variant block">Standardized Illumination &amp; Hardware Polarization</span><div class="flex flex-wrap gap-1.5"><label class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs font-medium cursor-pointer"><input checked="checked" class="w-3.5 h-3.5 accent-primary rounded" type="checkbox"><span class="material-symbols-outlined text-[14px]">light_mode</span><span class="">5400K Daylight Normalized</span></label><label class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs font-medium cursor-pointer"><input checked="checked" class="w-3.5 h-3.5 accent-primary rounded" type="checkbox"><span class="material-symbols-outlined text-[14px]">filter_tilt_shift</span><span class="">Cross-Polarized Subsurface</span></label><label class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant font-label-xs text-label-xs cursor-pointer hover:bg-surface-container"><input class="w-3.5 h-3.5 accent-primary rounded" type="checkbox"><span class="">Parallel Polarized (Specular)</span></label></div><div class="pt-1 flex items-center justify-between border-t border-surface-container text-on-surface-variant"><span class="font-body-sm text-[12px]">Maximum Pose Deviation</span><span class="px-2 py-0.5 rounded bg-surface-container font-label-xs text-[11px] font-semibold text-primary">&lt; 1.0° Strict Orthogonal</span></div></div></section><section class="space-y-2"><span class="font-label-xs text-label-xs font-bold uppercase tracking-wider text-on-surface-variant block">Clinical Annotations &amp; Milestones</span><div class="bg-surface-container-lowest p-3 rounded-xl border border-surface-container-high space-y-2"><label class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low/70 cursor-pointer hover:bg-surface-container"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-primary">stethoscope</span><div><span class="font-body-sm text-[13px] font-semibold text-on-surface block">Physician Reviewed Only</span><span class="font-label-xs text-[10px] text-on-surface-variant block">Includes Dr. Thorne &amp; certified tele-dermatologists</span></div></div><input checked="checked" class="w-4 h-4 accent-primary rounded" type="checkbox"></label><label class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low/70 cursor-pointer hover:bg-surface-container"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-error">flag</span><div><span class="font-body-sm text-[13px] font-semibold text-on-surface block">Flagged Dermal Anomalies</span><span class="font-label-xs text-[10px] text-on-surface-variant block">Outlier vascular or stratum corneum alerts</span></div></div><input class="w-4 h-4 accent-primary rounded" type="checkbox"></label><label class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low/70 cursor-pointer hover:bg-surface-container"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-secondary">medication</span><div><span class="font-body-sm text-[13px] font-semibold text-on-surface block">Formulation Adjustment Events</span><span class="font-label-xs text-[10px] text-on-surface-variant block">Active changes (e.g. Zinc veil, Centella, PHA 4%)</span></div></div><input checked="checked" class="w-4 h-4 accent-primary rounded" type="checkbox"></label></div></section><section class="space-y-2"><span class="font-label-xs text-label-xs font-bold uppercase tracking-wider text-on-surface-variant block">Timeframe &amp; Longitudinal Cohort</span><div class="grid grid-cols-2 gap-1.5"><button class="py-2 px-3 rounded-lg bg-surface-container-lowest border border-surface-container-high text-on-surface-variant font-label-xs text-left hover:bg-surface-container-low" type="button">Last 30 Days</button><button class="py-2 px-3 rounded-lg bg-primary text-on-primary font-label-xs text-left font-semibold shadow-sm flex items-center justify-between" type="button"><span class="">8-Week Protocol</span><span class="material-symbols-outlined text-[16px]">check</span></button><button class="py-2 px-3 rounded-lg bg-surface-container-lowest border border-surface-container-high text-on-surface-variant font-label-xs text-left hover:bg-surface-container-low" type="button">Baseline Delta Only</button><button class="py-2 px-3 rounded-lg bg-surface-container-lowest border border-surface-container-high text-on-surface-variant font-label-xs text-left hover:bg-surface-container-low flex items-center justify-between" type="button"><span class="">Custom Range...</span><span class="material-symbols-outlined text-[14px]">calendar_today</span></button></div></section></div><div class="px-gutter-mobile py-3 bg-surface-container-lowest border-t border-surface-container-high flex items-center gap-2.5 shrink-0 shadow-[0_-4px_16px_rgba(48,77,64,0.06)]"><button class="px-3.5 h-11 rounded-xl bg-surface-container text-on-surface-variant font-title-sm text-body-sm font-semibold hover:bg-surface-container-high transition-colors shrink-0" onclick="document.getElementById('filterBottomSheet').classList.add('hidden')" type="button">Clear Filters</button><button class="flex-1 h-11 flex items-center justify-center gap-1.5 bg-primary text-on-primary rounded-xl font-title-sm text-body-sm font-semibold shadow-sm hover:bg-primary-container transition-colors" onclick="document.getElementById('filterBottomSheet').classList.add('hidden')" type="button"><span class="">Apply Biomarker Filters</span><span class="px-1.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-[10px] font-bold">4 Active • 6 Scans</span></button></div></div></div><div class="fixed inset-0 z-50 flex flex-col justify-end bg-inverse-surface/60 backdrop-blur-sm transition-all duration-300" id="fhirExportModal"><div class="absolute inset-0" onclick="document.getElementById('fhirExportModal').classList.add('hidden')"></div><div class="relative w-full max-h-[92vh] bg-surface rounded-t-[28px] shadow-2xl flex flex-col overflow-hidden border-t border-surface-container-highest z-10"><div class="flex justify-center pt-3 pb-1 shrink-0"><div class="w-12 h-1.5 rounded-full bg-outline-variant/60"></div></div><div class="px-gutter-mobile py-3 border-b border-surface-container-high shrink-0 bg-surface/90 backdrop-blur-md"><div class="flex items-start justify-between gap-3"><div class="flex items-start gap-2.5"><div class="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0 mt-0.5"><span class="material-symbols-outlined text-[22px]">enhanced_encryption</span></div><div><div class="flex flex-wrap items-center gap-1.5 mb-0.5"><h2 class="font-headline-sm text-[20px] text-on-surface leading-snug font-medium">HL7® FHIR® R4 Clinical Telemetry Export</h2></div><div class="flex flex-wrap items-center gap-1.5"><span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs font-semibold">FHIR Release 4.0.1</span><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-label-xs text-label-xs font-semibold"><span class="material-symbols-outlined text-[12px] text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>Cryptographically Signed (Ed25519)</span></div><p class="font-body-sm text-[12px] text-on-surface-variant mt-1"><strong class="text-on-surface font-semibold">Subject:</strong> Elena Vance • <strong class="text-on-surface font-semibold">Patient ID:</strong> #DN-8841-B • <strong class="text-on-surface font-semibold">Bundle:</strong> #OB-2024-1128</p></div></div><button aria-label="Close modal" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-colors shrink-0" onclick="document.getElementById('fhirExportModal').classList.add('hidden')" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button></div><div class="flex items-center gap-1.5 mt-3 pt-1 border-t border-surface-container overflow-x-auto no-scrollbar"><button class="fhir-tab-btn shrink-0 px-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-primary font-label-xs text-label-xs font-semibold transition-all flex items-center gap-1.5" id="tabBtnSummary" onclick="switchFhirTab('summary')" type="button"><span class="material-symbols-outlined text-[15px]">clinical_notes</span><span class="">Clinical Summary</span></button><button class="fhir-tab-btn shrink-0 px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-xs text-label-xs font-semibold transition-all flex items-center gap-1.5 shadow-sm" id="tabBtnJson" onclick="switchFhirTab('json')" type="button"><span class="material-symbols-outlined text-[15px]">data_object</span><span class="">FHIR JSON Bundle</span></button><button class="fhir-tab-btn shrink-0 px-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-primary font-label-xs text-label-xs font-semibold transition-all flex items-center gap-1.5" id="tabBtnCrypto" onclick="switchFhirTab('crypto')" type="button"><span class="material-symbols-outlined text-[15px]">verified_user</span><span class="">Provenance &amp; Hash</span></button></div></div><div class="flex-1 overflow-y-auto px-gutter-mobile py-3.5 space-y-4 no-scrollbar"><div class="space-y-3" id="fhirViewJson"><div class="flex flex-wrap items-center justify-between gap-2 px-0.5"><div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] text-primary">schema</span><span class="font-label-xs text-label-xs font-bold uppercase tracking-wider text-on-surface">Bundle #OB-2024-1128</span><span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-xs text-[10px] font-semibold">FHIR v4.0.1 Validated • 4.8 KB • 6 Resources</span></div><div class="flex items-center gap-1.5"><button class="px-2.5 py-1 rounded-md bg-surface-container text-on-surface-variant hover:text-primary font-label-xs text-[11px] font-semibold transition-colors flex items-center gap-1" onclick="navigator.clipboard.writeText(document.getElementById('fhirCodeBlock').innerText); this.innerHTML='&lt;span class=\'material-symbols-outlined text-[13px]\'&gt;check&lt;/span&gt; Copied!'; setTimeout(()=&gt;this.innerHTML='&lt;span class=\'material-symbols-outlined text-[13px]\'&gt;content_copy&lt;/span&gt; Copy JSON', 1800);" type="button"><span class="material-symbols-outlined text-[13px]">content_copy</span> Copy JSON</button><button class="px-2.5 py-1 rounded-md bg-surface-container text-on-surface-variant hover:text-primary font-label-xs text-[11px] font-semibold transition-colors flex items-center gap-1" type="button"><span class="material-symbols-outlined text-[13px]">unfold_less</span> Collapse All</button></div></div><div class="rounded-xl bg-inverse-surface text-inverse-on-surface border border-surface-container-high overflow-hidden shadow-inner"><div class="flex items-center justify-between px-3 py-1.5 bg-inverse-surface/60 border-b border-outline-variant/60 text-[11px] font-mono text-outline"><div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-primary/40 inline-block"></span><span class="">bundle-ob-2024-1128.json</span></div><span class="text-[10px] text-secondary-fixed">UTF-8 • application/fhir+json</span></div><div class="p-3 overflow-x-auto text-[11px] font-mono leading-relaxed max-h-[380px] no-scrollbar"><pre class="whitespace-pre text-secondary-fixed font-mono" id="fhirCodeBlock"><span class="text-[#a8cfbb]">{</span>
+  <span class="text-[#c4ebd7]">"resourceType"</span>: <span class="text-[#e5e1ec]">"Bundle"</span>,
+  <span class="text-[#c4ebd7]">"id"</span>: <span class="text-[#e5e1ec]">"OB-2024-1128-DN8841B"</span>,
+  <span class="text-[#c4ebd7]">"meta"</span>: {
+    <span class="text-[#c4ebd7]">"profile"</span>: [
+      <span class="text-[#e5e1ec]">"http://hl7.org/fhir/StructureDefinition/dermal-telemetry-bundle"</span>
+    ],
+    <span class="text-[#c4ebd7]">"lastUpdated"</span>: <span class="text-[#e5e1ec]">"2024-11-29T08:32:14Z"</span>,
+    <span class="text-[#c4ebd7]">"security"</span>: [{
+      <span class="text-[#c4ebd7]">"system"</span>: <span class="text-[#e5e1ec]">"http://terminology.hl7.org/CodeSystem/v3-Confidentiality"</span>,
+      <span class="text-[#c4ebd7]">"code"</span>: <span class="text-[#e5e1ec]">"R"</span>,
+      <span class="text-[#c4ebd7]">"display"</span>: <span class="text-[#e5e1ec]">"Restricted Clinical Telemetry"</span>
+    }]
+  },
+  <span class="text-[#c4ebd7]">"type"</span>: <span class="text-[#e5e1ec]">"collection"</span>,
+  <span class="text-[#c4ebd7]">"timestamp"</span>: <span class="text-[#e5e1ec]">"2024-11-29T08:32:14Z"</span>,
+  <span class="text-[#c4ebd7]">"total"</span>: <span class="text-[#a8cfbb]">6</span>,
+  <span class="text-[#c4ebd7]">"entry"</span>: [
+    {
+      <span class="text-[#c4ebd7]">"fullUrl"</span>: <span class="text-[#e5e1ec]">"urn:uuid:patient-elena-vance"</span>,
+      <span class="text-[#c4ebd7]">"resource"</span>: {
+        <span class="text-[#c4ebd7]">"resourceType"</span>: <span class="text-[#e5e1ec]">"Patient"</span>,
+        <span class="text-[#c4ebd7]">"id"</span>: <span class="text-[#e5e1ec]">"DN-8841-B"</span>,
+        <span class="text-[#c4ebd7]">"identifier"</span>: [{
+          <span class="text-[#c4ebd7]">"system"</span>: <span class="text-[#e5e1ec]">"https://dermanova.ai/patients"</span>,
+          <span class="text-[#c4ebd7]">"value"</span>: <span class="text-[#e5e1ec]">"DN-8841-B"</span>
+        }],
+        <span class="text-[#c4ebd7]">"name"</span>: [{
+          <span class="text-[#c4ebd7]">"use"</span>: <span class="text-[#e5e1ec]">"official"</span>,
+          <span class="text-[#c4ebd7]">"family"</span>: <span class="text-[#e5e1ec]">"Vance"</span>,
+          <span class="text-[#c4ebd7]">"given"</span>: [<span class="text-[#e5e1ec]">"Elena"</span>]
+        }],
+        <span class="text-[#c4ebd7]">"gender"</span>: <span class="text-[#e5e1ec]">"female"</span>
+      }
+    },
+    {
+      <span class="text-[#c4ebd7]">"fullUrl"</span>: <span class="text-[#e5e1ec]">"urn:uuid:device-sonyimx-derma9"</span>,
+      <span class="text-[#c4ebd7]">"resource"</span>: {
+        <span class="text-[#c4ebd7]">"resourceType"</span>: <span class="text-[#e5e1ec]">"Device"</span>,
+        <span class="text-[#c4ebd7]">"id"</span>: <span class="text-[#e5e1ec]">"SONY-IMX-DERMA9"</span>,
+        <span class="text-[#c4ebd7]">"deviceName"</span>: [{
+          <span class="text-[#c4ebd7]">"name"</span>: <span class="text-[#e5e1ec]">"SONY IMX-Derma9 Optical Polarized Sensor"</span>,
+          <span class="text-[#c4ebd7]">"type"</span>: <span class="text-[#e5e1ec]">"model-name"</span>
+        }],
+        <span class="text-[#c4ebd7]">"property"</span>: [{
+          <span class="text-[#c4ebd7]">"type"</span>: { <span class="text-[#c4ebd7]">"text"</span>: <span class="text-[#e5e1ec]">"Illumination"</span> },
+          <span class="text-[#c4ebd7]">"valueString"</span>: <span class="text-[#e5e1ec]">"5400K Daylight Normalized"</span>
+        }]
+      }
+    },
+    {
+      <span class="text-[#c4ebd7]">"fullUrl"</span>: <span class="text-[#e5e1ec]">"urn:uuid:obs-erythema-01"</span>,
+      <span class="text-[#c4ebd7]">"resource"</span>: {
+        <span class="text-[#c4ebd7]">"resourceType"</span>: <span class="text-[#e5e1ec]">"Observation"</span>,
+        <span class="text-[#c4ebd7]">"status"</span>: <span class="text-[#e5e1ec]">"final"</span>,
+        <span class="text-[#c4ebd7]">"code"</span>: {
+          <span class="text-[#c4ebd7]">"coding"</span>: [{
+            <span class="text-[#c4ebd7]">"system"</span>: <span class="text-[#e5e1ec]">"http://loinc.org"</span>,
+            <span class="text-[#c4ebd7]">"code"</span>: <span class="text-[#e5e1ec]">"98547-3"</span>,
+            <span class="text-[#c4ebd7]">"display"</span>: <span class="text-[#e5e1ec]">"Cutaneous vascular erythema score"</span>
+          }]
+        },
+        <span class="text-[#c4ebd7]">"valueQuantity"</span>: {
+          <span class="text-[#c4ebd7]">"value"</span>: 12.0,
+          <span class="text-[#c4ebd7]">"unit"</span>: <span class="text-[#e5e1ec]">"%"</span>,
+          <span class="text-[#c4ebd7]">"system"</span>: <span class="text-[#e5e1ec]">"http://unitsofmeasure.org"</span>,
+          <span class="text-[#c4ebd7]">"code"</span>: <span class="text-[#e5e1ec]">"%"</span>
+        },
+        <span class="text-[#c4ebd7]">"interpretation"</span>: [{
+          <span class="text-[#c4ebd7]">"coding"</span>: [{ <span class="text-[#c4ebd7]">"code"</span>: <span class="text-[#e5e1ec]">"N"</span>, <span class="text-[#c4ebd7]">"display"</span>: <span class="text-[#e5e1ec]">"Normal / Baseline"</span> }]
+        }]
+      }
+    },
+    {
+      <span class="text-[#c4ebd7]">"fullUrl"</span>: <span class="text-[#e5e1ec]">"urn:uuid:obs-hydration-02"</span>,
+      <span class="text-[#c4ebd7]">"resource"</span>: {
+        <span class="text-[#c4ebd7]">"resourceType"</span>: <span class="text-[#e5e1ec]">"Observation"</span>,
+        <span class="text-[#c4ebd7]">"status"</span>: <span class="text-[#e5e1ec]">"final"</span>,
+        <span class="text-[#c4ebd7]">"code"</span>: {
+          <span class="text-[#c4ebd7]">"coding"</span>: [{
+            <span class="text-[#c4ebd7]">"system"</span>: <span class="text-[#e5e1ec]">"http://loinc.org"</span>,
+            <span class="text-[#c4ebd7]">"code"</span>: <span class="text-[#e5e1ec]">"72143-1"</span>,
+            <span class="text-[#c4ebd7]">"display"</span>: <span class="text-[#e5e1ec]">"Stratum corneum hydration capacitance"</span>
+          }]
+        },
+        <span class="text-[#c4ebd7]">"valueQuantity"</span>: {
+          <span class="text-[#c4ebd7]">"value"</span>: 84.0,
+          <span class="text-[#c4ebd7]">"unit"</span>: <span class="text-[#e5e1ec]">"%"</span>
+        }
+      }
+    },
+    {
+      <span class="text-[#c4ebd7]">"fullUrl"</span>: <span class="text-[#e5e1ec]">"urn:uuid:obs-sebum-03"</span>,
+      <span class="text-[#c4ebd7]">"resource"</span>: {
+        <span class="text-[#c4ebd7]">"resourceType"</span>: <span class="text-[#e5e1ec]">"Observation"</span>,
+        <span class="text-[#c4ebd7]">"status"</span>: <span class="text-[#e5e1ec]">"final"</span>,
+        <span class="text-[#c4ebd7]">"code"</span>: {
+          <span class="text-[#c4ebd7]">"coding"</span>: [{
+            <span class="text-[#c4ebd7]">"system"</span>: <span class="text-[#e5e1ec]">"http://snomed.info/sct"</span>,
+            <span class="text-[#c4ebd7]">"code"</span>: <span class="text-[#e5e1ec]">"247441003"</span>,
+            <span class="text-[#c4ebd7]">"display"</span>: <span class="text-[#e5e1ec]">"Sebum Ostia Saturation Index"</span>
+          }]
+        },
+        <span class="text-[#c4ebd7]">"valueQuantity"</span>: {
+          <span class="text-[#c4ebd7]">"value"</span>: 78,
+          <span class="text-[#c4ebd7]">"unit"</span>: <span class="text-[#e5e1ec]">"/100"</span>
+        }
+      }
+    },
+    {
+      <span class="text-[#c4ebd7]">"fullUrl"</span>: <span class="text-[#e5e1ec]">"urn:uuid:obs-tewl-04"</span>,
+      <span class="text-[#c4ebd7]">"resource"</span>: {
+        <span class="text-[#c4ebd7]">"resourceType"</span>: <span class="text-[#e5e1ec]">"Observation"</span>,
+        <span class="text-[#c4ebd7]">"status"</span>: <span class="text-[#e5e1ec]">"final"</span>,
+        <span class="text-[#c4ebd7]">"code"</span>: {
+          <span class="text-[#c4ebd7]">"coding"</span>: [{
+            <span class="text-[#c4ebd7]">"system"</span>: <span class="text-[#e5e1ec]">"http://loinc.org"</span>,
+            <span class="text-[#c4ebd7]">"code"</span>: <span class="text-[#e5e1ec]">"95412-2"</span>,
+            <span class="text-[#c4ebd7]">"display"</span>: <span class="text-[#e5e1ec]">"Trans-Epidermal Water Loss (TEWL)"</span>
+          }]
+        },
+        <span class="text-[#c4ebd7]">"valueQuantity"</span>: {
+          <span class="text-[#c4ebd7]">"value"</span>: 14.2,
+          <span class="text-[#c4ebd7]">"unit"</span>: <span class="text-[#e5e1ec]">"g/m2h"</span>
+        }
+      }
+    }
+  ],
+  <span class="text-[#c4ebd7]">"signature"</span>: {
+    <span class="text-[#c4ebd7]">"type"</span>: [{ <span class="text-[#c4ebd7]">"code"</span>: <span class="text-[#e5e1ec]">"1.2.840.10065.1.12.1.1"</span> }],
+    <span class="text-[#c4ebd7]">"when"</span>: <span class="text-[#e5e1ec]">"2024-11-29T08:32:14Z"</span>,
+    <span class="text-[#c4ebd7]">"who"</span>: { <span class="text-[#c4ebd7]">"display"</span>: <span class="text-[#e5e1ec]">"Dr. Marcus Thorne, MD (Lic. #CA-77492)"</span> },
+    <span class="text-[#c4ebd7]">"sigFormat"</span>: <span class="text-[#e5e1ec]">"application/jose"</span>,
+    <span class="text-[#c4ebd7]">"data"</span>: <span class="text-[#e5e1ec]">"ZXlKaGJHY2lPaUpTVXpVeU5pSXNJblI1Y0NJNklu..."</span>
+  }
+<span class="text-[#a8cfbb]">}</span></pre></div></div><div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low border border-surface-container-high text-[11px] text-on-surface-variant"><div class="flex items-center gap-1.5 text-primary"><span class="material-symbols-outlined text-[15px]">fingerprint</span><span class="font-semibold">Ed25519 Provenance:</span><span class="font-mono text-[10px] text-on-surface truncate max-w-[180px]">e3b0c44298fc1c149afbf4c8...</span></div><span class="font-label-xs text-label-xs text-outline">6 Resources Indexed</span></div></div></div><div class="px-gutter-mobile py-3 bg-surface-container-lowest border-t border-surface-container-high flex items-center gap-2.5 shrink-0 shadow-[0_-4px_16px_rgba(48,77,64,0.06)]"><button class="px-3.5 h-11 rounded-xl bg-surface-container text-on-surface-variant font-title-sm text-body-sm font-semibold hover:bg-surface-container-high transition-colors shrink-0" onclick="document.getElementById('fhirExportModal').classList.add('hidden')" type="button">Close</button><button class="flex-1 h-11 flex items-center justify-center gap-1.5 bg-primary text-on-primary rounded-xl font-title-sm text-body-sm font-semibold shadow-sm hover:bg-primary-container transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">download</span><span class="">Download Signed FHIR (.json)</span></button><button class="h-11 px-3 flex items-center justify-center gap-1.5 bg-surface-container-low text-primary border border-primary/20 rounded-xl font-title-sm text-body-sm font-semibold hover:bg-surface-container transition-colors shrink-0" title="Transmit to EHR / Provider (Direct)" type="button"><span class="material-symbols-outlined text-[18px]">send_to_mobile</span><span class="hidden sm:inline">Send EHR</span></button></div></div></div><script>function switchFhirTab(tabName){const views={summary:document.getElementById('fhirViewSummary'),json:document.getElementById('fhirViewJson'),crypto:document.getElementById('fhirViewCrypto')};const btns={summary:document.getElementById('tabBtnSummary'),json:document.getElementById('tabBtnJson'),crypto:document.getElementById('tabBtnCrypto')};Object.keys(views).forEach(key=>{if(key===tabName){views[key].classList.remove('hidden');btns[key].className='fhir-tab-btn shrink-0 px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-xs text-label-xs font-semibold transition-all flex items-center gap-1.5 shadow-sm';}else{views[key].classList.add('hidden');btns[key].className='fhir-tab-btn shrink-0 px-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-primary font-label-xs text-label-xs font-semibold transition-all flex items-center gap-1.5';}});}</script>
+
+</body></html>

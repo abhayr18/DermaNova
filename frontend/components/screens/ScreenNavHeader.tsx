@@ -28,7 +28,8 @@ export type ScreenId =
   | 'detail'       // Screen 7
   | 'routine'      // Screen 8
   | 'progress'     // Screen 9
-  | 'settings';    // Screen 10
+  | 'settings'     // Screen 10
+  | 'telehealth';  // Screen 11 (Google Stitch Telehealth Network)
 
 interface ScreenNavHeaderProps {
   currentScreen: ScreenId;
@@ -59,6 +60,7 @@ export const ScreenNavHeader: React.FC<ScreenNavHeaderProps> = ({
     { id: 'routine', number: '08', title: 'Personalized Routine', category: 'Regimen' },
     { id: 'progress', number: '09', title: 'Progress Tracking', category: 'Journal' },
     { id: 'settings', number: '10', title: 'Profile & Privacy', category: 'Settings' },
+    { id: 'telehealth', number: '11', title: 'Telehealth Consult', category: 'Clinical' },
   ];
 
   const currentMeta = screensMeta.find((s) => s.id === currentScreen) || screensMeta[0];

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "surface-dim": "#d8dbd2", "tertiary-fixed-dim": "#c8c5cf", "tertiary-fixed": "#e5e1ec", "on-secondary-container": "#4d6b5d", "background": "#f7fbf1", "on-surface": "#191d17", "on-tertiary-container": "#f5f0fb", "secondary-fixed-dim": "#adcebd", "outline": "#717974", "on-secondary": "#ffffff", "surface-container-lowest": "#ffffff", "secondary": "#476557", "secondary-container": "#c9ead8", "on-error": "#ffffff", "on-tertiary-fixed-variant": "#47464e", "inverse-on-surface": "#eff2e8", "secondary-fixed": "#c9ead8", "inverse-primary": "#a8cfbb", "on-error-container": "#93000a", "on-tertiary": "#ffffff", "surface": "#f7fbf1", "error": "#ba1a1a", "on-tertiary-fixed": "#1b1b22", "on-surface-variant": "#414844", "inverse-surface": "#2e322b", "error-container": "#ffdad6", "on-primary-fixed-variant": "#2a4e3e", "surface-container": "#ecefe6", "surface-variant": "#e0e4da", "on-primary-container": "#d4fce6", "primary-fixed-dim": "#a8cfbb", "outline-variant": "#c1c8c2", "on-primary-fixed": "#002115", "primary-container": "#527665", "on-background": "#191d17", "primary": "#3a5d4d", "surface-container-highest": "#e0e4da", "tertiary-container": "#6f6d76", "surface-container-low": "#f2f5eb", "on-secondary-fixed": "#022016", "on-secondary-fixed-variant": "#304d40", "surface-container-high": "#e6e9e0", "on-primary": "#ffffff", "surface-bright": "#f7fbf1", "tertiary": "#56555e", "surface-tint": "#426655", "primary-fixed": "#c4ebd7" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-sm": "0.5rem", "space-lg": "1.5rem", "space-md": "1rem", "margin-mobile": "1.25rem", "space-xs": "0.25rem", "gutter": "1.5rem", "margin": "3rem", "space-xl": "2.5rem", "gutter-mobile": "1rem" }, fontFamily: { "body-md": ["Manrope"], "label-md": ["Manrope"], "headline-lg": ["Newsreader"], "display-hero": ["Newsreader"], "headline-lg-mobile": ["Newsreader"], "headline-sm": ["Newsreader"], "body-lg": ["Manrope"], "display-hero-mobile": ["Newsreader"], "title-md": ["Manrope"], "headline-md": ["Newsreader"], "label-xs": ["Manrope"], "body-sm": ["Manrope"], "title-sm": ["Manrope"] }, fontSize: { "body-md": ["14px", { lineHeight: "22px", letterSpacing: "0.01em", fontWeight: "400" }], "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.04em", fontWeight: "600" }], "headline-lg": ["40px", { lineHeight: "48px", letterSpacing: "-0.015em", fontWeight: "400" }], "display-hero": ["56px", { lineHeight: "64px", letterSpacing: "-0.02em", fontWeight: "400" }], "headline-lg-mobile": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "400" }], "headline-sm": ["22px", { lineHeight: "30px", letterSpacing: "-0.005em", fontWeight: "500" }], "body-lg": ["16px", { lineHeight: "26px", letterSpacing: "0.005em", fontWeight: "400" }], "display-hero-mobile": ["36px", { lineHeight: "44px", letterSpacing: "-0.015em", fontWeight: "400" }], "title-md": ["18px", { lineHeight: "26px", letterSpacing: "0em", fontWeight: "600" }], "headline-md": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "500" }], "label-xs": ["10px", { lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "700" }], "body-sm": ["13px", { lineHeight: "18px", letterSpacing: "0.01em", fontWeight: "400" }], "title-sm": ["16px", { lineHeight: "24px", letterSpacing: "0em", fontWeight: "600" }] } } } }</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(48,77,64,0.04)]"><div class="h-16 px-margin-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm"><button aria-label="Cancel and dismiss diagnostic" class="w-11 h-11 -ml-space-xs flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" onclick="history.back()" type="button"><span class="material-symbols-outlined text-[22px]">close</span></button><div class="flex items-center gap-space-xs"><img alt="Close-up editorial beauty portrait of an authentic woman with natural skin texture, freckles, real pores, soft clean lighting, neutral warm background, calm serene expression, luxury skincare brand photography aesthetic, no artificial retouching or heavy makeup." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UR0nDiC02I81WcfAOtxkbCSwZQoQ647J4KVG41bpHIJJKEVN3tJKpEC9tmoPNsugQqmtm99Wyni0uho6XFvCxdUmApZqpxV7zIrX4z4O03a1aLBj4jX_HUDTjFmiI5iQBsMB8Ra7HV43_IvxSgdw7m4c28DzFs28PQCXEX6jkmA8OFulRrjbM_fNt-daHeSrzw5XzBku2QD9xYn2ZAlJffaR2TE7ahBb1awg025UFjJpBJvQ9m4djWd3NX"/><div class="flex flex-col ml-1"><span class="font-headline-sm text-title-sm text-primary leading-none tracking-tight">DermaNova</span><span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-widest mt-0.5">Diagnostics</span></div></div></div><div class="flex items-center gap-space-sm"><div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-low text-secondary"><span class="material-symbols-outlined text-[14px]">verified_user</span><span class="font-label-xs text-label-xs uppercase tracking-wider font-semibold text-secondary">HIPAA Verified</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 shadow-[0_2px_6px_rgba(48,77,64,0.12)]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="h-6 px-margin-mobile pb-2 flex items-center justify-between text-on-surface-variant"><span class="font-title-sm text-title-sm text-on-surface font-medium">Diagnostic Scan Processing</span><span class="font-label-xs text-label-xs tracking-wider uppercase text-outline">Diagnostic Mode</span></div></header><main class="flex-1 flex flex-col relative w-full pt-16 bg-surface"><div class="flex flex-col w-full px-margin-mobile pb-12 pt-3">
+<!-- Top Protocol Metadata & Step Tracker -->
+<section class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-xs text-label-xs uppercase tracking-wider">
+        Studio Protocol 01 • Mobile Capture
+      </span>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-xs text-label-xs uppercase tracking-wider font-semibold">Optical Calibrator Ready</span>
+</div>
+</div>
+<!-- Step Progress Flow -->
+<div class="flex items-center gap-2 pt-1 pb-1">
+<div class="flex-1 flex items-center gap-1.5">
+<span class="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-xs text-label-xs font-semibold">1</span>
+<span class="font-label-xs text-label-xs text-primary font-semibold tracking-wide">Capture</span>
+</div>
+<div class="w-4 h-px bg-surface-container-highest"></div>
+<div class="flex-1 flex items-center gap-1.5 opacity-60">
+<span class="w-5 h-5 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-label-xs text-label-xs">2</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Quality Check</span>
+</div>
+<div class="w-4 h-px bg-surface-container-highest"></div>
+<div class="flex-1 flex items-center gap-1.5 opacity-60">
+<span class="w-5 h-5 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-label-xs text-label-xs">3</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Neural Analysis</span>
+</div>
+</div>
+<!-- Editorial Header Block -->
+<div class="flex flex-col gap-1.5 mt-1">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-normal leading-tight">
+        Let’s take a closer look at your skin.
+      </h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Capture or upload an ordinary, clear facial photograph in neutral daylight. DermaNova evaluates structural fidelity across 8 core dermal markers.
+      </p>
+</div>
+</section>
+<!-- Biometric Viewfinder Frame & Interactive Reticle Overlays -->
+<section class="mt-5 flex flex-col">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-surface-container shadow-md select-none group" id="viewfinder-container">
+<!-- Portrait Photography Capture -->
+<img alt="Biometric calibrated facial capture" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida/AEtjO1UR0nDiC02I81WcfAOtxkbCSwZQoQ647J4KVG41bpHIJJKEVN3tJKpEC9tmoPNsugQqmtm99Wyni0uho6XFvCxdUmApZqpxV7zIrX4z4O03a1aLBj4jX_HUDTjFmiI5iQBsMB8Ra7HV43_IvxSgdw7m4c28DzFs28PQCXEX6jkmA8OFulRrjbM_fNt-daHeSrzw5XzBku2QD9xYn2ZAlJffaR2TE7ahBb1awg025UFjJpBJvQ9m4djWd3NX"/>
+<!-- Subtle Vignette & Medical Grid Scrim -->
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/40 via-transparent to-on-surface/20 pointer-events-none"></div>
+<!-- Corner Alignment Brackets -->
+<div class="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-primary-fixed rounded-tl-sm pointer-events-none"></div>
+<div class="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-primary-fixed rounded-tr-sm pointer-events-none"></div>
+<div class="absolute bottom-14 left-3 w-6 h-6 border-b-2 border-l-2 border-primary-fixed rounded-bl-sm pointer-events-none"></div>
+<div class="absolute bottom-14 right-3 w-6 h-6 border-b-2 border-r-2 border-primary-fixed rounded-br-sm pointer-events-none"></div>
+<!-- Mode View Toggle Pill (Top Right) -->
+<div class="absolute top-3 right-3 z-20 flex bg-surface-container-lowest/90 backdrop-blur-md p-0.5 rounded-full shadow-sm">
+<button class="px-2.5 py-1 rounded-full bg-primary text-on-primary font-label-xs text-label-xs transition-colors" id="toggle-landmarks-btn">
+          Landmarks
+        </button>
+<button class="px-2.5 py-1 rounded-full text-on-surface-variant font-label-xs text-label-xs hover:text-on-surface transition-colors" id="toggle-clean-btn">
+          Clean View
+        </button>
+</div>
+<!-- Top Alignment Telemetry Badge -->
+<div class="absolute top-3 left-3 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md shadow-sm">
+<span class="material-symbols-outlined text-primary text-[14px]">sensors</span>
+<span class="font-label-xs text-label-xs text-primary font-semibold uppercase tracking-wider">Mesh 0.94 Lock</span>
+</div>
+<!-- Dynamic Biometric Overlay Layer -->
+<div class="absolute inset-0 pointer-events-none transition-opacity duration-300" id="landmarks-layer">
+<!-- SVG Biometric Face Contours & Wireframe Grid -->
+<svg class="w-full h-full absolute inset-0 opacity-80" fill="none" viewbox="0 0 320 400">
+<!-- Oval Mesh Perimeter -->
+<ellipse class="text-secondary-fixed-dim" cx="160" cy="180" rx="90" ry="120" stroke="currentColor" stroke-dasharray="3 3" stroke-width="1"></ellipse>
+<!-- Central Symmetry Axis -->
+<line class="text-secondary-fixed" stroke="currentColor" stroke-dasharray="2 4" stroke-width="1" x1="160" x2="160" y1="50" y2="310"></line>
+<!-- Mid Pupillary Horizontal Baseline -->
+<line class="text-secondary-fixed" stroke="currentColor" stroke-width="1" x1="85" x2="235" y1="165" y2="165"></line>
+<!-- Eyebrow & Orbital Reference Arcs -->
+<path class="text-primary-fixed" d="M 105 150 Q 125 142 145 152" stroke="currentColor" stroke-width="1.2"></path>
+<path class="text-primary-fixed" d="M 175 152 Q 195 142 215 150" stroke="currentColor" stroke-width="1.2"></path>
+<!-- Target Nodes: Cheekbones & Chin -->
+<circle class="text-secondary-container" cx="118" cy="205" fill="currentColor" r="3.5"></circle>
+<circle class="text-secondary-container" cx="202" cy="205" fill="currentColor" r="3.5"></circle>
+<circle class="text-primary-fixed" cx="160" cy="285" fill="currentColor" r="4"></circle>
+</svg>
+<!-- Floating Metric Badge: Left Orbit -->
+<div class="absolute left-6 top-[37%] flex items-center gap-1 bg-surface-container-lowest/90 backdrop-blur-md px-2 py-0.5 rounded-full shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-xs text-label-xs text-on-surface font-medium">L_ORBIT: 42.8°</span>
+</div>
+<!-- Floating Metric Badge: Right Orbit -->
+<div class="absolute right-6 top-[37%] flex items-center gap-1 bg-surface-container-lowest/90 backdrop-blur-md px-2 py-0.5 rounded-full shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-xs text-label-xs text-on-surface font-medium">R_ORBIT: 42.8°</span>
+</div>
+<!-- Eye Level Status Center Pin -->
+<div class="absolute top-[42%] left-1/2 -translate-x-1/2 flex items-center gap-1 bg-primary/90 text-on-primary backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-[12px]">visibility</span>
+<span class="font-label-xs text-label-xs font-semibold tracking-wider uppercase">Eye Level Aligned</span>
+</div>
+<!-- Chin Anchor Pin -->
+<div class="absolute bottom-[22%] left-1/2 -translate-x-1/2 flex items-center gap-1 bg-surface-container-lowest/90 text-on-surface backdrop-blur-md px-2 py-0.5 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-[13px] text-primary">anchor</span>
+<span class="font-label-xs text-label-xs font-medium">Chin Locked</span>
+</div>
+</div>
+<!-- Live Sensor HUD Control Bar (Bottom Floating Deck) -->
+<div class="absolute bottom-2.5 left-2.5 right-2.5 z-20 flex items-center justify-between px-3 py-2 rounded-xl bg-surface-container-lowest/95 backdrop-blur-lg shadow-md">
+<div class="flex items-center gap-2 min-w-0">
+<span class="material-symbols-outlined text-secondary text-[18px]">verified</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-xs text-label-xs text-on-surface font-bold truncate">ISO 100 • 1/120s</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant truncate">Optimal Luminescence</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5">
+<button aria-label="Recalibrate sensors" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">cached</span>
+</button>
+<button aria-label="Switch front or rear lens" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">flip_camera_ios</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Active Raw File Bar Below Viewfinder -->
+<div class="mt-2.5 flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-surface-container-low shadow-sm">
+<div class="flex items-center gap-2 min-w-0">
+<span class="material-symbols-outlined text-primary text-[18px]">photo_camera_back</span>
+<div class="flex flex-col min-w-0">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold truncate leading-tight">IMG_4921_RAW.heic</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">4.2 MB • sRGB IEC61966</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-xs text-label-xs hover:bg-surface-container-high transition-colors">
+          Replace
+        </button>
+<button aria-label="Remove photo" class="p-1 rounded-full text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Real-Time Optical Verification Telemetry -->
+<section class="mt-5 flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Real-Time Verification</span>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span class="font-label-xs text-label-xs font-semibold">98% Confidence • Stable</span>
+</div>
+</div>
+<!-- Signal Metrics Stack -->
+<div class="grid grid-cols-1 gap-2">
+<!-- Signal 1: Daylight Detection -->
+<div class="flex items-start gap-2.5 p-3 rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="w-7 h-7 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">wb_sunny</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Neutral Daylight Detected</span>
+<span class="font-label-xs text-label-xs text-secondary font-bold">5400K Balance</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            Balanced ambient illumination across forehead, cheeks, and nasal ridge without color casts.
+          </p>
+</div>
+</div>
+<!-- Signal 2: Midline Centering -->
+<div class="flex items-start gap-2.5 p-3 rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="w-7 h-7 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">center_focus_strong</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Centered &amp; Camera Facing</span>
+<span class="font-label-xs text-label-xs text-secondary font-bold">&lt; 1.4° Tilt</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            Sagittal midline aligned within bilateral tolerance. Both ears equally foreshortened.
+          </p>
+</div>
+</div>
+<!-- Signal 3: Specular Glare -->
+<div class="flex items-start gap-2.5 p-3 rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="w-7 h-7 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">flare</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Specular Glare Absent</span>
+<span class="font-label-xs text-label-xs text-secondary font-bold">Passed</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            No sharp highlights or blown-out reflection hotspots obscuring follicle pores.
+          </p>
+</div>
+</div>
+<!-- Signal 4: Dermal Perimeter -->
+<div class="flex items-start gap-2.5 p-3 rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="w-7 h-7 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">face</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Perimeter Dermal Visibility</span>
+<span class="font-label-xs text-label-xs text-secondary font-bold">94% Open</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            Cheekbones, jawline, and periorbital tissue fully unobstructed by hair strands or jewelry.
+          </p>
+</div>
+</div>
+</div>
+<!-- Signal Uniformity Visualizer Bar -->
+<div class="p-3 rounded-xl bg-surface-container-low flex flex-col gap-1.5 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider font-semibold">Signal Uniformity Spectrum</span>
+<span class="font-label-xs text-label-xs text-primary font-bold">Calibrated (1.000)</span>
+</div>
+<div class="flex items-center gap-1 w-full h-2">
+<div class="flex-1 h-full rounded-sm bg-primary"></div>
+<div class="flex-1 h-full rounded-sm bg-primary"></div>
+<div class="flex-1 h-full rounded-sm bg-primary"></div>
+<div class="flex-1 h-full rounded-sm bg-primary"></div>
+<div class="flex-1 h-full rounded-sm bg-secondary"></div>
+<div class="flex-1 h-full rounded-sm bg-secondary-container"></div>
+<div class="flex-1 h-full rounded-sm bg-primary"></div>
+<div class="flex-1 h-full rounded-sm bg-primary"></div>
+</div>
+</div>
+</section>
+<!-- Mobile Action Triggers & Prominent Analyze CTA -->
+<section class="mt-5 flex flex-col gap-3">
+<!-- Secondary Capture / Upload Buttons -->
+<div class="grid grid-cols-2 gap-2.5">
+<button class="flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-surface-container-high text-on-surface font-title-sm text-title-sm active:scale-95 transition-transform shadow-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">photo_camera</span>
+<span>Open Camera</span>
+</button>
+<button class="flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-surface-container-high text-on-surface font-title-sm text-title-sm active:scale-95 transition-transform shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">cloud_upload</span>
+<span>Upload New</span>
+</button>
+</div>
+<!-- Primary Action Anchor Button -->
+<button class="w-full py-4 px-6 rounded-xl bg-primary text-on-primary font-title-sm text-title-sm shadow-md flex items-center justify-center gap-2 hover:bg-primary-container active:scale-[0.99] transition-all">
+<span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+<span class="tracking-wide font-semibold">✦ Analyze My Skin</span>
+</button>
+<!-- Extraction Targets Breakdown Chips -->
+<div class="flex flex-col gap-2 p-3.5 rounded-xl bg-surface-container-low shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-on-surface font-medium">Ready for Extraction</span>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-semibold">8 Targets</span>
+</div>
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-xs text-label-xs shadow-sm">
+          Epidermal Hydration
+        </span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-xs text-label-xs shadow-sm">
+          Pore Congestion
+        </span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-xs text-label-xs shadow-sm">
+          Erythema / Redness
+        </span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-xs text-label-xs shadow-sm">
+          Expression Lines
+        </span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-xs text-label-xs shadow-sm">
+          Sebum Equilibrium
+        </span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-xs text-label-xs shadow-sm">
+          Hyperpigmentation
+        </span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-xs text-label-xs shadow-sm">
+          Texture Smoothness
+        </span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-xs text-label-xs shadow-sm">
+          Lipid Barrier
+        </span>
+</div>
+</div>
+</section>
+<!-- Clinical Protocols for Optimal Precision (Editorial Cards) -->
+<section class="mt-6 flex flex-col gap-2.5">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-on-surface font-normal">Protocols for Precision</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+      Adherence ensures maximum neural mapping fidelity and diagnostic confidence.
+    </p>
+<div class="flex flex-col gap-2 mt-1">
+<!-- Protocol 1 -->
+<div class="p-3.5 rounded-xl bg-surface-container-lowest shadow-sm flex items-start gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">wb_sunny</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">1. Diffused Daylight</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            Position yourself directly facing a clean window. Avoid overhead fluorescent lights, desk lamps, or strong backlighting.
+          </p>
+</div>
+</div>
+<!-- Protocol 2 -->
+<div class="p-3.5 rounded-xl bg-surface-container-lowest shadow-sm flex items-start gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">sentiment_neutral</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">2. Neutral Expression</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            Gently relax your jaw, lips, and brow. Gaze straight into the camera lens without smiling or squinting.
+          </p>
+</div>
+</div>
+<!-- Protocol 3 -->
+<div class="p-3.5 rounded-xl bg-surface-container-lowest shadow-sm flex items-start gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">spa</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">3. Bare Dermal Baseline</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            Ensure skin is cleansed and dry. Avoid thick foundation, powder, topical sunscreen tints, or heavy reflective balms.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Cryptographic Privacy & Non-Diagnostic Disclosure -->
+<section class="mt-6 flex flex-col gap-3">
+<!-- Privacy Shield Banner -->
+<div class="p-3.5 rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-2">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+<span class="font-title-sm text-title-sm font-semibold">End-to-End Cryptographic Privacy</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+        Visual captures are parsed ephemerally in encrypted volatile memory. DermaNova strictly adheres to zero-knowledge biometrics. You can purge this capture at any moment with one click.
+      </p>
+<div class="flex items-center justify-between pt-1">
+<label class="flex items-center gap-2 cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-0 accent-primary" type="checkbox"/>
+<span class="font-label-md text-label-md text-on-surface">I consent to algorithmic skin analysis</span>
+</label>
+<button class="font-label-xs text-label-xs text-error font-semibold uppercase tracking-wider hover:underline">
+          Purge Photo
+        </button>
+</div>
+</div>
+<!-- Clinical Disclaimer Accordion Card -->
+<div class="p-3.5 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-1.5">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">info</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Informational &amp; Lifestyle Scope</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+        DermaNova computer vision delivers topical cosmetic pattern assessment. It is not an FDA-cleared diagnostic apparatus and does not diagnose melanoma, eczema, or clinical pathognomonic conditions. Always consult a board-certified dermatologist for medical dermatopathology.
+      </p>
+</div>
+</section>
+</div>
+<script>
+  // Simple interactive toggle for Landmarks vs Clean View
+  (function () {
+    var landmarksLayer = document.getElementById('landmarks-layer');
+    var btnLandmarks = document.getElementById('toggle-landmarks-btn');
+    var btnClean = document.getElementById('toggle-clean-btn');
+
+    if (btnLandmarks && btnClean && landmarksLayer) {
+      btnLandmarks.addEventListener('click', function () {
+        landmarksLayer.style.opacity = '1';
+        btnLandmarks.className = 'px-2.5 py-1 rounded-full bg-primary text-on-primary font-label-xs text-label-xs transition-colors';
+        btnClean.className = 'px-2.5 py-1 rounded-full text-on-surface-variant font-label-xs text-label-xs hover:text-on-surface transition-colors';
+      });
+
+      btnClean.addEventListener('click', function () {
+        landmarksLayer.style.opacity = '0';
+        btnClean.className = 'px-2.5 py-1 rounded-full bg-primary text-on-primary font-label-xs text-label-xs transition-colors';
+        btnLandmarks.className = 'px-2.5 py-1 rounded-full text-on-surface-variant font-label-xs text-label-xs hover:text-on-surface transition-colors';
+      });
+    }
+  })();
+</script></main></body></html>

@@ -9,9 +9,14 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['"Playfair Display"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+        serif: ['Newsreader', '"Playfair Display"', '"Cormorant Garamond"', 'Georgia', 'serif'],
         mono: ['"IBM Plex Mono"', 'Fragment Mono', 'ui-monospace', 'monospace'],
         sans: ['Manrope', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+      },
+      boxShadow: {
+        'stitch-resting': '0px 2px 8px -2px rgba(48, 77, 64, 0.04), 0px 8px 24px -4px rgba(48, 77, 64, 0.06)',
+        'stitch-hover': '0px 4px 12px -2px rgba(48, 77, 64, 0.06), 0px 16px 36px -6px rgba(48, 77, 64, 0.08)',
+        'stitch-modal': '0px 12px 32px -4px rgba(37, 41, 35, 0.08), 0px 24px 64px -12px rgba(37, 41, 35, 0.12)',
       },
       colors: {
         dn: {
