@@ -120,9 +120,12 @@ class FaceROIExtractor:
 
         H, W = img_np.shape[:2]
         gray = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY)
+        hsv = cv2.cvtColor(img_np, cv2.COLOR_RGB2HSV)
 
-        # 1. White paper background ratio
-        white_paper_ratio = float(np.mean(gray > 205))
+        # 1. Paper canvas metrics: documents/marksheets have bright, desaturated paper backgrounds
+        white_paper_ratio = float(np.mean(gray > 200))
+        light_bg_ratio = float(np.mean(gray > 170))
+        low_sat_ratio = float(np.mean(hsv[:, :, 1] < 40))
 
         # 2. Document grid / table line detection
         thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2)
@@ -140,11 +143,13 @@ class FaceROIExtractor:
             if 4 <= cw <= 80 and 5 <= ch <= 80:
                 text_like_boxes += 1
 
-        is_doc = (
-            (white_paper_ratio > 0.40 and text_like_boxes > 35) or
-            (line_ratio > 0.015 and text_like_boxes > 25) or
-            (white_paper_ratio > 0.65 and text_like_boxes > 15)
-        )
+        # A document must have an actual document paper background canvas
+        has_paper_canvas = (white_paper_ratio > 0.15 or light_bg_ratio > 0.18) and (low_sat_ratio > 0.15)
+        is_doc = bool(has_paper_canvas and (
+            (text_like_boxes > 40) or
+            (line_ratio > 0.012 and text_like_boxes > 20) or
+            (white_paper_ratio > 0.50)
+        ))
 
         if is_doc:
             return True, (
