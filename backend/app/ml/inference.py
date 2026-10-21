@@ -83,9 +83,9 @@ class InferenceEngine:
         if input_tensor.dim() == 3:
             input_tensor = input_tensor.unsqueeze(0)
 
-        if input_tensor.shape != (1, 3, 224, 224):
+        if input_tensor.shape[1:] != (3, 256, 256) and input_tensor.shape[1:] != (3, 224, 224):
             raise ValueError(
-                f"Expected input tensor of shape (1, 3, 224, 224), got {input_tensor.shape}"
+                f"Expected input tensor of shape (1, 3, 256, 256), got {input_tensor.shape}"
             )
 
         tensor_device = input_tensor.to(device)
@@ -105,9 +105,28 @@ class InferenceEngine:
             # Decode condition probabilities (Multi-label sigmoid)
             probs_cond = torch.sigmoid(logits_cond).squeeze(0).cpu().numpy()
 
-            # Decode severity grade (3 classes: Mild, Moderate, Severe)
-            sev_idx = int(torch.argmax(logits_sev, dim=1).item())
-            sev_grade = INDEX_TO_SEVERITY.get(sev_idx, SeverityLevelEnum.MILD)
+            # Decode severity grade
+            acne_prob = float(probs_cond[0])
+            if acne_prob < 0.65:
+                # If acne is below calibrated detection threshold, clinical grade is Clear / Minimal
+                sev_grade = SeverityLevelEnum.CLEAR
+                sev_idx = 0
+            elif logits_sev.shape[1] == 2:
+                # Ordinal cumulative 2-logit severity decoding
+                p_gt_mild = float(torch.sigmoid(logits_sev[0, 0]).item())
+                p_gt_mod = float(torch.sigmoid(logits_sev[0, 1]).item())
+                if p_gt_mod >= 0.50:
+                    sev_grade = SeverityLevelEnum.SEVERE
+                    sev_idx = 2
+                elif p_gt_mild >= 0.50:
+                    sev_grade = SeverityLevelEnum.MODERATE
+                    sev_idx = 1
+                else:
+                    sev_grade = SeverityLevelEnum.MILD
+                    sev_idx = 0
+            else:
+                sev_idx = int(torch.argmax(logits_sev, dim=1).item())
+                sev_grade = INDEX_TO_SEVERITY.get(sev_idx, SeverityLevelEnum.MILD)
 
             # Decode skin type (5 classes: Normal, Oily, Dry, Combination, Sensitive)
             type_probs = F.softmax(logits_type, dim=1).squeeze(0).cpu().numpy()

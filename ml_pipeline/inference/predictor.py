@@ -509,32 +509,37 @@ class DermaNovaPredictor:
         conditions_dict: Dict[str, ConditionScore] = {}
         for cond_key, prob in raw_probabilities.items():
             meta = CONDITION_METADATA[cond_key]
-            if prob < 0.25:
-                sev = SeverityLevelEnum.CLEAR
-            elif prob < 0.50:
-                sev = SeverityLevelEnum.MILD
-            elif prob < 0.75:
-                sev = SeverityLevelEnum.MODERATE
-            else:
-                sev = SeverityLevelEnum.SEVERE
-
             thr = self.calibrated_thresholds.get(cond_key, self.condition_detection_threshold)
+            is_detected = (prob >= thr)
+
+            if not is_detected:
+                sev = SeverityLevelEnum.CLEAR
+            else:
+                excess = (prob - thr) / max(0.01, 1.0 - thr)
+                if excess < 0.35:
+                    sev = SeverityLevelEnum.MILD
+                elif excess < 0.70:
+                    sev = SeverityLevelEnum.MODERATE
+                else:
+                    sev = SeverityLevelEnum.SEVERE
+
             conditions_dict[cond_key] = ConditionScore(
                 condition_id=cond_key,
                 display_name=meta["display_name"],
                 probability=round(prob, 4),
                 severity_level=sev,
-                is_detected=(prob >= thr),
+                is_detected=is_detected,
                 clinical_note=meta["description"]
             )
 
         # 6. Overall Skin Health Score (0 - 100)
+        # Only penalize conditions that exceed their calibrated threshold
         total_penalty = sum(
-            (prob - 0.30) * CONDITION_METADATA[k]["weight"] * 35.0
+            (prob - self.calibrated_thresholds.get(k, 0.50) + 0.10) * CONDITION_METADATA[k]["weight"] * 35.0
             for k, prob in raw_probabilities.items()
-            if prob > 0.30
+            if prob >= self.calibrated_thresholds.get(k, 0.50)
         )
-        health_score = int(np.clip(100.0 - total_penalty, 20, 98))
+        health_score = int(np.clip(96.0 - total_penalty, 25, 98))
 
         # 7. Identify Top Concerns
         detected_list = sorted(
@@ -574,6 +579,12 @@ class DermaNovaPredictor:
             "Consult a board-certified dermatologist for persistent or severe dermatological conditions."
         )
 
+        # Harmonize acne severity grade: if acne is not detected, grade must be Clear / Minimal
+        if not conditions_dict.get("acne", ConditionScore(condition_id="acne", display_name="Acne", probability=0, severity_level=SeverityLevelEnum.CLEAR, is_detected=False, clinical_note="")).is_detected:
+            final_acne_severity = SeverityLevelEnum.CLEAR
+        else:
+            final_acne_severity = acne_severity_grade if acne_severity_grade != SeverityLevelEnum.CLEAR else SeverityLevelEnum.MILD
+
         # Memory cleanup for constrained environments (Render free tier 512MB)
         import gc
         gc.collect()
@@ -585,7 +596,7 @@ class DermaNovaPredictor:
             detected_skin_type=detected_skin_type,
             conditions=conditions_dict,
             top_concerns=top_concerns,
-            acne_severity_grade=acne_severity_grade,
+            acne_severity_grade=final_acne_severity,
             heatmap_image_base64=heatmap_base64,
             face_detected=face_detected,
             clinical_disclaimer=clinical_disclaimer,
@@ -700,7 +711,10 @@ class DermaNovaPredictor:
             reverse=True
         )
 
-        top_active_conds = [c for c, p in ranked_conditions if p >= 0.35]
+        top_active_conds = [
+            c for c, p in ranked_conditions
+            if p >= self.calibrated_thresholds.get(c, 0.50) and c in ["acne", "redness", "dark_spots", "pores", "blackheads", "whiteheads"]
+        ]
         if not top_active_conds:
             # All conditions are low probability / clear skin: do not fabricate false lesions
             return []

@@ -15,7 +15,7 @@ from fastapi import APIRouter, UploadFile, File, Depends, Query, status
 from sqlalchemy.orm import Session
 
 from backend.app.core.security import get_current_user, get_optional_user
-from backend.app.core.exceptions import ResourceNotFoundError, AuthorizationError, ImageValidationError
+from backend.app.core.exceptions import ResourceNotFoundError, AuthorizationError, ImageValidationError, ImageQualityError
 from backend.app.database.session import get_db
 from backend.app.database.models import User, SkinAssessment
 from backend.app.schemas.analysis import AnalysisResponse, AnalysisRecordSummary
@@ -60,14 +60,24 @@ async def create_analysis(
             db=db
         )
         return result
+    except (ImageQualityError, ImageValidationError):
+        raise
+    except ValueError as ve:
+        raise ImageQualityError(str(ve))
     except Exception as e:
-        logger.warning(f"analysis_service failed ({e}), falling back to predictor_service: {e}")
-        from ml_pipeline.inference.predictor import predictor_service
-        from backend.app.api.v1.analysis import _save_assessment_and_routine
-        legacy_result = predictor_service.predict(image_bytes)
-        if current_user and db:
-            await _save_assessment_and_routine(legacy_result, image_bytes, current_user, db)
-        return legacy_result
+        logger.warning(f"analysis_service failed ({e}), attempting predictor_service fallback: {e}")
+        try:
+            from ml_pipeline.inference.predictor import predictor_service
+            from backend.app.api.v1.analysis import _save_assessment_and_routine
+            legacy_result = predictor_service.predict(image_bytes)
+            if current_user and db:
+                await _save_assessment_and_routine(legacy_result, image_bytes, current_user, db)
+            return legacy_result
+        except ValueError as ve:
+            raise ImageQualityError(str(ve))
+        except Exception as inner_e:
+            logger.error(f"Inference fallback failed: {inner_e}")
+            raise ImageQualityError(f"Skin analysis could not be completed: {str(e)}")
 
 
 

@@ -84,62 +84,74 @@ INDEX_TO_SKIN_TYPE: Dict[int, SkinTypeEnum] = {
     4: SkinTypeEnum.SENSITIVE
 }
 
+# Optimal F1-tuned decision thresholds from dermanova-model-training.ipynb validation set
+CALIBRATED_THRESHOLDS: Dict[str, float] = {
+    "acne": 0.65,
+    "blackheads": 0.75,
+    "whiteheads": 0.35,
+    "dark_spots": 0.50,
+    "pigmentation": 0.70,
+    "pores": 0.45,
+    "wrinkles": 0.65,
+    "redness": 0.55
+}
+
 # Educational & clinical condition metadata
 CONDITION_METADATA: Dict[str, Dict[str, Any]] = {
     "acne": {
         "display_name": "Inflammatory Acne",
         "description": "Active papules and erythematous pustules exhibiting follicular bacterial colonization.",
         "weight": 1.4,
-        "default_threshold": 0.38,
+        "default_threshold": 0.65,
         "high_severity_threshold": 0.88
     },
     "blackheads": {
         "display_name": "Blackheads (Open Comedones)",
         "description": "Widened follicular openings containing oxidized sebum and keratinous debris.",
         "weight": 1.0,
-        "default_threshold": 0.38,
+        "default_threshold": 0.75,
         "high_severity_threshold": 0.85
     },
     "whiteheads": {
         "display_name": "Whiteheads (Closed Comedones)",
         "description": "Non-inflamed microscopic follicular impactions beneath intact stratum corneum.",
         "weight": 1.0,
-        "default_threshold": 0.38,
+        "default_threshold": 0.35,
         "high_severity_threshold": 0.85
     },
     "dark_spots": {
         "display_name": "Dark Spots (Localized PIH)",
         "description": "Focal macules resulting from post-inflammatory melanocyte hyperactivity.",
         "weight": 1.1,
-        "default_threshold": 0.38,
+        "default_threshold": 0.50,
         "high_severity_threshold": 0.85
     },
     "pigmentation": {
         "display_name": "Pigmentation (Diffuse Melasma)",
         "description": "Broad mottled hyperchromia triggered by ultraviolet exposure or hormonal shifts.",
         "weight": 1.2,
-        "default_threshold": 0.38,
+        "default_threshold": 0.70,
         "high_severity_threshold": 0.85
     },
     "pores": {
         "display_name": "Dilated Pores",
         "description": "Enlarged follicular orifices across T-zone associated with elevated sebum flux.",
         "weight": 0.8,
-        "default_threshold": 0.38,
+        "default_threshold": 0.45,
         "high_severity_threshold": 0.85
     },
     "wrinkles": {
         "display_name": "Fine Lines & Wrinkles",
         "description": "Superficial cutaneous creases and solar elastosis from dermal collagen depletion.",
         "weight": 1.1,
-        "default_threshold": 0.38,
+        "default_threshold": 0.65,
         "high_severity_threshold": 0.85
     },
     "redness": {
         "display_name": "Facial Redness & Erythema",
         "description": "Microvascular capillary dilation indicating epidermal barrier compromise or rosacea.",
         "weight": 1.3,
-        "default_threshold": 0.38,
+        "default_threshold": 0.55,
         "high_severity_threshold": 0.85
     }
 }

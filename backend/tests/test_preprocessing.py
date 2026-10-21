@@ -17,27 +17,27 @@ from backend.app.services.preprocessing_service import preprocessing_service, IM
 
 
 def test_upscale_low_res_dimensions():
-    """Verify that images smaller than (224, 224) are upscaled smoothly."""
+    """Verify that images smaller than (256, 256) are upscaled smoothly."""
     small_img = Image.new("RGB", (100, 100), color=(150, 100, 80))
     upscaled = preprocessing_service.upscale_low_res(small_img)
-    assert upscaled.size == (224, 224)
+    assert upscaled.size == (256, 256)
 
 
 def test_enhance_and_resize_shape_and_dtype():
     """Verify RGB enhancement output shape and range."""
     test_img = Image.new("RGB", (300, 300), color=(140, 95, 75))
     enhanced_np = preprocessing_service.enhance_and_resize(test_img)
-    assert enhanced_np.shape == (224, 224, 3)
+    assert enhanced_np.shape == (256, 256, 3)
     assert enhanced_np.dtype == np.uint8
 
 
 def test_preprocess_to_tensor_shape_and_normalization():
-    """Verify tensor shape (1, 3, 224, 224), dtype, and ImageNet normalization."""
+    """Verify tensor shape (1, 3, 256, 256), dtype, and ImageNet normalization."""
     test_img = Image.new("RGB", (250, 250), color=(128, 128, 128))
     tensor = preprocessing_service.preprocess_to_tensor(test_img)
 
     assert isinstance(tensor, torch.Tensor)
-    assert tensor.shape == (1, 3, 224, 224)
+    assert tensor.shape == (1, 3, 256, 256)
     assert tensor.dtype == torch.float32
 
     # Check finite values
@@ -46,8 +46,8 @@ def test_preprocess_to_tensor_shape_and_normalization():
 
 def test_deterministic_preprocessing():
     """Verify that identical input images produce identical preprocessed tensors."""
-    img1 = Image.new("RGB", (224, 224), color=(160, 110, 85))
-    img2 = Image.new("RGB", (224, 224), color=(160, 110, 85))
+    img1 = Image.new("RGB", (256, 256), color=(160, 110, 85))
+    img2 = Image.new("RGB", (256, 256), color=(160, 110, 85))
 
     t1 = preprocessing_service.preprocess_to_tensor(img1)
     t2 = preprocessing_service.preprocess_to_tensor(img2)

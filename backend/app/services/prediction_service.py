@@ -60,18 +60,20 @@ class PredictionService:
                 "weight": 1.0,
                 "default_threshold": self.default_threshold
             })
+            thr = meta.get("default_threshold", self.default_threshold)
+            is_detected = prob >= thr
 
-            # Determine severity bracket
-            if prob < 0.25:
+            # Determine severity bracket: Clear if undetected, otherwise graded by margin above threshold
+            if not is_detected:
                 sev = SeverityLevelEnum.CLEAR
-            elif prob < 0.50:
-                sev = SeverityLevelEnum.MILD
-            elif prob < 0.75:
-                sev = SeverityLevelEnum.MODERATE
             else:
-                sev = SeverityLevelEnum.SEVERE
-
-            is_detected = prob >= meta.get("default_threshold", self.default_threshold)
+                excess = (prob - thr) / max(0.01, 1.0 - thr)
+                if excess < 0.35:
+                    sev = SeverityLevelEnum.MILD
+                elif excess < 0.70:
+                    sev = SeverityLevelEnum.MODERATE
+                else:
+                    sev = SeverityLevelEnum.SEVERE
 
             conditions_dict[cond_key] = ConditionScore(
                 condition_id=cond_key,
@@ -83,12 +85,13 @@ class PredictionService:
             )
 
         # 2. Overall Skin Health Score (0 - 100)
+        # Only penalize conditions that are clinically detected above their validation threshold
         total_penalty = sum(
-            (prob - 0.30) * CONDITION_METADATA[k]["weight"] * 35.0
+            (prob - CONDITION_METADATA[k]["default_threshold"] + 0.10) * CONDITION_METADATA[k]["weight"] * 35.0
             for k, prob in raw_probabilities.items()
-            if prob > 0.30
+            if prob >= CONDITION_METADATA[k]["default_threshold"]
         )
-        health_score = int(np.clip(100.0 - total_penalty, 20, 98))
+        health_score = int(np.clip(96.0 - total_penalty, 25, 98))
 
         # 3. Identify Top Concerns
         detected_list = sorted(
@@ -113,14 +116,20 @@ class PredictionService:
         # 5. Render Saliency Heatmap
         heatmap_base64 = self._render_saliency_heatmap(img_np, saliency_map, detected_list[0][0])
 
-        # 6. Detect Lesion Pinpoints
+        # 6. Detect Lesion Pinpoints (only for genuinely detected conditions)
         detected_lesions = self._detect_lesion_pinpoints(img_np, saliency_map, raw_probabilities)
+
+        # 7. Harmonize acne severity grade: if acne is not detected, grade must be Clear / Minimal
+        if not conditions_dict.get("acne", ConditionScore(condition_id="acne", display_name="Acne", probability=0, severity_level=SeverityLevelEnum.CLEAR, is_detected=False, clinical_note="")).is_detected:
+            final_severity_grade = SeverityLevelEnum.CLEAR
+        else:
+            final_severity_grade = severity_grade if severity_grade != SeverityLevelEnum.CLEAR else SeverityLevelEnum.MILD
 
         return {
             "conditions": conditions_dict,
             "overall_health_score": health_score,
             "top_concerns": top_concerns,
-            "acne_severity_grade": severity_grade,
+            "acne_severity_grade": final_severity_grade,
             "detected_skin_type": skin_type,
             "requires_clinical_referral": requires_referral,
             "heatmap_image_base64": heatmap_base64,
@@ -175,7 +184,7 @@ class PredictionService:
 
         active_conditions = [
             (k, prob) for k, prob in raw_probabilities.items()
-            if prob >= self.default_threshold and k in ["acne", "redness", "dark_spots", "pores", "blackheads"]
+            if prob >= CONDITION_METADATA.get(k, {}).get("default_threshold", 0.50) and k in ["acne", "redness", "dark_spots", "pores", "blackheads"]
         ]
         active_conditions.sort(key=lambda x: x[1], reverse=True)
 

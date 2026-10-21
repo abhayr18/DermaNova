@@ -44,7 +44,7 @@ IMAGENET_STD = np.array([0.229, 0.224, 0.225], dtype=np.float32)
 class PreprocessingService:
     def __init__(
         self,
-        target_size: Tuple[int, int] = (224, 224),
+        target_size: Tuple[int, int] = (256, 256),
         clahe_clip_limit: float = 2.0,
         clahe_tile_grid: Tuple[int, int] = (8, 8)
     ):
@@ -83,8 +83,8 @@ class PreprocessingService:
         Runs full image enhancement matching ImageEnhancer in training:
         1. Bicubic upscaling
         2. LAB CLAHE
-        3. Final bicubic resize to target_size (224, 224)
-        Returns: RGB uint8 numpy array (224, 224, 3)
+        3. Final bicubic resize to target_size (256, 256)
+        Returns: RGB uint8 numpy array (256, 256, 3)
         """
         rgb_img = pil_img.convert("RGB")
         upscaled = self.upscale_low_res(rgb_img)
@@ -95,7 +95,7 @@ class PreprocessingService:
     def preprocess_to_tensor(self, img_input: Union[Image.Image, np.ndarray]) -> Any:
         """
         Preprocesses an image to a normalized PyTorch tensor ready for inference.
-        Returns: Float32 Tensor of shape (1, 3, 224, 224).
+        Returns: Float32 Tensor of shape (1, 3, 256, 256).
         """
         if isinstance(img_input, np.ndarray):
             pil_img = Image.fromarray(img_input).convert("RGB")
