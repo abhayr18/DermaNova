@@ -54,6 +54,8 @@ ml_pipeline/models/saved_models/*
 !ml_pipeline/models/saved_models/dermanova_best_weights.pth
 !ml_pipeline/models/saved_models/dermanova_model.onnx
 !ml_pipeline/models/saved_models/face_detection_yunet_2023mar.onnx
+!ml_pipeline/models/saved_models/dermanova_final.pth
+!ml_pipeline/models/saved_models/dermanova-model-training.ipynb
 
 # MLflow & Experiment Logs
 mlruns/

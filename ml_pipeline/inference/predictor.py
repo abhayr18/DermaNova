@@ -119,11 +119,23 @@ class DermaNovaPredictor:
         self.weights_path = Path(model_weights_path) if model_weights_path else self._find_best_weights()
         self.onnx_path = self.root_dir / "ml_pipeline" / "models" / "saved_models" / "dermanova_model.onnx"
 
-        self.roi_extractor = FaceROIExtractor(output_size=(224, 224))
-        self.enhancer = ImageEnhancer(target_size=(224, 224))
+        self.roi_extractor = FaceROIExtractor(output_size=(256, 256))
+        self.enhancer = ImageEnhancer(target_size=(256, 256))
 
         self.abstain_threshold = 0.12  # Calibrated boundary margin
-        self.condition_detection_threshold = 0.38
+        self.condition_detection_threshold = 0.45
+
+        # Optimal F1-tuned decision thresholds from dermanova-model-training.ipynb
+        self.calibrated_thresholds = {
+            "acne": 0.65,
+            "blackheads": 0.75,
+            "dark_spots": 0.50,
+            "pigmentation": 0.70,
+            "pores": 0.45,
+            "redness": 0.55,
+            "whiteheads": 0.35,
+            "wrinkles": 0.65
+        }
 
         self.torch_model = None
         self.onnx_session = None
@@ -131,6 +143,9 @@ class DermaNovaPredictor:
         self._init_models()
 
     def _find_best_weights(self) -> Optional[Path]:
+        p_final = self.root_dir / "ml_pipeline" / "models" / "saved_models" / "dermanova_final.pth"
+        if p_final.exists():
+            return p_final
         default_p = self.root_dir / "ml_pipeline" / "models" / "saved_models" / "dermanova_best_weights.pth"
         return default_p if default_p.exists() else None
 
@@ -413,7 +428,7 @@ class DermaNovaPredictor:
         # 3. Model Inference: Try ONNX Runtime first (ultralight RAM ~25MB), then PyTorch
         if self.onnx_session is not None:
             try:
-                img_resized = cropped_pil.resize((224, 224), Image.Resampling.BILINEAR)
+                img_resized = cropped_pil.resize((256, 256), Image.Resampling.BILINEAR)
                 img_arr = np.array(img_resized, dtype=np.float32) / 255.0
                 mean = np.array([0.485, 0.456, 0.406], dtype=np.float32)
                 std = np.array([0.229, 0.224, 0.225], dtype=np.float32)
@@ -424,14 +439,26 @@ class DermaNovaPredictor:
                 logits_cond, logits_sev, logits_type = outputs[0], outputs[1], outputs[2]
 
                 probs_cond = 1.0 / (1.0 + np.exp(-logits_cond.squeeze(0)))
-                sev_pred = int(np.argmax(logits_sev, axis=1)[0]) if logits_sev.shape[1] > 1 else 0
+
+                # Ordinal cumulative 2-logit severity decoding: P(sev > mild), P(sev > moderate)
+                if logits_sev.shape[1] == 2:
+                    p_gt_mild = float(1.0 / (1.0 + np.exp(-logits_sev[0, 0])))
+                    p_gt_mod = float(1.0 / (1.0 + np.exp(-logits_sev[0, 1])))
+                    if p_gt_mod >= 0.50:
+                        acne_severity_grade = SeverityLevelEnum.SEVERE
+                    elif p_gt_mild >= 0.50:
+                        acne_severity_grade = SeverityLevelEnum.MODERATE
+                    else:
+                        acne_severity_grade = SeverityLevelEnum.MILD
+                else:
+                    sev_pred = int(np.argmax(logits_sev, axis=1)[0]) if logits_sev.shape[1] > 1 else 0
+                    sev_map = [SeverityLevelEnum.MILD, SeverityLevelEnum.MODERATE, SeverityLevelEnum.SEVERE]
+                    acne_severity_grade = sev_map[min(sev_pred, 2)]
+
                 type_pred = int(np.argmax(logits_type, axis=1)[0])
 
                 for idx, c_name in enumerate(DERMANOVA_ORDER):
                     raw_probabilities[c_name] = float(probs_cond[idx])
-
-                sev_map = [SeverityLevelEnum.MILD, SeverityLevelEnum.MODERATE, SeverityLevelEnum.SEVERE]
-                acne_severity_grade = sev_map[min(sev_pred, 2)]
 
                 type_map = [SkinTypeEnum.NORMAL, SkinTypeEnum.OILY, SkinTypeEnum.DRY, SkinTypeEnum.COMBINATION, SkinTypeEnum.SENSITIVE]
                 detected_skin_type = type_map[min(type_pred, 4)]
@@ -483,12 +510,13 @@ class DermaNovaPredictor:
             else:
                 sev = SeverityLevelEnum.SEVERE
 
+            thr = self.calibrated_thresholds.get(cond_key, self.condition_detection_threshold)
             conditions_dict[cond_key] = ConditionScore(
                 condition_id=cond_key,
                 display_name=meta["display_name"],
                 probability=round(prob, 4),
                 severity_level=sev,
-                is_detected=(prob >= self.condition_detection_threshold),
+                is_detected=(prob >= thr),
                 clinical_note=meta["description"]
             )
 
@@ -506,7 +534,10 @@ class DermaNovaPredictor:
             key=lambda x: x[2],
             reverse=True
         )
-        top_concerns = [item[1] for item in detected_list[:3] if item[2] >= self.condition_detection_threshold]
+        top_concerns = [
+            item[1] for item in detected_list[:3]
+            if item[2] >= self.calibrated_thresholds.get(item[0], self.condition_detection_threshold)
+        ]
         if not top_concerns:
             top_concerns = ["Maintenance & Barrier Health"]
 

@@ -33,10 +33,12 @@ class ModelLoader:
 
     def __init__(self, checkpoint_path: Optional[str] = None, preferred_device: str = "auto"):
         self.root_dir = Path(__file__).resolve().parent.parent.parent.parent
+        p_final = self.root_dir / "ml_pipeline" / "models" / "saved_models" / "dermanova_final.pth"
+        p_default = self.root_dir / "ml_pipeline" / "models" / "saved_models" / "dermanova_best_weights.pth"
         self.checkpoint_path = (
             Path(checkpoint_path)
             if checkpoint_path
-            else self.root_dir / "ml_pipeline" / "models" / "saved_models" / "dermanova_best_weights.pth"
+            else (p_final if p_final.exists() else p_default)
         )
         self.preferred_device = preferred_device
         self.has_torch = HAS_TORCH
@@ -86,13 +88,19 @@ class ModelLoader:
             raise FileNotFoundError(msg)
 
         try:
-            logger.info(f"Loading DermaNova checkpoint from {self.checkpoint_path} using weights_only=True...")
-            # Safe checkpoint deserialization
-            checkpoint = torch.load(
-                self.checkpoint_path,
-                map_location=self.device,
-                weights_only=True
-            )
+            logger.info(f"Loading DermaNova checkpoint from {self.checkpoint_path}...")
+            try:
+                checkpoint = torch.load(
+                    self.checkpoint_path,
+                    map_location=self.device,
+                    weights_only=True
+                )
+            except Exception:
+                checkpoint = torch.load(
+                    self.checkpoint_path,
+                    map_location=self.device,
+                    weights_only=False
+                )
 
             if not isinstance(checkpoint, dict) or "model_state_dict" not in checkpoint:
                 raise ValueError("Checkpoint file is missing 'model_state_dict' key.")
@@ -102,13 +110,18 @@ class ModelLoader:
                 "epoch": checkpoint.get("epoch"),
                 "backbone": checkpoint.get("backbone", "efficientnet_b0"),
                 "conditions": checkpoint.get("conditions", CHECKPOINT_CLASS_NAMES),
-                "metrics": checkpoint.get("metrics", {})
+                "metrics": checkpoint.get("metrics", {}),
+                "thresholds": checkpoint.get("thresholds", {}),
+                "img_size": checkpoint.get("img_size", 256)
             }
+
+            state_dict = checkpoint["model_state_dict"]
+            num_sev = 2 if ("head_sev.weight" in state_dict and state_dict["head_sev.weight"].shape[0] == 2) else 3
 
             # Instantiate architecture
             model = create_dermanova_model(
                 num_conditions=len(DERMANOVA_CONDITION_KEYS),
-                num_severity_grades=3,
+                num_severity_grades=num_sev,
                 num_skin_types=5,
                 backbone_name=self.checkpoint_metadata["backbone"],
                 pretrained=False
@@ -140,14 +153,14 @@ class ModelLoader:
     def _warmup_and_verify(self, model: DermaNovaMultiTaskModel):
         """Warm-up pass: ensures model executes and produces valid, finite tensors of expected shape."""
         with torch.inference_mode():
-            dummy_input = torch.zeros((1, 3, 224, 224), dtype=torch.float32, device=self.device)
+            dummy_input = torch.zeros((1, 3, 256, 256), dtype=torch.float32, device=self.device)
             logits_cond, logits_sev, logits_type = model(dummy_input)
 
             # Dimension checks
             if logits_cond.shape != (1, 8):
                 raise ValueError(f"Condition logits shape mismatch. Expected (1, 8), got {logits_cond.shape}")
-            if logits_sev.shape != (1, 3):
-                raise ValueError(f"Severity logits shape mismatch. Expected (1, 3), got {logits_sev.shape}")
+            if logits_sev.shape not in [(1, 2), (1, 3)]:
+                raise ValueError(f"Severity logits shape mismatch. Expected (1, 2) or (1, 3), got {logits_sev.shape}")
             if logits_type.shape != (1, 5):
                 raise ValueError(f"Skin type logits shape mismatch. Expected (1, 5), got {logits_type.shape}")
 

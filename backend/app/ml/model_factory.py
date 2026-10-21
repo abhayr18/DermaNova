@@ -61,25 +61,47 @@ class DermaNovaMultiTaskModel(_ModuleBase):
         else:
             raise ValueError(f"Unsupported backbone: {backbone_name}. Only efficientnet_b0 is validated.")
 
-        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
+        self.pool = nn.AdaptiveAvgPool2d(1) if nn else None
 
-        # Shared latent projector
-        self.shared_proj = nn.Sequential(
+        # Shared trunk matching dermanova-model-training.ipynb
+        self.trunk = nn.Sequential(
             nn.Dropout(p=0.3),
             nn.Linear(in_features, 512),
             nn.BatchNorm1d(512),
-            nn.SiLU()
-        )
+            nn.SiLU(),
+            nn.Dropout(p=0.2)
+        ) if nn else None
 
-        # Multi-task heads
-        self.head_conditions = nn.Linear(512, num_conditions)
-        self.head_severity = nn.Linear(512, num_severity_grades)
-        self.head_skin_type = nn.Linear(512, num_skin_types)
+        # Multi-task heads matching dermanova_final.pth
+        self.head_cond = nn.Linear(512, num_conditions) if nn else None
+        self.head_sev  = nn.Linear(512, num_severity_grades) if nn else None
+        self.head_type = nn.Linear(512, num_skin_types) if nn else None
 
         # Grad-CAM hooks
         self.gradients = None
         self.activations = None
-        self._register_hooks()
+        if self.features is not None:
+            self._register_hooks()
+
+    @property
+    def avgpool(self):
+        return self.pool
+
+    @property
+    def shared_proj(self):
+        return self.trunk
+
+    @property
+    def head_conditions(self):
+        return self.head_cond
+
+    @property
+    def head_severity(self):
+        return self.head_sev
+
+    @property
+    def head_skin_type(self):
+        return self.head_type
 
     def _register_hooks(self):
         def forward_hook(module, input, output):
@@ -94,12 +116,12 @@ class DermaNovaMultiTaskModel(_ModuleBase):
 
     def forward(self, x: Any) -> Tuple[Any, Any, Any]:
         feat = self.features(x)
-        pooled = self.avgpool(feat).flatten(1)
-        shared = self.shared_proj(pooled)
+        pooled = self.pool(feat).flatten(1)
+        shared = self.trunk(pooled)
 
-        logits_cond = self.head_conditions(shared)
-        logits_sev = self.head_severity(shared)
-        logits_type = self.head_skin_type(shared)
+        logits_cond = self.head_cond(shared)
+        logits_sev = self.head_sev(shared)
+        logits_type = self.head_type(shared)
 
         return logits_cond, logits_sev, logits_type
 
