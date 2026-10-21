@@ -2,8 +2,8 @@ name: Render 24/7 Keep-Alive Heartbeat
 
 on:
   schedule:
-    # Runs every 12 minutes (Render free tier sleeps after 15 minutes of inactivity)
-    - cron: '*/12 * * * *'
+    # Runs every 10 minutes (Render free tier spins down after 15 minutes of inactivity)
+    - cron: '*/10 * * * *'
   workflow_dispatch: # Allows manual trigger from GitHub Actions tab
 
 jobs:
@@ -16,6 +16,11 @@ jobs:
           if [ -z "$TARGET_URL" ]; then
             TARGET_URL="https://dermanova.onrender.com"
           fi
-          echo "Sending keep-alive ping to: $TARGET_URL/health"
-          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" "$TARGET_URL/health" || echo "failed")
+          echo "Sending keep-alive ping to: $TARGET_URL/api/v1/health"
+          RESPONSE=$(curl -s -L --max-time 60 --retry 2 -o /dev/null -w "%{http_code}" "$TARGET_URL/api/v1/health" || echo "failed")
           echo "Health check HTTP response code: $RESPONSE"
+          if [ "$RESPONSE" != "200" ]; then
+            echo "Falling back to root /health ping..."
+            curl -s -L --max-time 30 -o /dev/null -w "%{http_code}\n" "$TARGET_URL/health" || true
+          fi
+

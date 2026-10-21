@@ -421,7 +421,8 @@ export const apiService = {
     const url = raw.endsWith('/api/v1') ? `${raw}/health` : `${raw}/api/v1/health`;
     const start = Date.now();
     try {
-      const resp = await axios.get(url, { timeout: 35000 });
+      // 75s timeout to allow Render free-tier cold starts (~30-50s) without timing out
+      const resp = await axios.get(url, { timeout: 75000 });
       return {
         success: resp.status === 200,
         latencyMs: Date.now() - start,

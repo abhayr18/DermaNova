@@ -96,6 +96,14 @@ export default function DermaNovaApp() {
       }
     };
     checkSession();
+
+    // Proactive background keep-alive heartbeat while user is on the site
+    apiService.getHealth().catch(() => {});
+    const heartbeatTimer = setInterval(() => {
+      apiService.getHealth().catch(() => {});
+    }, 9 * 60 * 1000);
+
+    return () => clearInterval(heartbeatTimer);
   }, []);
 
   const handleLogout = () => {
