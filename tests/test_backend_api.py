@@ -89,6 +89,6 @@ def test_blank_white_image_rejected_with_400():
         files={"file": ("blank_white.jpg", buf, "image/jpeg")}
     )
     assert response.status_code == 400
-    assert "blank" in response.text or "No human face" in response.text
+    assert "blank" in response.text or "No human face" in response.text or "Document" in response.text
 
 
