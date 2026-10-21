@@ -15,6 +15,7 @@ Reproduces the exact training preprocessing pipeline:
    - std  = [0.229, 0.224, 0.225]
 """
 
+from __future__ import annotations
 import logging
 from typing import Tuple, Union, Any
 import numpy as np
@@ -91,7 +92,7 @@ class PreprocessingService:
         final_pil = Image.fromarray(enhanced_np).resize(self.target_size, resample=Image.Resampling.BICUBIC)
         return np.array(final_pil, dtype=np.uint8)
 
-    def preprocess_to_tensor(self, img_input: Union[Image.Image, np.ndarray]) -> torch.Tensor:
+    def preprocess_to_tensor(self, img_input: Union[Image.Image, np.ndarray]) -> Any:
         """
         Preprocesses an image to a normalized PyTorch tensor ready for inference.
         Returns: Float32 Tensor of shape (1, 3, 224, 224).

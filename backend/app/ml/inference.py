@@ -5,6 +5,7 @@ Executes PyTorch forward pass, verifies outputs, applies sigmoid for multi-label
 and extracts Grad-CAM saliency heatmaps.
 """
 
+from __future__ import annotations
 import logging
 from typing import Dict, Any, Tuple, Optional, Union
 import numpy as np
@@ -136,7 +137,7 @@ class InferenceEngine:
     def _compute_gradcam(
         self,
         model: Any,
-        tensor_device: torch.Tensor,
+        tensor_device: Any,
         condition_scores: Dict[str, float]
     ) -> Optional[np.ndarray]:
         """Compute backward gradients on top predicted condition for authentic spatial saliency."""

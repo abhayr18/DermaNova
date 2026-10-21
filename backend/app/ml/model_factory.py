@@ -19,6 +19,7 @@ Architecture:
 5. Grad-CAM feature hooks on features[-1]
 """
 
+from __future__ import annotations
 from typing import Tuple, Optional, Any
 
 try:
@@ -91,7 +92,7 @@ class DermaNovaMultiTaskModel(_ModuleBase):
         target_layer.register_forward_hook(forward_hook)
         target_layer.register_full_backward_hook(backward_hook)
 
-    def forward(self, x: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    def forward(self, x: Any) -> Tuple[Any, Any, Any]:
         feat = self.features(x)
         pooled = self.avgpool(feat).flatten(1)
         shared = self.shared_proj(pooled)
@@ -102,9 +103,9 @@ class DermaNovaMultiTaskModel(_ModuleBase):
 
         return logits_cond, logits_sev, logits_type
 
-    def get_gradcam_weights(self) -> Optional[torch.Tensor]:
+    def get_gradcam_weights(self) -> Optional[Any]:
         """Compute spatial attention heatmap using backward pass gradients."""
-        if self.gradients is None or self.activations is None:
+        if self.gradients is None or self.activations is None or torch is None:
             return None
         weights = torch.mean(self.gradients, dim=[2, 3], keepdim=True)
         cam = torch.sum(weights * self.activations, dim=1, keepdim=True)
