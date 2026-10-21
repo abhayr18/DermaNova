@@ -24,7 +24,8 @@ import {
   Sparkles,
   Sliders,
   AlertCircle,
-  Camera
+  Camera,
+  Database
 } from 'lucide-react';
 import { apiService, AnalysisResponse, UserAccount } from '../../services/api';
 
@@ -86,7 +87,6 @@ export const HistoricalTelemetryScreen: React.FC<HistoricalTelemetryScreenProps>
           };
         });
 
-        // If no items in database response, but user has an active session scan, include it
         if (normalized.length === 0 && latestAnalysis) {
           const d = latestAnalysis.timestamp ? new Date(latestAnalysis.timestamp) : new Date();
           normalized = [
@@ -108,7 +108,6 @@ export const HistoricalTelemetryScreen: React.FC<HistoricalTelemetryScreenProps>
           setScans(normalized);
         }
       } catch (err) {
-        console.warn('Failed to load analysis history:', err);
         if (latestAnalysis && isMounted) {
           const d = latestAnalysis.timestamp ? new Date(latestAnalysis.timestamp) : new Date();
           setScans([
@@ -210,30 +209,30 @@ export const HistoricalTelemetryScreen: React.FC<HistoricalTelemetryScreenProps>
   if (loading) {
     return (
       <div className="w-full py-16 flex flex-col items-center justify-center space-y-3">
-        <div className="w-6 h-6 border-2 border-[#527665] border-t-transparent rounded-full animate-spin" />
-        <span className="text-xs font-mono text-[#777D76]">Loading telemetry records...</span>
+        <div className="w-6 h-6 border-2 border-teal-600 border-t-transparent rounded-full animate-spin" />
+        <span className="text-xs font-mono text-slate-500">Retrieving longitudinal SQLite telemetry records...</span>
       </div>
     );
   }
 
   if (scans.length === 0) {
     return (
-      <div className="w-full space-y-8 animate-fade-in py-8">
-        <div className="rounded-3xl border border-[#E8E8E1] bg-white p-8 sm:p-12 text-center max-w-xl mx-auto space-y-4 shadow-sm">
-          <div className="w-16 h-16 rounded-2xl bg-[#E8EFE9] text-[#304D40] flex items-center justify-center mx-auto">
-            <History className="w-8 h-8 text-[#527665]" />
+      <div className="w-full space-y-6 animate-fade-in py-8">
+        <div className="rounded-2xl border border-slate-200 bg-white p-8 sm:p-12 text-center max-w-lg mx-auto space-y-4 shadow-xs">
+          <div className="w-14 h-14 rounded-2xl bg-teal-50 text-teal-700 border border-teal-200 flex items-center justify-center mx-auto">
+            <History className="w-7 h-7" />
           </div>
-          <h2 className="font-serif text-2xl sm:text-3xl text-[#252923]">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
             No Telemetry Scans Recorded
           </h2>
-          <p className="text-xs sm:text-sm text-[#777D76] leading-relaxed">
+          <p className="text-xs text-slate-500 leading-relaxed">
             Your calibration archive stores longitudinal facial scans, barrier health scores, and chromatic normalizations. Perform your first scan to initiate your biometric telemetry log.
           </p>
           <button
             onClick={onOpenAnalysisResults}
-            className="mt-4 inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#527665] hover:bg-[#304D40] text-white text-xs font-mono tracking-wider uppercase font-semibold transition shadow-sm"
+            className="mt-2 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono font-semibold transition shadow-xs"
           >
-            <Camera className="w-4 h-4" />
+            <Camera className="w-4 h-4 text-teal-400" />
             <span>Perform Initial Skin Scan</span>
           </button>
         </div>
@@ -242,42 +241,42 @@ export const HistoricalTelemetryScreen: React.FC<HistoricalTelemetryScreenProps>
   }
 
   return (
-    <div className="w-full space-y-8 animate-fade-in pb-16">
+    <div className="w-full space-y-6 animate-fade-in pb-12">
       
-      {/* Top Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="space-y-1">
-          <div className="flex items-center gap-2 text-xs font-mono text-[#777D76]">
-            <span className="text-[#527665] font-semibold uppercase tracking-wider">Telemetry Vault</span>
+      {/* Top Clinical Header */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-3 border-b border-slate-200">
+        <div className="space-y-0.5">
+          <div className="flex items-center gap-2 text-xs font-mono text-slate-500">
+            <span className="text-teal-700 font-bold uppercase tracking-wider">Telemetry Vault</span>
             <span>/</span>
-            <span className="text-[#304D40] font-semibold">Biometric Longitudinal Log</span>
+            <span className="text-slate-900 font-semibold">SQLite Longitudinal Index</span>
             <span>/</span>
-            <span className="px-2 py-0.5 rounded-full bg-[#E8EFE9] text-[#304D40] font-semibold text-[10px]">
-              {scans.length} {scans.length === 1 ? 'Recorded Scan' : 'Recorded Scans'}
+            <span className="px-2 py-0.5 rounded-md bg-teal-50 text-teal-800 font-bold text-[10px] border border-teal-200">
+              {scans.length} {scans.length === 1 ? 'Scan' : 'Scans'}
             </span>
           </div>
-          <h1 className="font-serif text-2xl sm:text-3xl text-[#252923] tracking-tight">
-            Calibration Archive &amp; Telemetry Log
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Calibration Archive & Telemetry Log
           </h1>
-          <p className="text-sm text-[#777D76] max-w-2xl leading-relaxed">
-            Longitudinal repository of your verified optical facial scans, condition findings, and barrier health scores.
+          <p className="text-xs text-slate-500">
+            Longitudinal repository of verified optical facial scans, condition findings, and barrier health scores.
           </p>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center flex-wrap gap-2.5">
+        <div className="flex items-center flex-wrap gap-2">
           <button
             onClick={() => setIsFhirModalOpen(true)}
-            className="px-4 py-2.5 rounded-xl bg-white hover:bg-[#FAF9F6] border border-[#E8E8E1] text-[#252923] text-xs font-semibold flex items-center gap-2 shadow-sm transition active:scale-[0.98]"
+            className="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-mono font-semibold flex items-center gap-2 shadow-xs transition"
           >
-            <FileCode className="w-4 h-4 text-[#527665]" />
-            <span>Export Clinical FHIR Dossier</span>
+            <FileCode className="w-4 h-4 text-teal-600" />
+            <span>Export FHIR Bundle</span>
           </button>
           <button
             onClick={onOpenConsultation}
-            className="px-4 py-2.5 rounded-xl bg-[#304D40] hover:bg-[#253d33] text-white text-xs font-semibold flex items-center gap-2 shadow-sm transition active:scale-[0.98]"
+            className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono font-semibold flex items-center gap-2 shadow-xs transition"
           >
-            <Stethoscope className="w-4 h-4 text-[#E8EFE9]" />
+            <Stethoscope className="w-4 h-4 text-teal-400" />
             <span>Consult Provider</span>
           </button>
         </div>
@@ -285,128 +284,128 @@ export const HistoricalTelemetryScreen: React.FC<HistoricalTelemetryScreenProps>
 
       {/* Dynamic Telemetry Metric Strip */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="p-4 rounded-2xl bg-white border border-[#E8E8E1] shadow-[0_1px_4px_rgba(0,0,0,0.02)] space-y-1">
-          <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-wider text-[#777D76]">
-            <span>Total Scans</span>
-            <History className="w-3.5 h-3.5 text-[#527665]" />
+        <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-xs space-y-1">
+          <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-wider text-slate-500">
+            <span>Total Ingestions</span>
+            <History className="w-3.5 h-3.5 text-teal-600" />
           </div>
           <div className="flex items-baseline gap-1.5 pt-0.5">
-            <span className="font-serif text-2xl text-[#252923] font-semibold">{scans.length}</span>
-            <span className="text-xs text-[#777D76]">Captures</span>
+            <span className="text-2xl font-bold text-slate-900">{scans.length}</span>
+            <span className="text-xs text-slate-500 font-mono">Records</span>
           </div>
-          <p className="text-[11px] text-[#527665] font-mono">Biometric history</p>
+          <p className="text-[11px] text-teal-700 font-mono font-medium">SQLite Indexed</p>
         </div>
 
-        <div className="p-4 rounded-2xl bg-[#E8EFE9]/40 border border-[#c4ebd7] shadow-[0_1px_4px_rgba(0,0,0,0.02)] space-y-1">
-          <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-wider text-[#304D40]">
-            <span>Latest Barrier Health</span>
-            <ShieldCheck className="w-3.5 h-3.5 text-[#304D40]" />
+        <div className="p-4 rounded-xl bg-emerald-50/70 border border-emerald-200 shadow-xs space-y-1">
+          <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-wider text-emerald-800 font-bold">
+            <span>Barrier Score</span>
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
           </div>
           <div className="flex items-baseline gap-1.5 pt-0.5">
-            <span className="font-serif text-2xl text-[#304D40] font-semibold">{latestScan ? `${latestScan.barrierScore}/100` : '—'}</span>
+            <span className="text-2xl font-bold text-emerald-900">{latestScan ? `${latestScan.barrierScore}/100` : '—'}</span>
           </div>
-          <p className="text-[11px] text-[#304D40] font-mono font-semibold">
+          <p className="text-[11px] text-emerald-700 font-mono font-semibold">
             {latestScan ? latestScan.date : 'No scan'}
           </p>
         </div>
 
-        <div className="p-4 rounded-2xl bg-white border border-[#E8E8E1] shadow-[0_1px_4px_rgba(0,0,0,0.02)] space-y-1">
-          <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-wider text-[#777D76]">
-            <span>Detected Skin Type</span>
-            <Sparkles className="w-3.5 h-3.5 text-[#527665]" />
+        <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-xs space-y-1">
+          <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-wider text-slate-500">
+            <span>Skin Type Baseline</span>
+            <Sparkles className="w-3.5 h-3.5 text-teal-600" />
           </div>
           <div className="flex items-baseline gap-1.5 pt-0.5">
-            <span className="font-serif text-2xl text-[#252923] font-semibold">
+            <span className="text-xl font-bold text-slate-900">
               {latestScan ? latestScan.skinType : '—'}
             </span>
           </div>
-          <p className="text-[11px] text-[#777D76] font-mono">Optical baseline</p>
+          <p className="text-[11px] text-slate-500 font-mono">Calibrated</p>
         </div>
 
-        <div className="p-4 rounded-2xl bg-white border border-[#E8E8E1] shadow-[0_1px_4px_rgba(0,0,0,0.02)] space-y-1">
-          <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-wider text-[#777D76]">
-            <span>Primary Focus</span>
-            <Activity className="w-3.5 h-3.5 text-[#527665]" />
+        <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-xs space-y-1">
+          <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-wider text-slate-500">
+            <span>Triage Priority</span>
+            <Activity className="w-3.5 h-3.5 text-teal-600" />
           </div>
           <div className="flex items-baseline gap-1.5 pt-0.5">
-            <span className="font-serif text-xl text-[#252923] font-semibold truncate">
+            <span className="text-base font-bold text-slate-900 truncate">
               {latestScan ? latestScan.primaryConcern : 'None'}
             </span>
           </div>
-          <p className="text-[11px] text-[#527665] font-mono">
-            {latestScan?.requiresReferral ? 'Clinical review advised' : 'Cosmetic maintenance'}
+          <p className="text-[11px] text-teal-700 font-mono">
+            {latestScan?.requiresReferral ? 'Clinical Review' : 'Normative Target'}
           </p>
         </div>
       </div>
 
       {/* Search and Filters */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1">
         <div className="relative w-full sm:w-72">
-          <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#777D76]" />
+          <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
             type="text"
             placeholder="Search scans by ID, date, or concern..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-white border border-[#E8E8E1] text-xs font-mono text-[#252923] focus:outline-none focus:border-[#527665]"
+            className="w-full pl-9 pr-4 py-2 rounded-xl bg-white border border-slate-200 text-xs font-mono text-slate-900 focus:outline-none focus:border-teal-600"
           />
         </div>
 
-        <div className="flex items-center gap-2 self-end sm:self-auto">
+        <div className="flex items-center gap-1.5 self-end sm:self-auto bg-slate-100 p-1 rounded-lg border border-slate-200">
           <button
             onClick={() => setViewMode('matrix')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-mono transition ${
+            className={`px-3 py-1 rounded-md text-xs font-mono transition ${
               viewMode === 'matrix'
-                ? 'bg-white text-[#252923] font-semibold border border-[#E8E8E1] shadow-xs'
-                : 'text-[#777D76] hover:text-[#252923]'
+                ? 'bg-white text-slate-900 font-bold shadow-xs'
+                : 'text-slate-500 hover:text-slate-900'
             }`}
           >
             Table View
           </button>
           <button
             onClick={() => setViewMode('cards')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-mono transition ${
+            className={`px-3 py-1 rounded-md text-xs font-mono transition ${
               viewMode === 'cards'
-                ? 'bg-white text-[#252923] font-semibold border border-[#E8E8E1] shadow-xs'
-                : 'text-[#777D76] hover:text-[#252923]'
+                ? 'bg-white text-slate-900 font-bold shadow-xs'
+                : 'text-slate-500 hover:text-slate-900'
             }`}
           >
-            Cards View
+            Card Grid
           </button>
         </div>
       </div>
 
       {/* Main Scans List */}
       {viewMode === 'matrix' ? (
-        <div className="overflow-x-auto rounded-3xl border border-[#E8E8E1] bg-white shadow-sm">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-xs">
           <table className="w-full text-left text-xs font-mono">
             <thead>
-              <tr className="border-b border-[#E8E8E1] bg-[#FAF9F6] text-[#777D76] uppercase tracking-wider text-[10px]">
-                <th className="p-4">Scan Identifier</th>
-                <th className="p-4">Date & Time</th>
-                <th className="p-4">Barrier Score</th>
-                <th className="p-4">Skin Type</th>
-                <th className="p-4">Primary Concern</th>
-                <th className="p-4">Triage Status</th>
+              <tr className="border-b border-slate-200 bg-slate-50 text-slate-500 uppercase tracking-wider text-[10px]">
+                <th className="p-3.5">Record ID</th>
+                <th className="p-3.5">Timestamp</th>
+                <th className="p-3.5">Barrier Score</th>
+                <th className="p-3.5">Skin Type</th>
+                <th className="p-3.5">Primary Target</th>
+                <th className="p-3.5">Triage Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#E8E8E1]">
+            <tbody className="divide-y divide-slate-100">
               {filteredScans.map((s) => (
-                <tr key={s.id} className="hover:bg-[#FAF9F6] transition">
-                  <td className="p-4 font-semibold text-[#252923]">{s.id}</td>
-                  <td className="p-4 text-[#777D76]">{s.date} • {s.time}</td>
-                  <td className="p-4">
-                    <span className="px-2.5 py-1 rounded-full bg-[#E8EFE9] text-[#304D40] font-semibold">
+                <tr key={s.id} className="hover:bg-slate-50/70 transition">
+                  <td className="p-3.5 font-bold text-slate-900">{s.id}</td>
+                  <td className="p-3.5 text-slate-500">{s.date} • {s.time}</td>
+                  <td className="p-3.5">
+                    <span className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 font-bold border border-emerald-200">
                       {s.barrierScore} / 100
                     </span>
                   </td>
-                  <td className="p-4 text-[#252923]">{s.skinType}</td>
-                  <td className="p-4 text-[#777D76]">{s.primaryConcern}</td>
-                  <td className="p-4">
+                  <td className="p-3.5 text-slate-900 font-medium">{s.skinType}</td>
+                  <td className="p-3.5 text-slate-500">{s.primaryConcern}</td>
+                  <td className="p-3.5">
                     {s.requiresReferral ? (
-                      <span className="text-[#b85c3c] font-semibold">Referral Recommended</span>
+                      <span className="text-amber-800 font-bold">Referral Advised</span>
                     ) : (
-                      <span className="text-[#527665]">Normative</span>
+                      <span className="text-teal-700 font-semibold">Normative</span>
                     )}
                   </td>
                 </tr>
@@ -415,21 +414,21 @@ export const HistoricalTelemetryScreen: React.FC<HistoricalTelemetryScreenProps>
           </table>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {filteredScans.map((s) => (
-            <div key={s.id} className="p-5 rounded-3xl bg-white border border-[#E8E8E1] space-y-3 shadow-sm">
+            <div key={s.id} className="p-4 rounded-xl bg-white border border-slate-200 space-y-2.5 shadow-xs">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs font-semibold text-[#252923]">{s.id}</span>
-                <span className="px-2 py-0.5 rounded-full bg-[#E8EFE9] text-[#304D40] text-[10px] font-mono font-semibold">
+                <span className="font-mono text-xs font-bold text-slate-900">{s.id}</span>
+                <span className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 text-[10px] font-mono font-bold border border-emerald-200">
                   Score: {s.barrierScore}
                 </span>
               </div>
-              <div className="text-xs text-[#777D76] font-mono">
+              <div className="text-xs text-slate-500 font-mono">
                 {s.date} at {s.time}
               </div>
-              <div className="pt-2 border-t border-[#E8E8E1] text-xs space-y-1">
-                <div><strong>Skin Type:</strong> {s.skinType}</div>
-                <div><strong>Primary Concern:</strong> {s.primaryConcern}</div>
+              <div className="pt-2 border-t border-slate-100 text-xs space-y-1 font-mono">
+                <div><span className="text-slate-500">Classification:</span> <strong className="text-slate-900">{s.skinType}</strong></div>
+                <div><span className="text-slate-500">Biomarker:</span> <strong className="text-slate-900">{s.primaryConcern}</strong></div>
               </div>
             </div>
           ))}
@@ -438,36 +437,36 @@ export const HistoricalTelemetryScreen: React.FC<HistoricalTelemetryScreenProps>
 
       {/* FHIR Export Modal */}
       {isFhirModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
-          <div className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-white rounded-3xl border border-[#E8E8E1] p-6 space-y-4 shadow-2xl">
-            <div className="flex items-center justify-between pb-3 border-b border-[#E8E8E1]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm animate-fade-in">
+          <div className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-white rounded-2xl border border-slate-200 p-6 space-y-4 shadow-2xl">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200">
               <div className="space-y-0.5">
-                <h3 className="font-serif text-xl text-[#252923]">HL7 FHIR Clinical Telemetry Bundle</h3>
-                <p className="text-xs text-[#777D76]">Standardized clinical exchange format for your electronic health records</p>
+                <h3 className="text-base font-bold text-slate-900">HL7 FHIR Clinical Telemetry Bundle</h3>
+                <p className="text-xs text-slate-500">Standardized clinical exchange format for your electronic medical record (EMR)</p>
               </div>
               <button
                 onClick={() => setIsFhirModalOpen(false)}
-                className="p-1.5 rounded-full hover:bg-[#FAF9F6] text-[#777D76]"
+                className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="p-4 rounded-2xl bg-[#1e231f] text-emerald-300 font-mono text-[11px] overflow-x-auto max-h-96">
+            <div className="p-4 rounded-xl bg-slate-950 text-teal-300 font-mono text-[11px] overflow-x-auto max-h-96 border border-slate-800">
               <pre>{JSON.stringify(fhirJsonPayload, null, 2)}</pre>
             </div>
 
             <div className="flex justify-between items-center pt-2">
               <button
                 onClick={handleCopyJson}
-                className="px-4 py-2 rounded-xl bg-[#527665] hover:bg-[#304D40] text-white text-xs font-mono transition flex items-center gap-1.5"
+                className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono font-semibold transition flex items-center gap-1.5 shadow-xs"
               >
-                {copiedJson ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                {copiedJson ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-teal-400" />}
                 <span>{copiedJson ? 'Copied to Clipboard' : 'Copy FHIR JSON'}</span>
               </button>
               <button
                 onClick={() => setIsFhirModalOpen(false)}
-                className="px-4 py-2 rounded-xl border border-[#E8E8E1] text-xs font-mono text-[#777D76]"
+                className="px-4 py-2 rounded-xl border border-slate-200 text-xs font-mono text-slate-600 hover:text-slate-900"
               >
                 Close
               </button>

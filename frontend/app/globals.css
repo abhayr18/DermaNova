@@ -1,32 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --dn-bg: #FAF9F6;
-  --dn-surface: #FFFFFF;
-  --dn-sage: #527665;
-  --dn-forest: #304D40;
-  --dn-soft-sage: #E8EFE9;
-  --dn-lavender: #EEEAF5;
-  --dn-blush: #F3E5E2;
-  --dn-text: #252923;
-  --dn-text-secondary: #777D76;
-  --dn-border: #E8E8E1;
-
-  --botanical-bg: #FAF9F6;
-  --botanical-surface: #FFFFFF;
-  --botanical-card: #FFFFFF;
-  --botanical-card-muted: #F5F4EE;
-  --botanical-text: #252923;
-  --botanical-text-muted: #777D76;
-  --botanical-sage: #527665;
-  --botanical-moss: #304D40;
-  --botanical-border: #E8E8E1;
-  --botanical-terracotta: #b85c3c;
+  --bg-main: #FAFAFB;
+  --surface-card: #FFFFFF;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --border-light: #E2E8F0;
+  --border-subtle: #F1F5F9;
+  --accent-teal: #0D9488;
+  --accent-emerald: #10B981;
+  --accent-cyan: #06B6D4;
 }
 
 html {
@@ -36,79 +24,82 @@ html {
 }
 
 body {
-  color: #252923;
-  background-color: #FAF9F6;
+  color: #0F172A;
+  background-color: #FAFAFB;
   min-height: 100vh;
   overflow-x: hidden;
-  font-family: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-tap-highlight-color: transparent;
 }
 
-button, a, input, select, textarea {
-  touch-action: manipulation;
+/* Modern Frosted Tech Cards */
+.tech-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 4px 16px -2px rgba(15, 23, 42, 0.03);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Botanical Luxury Minimal Surfaces */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.85);
+.tech-card:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.08);
+}
+
+.tech-card-glass {
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid #e6e2d8;
-  box-shadow: 0 4px 20px -2px rgba(28, 36, 23, 0.04), 0 2px 6px -1px rgba(28, 36, 23, 0.02);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 4px 24px -4px rgba(15, 23, 42, 0.05);
 }
 
-.glass-panel-subtle {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid #eeebe3;
+/* Subtle Glowing Tech Accents */
+.glow-teal {
+  box-shadow: 0 0 20px -3px rgba(13, 148, 136, 0.25);
 }
 
-.glass-card {
-  background: #ffffff;
-  border: 1px solid #e6e2d8;
-  box-shadow: 0 2px 12px -2px rgba(28, 36, 23, 0.04);
+.glow-cyan {
+  box-shadow: 0 0 20px -3px rgba(6, 182, 212, 0.3);
 }
 
-.glass-input {
-  background: #ffffff;
-  border: 1px solid #dcd7cb;
-  color: #1a2217;
+/* Animated Scanner Laser Bar */
+@keyframes scanLaser {
+  0% {
+    top: 0%;
+    opacity: 0.8;
+  }
+  50% {
+    top: 96%;
+    opacity: 1;
+  }
+  100% {
+    top: 0%;
+    opacity: 0.8;
+  }
 }
 
-.glass-input:focus {
-  border-color: #637852;
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(99, 120, 82, 0.15);
+.animate-scan-laser {
+  animation: scanLaser 3.5s ease-in-out infinite;
 }
 
-/* Serif Headings */
-.font-serif-luxury {
-  font-family: 'Playfair Display', Georgia, serif;
-  letter-spacing: -0.02em;
-}
-
-/* Mono Technical Indicators */
-.font-mono-clinical {
-  font-family: 'IBM Plex Mono', 'Fragment Mono', monospace;
-}
-
-/* Custom Scrollbars */
+/* Custom Minimalist Scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #faf9f5;
+  background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #cbd7c1;
+  background: #CBD5E1;
   border-radius: 9999px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #94b383;
+  background: #94A3B8;
 }
 
 .no-scrollbar::-webkit-scrollbar {

@@ -224,7 +224,7 @@ export const CosmeticsFitScanner: React.FC<CosmeticsFitScannerProps> = ({
 
   const getScoreBadge = (score: number) => {
     if (score >= 90) return { label: 'Optimal Fit', color: 'bg-emerald-50 text-emerald-700 border-emerald-200', barColor: 'from-emerald-500 to-teal-500' };
-    if (score >= 75) return { label: 'Compatible', color: 'bg-[#f4f6f1] text-[#425335] border-[#cbd7c1]', barColor: 'from-[#637852] to-[#8fa382]' };
+    if (score >= 75) return { label: 'Compatible', color: 'bg-[#f1f5f9] text-[#0f172a] border-[#94a3b8]', barColor: 'from-[#0d9488] to-[#8fa382]' };
     if (score >= 60) return { label: 'Caution Advised', color: 'bg-amber-50 text-amber-700 border-amber-200', barColor: 'from-amber-500 to-yellow-500' };
     return { label: 'Barrier Conflict', color: 'bg-rose-50 text-rose-700 border-rose-200', barColor: 'from-rose-500 to-red-500' };
   };
@@ -271,36 +271,36 @@ export const CosmeticsFitScanner: React.FC<CosmeticsFitScannerProps> = ({
     <div className="w-full space-y-6">
       
       {/* Top Banner: No Brand Affiliation Guarantee */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e6e2d8] shadow-sm relative overflow-hidden">
+      <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e2e8f0] shadow-sm relative overflow-hidden">
         <div className="max-w-3xl space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fbf0eb] border border-[#f3d3c7] text-[#b85c3c] text-[10px] font-mono-clinical uppercase tracking-wider font-semibold">
-            <Sparkles className="w-3.5 h-3.5 text-[#b85c3c]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fff7ed] border border-[#ffedd5] text-[#d97706] text-[10px] font-mono uppercase tracking-wider font-semibold">
+            <Sparkles className="w-3.5 h-3.5 text-[#d97706]" />
             Cosmetics Fit Score™ Engine • 100% Brand-Neutral
           </div>
-          <h2 className="font-serif-luxury text-2xl sm:text-4xl text-[#1a2217] font-normal leading-tight">
+          <h2 className="font-sans font-extrabold text-2xl sm:text-4xl text-[#0f172a] font-normal leading-tight">
             Check Cosmetics Compatibility with Zero Commercial Bias
           </h2>
-          <p className="text-xs sm:text-sm text-[#556050] leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#64748b] leading-relaxed">
             Search or scan any cosmetic formulation to evaluate exact compatibility against your facial skin diagnosis. Our clinical scoring engine evaluates every ingredient against European Chemical Agency (ECHA), CIR, and FDA safety standards.
           </p>
         </div>
 
         {/* Brand Neutrality Guarantee Badges */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-4 border-t border-[#f0ede6] text-xs text-[#1a2217] mt-4">
-          <div className="flex items-center gap-1.5 font-mono-clinical text-[11px] text-[#425335]">
-            <CheckCircle2 className="w-3.5 h-3.5 text-[#637852]" />
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-4 border-t border-[#f1f5f9] text-xs text-[#0f172a] mt-4">
+          <div className="flex items-center gap-1.5 font-mono text-[11px] text-[#0f172a]">
+            <CheckCircle2 className="w-3.5 h-3.5 text-[#0d9488]" />
             <span>0% Brand Sponsorship</span>
           </div>
-          <div className="flex items-center gap-1.5 font-mono-clinical text-[11px] text-[#425335]">
-            <CheckCircle2 className="w-3.5 h-3.5 text-[#637852]" />
+          <div className="flex items-center gap-1.5 font-mono text-[11px] text-[#0f172a]">
+            <CheckCircle2 className="w-3.5 h-3.5 text-[#0d9488]" />
             <span>Independent INCI Lab Scoring</span>
           </div>
-          <div className="flex items-center gap-1.5 font-mono-clinical text-[11px] text-[#425335]">
-            <CheckCircle2 className="w-3.5 h-3.5 text-[#637852]" />
+          <div className="flex items-center gap-1.5 font-mono text-[11px] text-[#0f172a]">
+            <CheckCircle2 className="w-3.5 h-3.5 text-[#0d9488]" />
             <span>Comedogenic Pore Rating</span>
           </div>
-          <div className="flex items-center gap-1.5 font-mono-clinical text-[11px] text-[#425335]">
-            <CheckCircle2 className="w-3.5 h-3.5 text-[#637852]" />
+          <div className="flex items-center gap-1.5 font-mono text-[11px] text-[#0f172a]">
+            <CheckCircle2 className="w-3.5 h-3.5 text-[#0d9488]" />
             <span>Safer Alternatives</span>
           </div>
         </div>
@@ -311,16 +311,16 @@ export const CosmeticsFitScanner: React.FC<CosmeticsFitScannerProps> = ({
         
         {/* Left Column: Product Search & Selector (5 cols) */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="rounded-3xl p-4 sm:p-5 bg-white border border-[#e6e2d8] space-y-4 shadow-sm">
+          <div className="rounded-3xl p-4 sm:p-5 bg-white border border-[#e2e8f0] space-y-4 shadow-sm">
             {/* Search Input */}
             <div className="relative">
-              <Search className="w-4 h-4 text-[#8b9784] absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-[#94a3b8] absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 placeholder="Search CeraVe, The Ordinary, Paula's Choice, BHA..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-[#faf9f5] border border-[#ded9cd] text-xs text-[#1a2217] placeholder:text-[#8b9784] font-sans focus:outline-none focus:ring-2 focus:ring-[#637852]/20 focus:border-[#637852]"
+                className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-[#f8fafc] border border-[#cbd5e1] text-xs text-[#0f172a] placeholder:text-[#94a3b8] font-sans focus:outline-none focus:ring-2 focus:ring-[#0d9488]/20 focus:border-[#0d9488]"
               />
             </div>
 
@@ -330,10 +330,10 @@ export const CosmeticsFitScanner: React.FC<CosmeticsFitScannerProps> = ({
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-3 py-1 rounded-xl font-mono-clinical text-[11px] capitalize transition shrink-0 ${
+                  className={`px-3 py-1 rounded-xl font-mono text-[11px] capitalize transition shrink-0 ${
                     selectedCategory === cat
-                      ? 'bg-[#1c2417] text-white font-medium shadow-sm'
-                      : 'bg-[#faf9f5] text-[#556050] hover:text-[#1a2217] border border-[#e6e2d8]'
+                      ? 'bg-[#0f172a] text-white font-medium shadow-sm'
+                      : 'bg-[#f8fafc] text-[#64748b] hover:text-[#0f172a] border border-[#e2e8f0]'
                   }`}
                 >
                   {cat}
@@ -354,27 +354,27 @@ export const CosmeticsFitScanner: React.FC<CosmeticsFitScannerProps> = ({
                     }}
                     className={`p-3.5 rounded-2xl border transition cursor-pointer flex items-center justify-between gap-3 ${
                       isSelected
-                        ? 'bg-[#f4f6f1] border-[#637852] ring-2 ring-[#637852]/20 shadow-sm'
-                        : 'bg-[#faf9f5] border-[#e6e2d8] hover:border-[#cbd7c1] hover:bg-white'
+                        ? 'bg-[#f1f5f9] border-[#0d9488] ring-2 ring-[#0d9488]/20 shadow-sm'
+                        : 'bg-[#f8fafc] border-[#e2e8f0] hover:border-[#94a3b8] hover:bg-white'
                     }`}
                   >
                     <div className="space-y-0.5">
-                      <div className="text-[10px] font-mono-clinical text-[#637852] uppercase font-medium">
+                      <div className="text-[10px] font-mono text-[#0d9488] uppercase font-medium">
                         {prod.brand} • {prod.category}
                       </div>
-                      <h4 className="text-xs font-bold text-[#1a2217] leading-snug">
+                      <h4 className="text-xs font-bold text-[#0f172a] leading-snug">
                         {prod.name}
                       </h4>
-                      <div className="text-[10px] text-[#6b7764] line-clamp-1">
+                      <div className="text-[10px] text-[#64748b] line-clamp-1">
                         Actives: {prod.keyActives.join(', ')}
                       </div>
                     </div>
 
                     <div className="text-right shrink-0">
-                      <div className="text-base font-mono-clinical font-bold text-[#1a2217]">
+                      <div className="text-base font-mono font-bold text-[#0f172a]">
                         {prod.baseFitScore}%
                       </div>
-                      <span className="text-[9px] font-mono-clinical text-[#637852]">
+                      <span className="text-[9px] font-mono text-[#0d9488]">
                         Fit Score
                       </span>
                     </div>
@@ -383,11 +383,11 @@ export const CosmeticsFitScanner: React.FC<CosmeticsFitScannerProps> = ({
               })}
 
               {filteredProducts.length === 0 && (
-                <div className="p-6 text-center text-xs text-[#6b7764] space-y-2">
+                <div className="p-6 text-center text-xs text-[#64748b] space-y-2">
                   <p>No products found for "{searchQuery}".</p>
                   <button
                     onClick={() => setIsCustomMode(true)}
-                    className="text-[#b85c3c] underline font-medium"
+                    className="text-[#d97706] underline font-medium"
                   >
                     Paste custom ingredients to analyze
                   </button>
@@ -398,10 +398,10 @@ export const CosmeticsFitScanner: React.FC<CosmeticsFitScannerProps> = ({
             {/* Custom Formula Analyzer Trigger */}
             <button
               onClick={() => setIsCustomMode(true)}
-              className={`w-full py-2.5 rounded-2xl border text-xs font-mono-clinical font-semibold flex items-center justify-center gap-2 transition ${
+              className={`w-full py-2.5 rounded-2xl border text-xs font-mono font-semibold flex items-center justify-center gap-2 transition ${
                 isCustomMode
-                  ? 'bg-[#1c2417] text-white border-[#1c2417] shadow-sm'
-                  : 'bg-[#faf9f5] border-[#e6e2d8] text-[#1a2217] hover:bg-white'
+                  ? 'bg-[#0f172a] text-white border-[#0f172a] shadow-sm'
+                  : 'bg-[#f8fafc] border-[#e2e8f0] text-[#0f172a] hover:bg-white'
               }`}
             >
               <Sliders className="w-3.5 h-3.5" />
@@ -414,32 +414,32 @@ export const CosmeticsFitScanner: React.FC<CosmeticsFitScannerProps> = ({
         <div className="lg:col-span-7 space-y-5">
           {!isCustomMode ? (
             /* Selected Product Detailed Analysis */
-            <div className="rounded-3xl p-5 sm:p-7 bg-white border border-[#e6e2d8] space-y-6 shadow-sm animate-fade-in">
+            <div className="rounded-3xl p-5 sm:p-7 bg-white border border-[#e2e8f0] space-y-6 shadow-sm animate-fade-in">
               {/* Product Header & Fit Meter */}
-              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-[#f0ede6] pb-5">
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-[#f1f5f9] pb-5">
                 <div className="space-y-1">
-                  <div className="text-xs font-mono-clinical text-[#637852] uppercase tracking-wider font-semibold">
+                  <div className="text-xs font-mono text-[#0d9488] uppercase tracking-wider font-semibold">
                     {selectedProduct.brand} • {selectedProduct.category} • {selectedProduct.price}
                   </div>
-                  <h3 className="font-serif-luxury text-xl sm:text-2xl font-normal text-[#1a2217] leading-tight">
+                  <h3 className="font-sans font-extrabold text-xl sm:text-2xl font-normal text-[#0f172a] leading-tight">
                     {selectedProduct.name}
                   </h3>
-                  <p className="text-xs text-[#6b7764]">
-                    Evaluated against your profile: <strong className="text-[#1a2217] font-semibold">{userSkinType} Skin</strong> • Concerns: {activeIssues.join(', ')}
+                  <p className="text-xs text-[#64748b]">
+                    Evaluated against your profile: <strong className="text-[#0f172a] font-semibold">{userSkinType} Skin</strong> • Concerns: {activeIssues.join(', ')}
                   </p>
                 </div>
 
                 {/* Fit Score Badge */}
                 <div className="flex sm:flex-col items-center sm:items-end justify-between gap-2 shrink-0">
                   <div className="text-right">
-                    <span className="text-3xl sm:text-4xl font-mono-clinical font-bold text-[#1a2217]">
+                    <span className="text-3xl sm:text-4xl font-mono font-bold text-[#0f172a]">
                       {selectedProduct.baseFitScore}%
                     </span>
-                    <div className="text-[10px] font-mono-clinical text-[#6b7764] uppercase tracking-wider">
+                    <div className="text-[10px] font-mono text-[#64748b] uppercase tracking-wider">
                       Fit Score
                     </div>
                   </div>
-                  <span className={`px-2.5 py-1 rounded-full text-[10px] font-mono-clinical font-semibold border ${currentBadge.color}`}>
+                  <span className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-semibold border ${currentBadge.color}`}>
                     {currentBadge.label}
                   </span>
                 </div>
@@ -447,11 +447,11 @@ export const CosmeticsFitScanner: React.FC<CosmeticsFitScannerProps> = ({
 
               {/* Progress Fit Meter */}
               <div className="space-y-1.5">
-                <div className="flex justify-between text-xs font-mono-clinical text-[#6b7764]">
+                <div className="flex justify-between text-xs font-mono text-[#64748b]">
                   <span>Skin Compatibility Index</span>
-                  <span className="text-[#1a2217] font-semibold">{selectedProduct.baseFitScore} / 100</span>
+                  <span className="text-[#0f172a] font-semibold">{selectedProduct.baseFitScore} / 100</span>
                 </div>
-                <div className="w-full h-2 rounded-full bg-[#f0ede6] overflow-hidden">
+                <div className="w-full h-2 rounded-full bg-[#f1f5f9] overflow-hidden">
                   <div
                     className={`h-full rounded-full bg-gradient-to-r ${currentBadge.barColor} transition-all duration-700`}
                     style={{ width: `${selectedProduct.baseFitScore}%` }}
@@ -461,38 +461,38 @@ export const CosmeticsFitScanner: React.FC<CosmeticsFitScannerProps> = ({
 
               {/* 4-Pillar Clinical Safety Evaluation */}
               <div className="space-y-2.5">
-                <h4 className="text-xs font-mono-clinical font-semibold text-[#637852] uppercase tracking-wider">
+                <h4 className="text-xs font-mono font-semibold text-[#0d9488] uppercase tracking-wider">
                   Comprehensive Ingredient Safety Evaluation
                 </h4>
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                  <div className="p-3 rounded-2xl bg-[#faf9f5] border border-[#e6e2d8] text-center space-y-1">
-                    <div className="text-[10px] font-mono-clinical text-[#6b7764]">Comedogenic</div>
-                    <div className="text-xs font-mono-clinical font-bold text-emerald-700 flex items-center justify-center gap-1">
+                  <div className="p-3 rounded-2xl bg-[#f8fafc] border border-[#e2e8f0] text-center space-y-1">
+                    <div className="text-[10px] font-mono text-[#64748b]">Comedogenic</div>
+                    <div className="text-xs font-mono font-bold text-emerald-700 flex items-center justify-center gap-1">
                       <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                       <span>{selectedProduct.comedogenicRating}/5 Safe</span>
                     </div>
                   </div>
 
-                  <div className="p-3 rounded-2xl bg-[#faf9f5] border border-[#e6e2d8] text-center space-y-1">
-                    <div className="text-[10px] font-mono-clinical text-[#6b7764]">Skin Barrier</div>
-                    <div className="text-xs font-mono-clinical font-bold text-emerald-700 flex items-center justify-center gap-1">
+                  <div className="p-3 rounded-2xl bg-[#f8fafc] border border-[#e2e8f0] text-center space-y-1">
+                    <div className="text-[10px] font-mono text-[#64748b]">Skin Barrier</div>
+                    <div className="text-xs font-mono font-bold text-emerald-700 flex items-center justify-center gap-1">
                       <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                       <span>{selectedProduct.isBarrierSafe ? 'Lipid Safe' : 'Drying'}</span>
                     </div>
                   </div>
 
-                  <div className="p-3 rounded-2xl bg-[#faf9f5] border border-[#e6e2d8] text-center space-y-1">
-                    <div className="text-[10px] font-mono-clinical text-[#6b7764]">Fragrance</div>
-                    <div className="text-xs font-mono-clinical font-bold text-emerald-700 flex items-center justify-center gap-1">
+                  <div className="p-3 rounded-2xl bg-[#f8fafc] border border-[#e2e8f0] text-center space-y-1">
+                    <div className="text-[10px] font-mono text-[#64748b]">Fragrance</div>
+                    <div className="text-xs font-mono font-bold text-emerald-700 flex items-center justify-center gap-1">
                       <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                       <span>{selectedProduct.isFragranceFree ? 'Pure / 0%' : 'Added'}</span>
                     </div>
                   </div>
 
-                  <div className="p-3 rounded-2xl bg-[#faf9f5] border border-[#e6e2d8] text-center space-y-1">
-                    <div className="text-[10px] font-mono-clinical text-[#6b7764]">Pregnancy</div>
-                    <div className="text-xs font-mono-clinical font-bold text-emerald-700 flex items-center justify-center gap-1">
+                  <div className="p-3 rounded-2xl bg-[#f8fafc] border border-[#e2e8f0] text-center space-y-1">
+                    <div className="text-[10px] font-mono text-[#64748b]">Pregnancy</div>
+                    <div className="text-xs font-mono font-bold text-emerald-700 flex items-center justify-center gap-1">
                       <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                       <span>{selectedProduct.isPregnancySafe ? 'Approved' : 'Caution'}</span>
                     </div>
@@ -501,16 +501,16 @@ export const CosmeticsFitScanner: React.FC<CosmeticsFitScannerProps> = ({
               </div>
 
               {/* Why It Fits & Scientific Rationale */}
-              <div className="p-4 rounded-2xl bg-[#faf9f5] border border-[#e6e2d8] space-y-2">
-                <span className="text-[10px] font-mono-clinical font-semibold uppercase tracking-wider text-[#637852] flex items-center gap-1.5">
-                  <Info className="w-3.5 h-3.5 text-[#637852]" />
+              <div className="p-4 rounded-2xl bg-[#f8fafc] border border-[#e2e8f0] space-y-2">
+                <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-[#0d9488] flex items-center gap-1.5">
+                  <Info className="w-3.5 h-3.5 text-[#0d9488]" />
                   Cosmetic Chemist Clinical Reasoning
                 </span>
                 <p className="text-xs sm:text-sm text-[#384333] leading-relaxed">
                   {selectedProduct.whyItFits}
                 </p>
                 {selectedProduct.cautions && (
-                  <div className="p-2.5 rounded-xl bg-[#fbf0eb] border border-[#f3d3c7] text-[#b85c3c] text-xs flex items-start gap-2 mt-2">
+                  <div className="p-2.5 rounded-xl bg-[#fff7ed] border border-[#ffedd5] text-[#d97706] text-xs flex items-start gap-2 mt-2">
                     <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
                     <span>{selectedProduct.cautions}</span>
                   </div>
@@ -519,14 +519,14 @@ export const CosmeticsFitScanner: React.FC<CosmeticsFitScannerProps> = ({
 
               {/* Key Actives Pill Tags */}
               <div className="space-y-2">
-                <span className="text-[10px] font-mono-clinical font-semibold uppercase tracking-wider text-[#6b7764]">
+                <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-[#64748b]">
                   Therapeutic Active Compounds
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {selectedProduct.keyActives.map((active, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 rounded-xl bg-[#f4f6f1] border border-[#d6e0ce] text-[#425335] text-xs font-mono-clinical font-medium"
+                      className="px-3 py-1 rounded-xl bg-[#f1f5f9] border border-[#cbd5e1] text-[#0f172a] text-xs font-mono font-medium"
                     >
                       {active}
                     </span>
@@ -536,32 +536,32 @@ export const CosmeticsFitScanner: React.FC<CosmeticsFitScannerProps> = ({
 
               {/* Better-Fit-To-You Alternatives (if present) */}
               {selectedProduct.betterAlternatives && selectedProduct.betterAlternatives.length > 0 && (
-                <div className="p-4 rounded-2xl bg-[#f4f6f1] border border-[#d6e0ce] space-y-3">
+                <div className="p-4 rounded-2xl bg-[#f1f5f9] border border-[#cbd5e1] space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#1a2217] flex items-center gap-1.5 font-mono-clinical">
-                      <Sparkles className="w-3.5 h-3.5 text-[#637852]" />
+                    <span className="text-xs font-bold text-[#0f172a] flex items-center gap-1.5 font-mono">
+                      <Sparkles className="w-3.5 h-3.5 text-[#0d9488]" />
                       Better-Fit Formulations
                     </span>
-                    <span className="text-[10px] text-[#637852] font-mono-clinical">Higher Safety Index</span>
+                    <span className="text-[10px] text-[#0d9488] font-mono">Higher Safety Index</span>
                   </div>
 
                   <div className="space-y-2">
                     {selectedProduct.betterAlternatives.map((alt, i) => (
                       <div
                         key={i}
-                        className="p-3 rounded-xl bg-white border border-[#e6e2d8] flex items-center justify-between gap-3 text-xs"
+                        className="p-3 rounded-xl bg-white border border-[#e2e8f0] flex items-center justify-between gap-3 text-xs"
                       >
                         <div>
-                          <div className="font-bold text-[#1a2217]">
-                            {alt.name} <span className="font-normal text-[#6b7764]">by {alt.brand}</span>
+                          <div className="font-bold text-[#0f172a]">
+                            {alt.name} <span className="font-normal text-[#64748b]">by {alt.brand}</span>
                           </div>
-                          <p className="text-[11px] text-[#556050] mt-0.5">{alt.reason}</p>
+                          <p className="text-[11px] text-[#64748b] mt-0.5">{alt.reason}</p>
                         </div>
                         <div className="text-right shrink-0">
-                          <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-mono-clinical font-semibold text-xs border border-emerald-200">
+                          <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-mono font-semibold text-xs border border-emerald-200">
                             {alt.fitScore}% Fit
                           </span>
-                          <div className="text-[10px] text-[#6b7764] mt-0.5">{alt.price}</div>
+                          <div className="text-[10px] text-[#64748b] mt-0.5">{alt.price}</div>
                         </div>
                       </div>
                     ))}
@@ -571,15 +571,15 @@ export const CosmeticsFitScanner: React.FC<CosmeticsFitScannerProps> = ({
             </div>
           ) : (
             /* Custom INCI Formula Analyzer */
-            <div className="rounded-3xl p-5 sm:p-7 bg-white border border-[#e6e2d8] space-y-5 shadow-sm animate-fade-in">
+            <div className="rounded-3xl p-5 sm:p-7 bg-white border border-[#e2e8f0] space-y-5 shadow-sm animate-fade-in">
               <div className="space-y-1">
-                <span className="text-xs font-mono-clinical text-[#b85c3c] uppercase font-semibold">
+                <span className="text-xs font-mono text-[#d97706] uppercase font-semibold">
                   Custom Cosmetic Chemist Analyzer
                 </span>
-                <h3 className="font-serif-luxury text-xl font-normal text-[#1a2217]">
+                <h3 className="font-sans font-extrabold text-xl font-normal text-[#0f172a]">
                   Analyze Any Skincare Product by INCI Ingredients
                 </h3>
-                <p className="text-xs text-[#6b7764]">
+                <p className="text-xs text-[#64748b]">
                   Paste the ingredients from the back of your bottle to check pore-clogging comedogenicity, drying alcohol content, and barrier safety.
                 </p>
               </div>
@@ -589,56 +589,56 @@ export const CosmeticsFitScanner: React.FC<CosmeticsFitScannerProps> = ({
                 placeholder="Paste ingredient list (e.g., Aqua, Glycerin, Niacinamide, Salicylic Acid, Fragrance, Alcohol Denat...)"
                 value={customINCI}
                 onChange={(e) => setCustomINCI(e.target.value)}
-                className="w-full p-4 rounded-2xl bg-[#faf9f5] border border-[#ded9cd] text-xs font-mono-clinical leading-relaxed text-[#1a2217] placeholder:text-[#8b9784] focus:outline-none focus:ring-2 focus:ring-[#637852]/20 focus:border-[#637852]"
+                className="w-full p-4 rounded-2xl bg-[#f8fafc] border border-[#cbd5e1] text-xs font-mono leading-relaxed text-[#0f172a] placeholder:text-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-[#0d9488]/20 focus:border-[#0d9488]"
               />
 
               <button
                 onClick={handleAnalyzeCustomINCI}
-                className="px-6 py-3 rounded-full bg-[#1c2417] hover:bg-[#2d3b25] text-white font-mono-clinical font-semibold text-xs flex items-center gap-2 transition shadow-sm"
+                className="px-6 py-3 rounded-full bg-[#0f172a] hover:bg-[#1e293b] text-white font-mono font-semibold text-xs flex items-center gap-2 transition shadow-sm"
               >
-                <Sparkles className="w-4 h-4 text-[#b85c3c]" />
+                <Sparkles className="w-4 h-4 text-[#d97706]" />
                 <span>Calculate Fit Score</span>
               </button>
 
               {customAnalysis && (
-                <div className="p-5 rounded-2xl bg-[#faf9f5] border border-[#e6e2d8] space-y-4 animate-fade-in">
-                  <div className="flex items-center justify-between border-b border-[#e6e2d8] pb-3">
+                <div className="p-5 rounded-2xl bg-[#f8fafc] border border-[#e2e8f0] space-y-4 animate-fade-in">
+                  <div className="flex items-center justify-between border-b border-[#e2e8f0] pb-3">
                     <div>
-                      <span className="text-[10px] font-mono-clinical text-[#637852]">Custom Formula Result</span>
-                      <h4 className="text-base font-bold text-[#1a2217]">Analyzed Formulation</h4>
+                      <span className="text-[10px] font-mono text-[#0d9488]">Custom Formula Result</span>
+                      <h4 className="text-base font-bold text-[#0f172a]">Analyzed Formulation</h4>
                     </div>
                     <div className="text-right">
-                      <div className="text-2xl font-mono-clinical font-bold text-[#1a2217]">
+                      <div className="text-2xl font-mono font-bold text-[#0f172a]">
                         {customAnalysis.score}%
                       </div>
-                      <span className="text-[10px] font-mono-clinical text-[#6b7764]">Fit Score</span>
+                      <span className="text-[10px] font-mono text-[#64748b]">Fit Score</span>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2 text-xs font-mono-clinical">
-                    <div className="p-2.5 rounded-xl bg-white border border-[#e6e2d8] flex items-center justify-between">
-                      <span className="text-[#6b7764]">Non-Comedogenic:</span>
+                  <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+                    <div className="p-2.5 rounded-xl bg-white border border-[#e2e8f0] flex items-center justify-between">
+                      <span className="text-[#64748b]">Non-Comedogenic:</span>
                       <span className={customAnalysis.safetyCheck.nonComedogenic ? 'text-emerald-700 font-bold' : 'text-rose-700 font-bold'}>
                         {customAnalysis.safetyCheck.nonComedogenic ? '✓ Passed' : '✗ Flagged'}
                       </span>
                     </div>
 
-                    <div className="p-2.5 rounded-xl bg-white border border-[#e6e2d8] flex items-center justify-between">
-                      <span className="text-[#6b7764]">Barrier-Safe:</span>
+                    <div className="p-2.5 rounded-xl bg-white border border-[#e2e8f0] flex items-center justify-between">
+                      <span className="text-[#64748b]">Barrier-Safe:</span>
                       <span className={customAnalysis.safetyCheck.barrierSafe ? 'text-emerald-700 font-bold' : 'text-amber-700 font-bold'}>
                         {customAnalysis.safetyCheck.barrierSafe ? '✓ Safe' : '✗ Contains Alcohol'}
                       </span>
                     </div>
 
-                    <div className="p-2.5 rounded-xl bg-white border border-[#e6e2d8] flex items-center justify-between">
-                      <span className="text-[#6b7764]">Fragrance-Free:</span>
+                    <div className="p-2.5 rounded-xl bg-white border border-[#e2e8f0] flex items-center justify-between">
+                      <span className="text-[#64748b]">Fragrance-Free:</span>
                       <span className={customAnalysis.safetyCheck.fragranceFree ? 'text-emerald-700 font-bold' : 'text-amber-700 font-bold'}>
                         {customAnalysis.safetyCheck.fragranceFree ? '✓ Pure' : '✗ Fragrance'}
                       </span>
                     </div>
 
-                    <div className="p-2.5 rounded-xl bg-white border border-[#e6e2d8] flex items-center justify-between">
-                      <span className="text-[#6b7764]">Pregnancy-Safe:</span>
+                    <div className="p-2.5 rounded-xl bg-white border border-[#e2e8f0] flex items-center justify-between">
+                      <span className="text-[#64748b]">Pregnancy-Safe:</span>
                       <span className="text-emerald-700 font-bold">✓ Safe</span>
                     </div>
                   </div>

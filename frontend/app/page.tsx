@@ -210,7 +210,7 @@ export default function DermaNovaApp() {
   ].includes(currentScreen);
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6] text-[#252923] flex flex-col font-sans selection:bg-[#E8EFE9] selection:text-[#304D40]">
+    <div className="min-h-screen bg-[#FAFAFB] text-slate-900 flex flex-col font-sans selection:bg-teal-100 selection:text-teal-900">
       
       {/* Universal Navigation Header */}
       <ScreenNavHeader
@@ -230,21 +230,21 @@ export default function DermaNovaApp() {
       {/* Global Error Banner if any */}
       {errorMsg && (
         <div className="max-w-[1280px] mx-auto w-full px-4 sm:px-6 mt-4">
-          <div className="p-4 rounded-2xl bg-[#fff5f5] border border-[#fed7d7] text-[#9b2c2c] text-xs space-y-2 shadow-xs">
+          <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs space-y-2 shadow-xs">
             <div className="flex items-center justify-between flex-wrap gap-2">
               <span className="font-medium">{errorMsg}</span>
               <div className="flex items-center gap-3">
                 <button
                   type="button"
                   onClick={() => setShowBackendConfig(!showBackendConfig)}
-                  className="text-xs text-[#304D40] underline font-semibold"
+                  className="text-xs text-teal-700 underline font-semibold"
                 >
                   {showBackendConfig ? 'Close Backend Config' : 'Connect Cloud Backend URL'}
                 </button>
                 <button
                   type="button"
                   onClick={() => setErrorMsg(null)}
-                  className="text-xs text-[#9b2c2c] underline font-semibold"
+                  className="text-xs text-rose-700 underline font-semibold"
                 >
                   Dismiss
                 </button>
@@ -252,9 +252,9 @@ export default function DermaNovaApp() {
             </div>
 
             {showBackendConfig && (
-              <div className="pt-2 border-t border-[#fed7d7] space-y-2 text-[#252923]">
-                <div className="text-[11px] text-[#777D76]">
-                  Production backend is deployed at <strong>https://dermanova.onrender.com/api/v1</strong>. You can verify the connection or connect an alternate backend:
+              <div className="pt-2 border-t border-rose-200 space-y-2 text-slate-800">
+                <div className="text-[11px] text-slate-500">
+                  Production backend is deployed at <strong>https://dermanova.onrender.com/api/v1</strong>:
                 </div>
                 <div className="flex flex-col sm:flex-row gap-2">
                   <input
@@ -262,19 +262,19 @@ export default function DermaNovaApp() {
                     value={backendInputUrl}
                     onChange={(e) => setBackendInputUrl(e.target.value)}
                     placeholder="https://dermanova.onrender.com/api/v1"
-                    className="flex-1 px-3.5 py-2 rounded-xl border border-[#E8E8E1] bg-white text-xs font-mono focus:outline-none focus:border-[#527665]"
+                    className="flex-1 px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-xs font-mono focus:outline-none focus:border-teal-600"
                   />
                   <button
                     type="button"
                     disabled={backendTesting || !backendInputUrl.trim()}
                     onClick={handleTestAndSaveBackend}
-                    className="px-4 py-2 rounded-xl bg-[#304D40] hover:bg-[#253d33] disabled:opacity-50 text-white font-mono text-xs font-medium shrink-0 transition"
+                    className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 disabled:opacity-50 text-white font-mono text-xs font-medium shrink-0 transition"
                   >
                     {backendTesting ? 'Testing Connection...' : 'Test & Connect'}
                   </button>
                 </div>
                 {backendTestStatus && (
-                  <div className={`text-[11px] font-mono ${backendTestStatus.includes('failed') ? 'text-[#9b2c2c]' : 'text-[#304D40] font-semibold'}`}>
+                  <div className={`text-[11px] font-mono ${backendTestStatus.includes('failed') ? 'text-rose-600' : 'text-teal-700 font-semibold'}`}>
                     {backendTestStatus}
                   </div>
                 )}
@@ -286,7 +286,7 @@ export default function DermaNovaApp() {
 
       {/* RENDER VIEW: Public Landing Page vs Authenticated Member Portal */}
       {currentScreen === 'landing' ? (
-        <div className="flex-1 w-full max-w-[1280px] mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <div className="flex-1 w-full max-w-[1360px] mx-auto px-4 sm:px-6 py-6 sm:py-10">
           <LandingPageScreen
             onStartAnalysis={() => {
               if (currentUser) {
@@ -323,121 +323,121 @@ export default function DermaNovaApp() {
         <div className="flex-1 w-full max-w-[1360px] mx-auto px-4 sm:px-6 py-6 pb-24 md:pb-12 flex gap-8">
           
           {/* Desktop Persistent Sidebar (Member Portal) */}
-          <aside className="hidden lg:flex flex-col w-64 shrink-0 space-y-6 sticky top-24 self-start">
-            <div className="rounded-3xl bg-white border border-[#E8E8E1] p-4 space-y-1 shadow-xs">
-              <div className="px-3 py-2 text-[10px] font-mono uppercase tracking-wider text-[#777D76] font-semibold">
+          <aside className="hidden lg:flex flex-col w-64 shrink-0 space-y-5 sticky top-20 self-start">
+            <div className="rounded-2xl bg-white border border-slate-200 p-2.5 space-y-1 shadow-xs">
+              <div className="px-3 py-2 text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">
                 Member Portal
               </div>
 
               <button
                 onClick={() => setCurrentScreen('dashboard')}
-                className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-mono transition text-left ${
+                className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold transition text-left ${
                   currentScreen === 'dashboard'
-                    ? 'bg-[#E8EFE9] text-[#304D40] font-semibold'
-                    : 'text-[#777D76] hover:bg-[#FAF9F6] hover:text-[#252923]'
+                    ? 'bg-slate-900 text-white shadow-xs'
+                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                 }`}
               >
-                <HomeIcon className="w-4 h-4 text-[#527665]" />
+                <HomeIcon className={`w-4 h-4 ${currentScreen === 'dashboard' ? 'text-teal-400' : 'text-slate-400'}`} />
                 <span>Overview</span>
               </button>
 
               <button
                 onClick={() => setCurrentScreen('capture')}
-                className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-mono transition text-left ${
+                className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold transition text-left ${
                   currentScreen === 'capture' || currentScreen === 'loading'
-                    ? 'bg-[#E8EFE9] text-[#304D40] font-semibold'
-                    : 'text-[#777D76] hover:bg-[#FAF9F6] hover:text-[#252923]'
+                    ? 'bg-slate-900 text-white shadow-xs'
+                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                 }`}
               >
-                <Camera className="w-4 h-4 text-[#527665]" />
+                <Camera className={`w-4 h-4 ${currentScreen === 'capture' ? 'text-teal-400' : 'text-slate-400'}`} />
                 <span>Diagnostic Studio</span>
               </button>
 
               <button
                 onClick={() => setCurrentScreen('results')}
-                className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-mono transition text-left ${
+                className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold transition text-left ${
                   currentScreen === 'results' || currentScreen === 'detail'
-                    ? 'bg-[#E8EFE9] text-[#304D40] font-semibold'
-                    : 'text-[#777D76] hover:bg-[#FAF9F6] hover:text-[#252923]'
+                    ? 'bg-slate-900 text-white shadow-xs'
+                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                 }`}
               >
-                <Layers className="w-4 h-4 text-[#527665]" />
+                <Layers className={`w-4 h-4 ${currentScreen === 'results' ? 'text-teal-400' : 'text-slate-400'}`} />
                 <span>AI Clinical Report</span>
               </button>
 
               <button
                 onClick={() => setCurrentScreen('routine')}
-                className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-mono transition text-left ${
+                className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold transition text-left ${
                   currentScreen === 'routine'
-                    ? 'bg-[#E8EFE9] text-[#304D40] font-semibold'
-                    : 'text-[#777D76] hover:bg-[#FAF9F6] hover:text-[#252923]'
+                    ? 'bg-slate-900 text-white shadow-xs'
+                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                 }`}
               >
-                <FileText className="w-4 h-4 text-[#527665]" />
+                <FileText className={`w-4 h-4 ${currentScreen === 'routine' ? 'text-teal-400' : 'text-slate-400'}`} />
                 <span>Daily Routine</span>
               </button>
 
               <button
                 onClick={() => setCurrentScreen('scanner')}
-                className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-mono transition text-left ${
+                className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold transition text-left ${
                   currentScreen === 'scanner'
-                    ? 'bg-[#E8EFE9] text-[#304D40] font-semibold'
-                    : 'text-[#777D76] hover:bg-[#FAF9F6] hover:text-[#252923]'
+                    ? 'bg-slate-900 text-white shadow-xs'
+                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                 }`}
               >
-                <Sparkles className="w-4 h-4 text-[#527665]" />
+                <Sparkles className={`w-4 h-4 ${currentScreen === 'scanner' ? 'text-teal-400' : 'text-slate-400'}`} />
                 <span>Cosmetics Fit Scanner</span>
               </button>
 
               <button
                 onClick={() => setCurrentScreen('progress')}
-                className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-mono transition text-left ${
+                className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold transition text-left ${
                   currentScreen === 'progress'
-                    ? 'bg-[#E8EFE9] text-[#304D40] font-semibold'
-                    : 'text-[#777D76] hover:bg-[#FAF9F6] hover:text-[#252923]'
+                    ? 'bg-slate-900 text-white shadow-xs'
+                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                 }`}
               >
-                <Compass className="w-4 h-4 text-[#527665]" />
+                <Compass className={`w-4 h-4 ${currentScreen === 'progress' ? 'text-teal-400' : 'text-slate-400'}`} />
                 <span>Progress Log</span>
               </button>
 
               <button
                 onClick={() => setCurrentScreen('settings')}
-                className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-mono transition text-left ${
+                className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold transition text-left ${
                   currentScreen === 'settings'
-                    ? 'bg-[#E8EFE9] text-[#304D40] font-semibold'
-                    : 'text-[#777D76] hover:bg-[#FAF9F6] hover:text-[#252923]'
+                    ? 'bg-slate-900 text-white shadow-xs'
+                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                 }`}
               >
-                <Settings className="w-4 h-4 text-[#527665]" />
+                <Settings className={`w-4 h-4 ${currentScreen === 'settings' ? 'text-teal-400' : 'text-slate-400'}`} />
                 <span>Settings & Privacy</span>
               </button>
             </div>
 
             {/* Sidebar User Widget */}
-            <div className="p-4 rounded-3xl bg-white border border-[#E8E8E1] space-y-3 shadow-xs">
+            <div className="p-3.5 rounded-2xl bg-white border border-slate-200 space-y-3 shadow-xs">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-full bg-[#304D40] text-white flex items-center justify-center font-mono text-xs font-bold">
+                <div className="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-xs">
                   {currentUser?.full_name?.charAt(0) || 'D'}
                 </div>
                 <div className="truncate flex-1">
-                  <div className="font-mono text-xs font-semibold text-[#252923] truncate">
+                  <div className="text-xs font-bold text-slate-900 truncate">
                     {currentUser?.full_name || 'Presentation Demo'}
                   </div>
-                  <div className="text-[10px] text-[#777D76] font-mono truncate">
+                  <div className="text-[10px] text-slate-500 font-mono truncate">
                     {currentUser?.email || 'demo.patient@dermanova.app'}
                   </div>
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-[#E8E8E1] flex items-center justify-between">
-                <div className="text-[11px] font-mono text-[#527665] flex items-center gap-1.5">
+              <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+                <div className="text-[11px] font-mono text-emerald-600 font-semibold flex items-center gap-1.5">
                   <ShieldCheck className="w-3.5 h-3.5" />
                   <span>Local DB Synced</span>
                 </div>
                 <button
                   onClick={handleLogout}
-                  className="text-[10px] font-mono text-[#9b2c2c] hover:underline font-semibold"
+                  className="text-[11px] font-semibold text-rose-600 hover:underline"
                 >
                   Sign Out
                 </button>
@@ -620,58 +620,70 @@ export default function DermaNovaApp() {
       {/* =======================================================================
           MOBILE BOTTOM NAVIGATION (Fixed on small screens: md:hidden)
          ======================================================================= */}
-      <nav className="md:hidden fixed bottom-0 inset-x-0 z-40 h-16 bg-white/95 backdrop-blur-xl border-t border-[#E8E8E1] flex items-center justify-around px-2 shadow-lg">
+      <nav className="md:hidden fixed bottom-0 inset-x-0 z-40 h-16 bg-white/95 backdrop-blur-xl border-t border-slate-200 flex items-center justify-around px-2 shadow-lg">
         
         <button
           onClick={() => setCurrentScreen('landing')}
           className={`flex flex-col items-center justify-center gap-1 flex-1 py-1 transition ${
-            currentScreen === 'landing' ? 'text-[#304D40] font-bold' : 'text-[#777D76]'
+            currentScreen === 'landing' ? 'text-teal-700 font-bold' : 'text-slate-500'
           }`}
         >
           <HomeIcon className="w-4 h-4" />
-          <span className="text-[9px] font-mono">Home</span>
+          <span className="text-[10px] font-mono">Home</span>
         </button>
 
         <button
-          onClick={() => setCurrentScreen('dashboard')}
+          onClick={() => {
+            if (!currentUser) setIsAuthModalOpen(true);
+            else setCurrentScreen('dashboard');
+          }}
           className={`flex flex-col items-center justify-center gap-1 flex-1 py-1 transition ${
-            currentScreen === 'dashboard' ? 'text-[#304D40] font-bold' : 'text-[#777D76]'
+            currentScreen === 'dashboard' ? 'text-teal-700 font-bold' : 'text-slate-500'
           }`}
         >
           <Layers className="w-4 h-4" />
-          <span className="text-[9px] font-mono">Portal</span>
+          <span className="text-[10px] font-mono">Portal</span>
         </button>
 
         <button
-          onClick={() => setCurrentScreen('capture')}
+          onClick={() => {
+            if (!currentUser) setIsAuthModalOpen(true);
+            else setCurrentScreen('capture');
+          }}
           className={`flex flex-col items-center justify-center gap-1 flex-1 py-1 transition ${
             currentScreen === 'capture' || currentScreen === 'loading'
-              ? 'text-[#304D40] font-bold'
-              : 'text-[#777D76]'
+              ? 'text-teal-700 font-bold'
+              : 'text-slate-500'
           }`}
         >
           <Camera className="w-4 h-4" />
-          <span className="text-[9px] font-mono">Scan</span>
+          <span className="text-[10px] font-mono">Scan</span>
         </button>
 
         <button
-          onClick={() => setCurrentScreen('routine')}
+          onClick={() => {
+            if (!currentUser) setIsAuthModalOpen(true);
+            else setCurrentScreen('routine');
+          }}
           className={`flex flex-col items-center justify-center gap-1 flex-1 py-1 transition ${
-            currentScreen === 'routine' ? 'text-[#304D40] font-bold' : 'text-[#777D76]'
+            currentScreen === 'routine' ? 'text-teal-700 font-bold' : 'text-slate-500'
           }`}
         >
           <FileText className="w-4 h-4" />
-          <span className="text-[9px] font-mono">Regimen</span>
+          <span className="text-[10px] font-mono">Regimen</span>
         </button>
 
         <button
-          onClick={() => setCurrentScreen('progress')}
+          onClick={() => {
+            if (!currentUser) setIsAuthModalOpen(true);
+            else setCurrentScreen('progress');
+          }}
           className={`flex flex-col items-center justify-center gap-1 flex-1 py-1 transition ${
-            currentScreen === 'progress' ? 'text-[#304D40] font-bold' : 'text-[#777D76]'
+            currentScreen === 'progress' ? 'text-teal-700 font-bold' : 'text-slate-500'
           }`}
         >
           <Compass className="w-4 h-4" />
-          <span className="text-[9px] font-mono">Progress</span>
+          <span className="text-[10px] font-mono">Progress</span>
         </button>
       </nav>
     </div>

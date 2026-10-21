@@ -148,16 +148,16 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
     <div className="w-full max-w-2xl mx-auto space-y-6 animate-fade-in py-4">
       
       {/* Top Mode Header / Segmented Switch */}
-      <div className="flex items-center justify-between pb-2 border-b border-[#E8E8E1]">
+      <div className="flex items-center justify-between pb-2 border-b border-[#e2e8f0]">
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-[#304D40] text-white flex items-center justify-center font-serif text-sm">
+          <div className="w-7 h-7 rounded-lg bg-[#0f172a] text-white flex items-center justify-center font-sans font-bold text-sm">
             D
           </div>
           <div>
-            <h2 className="font-serif text-xl text-[#252923] font-normal">
+            <h2 className="font-sans font-bold text-xl text-[#0f172a] font-normal">
               {activeMode === 'auth' ? 'Member Access' : 'Personal Skincare Onboarding'}
             </h2>
-            <p className="text-[11px] font-mono text-[#777D76]">
+            <p className="text-[11px] font-mono text-[#64748b]">
               {activeMode === 'auth'
                 ? 'Sign in or create an account for cloud synchronization'
                 : `Step ${onboardingStep} of 4 • Tailoring your skin model`}
@@ -165,13 +165,13 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5 p-1 rounded-full bg-[#E8EFE9] border border-[#d6e0ce] text-xs font-mono">
+        <div className="flex items-center gap-1.5 p-1 rounded-full bg-[#f0fdfa] border border-[#ccfbf1] text-xs font-mono">
           <button
             onClick={() => setActiveMode('auth')}
             className={`px-3 py-1 rounded-full transition ${
               activeMode === 'auth'
-                ? 'bg-white text-[#252923] font-semibold shadow-sm'
-                : 'text-[#777D76] hover:text-[#252923]'
+                ? 'bg-white text-[#0f172a] font-semibold shadow-sm'
+                : 'text-[#64748b] hover:text-[#0f172a]'
             }`}
           >
             Sign In / Join
@@ -180,8 +180,8 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
             onClick={() => setActiveMode('onboarding')}
             className={`px-3 py-1 rounded-full transition ${
               activeMode === 'onboarding'
-                ? 'bg-white text-[#252923] font-semibold shadow-sm'
-                : 'text-[#777D76] hover:text-[#252923]'
+                ? 'bg-white text-[#0f172a] font-semibold shadow-sm'
+                : 'text-[#64748b] hover:text-[#0f172a]'
             }`}
           >
             Onboarding Quiz
@@ -193,17 +193,17 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
           MODE 1: AUTHENTICATION (Sign In & Create Account)
          ======================================================================= */}
       {activeMode === 'auth' && (
-        <div className="rounded-3xl bg-white border border-[#E8E8E1] p-6 sm:p-10 space-y-6 shadow-sm">
+        <div className="rounded-3xl bg-white border border-[#e2e8f0] p-6 sm:p-10 space-y-6 shadow-sm">
           
           {/* Sign In vs Create Account Tabs */}
-          <div className="flex rounded-2xl bg-[#FAF9F6] p-1 border border-[#E8E8E1] text-xs font-mono">
+          <div className="flex rounded-2xl bg-[#f8fafc] p-1 border border-[#e2e8f0] text-xs font-mono">
             <button
               type="button"
               onClick={() => { setIsLogin(true); setAuthError(null); setAuthSuccess(null); }}
               className={`flex-1 py-2 font-medium rounded-xl transition ${
                 isLogin
-                  ? 'bg-white text-[#252923] font-semibold shadow-sm border border-[#E8E8E1]'
-                  : 'text-[#777D76] hover:text-[#252923]'
+                  ? 'bg-white text-[#0f172a] font-semibold shadow-sm border border-[#e2e8f0]'
+                  : 'text-[#64748b] hover:text-[#0f172a]'
               }`}
             >
               Sign In
@@ -213,8 +213,8 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
               onClick={() => { setIsLogin(false); setAuthError(null); setAuthSuccess(null); }}
               className={`flex-1 py-2 font-medium rounded-xl transition ${
                 !isLogin
-                  ? 'bg-white text-[#252923] font-semibold shadow-sm border border-[#E8E8E1]'
-                  : 'text-[#777D76] hover:text-[#252923]'
+                  ? 'bg-white text-[#0f172a] font-semibold shadow-sm border border-[#e2e8f0]'
+                  : 'text-[#64748b] hover:text-[#0f172a]'
               }`}
             >
               Create Account
@@ -223,10 +223,10 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
 
           {/* Heading */}
           <div className="space-y-1 text-center sm:text-left">
-            <h3 className="font-serif text-2xl text-[#252923] font-normal">
+            <h3 className="font-sans font-bold text-2xl text-[#0f172a] font-normal">
               {isLogin ? 'Welcome back to your skin space' : 'Begin your clinical skin journey'}
             </h3>
-            <p className="text-xs text-[#777D76]">
+            <p className="text-xs text-[#64748b]">
               {isLogin
                 ? 'Access your longitudinal skin scans, personalized routines, and journal notes.'
                 : 'Join DermaNova for private AI-powered visual skin tracking and barrier guidance.'}
@@ -241,7 +241,7 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
             </div>
           )}
           {authSuccess && (
-            <div className="p-3.5 rounded-xl bg-[#E8EFE9] border border-[#d6e0ce] text-[#304D40] text-xs flex items-center gap-2">
+            <div className="p-3.5 rounded-xl bg-[#f0fdfa] border border-[#ccfbf1] text-[#0f172a] text-xs flex items-center gap-2">
               <Check className="w-4 h-4 shrink-0" />
               <span>{authSuccess}</span>
             </div>
@@ -252,69 +252,69 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
             
             {!isLogin && (
               <div className="space-y-1.5">
-                <label className="text-xs font-mono text-[#252923] font-medium block">
+                <label className="text-xs font-mono text-[#0f172a] font-medium block">
                   Full Name
                 </label>
                 <div className="relative">
-                  <User className="w-4 h-4 text-[#777D76] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                  <User className="w-4 h-4 text-[#64748b] absolute left-3.5 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
                     required
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="e.g. Maya Sharma"
-                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#FAF9F6] border border-[#E8E8E1] text-xs sm:text-sm text-[#252923] focus:outline-none focus:border-[#527665] focus:bg-white transition"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#f8fafc] border border-[#e2e8f0] text-xs sm:text-sm text-[#0f172a] focus:outline-none focus:border-[#0d9488] focus:bg-white transition"
                   />
                 </div>
               </div>
             )}
 
             <div className="space-y-1.5">
-              <label className="text-xs font-mono text-[#252923] font-medium block">
+              <label className="text-xs font-mono text-[#0f172a] font-medium block">
                 Email Address
               </label>
               <div className="relative">
-                <Mail className="w-4 h-4 text-[#777D76] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Mail className="w-4 h-4 text-[#64748b] absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@example.com"
-                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#FAF9F6] border border-[#E8E8E1] text-xs sm:text-sm text-[#252923] focus:outline-none focus:border-[#527665] focus:bg-white transition"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#f8fafc] border border-[#e2e8f0] text-xs sm:text-sm text-[#0f172a] focus:outline-none focus:border-[#0d9488] focus:bg-white transition"
                 />
               </div>
             </div>
 
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-mono text-[#252923] font-medium block">
+                <label className="text-xs font-mono text-[#0f172a] font-medium block">
                   Password
                 </label>
                 {isLogin && (
                   <button
                     type="button"
                     onClick={() => setForgotModal(true)}
-                    className="text-[11px] font-mono text-[#527665] hover:underline"
+                    className="text-[11px] font-mono text-[#0d9488] hover:underline"
                   >
                     Forgot Password?
                   </button>
                 )}
               </div>
               <div className="relative">
-                <Lock className="w-4 h-4 text-[#777D76] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Lock className="w-4 h-4 text-[#64748b] absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••••••"
-                  className="w-full pl-10 pr-11 py-3 rounded-xl bg-[#FAF9F6] border border-[#E8E8E1] text-xs sm:text-sm text-[#252923] focus:outline-none focus:border-[#527665] focus:bg-white transition"
+                  className="w-full pl-10 pr-11 py-3 rounded-xl bg-[#f8fafc] border border-[#e2e8f0] text-xs sm:text-sm text-[#0f172a] focus:outline-none focus:border-[#0d9488] focus:bg-white transition"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#777D76] hover:text-[#252923]"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#64748b] hover:text-[#0f172a]"
                   title={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -325,7 +325,7 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
             <button
               type="submit"
               disabled={authLoading}
-              className="w-full py-3.5 rounded-2xl bg-[#304D40] hover:bg-[#253d33] disabled:opacity-60 text-white font-mono text-xs sm:text-sm font-medium transition shadow-sm flex items-center justify-center gap-2 mt-2"
+              className="w-full py-3.5 rounded-2xl bg-[#0f172a] hover:bg-[#1e293b] disabled:opacity-60 text-white font-mono text-xs sm:text-sm font-medium transition shadow-sm flex items-center justify-center gap-2 mt-2"
             >
               {authLoading ? (
                 <>
@@ -344,9 +344,9 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
           {/* Social Divider */}
           <div className="relative flex items-center justify-center pt-2">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-[#E8E8E1]" />
+              <div className="w-full border-t border-[#e2e8f0]" />
             </div>
-            <span className="relative px-3 bg-white text-[11px] font-mono text-[#777D76]">
+            <span className="relative px-3 bg-white text-[11px] font-mono text-[#64748b]">
               or continue with
             </span>
           </div>
@@ -357,7 +357,7 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
             onClick={() => {
               setAuthError('Google Single Sign-On is currently disabled. Please sign in with your email and password.');
             }}
-            className="w-full py-3 rounded-xl bg-white hover:bg-[#FAF9F6] border border-[#E8E8E1] text-xs font-mono text-[#252923] flex items-center justify-center gap-2.5 transition shadow-sm"
+            className="w-full py-3 rounded-xl bg-white hover:bg-[#f8fafc] border border-[#e2e8f0] text-xs font-mono text-[#0f172a] flex items-center justify-center gap-2.5 transition shadow-sm"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24">
               <path
@@ -381,8 +381,8 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
           </button>
 
           {/* Privacy Note */}
-          <div className="pt-2 text-center text-[11px] text-[#777D76] font-mono flex items-center justify-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#527665]" />
+          <div className="pt-2 text-center text-[11px] text-[#64748b] font-mono flex items-center justify-center gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#0d9488]" />
             <span>Biometric privacy guaranteed under DermaNova Security Protocols</span>
           </div>
         </div>
@@ -392,11 +392,11 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
           MODE 2: ONBOARDING QUESTIONS (4 Steps: Type, Concerns, Sensitivity, Experience)
          ======================================================================= */}
       {activeMode === 'onboarding' && (
-        <div className="rounded-3xl bg-white border border-[#E8E8E1] p-6 sm:p-10 space-y-7 shadow-sm">
+        <div className="rounded-3xl bg-white border border-[#e2e8f0] p-6 sm:p-10 space-y-7 shadow-sm">
           
           {/* Progress Indicator */}
           <div className="space-y-2">
-            <div className="flex items-center justify-between text-xs font-mono text-[#777D76]">
+            <div className="flex items-center justify-between text-xs font-mono text-[#64748b]">
               <span>Question {onboardingStep} of 4</span>
               <span>
                 {onboardingStep === 1 && 'Skin Baseline'}
@@ -405,9 +405,9 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
                 {onboardingStep === 4 && 'Experience'}
               </span>
             </div>
-            <div className="w-full h-1.5 rounded-full bg-[#FAF9F6] border border-[#E8E8E1] overflow-hidden">
+            <div className="w-full h-1.5 rounded-full bg-[#f8fafc] border border-[#e2e8f0] overflow-hidden">
               <div
-                className="h-full bg-[#527665] transition-all duration-300 rounded-full"
+                className="h-full bg-[#0d9488] transition-all duration-300 rounded-full"
                 style={{ width: `${(onboardingStep / 4) * 100}%` }}
               />
             </div>
@@ -417,13 +417,13 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
           {onboardingStep === 1 && (
             <div className="space-y-4">
               <div className="space-y-1">
-                <span className="text-[11px] font-mono uppercase tracking-wider text-[#527665] font-semibold">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#0d9488] font-semibold">
                   Step 01: Skin Type
                 </span>
-                <h3 className="font-serif text-2xl text-[#252923] font-normal">
+                <h3 className="font-sans font-bold text-2xl text-[#0f172a] font-normal">
                   How does your skin feel throughout the day?
                 </h3>
-                <p className="text-xs text-[#777D76]">
+                <p className="text-xs text-[#64748b]">
                   Select the option that most closely matches your natural sebum and moisture balance.
                 </p>
               </div>
@@ -435,23 +435,23 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
                     onClick={() => setSkinType(opt.id)}
                     className={`p-4 rounded-2xl border transition cursor-pointer flex items-center justify-between ${
                       skinType === opt.id
-                        ? 'border-[#527665] bg-[#E8EFE9]/50 shadow-sm'
-                        : 'border-[#E8E8E1] bg-[#FAF9F6] hover:bg-white hover:border-[#527665]/30'
+                        ? 'border-[#0d9488] bg-[#f0fdfa]/50 shadow-sm'
+                        : 'border-[#e2e8f0] bg-[#f8fafc] hover:bg-white hover:border-[#0d9488]/30'
                     }`}
                   >
                     <div className="space-y-0.5">
-                      <div className="text-xs font-mono font-semibold text-[#252923]">
+                      <div className="text-xs font-mono font-semibold text-[#0f172a]">
                         {opt.label}
                       </div>
-                      <div className="text-[11px] text-[#777D76]">
+                      <div className="text-[11px] text-[#64748b]">
                         {opt.desc}
                       </div>
                     </div>
                     <div
                       className={`w-5 h-5 rounded-full border flex items-center justify-center transition shrink-0 ${
                         skinType === opt.id
-                          ? 'border-[#527665] bg-[#527665] text-white'
-                          : 'border-[#E8E8E1] bg-white'
+                          ? 'border-[#0d9488] bg-[#0d9488] text-white'
+                          : 'border-[#e2e8f0] bg-white'
                       }`}
                     >
                       {skinType === opt.id && <Check className="w-3 h-3" />}
@@ -466,13 +466,13 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
           {onboardingStep === 2 && (
             <div className="space-y-4">
               <div className="space-y-1">
-                <span className="text-[11px] font-mono uppercase tracking-wider text-[#527665] font-semibold">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#0d9488] font-semibold">
                   Step 02: Primary Concerns
                 </span>
-                <h3 className="font-serif text-2xl text-[#252923] font-normal">
+                <h3 className="font-sans font-bold text-2xl text-[#0f172a] font-normal">
                   What visible skin concerns would you like to address?
                 </h3>
-                <p className="text-xs text-[#777D76]">
+                <p className="text-xs text-[#64748b]">
                   Select all that apply. DermaNova's vision model evaluates these 8 visible concerns.
                 </p>
               </div>
@@ -486,23 +486,23 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
                       onClick={() => handleToggleConcern(opt.id)}
                       className={`p-4 rounded-2xl border transition cursor-pointer flex items-start justify-between ${
                         isChecked
-                          ? 'border-[#527665] bg-[#E8EFE9]/50 shadow-sm'
-                          : 'border-[#E8E8E1] bg-[#FAF9F6] hover:bg-white hover:border-[#527665]/30'
+                          ? 'border-[#0d9488] bg-[#f0fdfa]/50 shadow-sm'
+                          : 'border-[#e2e8f0] bg-[#f8fafc] hover:bg-white hover:border-[#0d9488]/30'
                       }`}
                     >
                       <div className="space-y-0.5 pr-2">
-                        <div className="text-xs font-mono font-semibold text-[#252923]">
+                        <div className="text-xs font-mono font-semibold text-[#0f172a]">
                           {opt.label}
                         </div>
-                        <div className="text-[11px] text-[#777D76]">
+                        <div className="text-[11px] text-[#64748b]">
                           {opt.desc}
                         </div>
                       </div>
                       <div
                         className={`w-5 h-5 rounded-md border flex items-center justify-center transition shrink-0 mt-0.5 ${
                           isChecked
-                            ? 'border-[#527665] bg-[#527665] text-white'
-                            : 'border-[#E8E8E1] bg-white'
+                            ? 'border-[#0d9488] bg-[#0d9488] text-white'
+                            : 'border-[#e2e8f0] bg-white'
                         }`}
                       >
                         {isChecked && <Check className="w-3 h-3" />}
@@ -518,13 +518,13 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
           {onboardingStep === 3 && (
             <div className="space-y-4">
               <div className="space-y-1">
-                <span className="text-[11px] font-mono uppercase tracking-wider text-[#527665] font-semibold">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#0d9488] font-semibold">
                   Step 03: Sensitivity (Optional)
                 </span>
-                <h3 className="font-serif text-2xl text-[#252923] font-normal">
+                <h3 className="font-sans font-bold text-2xl text-[#0f172a] font-normal">
                   How reactive is your cutaneous barrier?
                 </h3>
-                <p className="text-xs text-[#777D76]">
+                <p className="text-xs text-[#64748b]">
                   Helps our formulation engine determine whether to recommend gentle buffer lipids or active potencies.
                 </p>
               </div>
@@ -536,23 +536,23 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
                     onClick={() => setSensitivity(opt.id)}
                     className={`p-4 rounded-2xl border transition cursor-pointer flex items-center justify-between ${
                       sensitivity === opt.id
-                        ? 'border-[#527665] bg-[#E8EFE9]/50 shadow-sm'
-                        : 'border-[#E8E8E1] bg-[#FAF9F6] hover:bg-white hover:border-[#527665]/30'
+                        ? 'border-[#0d9488] bg-[#f0fdfa]/50 shadow-sm'
+                        : 'border-[#e2e8f0] bg-[#f8fafc] hover:bg-white hover:border-[#0d9488]/30'
                     }`}
                   >
                     <div className="space-y-0.5">
-                      <div className="text-xs font-mono font-semibold text-[#252923]">
+                      <div className="text-xs font-mono font-semibold text-[#0f172a]">
                         {opt.label}
                       </div>
-                      <div className="text-[11px] text-[#777D76]">
+                      <div className="text-[11px] text-[#64748b]">
                         {opt.desc}
                       </div>
                     </div>
                     <div
                       className={`w-5 h-5 rounded-full border flex items-center justify-center transition shrink-0 ${
                         sensitivity === opt.id
-                          ? 'border-[#527665] bg-[#527665] text-white'
-                          : 'border-[#E8E8E1] bg-white'
+                          ? 'border-[#0d9488] bg-[#0d9488] text-white'
+                          : 'border-[#e2e8f0] bg-white'
                       }`}
                     >
                       {sensitivity === opt.id && <Check className="w-3 h-3" />}
@@ -567,13 +567,13 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
           {onboardingStep === 4 && (
             <div className="space-y-4">
               <div className="space-y-1">
-                <span className="text-[11px] font-mono uppercase tracking-wider text-[#527665] font-semibold">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#0d9488] font-semibold">
                   Step 04: Skincare Experience
                 </span>
-                <h3 className="font-serif text-2xl text-[#252923] font-normal">
+                <h3 className="font-sans font-bold text-2xl text-[#0f172a] font-normal">
                   What is your experience with active formulations?
                 </h3>
-                <p className="text-xs text-[#777D76]">
+                <p className="text-xs text-[#64748b]">
                   Ensures routine instructions match your comfort with introducing actives like retinoids and AHAs.
                 </p>
               </div>
@@ -585,23 +585,23 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
                     onClick={() => setExperience(opt.id)}
                     className={`p-4 rounded-2xl border transition cursor-pointer flex items-center justify-between ${
                       experience === opt.id
-                        ? 'border-[#527665] bg-[#E8EFE9]/50 shadow-sm'
-                        : 'border-[#E8E8E1] bg-[#FAF9F6] hover:bg-white hover:border-[#527665]/30'
+                        ? 'border-[#0d9488] bg-[#f0fdfa]/50 shadow-sm'
+                        : 'border-[#e2e8f0] bg-[#f8fafc] hover:bg-white hover:border-[#0d9488]/30'
                     }`}
                   >
                     <div className="space-y-0.5">
-                      <div className="text-xs font-mono font-semibold text-[#252923]">
+                      <div className="text-xs font-mono font-semibold text-[#0f172a]">
                         {opt.label}
                       </div>
-                      <div className="text-[11px] text-[#777D76]">
+                      <div className="text-[11px] text-[#64748b]">
                         {opt.desc}
                       </div>
                     </div>
                     <div
                       className={`w-5 h-5 rounded-full border flex items-center justify-center transition shrink-0 ${
                         experience === opt.id
-                          ? 'border-[#527665] bg-[#527665] text-white'
-                          : 'border-[#E8E8E1] bg-white'
+                          ? 'border-[#0d9488] bg-[#0d9488] text-white'
+                          : 'border-[#e2e8f0] bg-white'
                       }`}
                     >
                       {experience === opt.id && <Check className="w-3 h-3" />}
@@ -613,12 +613,12 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
           )}
 
           {/* Onboarding Nav Actions */}
-          <div className="flex items-center justify-between pt-4 border-t border-[#E8E8E1]">
+          <div className="flex items-center justify-between pt-4 border-t border-[#e2e8f0]">
             {onboardingStep > 1 ? (
               <button
                 type="button"
                 onClick={() => setOnboardingStep(onboardingStep - 1)}
-                className="px-4 py-2 rounded-xl border border-[#E8E8E1] text-[#777D76] hover:text-[#252923] text-xs font-mono flex items-center gap-1.5 transition"
+                className="px-4 py-2 rounded-xl border border-[#e2e8f0] text-[#64748b] hover:text-[#0f172a] text-xs font-mono flex items-center gap-1.5 transition"
               >
                 <ChevronLeft className="w-3.5 h-3.5" />
                 <span>Previous</span>
@@ -632,7 +632,7 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
                 <button
                   type="button"
                   onClick={() => setOnboardingStep(4)}
-                  className="px-3 py-2 text-xs font-mono text-[#777D76] hover:text-[#252923]"
+                  className="px-3 py-2 text-xs font-mono text-[#64748b] hover:text-[#0f172a]"
                 >
                   Skip optional
                 </button>
@@ -642,7 +642,7 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
                 <button
                   type="button"
                   onClick={() => setOnboardingStep(onboardingStep + 1)}
-                  className="px-6 py-2.5 rounded-xl bg-[#304D40] hover:bg-[#253d33] text-white text-xs font-mono font-medium flex items-center gap-1.5 transition shadow-sm"
+                  className="px-6 py-2.5 rounded-xl bg-[#0f172a] hover:bg-[#1e293b] text-white text-xs font-mono font-medium flex items-center gap-1.5 transition shadow-sm"
                 >
                   <span>Continue</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -651,7 +651,7 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
                 <button
                   type="button"
                   onClick={handleFinishOnboarding}
-                  className="px-6 py-2.5 rounded-xl bg-[#527665] hover:bg-[#436153] text-white text-xs font-mono font-medium flex items-center gap-1.5 transition shadow-sm"
+                  className="px-6 py-2.5 rounded-xl bg-[#0d9488] hover:bg-[#0f766e] text-white text-xs font-mono font-medium flex items-center gap-1.5 transition shadow-sm"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Save Skin Profile</span>
@@ -665,34 +665,34 @@ export const AuthOnboardingScreen: React.FC<AuthOnboardingScreenProps> = ({
       {/* Forgot Password Dialog */}
       {forgotModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
-          <div className="bg-white rounded-3xl border border-[#E8E8E1] p-6 max-w-sm w-full space-y-4 shadow-xl">
-            <h4 className="font-serif text-lg text-[#252923]">Reset Your Password</h4>
-            <p className="text-xs text-[#777D76]">
+          <div className="bg-white rounded-3xl border border-[#e2e8f0] p-6 max-w-sm w-full space-y-4 shadow-xl">
+            <h4 className="font-sans font-bold text-lg text-[#0f172a]">Reset Your Password</h4>
+            <p className="text-xs text-[#64748b]">
               Enter your email and we'll send you a secure link to reset your credentials.
             </p>
             {forgotEmailSent ? (
-              <div className="p-3 rounded-xl bg-[#E8EFE9] text-[#304D40] text-xs font-mono">
+              <div className="p-3 rounded-xl bg-[#f0fdfa] text-[#0f172a] text-xs font-mono">
                 ✓ Password reset link sent! Please check your inbox.
               </div>
             ) : (
               <input
                 type="email"
                 placeholder="name@example.com"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF9F6] border border-[#E8E8E1] text-xs"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#f8fafc] border border-[#e2e8f0] text-xs"
                 defaultValue={email}
               />
             )}
             <div className="flex justify-end gap-2 pt-2">
               <button
                 onClick={() => { setForgotModal(false); setForgotEmailSent(false); }}
-                className="px-4 py-2 rounded-xl text-xs font-mono text-[#777D76]"
+                className="px-4 py-2 rounded-xl text-xs font-mono text-[#64748b]"
               >
                 Close
               </button>
               {!forgotEmailSent && (
                 <button
                   onClick={() => setForgotEmailSent(true)}
-                  className="px-4 py-2 rounded-xl bg-[#304D40] text-white text-xs font-mono"
+                  className="px-4 py-2 rounded-xl bg-[#0f172a] text-white text-xs font-mono"
                 >
                   Send Reset Link
                 </button>

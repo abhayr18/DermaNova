@@ -16,7 +16,10 @@ import {
   Bookmark,
   Share2,
   FileText,
-  AlertCircle
+  AlertCircle,
+  Activity,
+  Zap,
+  Sliders
 } from 'lucide-react';
 import { AnalysisResponse } from '../../services/api';
 import { SKIN_CONCERNS_DATA, SkinConcernInfo } from '../../services/skinConcernsData';
@@ -44,13 +47,13 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
 
   const scanDate = analysis
     ? new Date(analysis.timestamp || Date.now()).toLocaleDateString('en-US', {
-        month: 'long',
+        month: 'short',
         day: 'numeric',
         year: 'numeric',
         hour: '2-digit',
         minute: '2-digit',
       })
-    : 'October 20, 2026 • 16:48';
+    : 'Oct 22, 2026 • 00:55';
 
   const skinType = analysis?.detected_skin_type || 'Combination (T-Zone)';
   const overallScore = analysis?.overall_health_score ?? 84;
@@ -77,7 +80,6 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
 
   const dynamicPins = React.useMemo(() => {
     if (analysis?.detected_lesions && analysis.detected_lesions.length > 0) {
-      // Filter out any lesions whose condition is not actually prominent (probability < 0.35)
       return analysis.detected_lesions
         .filter((l) => {
           const cond = analysis.conditions?.[l.condition_id];
@@ -87,7 +89,7 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
           id: l.condition_id === 'dark_spots' ? 'darkSpots' : l.condition_id === 'pores' ? 'visiblePores' : l.condition_id,
           label: l.condition_name.split(' ')[0],
           prob: Math.round(l.confidence * 100),
-          color: l.color || '#b85c3c',
+          color: l.color || '#0D9488',
           x: l.box.x + l.box.width / 2,
           y: l.box.y + l.box.height / 2,
         }));
@@ -96,26 +98,17 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
     if (analysis?.conditions) {
       const pinPositions: Record<string, { x: number; y: number; color: string; label: string }> = {
         acne: { x: 58, y: 38, color: '#ef4444', label: 'Acne' },
-        redness: { x: 34, y: 48, color: '#f43f5e', label: 'Redness' },
-        pores: { x: 46, y: 44, color: '#06b6d4', label: 'Pores' },
-        dark_spots: { x: 70, y: 55, color: '#a855f7', label: 'Dark Spots' },
-        pigmentation: { x: 30, y: 60, color: '#d946ef', label: 'Pigmentation' },
-        blackheads: { x: 50, y: 42, color: '#eab308', label: 'Blackheads' },
-        whiteheads: { x: 40, y: 35, color: '#fb923c', label: 'Whiteheads' },
-        wrinkles: { x: 50, y: 24, color: '#3b82f6', label: 'Wrinkles' },
+        redness: { x: 34, y: 48, color: '#f43f5e', label: 'Erythema' },
+        pores: { x: 46, y: 44, color: '#0ea5e9', label: 'Pores' },
+        dark_spots: { x: 62, y: 56, color: '#d97706', label: 'Pigment' },
       };
 
-      const detected = Object.entries(analysis.conditions)
-        .filter(([_, v]) => v.is_detected || v.probability >= 0.35)
-        .sort((a, b) => b[1].probability - a[1].probability)
-        .slice(0, 3);
-
-      if (detected.length > 0) {
-        return detected.map(([k, v]) => {
-          const pos = pinPositions[k] || { x: 50, y: 50, color: '#b85c3c', label: v.display_name };
-          const cid = k === 'dark_spots' ? 'darkSpots' : k === 'pores' ? 'visiblePores' : k;
+      return Object.entries(analysis.conditions)
+        .filter(([_, v]) => v.is_detected || v.probability >= 0.40)
+        .map(([k, v]) => {
+          const pos = pinPositions[k] || { x: 50, y: 50, color: '#0D9488', label: v.display_name };
           return {
-            id: cid,
+            id: k === 'dark_spots' ? 'darkSpots' : k === 'pores' ? 'visiblePores' : k,
             label: pos.label,
             prob: Math.round(v.probability * 100),
             color: pos.color,
@@ -123,19 +116,18 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
             y: pos.y,
           };
         });
-      }
     }
 
-    // When all 8 markers are low probability / clear skin, do not show fake pins
     return [];
   }, [analysis]);
 
-  // Dynamic clinical interpretation reflecting actual findings
+  // Concise clinical interpretation
   const clinicalInterpretation = React.useMemo(() => {
     if (!analysis?.conditions) {
       return {
-        heading: "Optimal Cutaneous Homeostasis",
-        body: "Your skin barrier reflects balanced follicular activity and healthy moisture equilibrium. Routine maintenance should focus on barrier lipid replenishment, antioxidant hydration, and daily broad-spectrum photoprotection."
+        heading: "Cutaneous Equilibrium & Homeostasis",
+        focus: "Balanced Lipid Distribution",
+        recommendation: "Maintain lipid replenishment, antioxidant hydration, and daily broad-spectrum SPF 50."
       };
     }
 
@@ -146,18 +138,19 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
     if (activeList.length === 0) {
       return {
         heading: "High Cutaneous Barrier Equilibrium",
-        body: "Your facial scan demonstrates high barrier integrity with low biomarker activity across all 8 analyzed categories. No prominent active acne, follicular comedones, or focal post-inflammatory hyperpigmentation were detected. Recommendations center on cellular hydration, ceramide lipid replenishment, and daily broad-spectrum SPF photoprotection."
+        focus: "Zero Acute Biomarkers",
+        recommendation: "Maintain ceramide replenishment, hyaluronic acid hydration, and daily broad-spectrum SPF."
       };
     }
 
     const prominentNames = activeList.map(([_, v]) => v.display_name).slice(0, 3).join(", ");
     return {
       heading: `Cutaneous Assessment Focus: ${prominentNames}`,
-      body: `Your scan reflects localized activity primarily associated with ${prominentNames}. Introducing targeted, low-irritation actives matched to these biomarkers alongside gentle ceramide barrier support will foster optimal cellular equilibrium.`
+      focus: prominentNames,
+      recommendation: `Targeted, non-comedogenic actives matched to ${prominentNames} alongside ceramide barrier recovery.`
     };
   }, [analysis]);
 
-  // All 8 core concerns in structured order
   const concernList: SkinConcernInfo[] = [
     SKIN_CONCERNS_DATA.acne,
     SKIN_CONCERNS_DATA.blackheads,
@@ -169,59 +162,48 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
     SKIN_CONCERNS_DATA.redness,
   ];
 
-  const handleExportPDF = () => {
-    alert('Exporting your comprehensive DermaNova Clinical Skin Report as a printable summary.');
-  };
-
   return (
-    <div className="w-full space-y-8 animate-fade-in py-2">
+    <div className="w-full space-y-6 animate-fade-in py-2">
       
-      {/* =======================================================================
-          TOP SECTION: Heading, Date, Badges & Actions
-         ======================================================================= */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#E8E8E1]">
+      {/* Top Clinical Header */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
         <div>
-          <div className="flex flex-wrap items-center gap-2 mb-1">
-            <span className="px-3 py-1 rounded-full bg-[#E8EFE9] text-[#304D40] text-[11px] font-mono font-medium">
+          <div className="flex flex-wrap items-center gap-2 mb-1.5">
+            <span className="px-2.5 py-0.5 rounded-md bg-teal-50 border border-teal-200 text-teal-800 text-[10px] font-mono font-bold">
               Health Score: {overallScore}/100
             </span>
-            <span className="px-3 py-1 rounded-full bg-[#FAF9F6] border border-[#E8E8E1] text-[#252923] text-[11px] font-mono">
-              Skin Type: {skinType}
+            <span className="px-2.5 py-0.5 rounded-md bg-slate-100 border border-slate-200 text-slate-800 text-[10px] font-mono font-medium">
+              Type: {skinType}
             </span>
-            {analysis?.acne_severity_grade && (
-              <span className="px-3 py-1 rounded-full bg-[#FAF9F6] border border-[#E8E8E1] text-[#777D76] text-[11px] font-mono">
-                Acne Grade: {analysis.acne_severity_grade}
-              </span>
-            )}
-            <span className="text-[11px] font-mono text-[#777D76]">
+            <span className="text-[11px] font-mono text-slate-500">
               {scanDate}
             </span>
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl text-[#252923] font-normal tracking-tight">
-            Your Skin Analysis
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            AI Cutaneous Telemetry Report
           </h1>
-          <p className="text-xs text-[#777D76] mt-0.5">
-            Multi-target visual evaluation of 8 core visible cutaneous markers.
+          <p className="text-xs text-slate-500 mt-0.5">
+            Multi-task dense inference across 8 clinical cutaneous indicators with sub-millimeter lesion localization.
           </p>
         </div>
 
         {/* Action Controls */}
-        <div className="flex flex-wrap items-center gap-2.5">
+        <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => setReportSaved(true)}
-            className={`px-4 py-2.5 rounded-xl border text-xs font-mono transition flex items-center gap-1.5 shadow-sm ${
+            className={`px-3.5 py-2 rounded-xl border text-xs font-mono font-semibold transition flex items-center gap-1.5 shadow-xs ${
               reportSaved
-                ? 'bg-[#E8EFE9] border-[#d6e0ce] text-[#304D40] font-semibold'
-                : 'bg-white border-[#E8E8E1] text-[#252923] hover:bg-[#FAF9F6]'
+                ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
+                : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
             }`}
           >
             <Bookmark className="w-3.5 h-3.5" />
-            <span>{reportSaved ? 'Saved to Journal' : 'Save Report'}</span>
+            <span>{reportSaved ? 'Saved to DB' : 'Save Telemetry'}</span>
           </button>
 
           <button
-            onClick={handleExportPDF}
-            className="px-4 py-2.5 rounded-xl bg-white hover:bg-[#FAF9F6] border border-[#E8E8E1] text-[#252923] text-xs font-mono transition flex items-center gap-1.5 shadow-sm"
+            onClick={() => window.print()}
+            className="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-mono font-semibold transition flex items-center gap-1.5 shadow-xs"
           >
             <Download className="w-3.5 h-3.5" />
             <span>Export Report</span>
@@ -229,28 +211,24 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
 
           <button
             onClick={onStartNewAnalysis}
-            className="px-5 py-2.5 rounded-xl bg-[#304D40] hover:bg-[#253d33] text-white text-xs font-mono font-medium transition flex items-center gap-1.5 shadow-sm"
+            className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono font-semibold transition flex items-center gap-1.5 shadow-xs"
           >
-            <Camera className="w-3.5 h-3.5" />
-            <span>New Analysis</span>
+            <Camera className="w-3.5 h-3.5 text-teal-400" />
+            <span>New Scan</span>
           </button>
         </div>
       </div>
 
-      {/* =======================================================================
-          MAIN REPORT LAYOUT (Two-column desktop / stacked mobile)
-         ======================================================================= */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      {/* Main Two-Column Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
-        {/* =====================================================================
-            LEFT COLUMN: Large Photograph with Interactive Analysis Overlay
-           ===================================================================== */}
-        <div className="lg:col-span-5 space-y-4 lg:sticky lg:top-24">
+        {/* LEFT COLUMN: Large Photograph with Interactive Analysis Overlay */}
+        <div className="lg:col-span-5 space-y-4 lg:sticky lg:top-20">
           
-          <div className="rounded-3xl bg-white border border-[#E8E8E1] p-3 shadow-sm">
+          <div className="rounded-2xl bg-white border border-slate-200 p-2.5 shadow-xs">
             
             {/* Visual Viewport */}
-            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-[#FAF9F6]">
+            <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-slate-950">
               <img
                 src={imageSrc}
                 alt="Facial Skin Analysis Viewport"
@@ -271,7 +249,7 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
                   )}
 
                   {/* Subtle Facial Zone Contours */}
-                  <div className="absolute inset-10 border border-white/20 rounded-[48%] pointer-events-none" />
+                  <div className="absolute inset-8 border border-white/20 rounded-[48%] pointer-events-none" />
 
                   {/* Dynamic Pins from real model inference */}
                   {dynamicPins.map((pin) => (
@@ -283,11 +261,11 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
                     >
                       <div
                         style={{ borderColor: pin.color }}
-                        className="w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 bg-black/20 flex items-center justify-center animate-pulse group-hover:scale-125 transition"
+                        className="w-7 h-7 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 bg-slate-950/60 flex items-center justify-center animate-pulse group-hover:scale-125 transition"
                       >
-                        <span style={{ backgroundColor: pin.color }} className="w-2 h-2 rounded-full" />
+                        <span style={{ backgroundColor: pin.color }} className="w-2 h-2 rounded-full shadow-sm" />
                       </div>
-                      <span className="absolute -top-6 -translate-x-1/2 left-1/2 px-2 py-0.5 rounded-full bg-[#304D40] text-white text-[9px] font-mono whitespace-nowrap shadow-md">
+                      <span className="absolute -top-6 -translate-x-1/2 left-1/2 px-2 py-0.5 rounded-md bg-slate-900/90 text-white text-[9px] font-mono whitespace-nowrap shadow-md border border-slate-700">
                         {pin.label} {pin.prob}%
                       </span>
                     </div>
@@ -295,144 +273,145 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
 
                   {/* Indicator if no prominent lesions are detected */}
                   {dynamicPins.length === 0 && (
-                    <div className="absolute top-4 inset-x-4 p-2.5 rounded-xl bg-white/95 backdrop-blur-md border border-[#E8E8E1] text-[11px] font-mono text-[#304D40] flex items-center justify-center gap-2 shadow-xs pointer-events-auto">
-                      <span className="w-2 h-2 rounded-full bg-[#527665]" />
-                      <span>Optimal Homeostasis • No Focal Lesions Detected</span>
+                    <div className="absolute top-3 inset-x-3 p-2 rounded-lg bg-slate-900/90 backdrop-blur-md border border-slate-700 text-[10px] font-mono text-emerald-400 flex items-center justify-center gap-1.5 shadow-xs pointer-events-auto">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                      <span>Optimal Homeostasis • Low Focal Irregularities</span>
                     </div>
                   )}
                 </div>
               )}
 
               {/* Bottom Overlay Toggle Bar */}
-              <div className="absolute bottom-3 inset-x-3 p-2 rounded-xl bg-white/95 backdrop-blur-md border border-[#E8E8E1] flex items-center justify-between shadow-sm">
-                <span className="text-[11px] font-mono text-[#777D76]">
-                  View Mode:
+              <div className="absolute bottom-2.5 inset-x-2.5 p-1.5 rounded-xl bg-slate-900/85 backdrop-blur-md border border-slate-800 flex items-center justify-between shadow-xs">
+                <span className="text-[10px] font-mono text-slate-400 pl-1">
+                  Visualization:
                 </span>
-                <div className="flex items-center gap-1 bg-[#FAF9F6] p-0.5 rounded-lg border border-[#E8E8E1] text-[11px] font-mono">
+                <div className="flex items-center gap-1 bg-slate-800/80 p-0.5 rounded-lg text-[10px] font-mono">
                   <button
                     type="button"
                     onClick={() => setShowOverlay(false)}
-                    className={`px-2.5 py-1 rounded-md transition ${
+                    className={`px-2 py-0.5 rounded-md transition ${
                       !showOverlay
-                        ? 'bg-white text-[#252923] font-semibold shadow-xs'
-                        : 'text-[#777D76] hover:text-[#252923]'
+                        ? 'bg-white text-slate-900 font-bold'
+                        : 'text-slate-400 hover:text-white'
                     }`}
                   >
-                    Original Photo
+                    Raw RGB
                   </button>
                   <button
                     type="button"
                     onClick={() => setShowOverlay(true)}
-                    className={`px-2.5 py-1 rounded-md transition ${
+                    className={`px-2 py-0.5 rounded-md transition ${
                       showOverlay
-                        ? 'bg-white text-[#252923] font-semibold shadow-xs'
-                        : 'text-[#777D76] hover:text-[#252923]'
+                        ? 'bg-teal-500 text-slate-950 font-bold'
+                        : 'text-slate-400 hover:text-white'
                     }`}
                   >
-                    Analysis Overlay
+                    Telemetry Pins
                   </button>
                 </div>
               </div>
             </div>
 
             {/* Concise Overlay Legend */}
-            <div className="p-3 pt-3 flex flex-wrap items-center justify-around gap-2 text-[10px] font-mono text-[#777D76] border-t border-[#E8E8E1] mt-2">
+            <div className="p-2.5 flex items-center justify-around gap-2 text-[10px] font-mono text-slate-500 border-t border-slate-100 mt-1">
               <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#ef4444]" /> Blemishes
+                <span className="w-2 h-2 rounded-full bg-rose-500" /> Inflammatory
               </span>
               <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#f43f5e]" /> Redness
+                <span className="w-2 h-2 rounded-full bg-sky-500" /> Follicular
               </span>
               <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#06b6d4]" /> Pore Density
+                <span className="w-2 h-2 rounded-full bg-amber-500" /> Pigment
               </span>
             </div>
           </div>
 
           {/* Quick Context Card */}
-          <div className="p-4 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] text-xs text-[#777D76] space-y-1">
-            <div className="font-mono text-[#252923] font-medium flex items-center gap-1.5">
-              <Info className="w-3.5 h-3.5 text-[#527665]" />
+          <div className="p-3.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-600 space-y-1 shadow-xs">
+            <div className="font-mono text-slate-900 font-bold text-[11px] flex items-center gap-1.5">
+              <Info className="w-3.5 h-3.5 text-teal-600" />
               <span>Spatial Localization Note</span>
             </div>
-            <p className="text-[11px] leading-relaxed">
-              Pins indicate regions of interest evaluated by the multi-label visual architecture. Click any marker or concern card to open ingredient recommendations and clinical guidance.
+            <p className="text-[11px] text-slate-500 leading-relaxed">
+              Click any pinpoint or indicator card on the right to view active biochemical mechanisms and contraindication-safe topical actives.
             </p>
           </div>
         </div>
 
-        {/* =====================================================================
-            RIGHT COLUMN: Visible Skin Concerns (8 Core Cards)
-           ===================================================================== */}
-        <div className="lg:col-span-7 space-y-6">
+        {/* RIGHT COLUMN: 8 Core Biomarker Telemetry Cards */}
+        <div className="lg:col-span-7 space-y-5">
           
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between pb-1">
             <div>
-              <span className="text-[10px] font-mono uppercase tracking-wider text-[#527665] font-semibold">
-                Comprehensive Evaluation
+              <span className="text-[10px] font-mono uppercase tracking-wider text-teal-700 font-bold">
+                Multi-Task Evaluation
               </span>
-              <h2 className="font-serif text-2xl text-[#252923] font-normal">
-                Visible Skin Concerns
+              <h2 className="text-xl font-bold text-slate-900 tracking-tight">
+                8-Cutaneous Biomarker Matrix
               </h2>
             </div>
-            <span className="text-xs font-mono text-[#777D76]">
-              8 markers analyzed
+            <span className="text-xs font-mono font-medium text-slate-500">
+              Calibrated Probabilities
             </span>
           </div>
 
-          {/* 8 Core Concern Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          {/* 8 Biomarker Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {concernList.map((concern) => {
               const liveScore = getConditionScore(concern.id);
               const isDetected = liveScore ? liveScore.isDetected : false;
               const confidence = liveScore ? liveScore.probability : 0;
               const severity = liveScore ? liveScore.severity : 'Clear';
 
+              const severityColors: Record<string, { bg: string; text: string; bar: string }> = {
+                Clear: { bg: 'bg-emerald-50 border-emerald-200', text: 'text-emerald-700', bar: 'bg-emerald-500' },
+                Mild: { bg: 'bg-sky-50 border-sky-200', text: 'text-sky-700', bar: 'bg-sky-500' },
+                Moderate: { bg: 'bg-amber-50 border-amber-200', text: 'text-amber-800', bar: 'bg-amber-500' },
+                Severe: { bg: 'bg-rose-50 border-rose-200', text: 'text-rose-700', bar: 'bg-rose-500' },
+              };
+              const col = severityColors[severity] || severityColors.Clear;
+
               return (
                 <div
                   key={concern.id}
                   onClick={() => onOpenConcernDetail(concern.id)}
-                  className="p-4 rounded-2xl bg-white border border-[#E8E8E1] hover:border-[#527665]/60 hover:shadow-sm transition cursor-pointer flex flex-col justify-between space-y-3 group"
+                  className="p-3.5 rounded-xl bg-white border border-slate-200 hover:border-slate-400 hover:shadow-xs transition cursor-pointer flex flex-col justify-between space-y-2.5 group"
                 >
                   <div className="space-y-1.5">
-                    
-                    {/* Top Row: Concern Name & Status Badge */}
-                    <div className="flex items-start justify-between gap-2">
-                      <h3 className="font-mono text-xs font-bold text-[#252923] group-hover:text-[#527665] transition">
+                    {/* Header Row */}
+                    <div className="flex items-center justify-between gap-2">
+                      <h3 className="font-semibold text-xs text-slate-900 group-hover:text-teal-700 transition">
                         {concern.name}
                       </h3>
-                      <span
-                        className={`px-2 py-0.5 rounded-full text-[10px] font-mono shrink-0 ${
-                          isDetected
-                            ? severity === 'Moderate' || severity === 'Severe'
-                              ? 'bg-[#EEEAF5] text-[#304D40] border border-[#d5cbe4]'
-                              : 'bg-[#E8EFE9] text-[#304D40] border border-[#d6e0ce]'
-                            : 'bg-[#FAF9F6] text-[#777D76] border border-[#E8E8E1]'
-                        }`}
-                      >
-                        {isDetected ? `${confidence}% probability` : 'Low probability'}
+                      <span className={`px-2 py-0.5 rounded-md text-[10px] font-mono font-bold border ${col.bg} ${col.text}`}>
+                        {confidence}%
                       </span>
                     </div>
 
-                    {/* Plain-language explanation */}
-                    <p className="text-[11px] text-[#777D76] leading-relaxed line-clamp-2">
+                    {/* Progress Bar */}
+                    <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                      <div
+                        className={`h-full rounded-full transition-all duration-500 ${col.bar}`}
+                        style={{ width: `${Math.max(confidence, 4)}%` }}
+                      />
+                    </div>
+
+                    {/* Concise Summary */}
+                    <p className="text-[11px] text-slate-500 leading-snug line-clamp-2">
                       {liveScore?.note || concern.shortDesc}
                     </p>
                   </div>
 
-                  {/* Bottom Row: Visual Indicator & Learn More CTA */}
-                  <div className="pt-2 border-t border-[#E8E8E1] flex items-center justify-between text-xs font-mono">
-                    <span className="text-[10px] text-[#777D76] flex items-center gap-1">
-                      <span
-                        className={`w-1.5 h-1.5 rounded-full ${
-                          isDetected ? 'bg-[#527665]' : 'bg-[#777D76]/40'
-                        }`}
-                      />
-                      {isDetected ? severity : 'Not prominent'}
+                  {/* Status & CTA */}
+                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] font-mono">
+                    <span className="text-slate-500 flex items-center gap-1.5">
+                      <span className={`w-1.5 h-1.5 rounded-full ${isDetected ? 'bg-amber-500' : 'bg-emerald-500'}`} />
+                      <span>{isDetected ? severity : 'Clear'}</span>
                     </span>
 
-                    <span className="text-[#527665] group-hover:underline text-[11px] font-semibold flex items-center gap-0.5">
-                      <span>Learn More</span>
+                    <span className="text-teal-700 group-hover:underline font-semibold flex items-center gap-0.5">
+                      <span>View Bio-Actives</span>
                       <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                     </span>
                   </div>
@@ -441,39 +420,45 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
             })}
           </div>
 
-          {/* ===================================================================
-              BOTTOM SECTION: What this may mean, Next steps & CTAs
-             =================================================================== */}
-          <div className="rounded-3xl bg-[#FAF9F6] border border-[#E8E8E1] p-6 sm:p-7 space-y-4">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-[#527665] font-semibold">
-              Clinical Interpretation
-            </span>
-            <h3 className="font-serif text-xl text-[#252923] font-normal">
-              {clinicalInterpretation.heading}
-            </h3>
-            <p className="text-xs sm:text-sm text-[#777D76] leading-relaxed">
-              {clinicalInterpretation.body}
-            </p>
+          {/* Clinical Interpretation & Next Steps Box */}
+          <div className="rounded-2xl bg-slate-900 text-white p-5 sm:p-6 space-y-4 shadow-sm">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-teal-400 font-bold">
+                Clinical Synthesis
+              </span>
+              <span className="text-[10px] font-mono text-slate-400">
+                Rule-Based Formulation Engine
+              </span>
+            </div>
 
-            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-t border-[#E8E8E1]">
-              <div className="text-xs font-mono text-[#777D76]">
-                Ready to review your tailored AM/PM sequence?
+            <div>
+              <h3 className="text-base font-bold text-white">
+                {clinicalInterpretation.heading}
+              </h3>
+              <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                {clinicalInterpretation.recommendation}
+              </p>
+            </div>
+
+            <div className="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-t border-slate-800">
+              <div className="text-xs font-mono text-slate-400">
+                Synthesize AM/PM regimen based on these biomarkers:
               </div>
               <button
                 onClick={onBuildRoutine}
-                className="px-6 py-3 rounded-2xl bg-[#304D40] hover:bg-[#253d33] text-white font-mono text-xs font-medium flex items-center justify-center gap-2 transition shadow-sm"
+                className="px-5 py-2.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-mono text-xs font-bold flex items-center justify-center gap-2 transition shadow-xs"
               >
-                <span>Build My Skincare Routine</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>Generate Prescribed Protocol</span>
+                <ArrowRight className="w-3.5 h-3.5 text-slate-950" />
               </button>
             </div>
           </div>
 
-          {/* Scientific & Educational Disclaimer */}
-          <div className="p-4 rounded-2xl border border-[#E8E8E1] bg-white text-[11px] text-[#777D76] leading-relaxed flex items-start gap-2.5">
-            <ShieldCheck className="w-4 h-4 text-[#527665] shrink-0 mt-0.5" />
+          {/* Clinical Disclaimer */}
+          <div className="p-3.5 rounded-xl border border-slate-200 bg-white text-[11px] text-slate-500 leading-normal flex items-start gap-2.5 shadow-xs">
+            <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
             <span>
-              <strong>Scientific Notice:</strong> Model confidence reflects pattern similarity to dermatological datasets and is not a clinical diagnosis. Absence of visible detection does not preclude underlying subclinical conditions. Consult a qualified dermatologist for personal medical advice.
+              <strong>Clinical Guardrail:</strong> Algorithmic evaluation reflects visible morphology and does not constitute histopathological or medical diagnosis. For persistent or cystic lesions, consult a licensed dermatologist.
             </span>
           </div>
         </div>

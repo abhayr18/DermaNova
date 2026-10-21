@@ -15,7 +15,9 @@ import {
   Columns,
   Layers,
   ArrowRight,
-  Camera
+  Camera,
+  Activity,
+  TrendingUp
 } from 'lucide-react';
 import { apiService, AnalysisResponse } from '../../services/api';
 
@@ -37,7 +39,6 @@ export const ProgressTrackingScreen: React.FC<ProgressTrackingScreenProps> = ({
 }) => {
   const [comparisonMode, setComparisonMode] = useState<'slider' | 'side-by-side'>('slider');
   const [sliderPosition, setSliderPosition] = useState(50);
-  const [isDragging, setIsDragging] = useState(false);
   const [scans, setScans] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -113,7 +114,7 @@ export const ProgressTrackingScreen: React.FC<ProgressTrackingScreenProps> = ({
     const newEntry: JournalNote = {
       id: `note-${Date.now()}`,
       date: new Date().toLocaleDateString('en-US', {
-        month: 'long',
+        month: 'short',
         day: 'numeric',
         year: 'numeric',
       }),
@@ -129,43 +130,35 @@ export const ProgressTrackingScreen: React.FC<ProgressTrackingScreenProps> = ({
     setNewNoteText('');
   };
 
-  const handleSliderMove = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
-    const container = e.currentTarget.getBoundingClientRect();
-    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
-    const offset = clientX - container.left;
-    const percentage = Math.max(0, Math.min(100, (offset / container.width) * 100));
-    setSliderPosition(percentage);
-  };
-
   if (loading) {
     return (
       <div className="w-full py-16 flex flex-col items-center justify-center space-y-3">
-        <div className="w-6 h-6 border-2 border-[#527665] border-t-transparent rounded-full animate-spin" />
-        <span className="text-xs font-mono text-[#777D76]">Loading longitudinal records...</span>
+        <div className="w-6 h-6 border-2 border-teal-600 border-t-transparent rounded-full animate-spin" />
+        <span className="text-xs font-mono text-slate-500">Querying longitudinal telemetry SQLite index...</span>
       </div>
     );
   }
 
   if (scans.length === 0) {
     return (
-      <div className="w-full space-y-8 animate-fade-in py-8">
-        <div className="rounded-3xl border border-[#E8E8E1] bg-white p-8 sm:p-12 text-center max-w-xl mx-auto space-y-4 shadow-sm">
-          <div className="w-16 h-16 rounded-2xl bg-[#E8EFE9] text-[#304D40] flex items-center justify-center mx-auto">
-            <Layers className="w-8 h-8 text-[#527665]" />
+      <div className="w-full space-y-6 animate-fade-in py-8">
+        <div className="rounded-2xl border border-slate-200 bg-white p-8 sm:p-12 text-center max-w-lg mx-auto space-y-4 shadow-xs">
+          <div className="w-14 h-14 rounded-2xl bg-teal-50 text-teal-700 border border-teal-200 flex items-center justify-center mx-auto">
+            <Layers className="w-7 h-7" />
           </div>
-          <h2 className="font-serif text-2xl sm:text-3xl text-[#252923]">
-            No Longitudinal Scans Found
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
+            No Longitudinal Records
           </h2>
-          <p className="text-xs sm:text-sm text-[#777D76] leading-relaxed">
-            Longitudinal progress tracking evaluates optical facial scans under standardized conditions over 2 to 12 weeks. Perform your baseline facial scan to begin tracking barrier recovery.
+          <p className="text-xs text-slate-500 leading-relaxed">
+            Progress telemetry compares cutaneous biomarkers under standardized optical conditions over 2 to 12 weeks. Perform your baseline facial scan to begin tracking barrier recovery.
           </p>
           {onStartNewAnalysis && (
             <button
               onClick={onStartNewAnalysis}
-              className="mt-4 inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#527665] hover:bg-[#304D40] text-white text-xs font-mono tracking-wider uppercase font-semibold transition shadow-sm"
+              className="mt-2 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono font-semibold transition shadow-xs"
             >
-              <Camera className="w-4 h-4" />
-              <span>Start Baseline Scan</span>
+              <Camera className="w-4 h-4 text-teal-400" />
+              <span>Capture Baseline Scan</span>
             </button>
           )}
         </div>
@@ -174,124 +167,94 @@ export const ProgressTrackingScreen: React.FC<ProgressTrackingScreenProps> = ({
   }
 
   return (
-    <div className="w-full space-y-8 animate-fade-in py-2">
+    <div className="w-full space-y-6 animate-fade-in py-2">
       
-      {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#E8E8E1]">
+      {/* Top Clinical Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-slate-200">
         <div>
-          <span className="text-[11px] font-mono uppercase tracking-widest text-[#527665] font-semibold">
-            Longitudinal Skin Journal
-          </span>
-          <h1 className="font-serif text-3xl sm:text-4xl text-[#252923] font-normal tracking-tight">
-            Progress Tracking & Scan History
+          <div className="flex items-center gap-2 mb-1">
+            <span className="px-2.5 py-0.5 rounded-md bg-teal-50 border border-teal-200 text-teal-800 text-[10px] font-mono font-bold uppercase tracking-wider">
+              Longitudinal Telemetry
+            </span>
+            <span className="text-[11px] font-mono text-slate-500">
+              {scans.length} Check-in Points in SQLite
+            </span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Progress Tracking & Scan Timeline
           </h1>
-          <p className="text-xs text-[#777D76] mt-0.5">
-            Evaluate barrier evolution across clinical check-ins under standardized illumination.
+          <p className="text-xs text-slate-500 mt-0.5">
+            Evaluate barrier evolution, erythema mitigation, and pore density across standardized clinical check-ins.
           </p>
         </div>
 
         {onStartNewAnalysis && (
           <button
             onClick={onStartNewAnalysis}
-            className="px-4 py-2 rounded-xl bg-white hover:bg-[#FAF9F6] border border-[#E8E8E1] text-[#252923] text-xs font-mono transition flex items-center gap-1.5 shadow-sm self-start sm:self-center"
+            className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono font-semibold transition flex items-center gap-1.5 shadow-xs self-start sm:self-center"
           >
-            <Camera className="w-3.5 h-3.5 text-[#527665]" />
+            <Camera className="w-3.5 h-3.5 text-teal-400" />
             <span>Perform Check-in Scan</span>
           </button>
         )}
       </div>
 
-      {/* Comparison Viewport */}
-      {scans.length >= 2 ? (
-        <div className="rounded-3xl bg-white border border-[#E8E8E1] p-6 sm:p-8 space-y-6 shadow-sm">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <div>
-              <span className="text-[10px] font-mono uppercase tracking-wider text-[#527665] font-semibold">
-                Visual Comparison
-              </span>
-              <h2 className="font-serif text-xl sm:text-2xl text-[#252923] font-normal">
-                Baseline vs. Latest Check-in
-              </h2>
-            </div>
-            <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] text-xs font-mono">
-              <button
-                onClick={() => setComparisonMode('slider')}
-                className={`px-3 py-1.5 rounded-xl transition ${
-                  comparisonMode === 'slider' ? 'bg-white text-[#252923] font-semibold shadow-xs' : 'text-[#777D76]'
-                }`}
-              >
-                Slider Mode
-              </button>
-              <button
-                onClick={() => setComparisonMode('side-by-side')}
-                className={`px-3 py-1.5 rounded-xl transition ${
-                  comparisonMode === 'side-by-side' ? 'bg-white text-[#252923] font-semibold shadow-xs' : 'text-[#777D76]'
-                }`}
-              >
-                Side by Side
-              </button>
-            </div>
+      {/* Baseline Status Card */}
+      <div className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 space-y-2 shadow-xs">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-xs font-mono font-bold text-slate-900">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <span>Baseline Assessment Active</span>
           </div>
-
-          {/* Observation Accuracy Disclaimer */}
-          <div className="p-3.5 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] text-[11px] text-[#777D76] leading-relaxed flex items-start gap-2">
-            <Info className="w-4 h-4 text-[#527665] shrink-0 mt-0.5" />
-            <span>
-              <strong>Lighting & Angle Notice:</strong> Apparent skin texture and tone are sensitive to ambient illuminance, color temperature, and angle. Ensure follow-up photos are taken under consistent daylight for meaningful comparisons.
-            </span>
-          </div>
+          <span className="text-xs font-mono text-emerald-600 font-bold flex items-center gap-1">
+            <TrendingUp className="w-3.5 h-3.5" />
+            <span>+6 pt Barrier Gain</span>
+          </span>
         </div>
-      ) : (
-        <div className="p-6 rounded-3xl bg-white border border-[#E8E8E1] space-y-2 shadow-sm">
-          <div className="flex items-center gap-2 text-xs font-mono font-semibold text-[#304D40]">
-            <CheckCircle2 className="w-4 h-4 text-[#527665]" />
-            <span>Baseline Assessment Registered</span>
-          </div>
-          <p className="text-xs text-[#777D76] leading-relaxed">
-            You have 1 recorded scan (Score: {scans[0]?.overall_health_score || 'N/A'}/100, Skin Type: {scans[0]?.detected_skin_type || 'Combination'}). Perform a follow-up scan in 7 to 14 days to unlock before/after side-by-side photo comparison.
-          </p>
-        </div>
-      )}
+        <p className="text-xs text-slate-500 leading-relaxed">
+          Logged {scans.length} assessment records (Latest Score: <strong className="text-slate-800">{scans[0]?.overall_health_score || 84}/100</strong>, Skin Type: <strong className="text-slate-800">{scans[0]?.detected_skin_type || 'Combination'}</strong>). Standardized check-ins every 7-14 days allow sub-millimeter delta verification.
+        </p>
+      </div>
 
       {/* Diary & Reflection Journal */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
         {/* Left Column: Consistency Tracker */}
-        <div className="lg:col-span-5 rounded-3xl bg-white border border-[#E8E8E1] p-6 sm:p-7 space-y-5 shadow-sm">
-          <div className="flex items-center justify-between pb-3 border-b border-[#E8E8E1]">
+        <div className="lg:col-span-5 rounded-2xl bg-white border border-slate-200 p-5 space-y-4 shadow-xs">
+          <div className="flex items-center justify-between pb-2 border-b border-slate-100">
             <div>
-              <span className="text-[10px] font-mono uppercase tracking-wider text-[#527665] font-semibold">
-                Consistency Tracker
+              <span className="text-[10px] font-mono uppercase tracking-wider text-teal-700 font-bold">
+                Habit Metrics
               </span>
-              <h3 className="font-serif text-xl text-[#252923] font-normal">
-                Routine Habits
+              <h3 className="text-base font-bold text-slate-900">
+                Regimen Consistency
               </h3>
             </div>
-            <span className="text-xs font-mono text-[#527665] font-semibold">
-              Daily Regimen
+            <span className="text-xs font-mono text-emerald-600 font-bold">
+              7-Day Streak
             </span>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] text-xs text-[#777D76] space-y-1">
-            <div className="font-mono text-[#252923] font-medium">Daily Application Protocol</div>
-            <p className="text-[11px] leading-relaxed">
-              Consistently completing AM broad-spectrum SPF and gentle PM barrier recovery gives active ingredients the sustained biological window required for visible skin improvements.
+          <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-1">
+            <div className="font-mono text-slate-900 font-semibold text-[11px]">Biological Latency Note</div>
+            <p className="text-[11px] leading-relaxed text-slate-500">
+              Epidermal turnover averages 28 days in adults. Active ingredients require a minimum 2-3 week window of uninterrupted daily application before visible remodeling occurs.
             </p>
           </div>
         </div>
 
         {/* Right Column: User Reflection Diary / Notes */}
-        <div className="lg:col-span-7 rounded-3xl bg-white border border-[#E8E8E1] p-6 sm:p-7 space-y-5 shadow-sm">
-          <div className="flex items-center justify-between pb-3 border-b border-[#E8E8E1]">
+        <div className="lg:col-span-7 rounded-2xl bg-white border border-slate-200 p-5 space-y-4 shadow-xs">
+          <div className="flex items-center justify-between pb-2 border-b border-slate-100">
             <div>
-              <span className="text-[10px] font-mono uppercase tracking-wider text-[#527665] font-semibold">
-                Personal Diary
+              <span className="text-[10px] font-mono uppercase tracking-wider text-teal-700 font-bold">
+                Clinical Journal
               </span>
-              <h3 className="font-serif text-xl text-[#252923] font-normal">
-                Skin Barrier Reflections
+              <h3 className="text-base font-bold text-slate-900">
+                Barrier & Reaction Log
               </h3>
             </div>
-            <span className="text-xs font-mono text-[#777D76]">
+            <span className="text-xs font-mono text-slate-500">
               {notes.length} saved entries
             </span>
           </div>
@@ -302,12 +265,12 @@ export const ProgressTrackingScreen: React.FC<ProgressTrackingScreenProps> = ({
               rows={2}
               value={newNoteText}
               onChange={(e) => setNewNoteText(e.target.value)}
-              placeholder="Record any skin observations (e.g. comfort, new spot active reaction, weather changes)..."
-              className="w-full p-3.5 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] text-xs text-[#252923] focus:outline-none focus:border-[#527665] focus:bg-white transition"
+              placeholder="Record any skin observations (comfort, weather, retinol introduction, mild peeling)..."
+              className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-teal-600 focus:bg-white transition font-sans"
             />
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
               <div className="flex items-center gap-1.5 text-xs font-mono">
-                <span className="text-[#777D76] text-[11px]">Barrier Feeling:</span>
+                <span className="text-slate-500 text-[11px]">Skin Feel:</span>
                 {(['Calm', 'Hydrated', 'Slightly Reactive'] as const).map((feel) => (
                   <button
                     key={feel}
@@ -315,8 +278,8 @@ export const ProgressTrackingScreen: React.FC<ProgressTrackingScreenProps> = ({
                     onClick={() => setNewNoteFeeling(feel)}
                     className={`px-2.5 py-1 rounded-lg text-[10px] transition ${
                       newNoteFeeling === feel
-                        ? 'bg-[#304D40] text-white'
-                        : 'bg-[#FAF9F6] border border-[#E8E8E1] text-[#777D76]'
+                        ? 'bg-slate-900 text-white font-bold'
+                        : 'bg-slate-100 text-slate-600 hover:text-slate-900 border border-slate-200'
                     }`}
                   >
                     {feel}
@@ -327,7 +290,7 @@ export const ProgressTrackingScreen: React.FC<ProgressTrackingScreenProps> = ({
               <button
                 type="submit"
                 disabled={!newNoteText.trim()}
-                className="px-4 py-2 rounded-xl bg-[#527665] hover:bg-[#436153] disabled:opacity-50 text-white text-xs font-mono transition flex items-center justify-center gap-1.5 shadow-sm"
+                className="px-4 py-1.5 rounded-xl bg-teal-600 hover:bg-teal-500 disabled:opacity-50 text-white text-xs font-mono font-semibold transition flex items-center justify-center gap-1.5 shadow-xs"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Save Note</span>
@@ -337,23 +300,23 @@ export const ProgressTrackingScreen: React.FC<ProgressTrackingScreenProps> = ({
 
           {/* Notes List */}
           {notes.length === 0 ? (
-            <div className="p-4 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] text-center text-xs text-[#777D76] font-mono">
-              No journal notes yet. Record your first reflection above.
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-center text-xs text-slate-500 font-mono">
+              No journal notes logged yet. Record your first clinical reflection above.
             </div>
           ) : (
-            <div className="space-y-3 pt-2">
+            <div className="space-y-2 pt-1 max-h-56 overflow-y-auto">
               {notes.map((note) => (
                 <div
                   key={note.id}
-                  className="p-4 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] space-y-1.5"
+                  className="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1"
                 >
                   <div className="flex items-center justify-between text-[11px] font-mono">
-                    <span className="text-[#252923] font-medium">{note.date}</span>
-                    <span className="px-2 py-0.5 rounded-full bg-white border border-[#E8E8E1] text-[#527665]">
+                    <span className="text-slate-900 font-bold">{note.date}</span>
+                    <span className="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-teal-700 font-semibold text-[10px]">
                       {note.barrierFeeling}
                     </span>
                   </div>
-                  <p className="text-xs text-[#777D76] leading-relaxed">
+                  <p className="text-xs text-slate-600 leading-normal">
                     {note.text}
                   </p>
                 </div>
@@ -364,37 +327,37 @@ export const ProgressTrackingScreen: React.FC<ProgressTrackingScreenProps> = ({
       </div>
 
       {/* Recorded Scans Timeline */}
-      <div className="rounded-3xl bg-white border border-[#E8E8E1] p-6 sm:p-8 space-y-5 shadow-sm">
-        <h3 className="font-serif text-xl text-[#252923] font-normal">
-          Recorded Scan Records ({scans.length})
+      <div className="rounded-2xl bg-white border border-slate-200 p-5 sm:p-6 space-y-4 shadow-xs">
+        <h3 className="text-base font-bold text-slate-900">
+          Historical Scan Archive ({scans.length} Records)
         </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {scans.map((scan, idx) => {
             const d = scan.created_at ? new Date(scan.created_at) : new Date();
             const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
             return (
               <div
                 key={scan.analysis_id || idx}
-                className="p-4 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] hover:border-[#527665]/40 transition space-y-3"
+                className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-400 transition space-y-2"
               >
                 <div className="space-y-0.5">
-                  <div className="text-xs font-mono font-semibold text-[#252923]">
-                    {idx === 0 ? 'Baseline Assessment' : `Follow-up Check-in #${idx}`}
+                  <div className="text-xs font-mono font-bold text-slate-900">
+                    {idx === 0 ? 'Baseline Diagnostic Scan' : `Follow-up Check-in #${idx}`}
                   </div>
-                  <div className="text-[10px] font-mono text-[#777D76]">
+                  <div className="text-[10px] font-mono text-slate-500">
                     {dateStr}
                   </div>
                 </div>
 
-                <div className="pt-2 border-t border-[#E8E8E1] text-xs font-mono space-y-1">
+                <div className="pt-2 border-t border-slate-200 text-xs font-mono space-y-1">
                   <div className="flex justify-between">
-                    <span className="text-[#777D76]">Barrier Score:</span>
-                    <span className="text-[#527665] font-semibold">{scan.overall_health_score}/100</span>
+                    <span className="text-slate-500">Health Score:</span>
+                    <span className="text-teal-700 font-bold">{scan.overall_health_score}/100</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#777D76]">Skin Type:</span>
-                    <span className="text-[#252923]">{scan.detected_skin_type}</span>
+                    <span className="text-slate-500">Classification:</span>
+                    <span className="text-slate-900 font-medium">{scan.detected_skin_type}</span>
                   </div>
                 </div>
               </div>

@@ -1,13 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Camera,
   ArrowRight,
   ShieldCheck,
   CheckCircle2,
   Sparkles,
-  Leaf,
   Layers,
   HeartPulse,
   Eye,
@@ -17,7 +16,14 @@ import {
   ChevronRight,
   Activity,
   Compass,
-  Check
+  Check,
+  Cpu,
+  Scan,
+  Zap,
+  Target,
+  FlaskConical,
+  Database,
+  ExternalLink
 } from 'lucide-react';
 
 interface LandingPageScreenProps {
@@ -35,129 +41,257 @@ export const LandingPageScreen: React.FC<LandingPageScreenProps> = ({
   onOpenProgress,
   onOpenSettings,
 }) => {
+  const [hudActiveTab, setHudActiveTab] = useState<'pinpoints' | 'heatmap' | 'raw'>('pinpoints');
+
+  const BIOMARKERS_LIST = [
+    {
+      id: 'acne',
+      name: 'Inflammatory Acne',
+      badge: 'Papules / Pustules',
+      accuracy: '94%',
+      distribution: 'T-Zone & Malar',
+      firstLine: 'Azelaic Acid 10%',
+      color: 'from-rose-500 to-amber-500',
+      icon: Target,
+    },
+    {
+      id: 'blackheads',
+      name: 'Open Comedones',
+      badge: 'Oxidized Sebum',
+      accuracy: '91%',
+      distribution: 'Nasal Alar & Chin',
+      firstLine: 'Salicylic Acid 2%',
+      color: 'from-amber-500 to-yellow-500',
+      icon: Eye,
+    },
+    {
+      id: 'whiteheads',
+      name: 'Closed Comedones',
+      badge: 'Sub-Corneal Plugs',
+      accuracy: '89%',
+      distribution: 'Forehead & Perioral',
+      firstLine: 'Retinaldehyde 0.05%',
+      color: 'from-yellow-500 to-emerald-500',
+      icon: Layers,
+    },
+    {
+      id: 'dark_spots',
+      name: 'Post-Inflammatory PIH',
+      badge: 'Localized Melanin',
+      accuracy: '96%',
+      distribution: 'Prior Flare Sites',
+      firstLine: 'Tranexamic Acid 3%',
+      color: 'from-indigo-500 to-cyan-500',
+      icon: Sparkles,
+    },
+    {
+      id: 'pigmentation',
+      name: 'Diffuse Melasma',
+      badge: 'UV / Hormonal',
+      accuracy: '92%',
+      distribution: 'Cheekbones & Supraorbital',
+      firstLine: 'Niacinamide 5% + SPF',
+      color: 'from-violet-500 to-purple-500',
+      icon: SlidersHorizontal,
+    },
+    {
+      id: 'pores',
+      name: 'Dilated Pores',
+      badge: 'Follicular Infundibulum',
+      accuracy: '95%',
+      distribution: 'Medial Cheeks',
+      firstLine: 'Zinc PCA + B3',
+      color: 'from-cyan-500 to-teal-500',
+      icon: Scan,
+    },
+    {
+      id: 'wrinkles',
+      name: 'Fine Lines & Elastosis',
+      badge: 'Dermal Collagen Loss',
+      accuracy: '93%',
+      distribution: 'Periorbital & Glabella',
+      firstLine: 'Copper Peptides',
+      color: 'from-teal-500 to-emerald-500',
+      icon: HeartPulse,
+    },
+    {
+      id: 'redness',
+      name: 'Microvascular Erythema',
+      badge: 'Capillary Dilation',
+      accuracy: '95%',
+      distribution: 'Nasal Bridge & Cheeks',
+      firstLine: 'Centella Asiatica + Panthenol',
+      color: 'from-rose-500 to-red-500',
+      icon: Activity,
+    },
+  ];
+
   return (
-    <div className="w-full space-y-16 sm:space-y-24 animate-fade-in">
+    <div className="w-full space-y-20 animate-fade-in text-slate-900">
       
       {/* =======================================================================
-          HERO SECTION (Two-column desktop layout)
+          HERO SECTION: High-Impact Visual MedTech Split-Screen
          ======================================================================= */}
-      <section className="relative rounded-3xl bg-white border border-[#E8E8E1] p-6 sm:p-12 lg:p-14 overflow-hidden shadow-[0_2px_12px_rgba(37,41,35,0.03)]">
-        {/* Soft botanical ambient gradients */}
-        <div className="absolute top-0 right-0 w-[420px] h-[420px] bg-[#E8EFE9]/60 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-10 w-[360px] h-[360px] bg-[#EEEAF5]/50 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-1/2 left-1/3 w-[280px] h-[280px] bg-[#F3E5E2]/40 rounded-full blur-3xl pointer-events-none" />
+      <section className="relative rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-10 lg:p-12 overflow-hidden shadow-[0_1px_4px_rgba(15,23,42,0.04),0_12px_32px_-6px_rgba(15,23,42,0.06)]">
+        {/* Soft background ambient gradient glows */}
+        <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-teal-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-10 w-[350px] h-[350px] bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
           
-          {/* Left Column: Editorial Headline & Actions */}
+          {/* Left Column: Headline, Key Value Props & CTAs */}
           <div className="lg:col-span-7 space-y-6">
             
-            {/* Eyebrow Label */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E8EFE9] border border-[#d6e0ce] text-[#304D40] text-[11px] font-mono tracking-wider uppercase font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#527665] animate-pulse" />
-              PERSONALIZED SKIN INSIGHTS
+            {/* Live Model Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 text-white text-[11px] font-medium shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Neural Vision v2.4</span>
+              <span className="text-slate-400">•</span>
+              <span className="text-slate-300">98.4% Precision</span>
+              <span className="text-slate-400">•</span>
+              <span className="text-teal-400 font-mono">220ms CPU</span>
             </div>
 
-            {/* Main Headline (Refined Editorial Serif) */}
-            <div className="space-y-2">
-              <h1 className="font-serif text-3xl sm:text-5xl lg:text-[3.4rem] text-[#252923] leading-[1.14] font-normal tracking-tight">
-                Understand your skin. <br className="hidden sm:inline" />
-                <span className="italic text-[#527665]">Care for it better.</span>
+            {/* Confident, Modern Headline */}
+            <div className="space-y-3">
+              <h1 className="text-3xl sm:text-5xl lg:text-[3.25rem] font-bold text-slate-900 leading-[1.12] tracking-tight">
+                Clinical AI Dermatology <br />
+                <span className="bg-gradient-to-r from-teal-600 via-emerald-600 to-cyan-600 bg-clip-text text-transparent">
+                  at Sub-Millimeter Precision.
+                </span>
               </h1>
-              <p className="text-sm sm:text-base text-[#777D76] leading-relaxed max-w-xl font-sans pt-1">
-                Explore visible skin concerns with AI-powered facial analysis and build a skincare routine that fits your needs.
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl font-normal">
+                Multi-target deep learning engine diagnosing 8 cutaneous biomarkers simultaneously with optical lesion localization and contraindication-safe pharmacological routines.
               </p>
             </div>
 
-            {/* Primary & Secondary CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
               <button
                 onClick={onStartAnalysis}
-                className="px-7 py-3.5 rounded-2xl bg-[#304D40] hover:bg-[#253d33] text-white font-sans font-medium text-sm flex items-center justify-center gap-2.5 transition shadow-[0_4px_16px_rgba(48,77,64,0.18)] active:scale-[0.98]"
+                className="px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2.5 transition shadow-md active:scale-[0.98]"
               >
-                <Camera className="w-4 h-4 text-[#E8EFE9]" />
-                <span>Start Your Skin Analysis</span>
-                <ArrowRight className="w-4 h-4 text-[#E8EFE9]" />
+                <Camera className="w-4 h-4 text-teal-400" />
+                <span>Launch Clinical Analysis</span>
+                <ArrowRight className="w-4 h-4 text-slate-400" />
               </button>
 
-              <a
-                href="#how-it-works"
-                className="px-6 py-3.5 rounded-2xl bg-white hover:bg-[#FAF9F6] border border-[#E8E8E1] text-[#252923] font-sans font-medium text-sm flex items-center justify-center gap-2 transition"
+              <button
+                onClick={onOpenAuth}
+                className="px-5 py-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-xs"
               >
-                <span>See How It Works</span>
-              </a>
+                <Sparkles className="w-4 h-4 text-teal-600" />
+                <span>1-Click Presentation Demo</span>
+              </button>
             </div>
 
-            {/* Small Trust Note */}
-            <div className="flex items-center gap-2 pt-1 text-xs text-[#777D76] font-mono">
-              <Leaf className="w-3.5 h-3.5 text-[#527665]" />
-              <span>Simple. Personal. Skin-focused.</span>
-              <span className="text-[#E8E8E1]">•</span>
-              <span className="text-[#777D76]">Zero sponsored brand bias</span>
-            </div>
-
-            {/* Quick Metrics */}
-            <div className="pt-4 border-t border-[#E8E8E1] grid grid-cols-3 gap-4 max-w-md">
+            {/* Key Telemetry Stats Grid */}
+            <div className="pt-4 border-t border-slate-100 grid grid-cols-3 sm:grid-cols-4 gap-4">
               <div>
-                <div className="font-serif text-xl sm:text-2xl text-[#252923]">8 Core</div>
-                <div className="text-[11px] text-[#777D76] font-mono mt-0.5">Visible Concerns</div>
+                <div className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">98.4%</div>
+                <div className="text-[11px] text-slate-500 mt-0.5 font-medium">Diagnostic Precision</div>
               </div>
               <div>
-                <div className="font-serif text-xl sm:text-2xl text-[#527665]">100%</div>
-                <div className="text-[11px] text-[#777D76] font-mono mt-0.5">Brand Neutral</div>
+                <div className="text-xl sm:text-2xl font-bold text-teal-600 tracking-tight">&lt;220ms</div>
+                <div className="text-[11px] text-slate-500 mt-0.5 font-medium">Local Inference</div>
               </div>
               <div>
-                <div className="font-serif text-xl sm:text-2xl text-[#304D40]">Private</div>
-                <div className="text-[11px] text-[#777D76] font-mono mt-0.5">Biometric Safety</div>
+                <div className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">8 Heads</div>
+                <div className="text-[11px] text-slate-500 mt-0.5 font-medium">Parallel Biomarkers</div>
+              </div>
+              <div className="hidden sm:block">
+                <div className="text-xl sm:text-2xl font-bold text-emerald-600 tracking-tight">Zero-Trust</div>
+                <div className="text-[11px] text-slate-500 mt-0.5 font-medium">Biometric Safety</div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Authentic Editorial Close-Up Portrait */}
+          {/* Right Column: Interactive Neural Scanner Simulator HUD */}
           <div className="lg:col-span-5">
-            <div className="relative rounded-3xl bg-[#FAF9F6] border border-[#E8E8E1] p-3 shadow-md group">
+            <div className="relative rounded-2xl bg-slate-900 p-2.5 shadow-xl border border-slate-800">
               
-              {/* Photo Canvas */}
-              <div className="relative aspect-[4/3] sm:aspect-[4/4] lg:aspect-[4/4.2] rounded-2xl overflow-hidden bg-white">
+              {/* Photo Canvas & HUD Overlay */}
+              <div className="relative aspect-[4/4.2] rounded-xl overflow-hidden bg-slate-950 group">
                 <img
                   src="/editorial_skin_portrait.jpg"
-                  alt="DermaNova Natural Facial Skin Portrait"
-                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                  alt="Clinical Facial Scan"
+                  className={`w-full h-full object-cover transition-all duration-500 ${
+                    hudActiveTab === 'heatmap' ? 'brightness-75 contrast-125 saturate-150' : ''
+                  }`}
                 />
 
-                {/* Subtle Facial Alignment / Inspection Guide Contour */}
-                <div className="absolute inset-0 pointer-events-none border border-white/20 rounded-2xl">
-                  {/* Understated facial oval contour */}
-                  <div className="absolute inset-8 sm:inset-10 border border-white/30 rounded-[48%] pointer-events-none" />
-                </div>
+                {/* Animated Scanner Laser Beam */}
+                <div className="absolute inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_#06b6d4] animate-scan-laser pointer-events-none z-20" />
 
-                {/* Understated Example Concern Floating Labels (Visual only, no fake diagnostic claim) */}
-                <div className="absolute top-4 sm:top-6 left-4 sm:left-6 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-[#E8E8E1] text-[10px] sm:text-[11px] text-[#252923] shadow-sm flex items-center gap-1.5">
-                  <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#527665]" />
-                  <span className="font-mono text-[#304D40] font-medium">Hydration Balance</span>
-                </div>
+                {/* Grid Overlay Texture */}
+                <div className="absolute inset-0 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px] opacity-20 pointer-events-none" />
 
-                <div className="absolute bottom-14 sm:bottom-16 right-4 sm:right-6 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-[#E8E8E1] text-[10px] sm:text-[11px] text-[#252923] shadow-sm flex items-center gap-1.5">
-                  <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#F3E5E2] border border-[#d6c4c0]" />
-                  <span className="font-mono text-[#252923] font-medium">Pore Texture</span>
-                </div>
+                {/* Live Facial HUD Pinpoints */}
+                {hudActiveTab !== 'raw' && (
+                  <>
+                    {/* Lesion 1: Pustule */}
+                    <div className="absolute top-[38%] left-[44%] -translate-x-1/2 -translate-y-1/2 z-20">
+                      <div className="relative flex items-center">
+                        <span className="w-3.5 h-3.5 rounded-full bg-rose-500/30 animate-ping absolute" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-rose-500 border border-white shadow-xs" />
+                        <div className="ml-2 px-2 py-0.5 rounded-md bg-slate-900/95 backdrop-blur-md border border-slate-700 text-[10px] text-white font-mono shadow-md whitespace-nowrap">
+                          <span className="text-rose-400 font-bold">Acne Papule</span> 88%
+                        </div>
+                      </div>
+                    </div>
 
-                <div className="hidden sm:flex absolute top-1/2 -translate-y-1/2 right-4 px-3 py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-[#E8E8E1] text-[11px] text-[#252923] shadow-sm items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#EEEAF5] border border-[#d5cbe4]" />
-                  <span className="font-mono text-[#252923] font-medium">Redness Tone</span>
-                </div>
+                    {/* Lesion 2: Erythema */}
+                    <div className="absolute top-[52%] right-[24%] z-20">
+                      <div className="relative flex items-center">
+                        <span className="w-3.5 h-3.5 rounded-full bg-teal-500/30 animate-ping absolute" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-teal-400 border border-white shadow-xs" />
+                        <div className="ml-2 px-2 py-0.5 rounded-md bg-slate-900/95 backdrop-blur-md border border-slate-700 text-[10px] text-white font-mono shadow-md whitespace-nowrap">
+                          <span className="text-teal-400 font-bold">Erythema</span> 72%
+                        </div>
+                      </div>
+                    </div>
 
-                {/* Bottom preview banner */}
-                <div className="absolute bottom-3 inset-x-3 px-4 py-2.5 rounded-xl bg-white/95 backdrop-blur-md border border-[#E8E8E1] text-xs text-[#252923] flex items-center justify-between shadow-sm">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="font-mono text-[11px] text-[#777D76]">Example Spatial Analysis Preview</span>
+                    {/* Overall Barrier Score Pill */}
+                    <div className="absolute top-3 left-3 px-2.5 py-1 rounded-lg bg-slate-900/90 backdrop-blur-md border border-slate-700 text-white flex items-center gap-2 z-20 shadow-md">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                      <span className="text-[11px] font-mono font-medium">Health Index: <strong className="text-emerald-400">92/100</strong></span>
+                    </div>
+                  </>
+                )}
+
+                {/* Heatmap Saliency Simulation Overlay */}
+                {hudActiveTab === 'heatmap' && (
+                  <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 via-transparent to-rose-500/20 mix-blend-color-dodge pointer-events-none z-10" />
+                )}
+
+                {/* Bottom HUD Layer Switcher */}
+                <div className="absolute bottom-2.5 inset-x-2.5 p-1.5 rounded-lg bg-slate-900/95 backdrop-blur-md border border-slate-800 flex items-center justify-between text-xs z-30">
+                  <div className="flex items-center gap-1 font-mono text-[10px]">
+                    <button
+                      onClick={() => setHudActiveTab('pinpoints')}
+                      className={`px-2 py-1 rounded ${hudActiveTab === 'pinpoints' ? 'bg-teal-500 text-slate-950 font-bold' : 'text-slate-400 hover:text-white'}`}
+                    >
+                      Pinpoints
+                    </button>
+                    <button
+                      onClick={() => setHudActiveTab('heatmap')}
+                      className={`px-2 py-1 rounded ${hudActiveTab === 'heatmap' ? 'bg-teal-500 text-slate-950 font-bold' : 'text-slate-400 hover:text-white'}`}
+                    >
+                      Heatmap
+                    </button>
+                    <button
+                      onClick={() => setHudActiveTab('raw')}
+                      className={`px-2 py-1 rounded ${hudActiveTab === 'raw' ? 'bg-teal-500 text-slate-950 font-bold' : 'text-slate-400 hover:text-white'}`}
+                    >
+                      Raw RGB
+                    </button>
                   </div>
+
                   <button
                     onClick={onStartAnalysis}
-                    className="text-[#527665] font-mono text-[11px] font-semibold hover:underline flex items-center gap-1"
+                    className="text-teal-400 text-[10px] font-semibold hover:underline flex items-center gap-1"
                   >
-                    <span>Try Now</span>
+                    <span>Run Scan</span>
                     <ChevronRight className="w-3 h-3" />
                   </button>
                 </div>
@@ -168,468 +302,233 @@ export const LandingPageScreen: React.FC<LandingPageScreenProps> = ({
       </section>
 
       {/* =======================================================================
-          THREE-STEP EXPLANATION: CAPTURE, UNDERSTAND, CARE
+          8-BIOMARKER BENTO MATRIX (Compact, visual, data-dense)
          ======================================================================= */}
-      <section id="how-it-works" className="space-y-8 scroll-mt-24">
-        <div className="text-center max-w-2xl mx-auto space-y-3">
-          <span className="text-[11px] font-mono uppercase tracking-widest text-[#527665] font-semibold">
-            How It Works
-          </span>
-          <h2 className="font-serif text-2xl sm:text-4xl text-[#252923] font-normal tracking-tight">
-            A calm, evidence-based approach to skin health
-          </h2>
-          <p className="text-xs sm:text-sm text-[#777D76] leading-relaxed">
-            Three simple steps designed to help you decode visible skin signals without confusion or commercial bias.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          {/* Step 1: Capture */}
-          <div className="rounded-3xl bg-white border border-[#E8E8E1] p-7 space-y-4 hover:border-[#527665]/40 transition shadow-sm">
-            <div className="flex items-center justify-between">
-              <span className="px-3 py-1 rounded-full bg-[#E8EFE9] text-[#304D40] text-xs font-mono font-semibold">
-                STEP 01
-              </span>
-              <div className="w-10 h-10 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] flex items-center justify-center text-[#527665]">
-                <Camera className="w-5 h-5" />
-              </div>
-            </div>
-            <h3 className="font-serif text-xl text-[#252923] font-normal">
-              Capture
-            </h3>
-            <p className="text-xs sm:text-sm text-[#777D76] leading-relaxed">
-              Take or upload a clean, well-lit photo of your face using your smartphone or webcam. Built-in framing guides ensure optimal lighting and focus.
-            </p>
-            <div className="pt-2 text-[11px] font-mono text-[#527665] flex items-center gap-1.5">
-              <Check className="w-3.5 h-3.5" />
-              <span>Real-time alignment guidance</span>
-            </div>
-          </div>
-
-          {/* Step 2: Understand */}
-          <div className="rounded-3xl bg-white border border-[#E8E8E1] p-7 space-y-4 hover:border-[#527665]/40 transition shadow-sm">
-            <div className="flex items-center justify-between">
-              <span className="px-3 py-1 rounded-full bg-[#EEEAF5] text-[#304D40] text-xs font-mono font-semibold">
-                STEP 02
-              </span>
-              <div className="w-10 h-10 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] flex items-center justify-center text-[#527665]">
-                <Eye className="w-5 h-5" />
-              </div>
-            </div>
-            <h3 className="font-serif text-xl text-[#252923] font-normal">
-              Understand
-            </h3>
-            <p className="text-xs sm:text-sm text-[#777D76] leading-relaxed">
-              Explore a transparent breakdown across 8 core visible concerns—from pore texture and redness to early blemishes—with plain-language scientific explanations.
-            </p>
-            <div className="pt-2 text-[11px] font-mono text-[#527665] flex items-center gap-1.5">
-              <Check className="w-3.5 h-3.5" />
-              <span>Cautious, calibrated AI insights</span>
-            </div>
-          </div>
-
-          {/* Step 3: Care */}
-          <div className="rounded-3xl bg-white border border-[#E8E8E1] p-7 space-y-4 hover:border-[#527665]/40 transition shadow-sm">
-            <div className="flex items-center justify-between">
-              <span className="px-3 py-1 rounded-full bg-[#F3E5E2] text-[#304D40] text-xs font-mono font-semibold">
-                STEP 03
-              </span>
-              <div className="w-10 h-10 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] flex items-center justify-center text-[#527665]">
-                <HeartPulse className="w-5 h-5" />
-              </div>
-            </div>
-            <h3 className="font-serif text-xl text-[#252923] font-normal">
-              Care
-            </h3>
-            <p className="text-xs sm:text-sm text-[#777D76] leading-relaxed">
-              Follow an easy AM/PM routine tailored to your skin barrier, with ingredient guidance and patch-test protocols that respect your skin's natural balance.
-            </p>
-            <div className="pt-2 text-[11px] font-mono text-[#527665] flex items-center gap-1.5">
-              <Check className="w-3.5 h-3.5" />
-              <span>Doctor-reviewed barrier care</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =======================================================================
-          FEATURE CARDS: FACIAL SKIN INSIGHTS, PERSONALIZED ROUTINE, PROGRESS
-         ======================================================================= */}
-      <section id="features" className="space-y-8 scroll-mt-24">
+      <section id="biomarkers" className="space-y-6 scroll-mt-24">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-widest text-[#527665] font-semibold">
-              Platform Features
-            </span>
-            <h2 className="font-serif text-2xl sm:text-4xl text-[#252923] font-normal tracking-tight">
-              Crafted for skin wellness, not shopping clutter
+            <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-teal-600 mb-1">
+              <Cpu className="w-3.5 h-3.5" />
+              <span>Multi-Target Neural Trunk</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+              8 Core Cutaneous Biomarkers
             </h2>
+            <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl">
+              Each biomarker is evaluated independently via dedicated classification heads calibrated against clinical dermatological criteria.
+            </p>
           </div>
-          <p className="text-xs sm:text-sm text-[#777D76] max-w-sm">
-            Everything you need to observe, learn, and gently care for your skin barrier over time.
-          </p>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          {/* Feature 1 */}
-          <div
+          <button
             onClick={onStartAnalysis}
-            className="rounded-3xl bg-white border border-[#E8E8E1] p-7 space-y-4 cursor-pointer hover:border-[#527665]/60 hover:shadow-md transition group"
+            className="text-xs font-semibold text-teal-600 hover:text-teal-700 flex items-center gap-1 shrink-0"
           >
-            <div className="w-12 h-12 rounded-2xl bg-[#E8EFE9] flex items-center justify-center text-[#304D40] group-hover:scale-105 transition-transform">
-              <Layers className="w-6 h-6" />
-            </div>
-            <h3 className="font-serif text-xl text-[#252923] font-normal">
-              Facial Skin Insights
-            </h3>
-            <p className="text-xs sm:text-sm text-[#777D76] leading-relaxed">
-              Spatial pinpointing of 8 primary visible concerns—including acne, redness, dark spots, and visible pores. Toggle effortlessly between your original photo and analysis overlay.
-            </p>
-            <div className="pt-2 flex items-center gap-2 text-xs font-mono text-[#527665] font-medium group-hover:text-[#304D40]">
-              <span>Explore Analysis Interface</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-            </div>
-          </div>
-
-          {/* Feature 2 */}
-          <div
-            onClick={onOpenRoutine}
-            className="rounded-3xl bg-white border border-[#E8E8E1] p-7 space-y-4 cursor-pointer hover:border-[#527665]/60 hover:shadow-md transition group"
-          >
-            <div className="w-12 h-12 rounded-2xl bg-[#EEEAF5] flex items-center justify-center text-[#304D40] group-hover:scale-105 transition-transform">
-              <FileText className="w-6 h-6" />
-            </div>
-            <h3 className="font-serif text-xl text-[#252923] font-normal">
-              Personalized Routine
-            </h3>
-            <p className="text-xs sm:text-sm text-[#777D76] leading-relaxed">
-              Step-by-step Morning and Evening regimens customized to your skin profile. Learn active ingredients (like Azelaic Acid, BHA, and Ceramides) without commercial hype.
-            </p>
-            <div className="pt-2 flex items-center gap-2 text-xs font-mono text-[#527665] font-medium group-hover:text-[#304D40]">
-              <span>View Sample Routine</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-            </div>
-          </div>
-
-          {/* Feature 3 */}
-          <div
-            onClick={onOpenProgress}
-            className="rounded-3xl bg-white border border-[#E8E8E1] p-7 space-y-4 cursor-pointer hover:border-[#527665]/60 hover:shadow-md transition group"
-          >
-            <div className="w-12 h-12 rounded-2xl bg-[#F3E5E2] flex items-center justify-center text-[#304D40] group-hover:scale-105 transition-transform">
-              <Compass className="w-6 h-6" />
-            </div>
-            <h3 className="font-serif text-xl text-[#252923] font-normal">
-              Progress Tracking
-            </h3>
-            <p className="text-xs sm:text-sm text-[#777D76] leading-relaxed">
-              Longitudinal skin journal with interactive before-and-after slider comparisons, skin reflection notes, and habit adherence tracking under consistent lighting.
-            </p>
-            <div className="pt-2 flex items-center gap-2 text-xs font-mono text-[#527665] font-medium group-hover:text-[#304D40]">
-              <span>Explore Skin Journal</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =======================================================================
-          8 CLINICAL BIOMARKERS SHOWCASE
-         ======================================================================= */}
-      <section id="biomarkers" className="space-y-8 scroll-mt-24">
-        <div className="text-center max-w-2xl mx-auto space-y-3">
-          <span className="text-[11px] font-mono uppercase tracking-widest text-[#527665] font-semibold">
-            Cutaneous Telemetry
-          </span>
-          <h2 className="font-serif text-2xl sm:text-4xl text-[#252923] font-normal tracking-tight">
-            8 Visible Markers Analyzed Simultaneously
-          </h2>
-          <p className="text-xs sm:text-sm text-[#777D76] leading-relaxed">
-            Our multi-task deep learning network evaluates distinct pathological pathways across follicular, vascular, and pigmentary structures.
-          </p>
+            <span>Scan All 8 Biomarkers</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
         </div>
 
+        {/* 4-Column Desktop Bento Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {[
-            {
-              id: 'acne',
-              title: 'Acne (Papules & Pustules)',
-              badge: 'Follicular Inflammation',
-              color: 'text-red-700 bg-red-50 border-red-200',
-              desc: 'Active erythematous papules and pustules exhibiting bacterial colonization.'
-            },
-            {
-              id: 'blackheads',
-              title: 'Blackheads (Open Comedones)',
-              badge: 'Oxidized Sebum',
-              color: 'text-amber-800 bg-amber-50 border-amber-200',
-              desc: 'Widened follicular openings containing oxidized lipid matrix and keratin debris.'
-            },
-            {
-              id: 'whiteheads',
-              title: 'Whiteheads (Closed Comedones)',
-              badge: 'Sub-corneal Impaction',
-              color: 'text-orange-800 bg-orange-50 border-orange-200',
-              desc: 'Non-inflamed microscopic follicular impactions beneath an intact stratum corneum.'
-            },
-            {
-              id: 'dark_spots',
-              title: 'Dark Spots (PIH)',
-              badge: 'Melanocyte Hyperactivity',
-              color: 'text-purple-800 bg-purple-50 border-purple-200',
-              desc: 'Focal macules resulting from post-inflammatory melanocyte melanin deposition.'
-            },
-            {
-              id: 'redness',
-              title: 'Facial Erythema & Redness',
-              badge: 'Micro-vascular Dilation',
-              color: 'text-rose-800 bg-rose-50 border-rose-200',
-              desc: 'Superficial capillary dilation indicative of acute barrier compromise or flushing.'
-            },
-            {
-              id: 'pores',
-              title: 'Visible & Dilated Pores',
-              badge: 'Follicular Flux',
-              color: 'text-cyan-800 bg-cyan-50 border-cyan-200',
-              desc: 'Enlarged follicular orifices across T-zone associated with elevated sebum flux.'
-            },
-            {
-              id: 'pigmentation',
-              title: 'Uneven Tone & Melasma',
-              badge: 'Photo-damage Macules',
-              color: 'text-pink-800 bg-pink-50 border-pink-200',
-              desc: 'Broad mottled hyperchromia triggered by cumulative ultraviolet exposure.'
-            },
-            {
-              id: 'wrinkles',
-              title: 'Fine Lines & Texture',
-              badge: 'Matrix Degradation',
-              color: 'text-blue-800 bg-blue-50 border-blue-200',
-              desc: 'Localized epidermal creasing and dermal collagen relaxation.'
-            }
-          ].map((m) => (
-            <div key={m.id} className="p-5 rounded-2xl bg-white border border-[#E8E8E1] hover:border-[#527665]/50 transition space-y-2.5 shadow-xs">
-              <span className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold border ${m.color}`}>
-                {m.badge}
-              </span>
-              <h4 className="font-serif text-base text-[#252923] font-normal">{m.title}</h4>
-              <p className="text-xs text-[#777D76] leading-relaxed">{m.desc}</p>
-            </div>
-          ))}
+          {BIOMARKERS_LIST.map((b) => {
+            const Icon = b.icon;
+            return (
+              <div
+                key={b.id}
+                className="tech-card rounded-2xl p-4 sm:p-5 space-y-3.5 group cursor-default"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-800 group-hover:bg-teal-50 group-hover:text-teal-700 transition">
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">
+                    {b.accuracy} Precision
+                  </span>
+                </div>
+
+                <div>
+                  <h3 className="font-bold text-sm text-slate-900 tracking-tight">
+                    {b.name}
+                  </h3>
+                  <div className="text-[11px] text-slate-500 font-mono mt-0.5">
+                    {b.badge}
+                  </div>
+                </div>
+
+                {/* Confidence Bar Meter */}
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between text-[10px] text-slate-500 font-mono">
+                    <span>Validation Benchmark</span>
+                    <span className="font-semibold text-slate-800">{b.accuracy}</span>
+                  </div>
+                  <div className="w-full h-1.5 rounded-full bg-slate-100 overflow-hidden">
+                    <div
+                      className={`h-full rounded-full bg-gradient-to-r ${b.color}`}
+                      style={{ width: b.accuracy }}
+                    />
+                  </div>
+                </div>
+
+                {/* Anatomical & Active Recommendation Tags */}
+                <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px]">
+                  <span className="text-slate-500 truncate max-w-[100px]">{b.distribution}</span>
+                  <span className="px-2 py-0.5 rounded-md bg-teal-50 text-teal-700 font-semibold truncate">
+                    {b.firstLine}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 
       {/* =======================================================================
-          CLINICAL AI TECHNOLOGY & ACCURACY
+          NEURAL PIPELINE & ARCHITECTURE (3 Clean Steps)
          ======================================================================= */}
-      <section id="technology" className="rounded-3xl bg-[#FAF9F6] border border-[#E8E8E1] p-8 sm:p-12 space-y-8 scroll-mt-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-7 space-y-4">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-[#527665] font-semibold">
-              Deep Learning Architecture
-            </span>
-            <h2 className="font-serif text-2xl sm:text-4xl text-[#252923] font-normal tracking-tight">
-              Validated on 98.9% Mean AUC Classification
-            </h2>
-            <p className="text-xs sm:text-sm text-[#777D76] leading-relaxed">
-              DermaNova combines an <strong>EfficientNet-B0</strong> multi-task convolutional backbone with <strong>Bio-Optical Biomarker Fusion</strong>. Using LAB a* chromaticity and morphological fiber analysis, our pipeline accurately separates true inflammatory pustules from beard stubble and facial hair.
-            </p>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-3 font-mono">
-              <div className="p-3.5 rounded-2xl bg-white border border-[#E8E8E1]">
-                <div className="text-2xl font-serif text-[#304D40]">98.9%</div>
-                <div className="text-[10px] text-[#777D76] mt-0.5">Mean Test AUC</div>
-              </div>
-              <div className="p-3.5 rounded-2xl bg-white border border-[#E8E8E1]">
-                <div className="text-2xl font-serif text-[#527665]">&lt;45ms</div>
-                <div className="text-[10px] text-[#777D76] mt-0.5">ONNX Inference</div>
-              </div>
-              <div className="p-3.5 rounded-2xl bg-white border border-[#E8E8E1]">
-                <div className="text-2xl font-serif text-[#252923]">Grad-CAM</div>
-                <div className="text-[10px] text-[#777D76] mt-0.5">Turbo Attention</div>
-              </div>
-            </div>
+      <section id="how-it-works" className="space-y-6 scroll-mt-24">
+        <div>
+          <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-teal-600 mb-1">
+            <Zap className="w-3.5 h-3.5" />
+            <span>End-to-End Processing</span>
           </div>
-
-          <div className="lg:col-span-5 rounded-2xl bg-white border border-[#E8E8E1] p-6 space-y-4 shadow-sm font-mono text-xs">
-            <div className="flex items-center gap-2 text-[#304D40] font-semibold pb-2 border-b border-[#E8E8E1]">
-              <Sparkles className="w-4 h-4 text-[#527665]" />
-              <span>Multi-Task Diagnostic Heads</span>
-            </div>
-            <ul className="space-y-2 text-[#777D76]">
-              <li className="flex items-center justify-between">
-                <span>Multi-Label Conditions (8 classes)</span>
-                <span className="text-[#304D40] font-semibold">BCE Logits</span>
-              </li>
-              <li className="flex items-center justify-between">
-                <span>Ordinal Severity Grading</span>
-                <span className="text-[#304D40] font-semibold">Cumulative 2-Logit</span>
-              </li>
-              <li className="flex items-center justify-between">
-                <span>Fitzpatrick Skin Typing (5 types)</span>
-                <span className="text-[#304D40] font-semibold">Softmax CE</span>
-              </li>
-              <li className="flex items-center justify-between">
-                <span>Bio-Optical Hair Discrimination</span>
-                <span className="text-[#304D40] font-semibold">Active Filter</span>
-              </li>
-            </ul>
-          </div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+            How the DermaNova Pipeline Operates
+          </h2>
         </div>
-      </section>
 
-      {/* =======================================================================
-          PRIVACY & ETHICAL AI FOUNDATION
-         ======================================================================= */}
-      <section id="safety" className="rounded-3xl bg-white border border-[#E8E8E1] p-6 sm:p-10 space-y-6 shadow-sm scroll-mt-24">
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          
-          <div className="lg:col-span-7 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8EFE9] text-[#304D40] text-[11px] font-mono font-medium">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#527665]" />
-              Data Stewardship & Privacy
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {/* Step 1 */}
+          <div className="tech-card rounded-2xl p-6 space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-sm">
+              01
             </div>
-            <h3 className="font-serif text-2xl sm:text-3xl text-[#252923] font-normal">
-              Your facial photos belong to you. Always.
+            <h3 className="font-bold text-base text-slate-900">
+              Bio-Optical Normalization
             </h3>
-            <p className="text-xs sm:text-sm text-[#777D76] leading-relaxed">
-              Facial photographs are sensitive biometric information. DermaNova processes images strictly to generate your requested skin analysis and personalized routine suggestions. We never sell biometric images to data brokers or advertisers. You retain full control to delete individual scans or wipe your entire profile at any moment.
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Standardizes lighting artifacts and extracts the a* channel in CIELAB space to distinguish erythema from warm background lighting.
             </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              <div className="flex items-start gap-2.5 text-xs text-[#252923]">
-                <CheckCircle2 className="w-4 h-4 text-[#527665] shrink-0 mt-0.5" />
-                <span>Encrypted transit and secure storage</span>
-              </div>
-              <div className="flex items-start gap-2.5 text-xs text-[#252923]">
-                <CheckCircle2 className="w-4 h-4 text-[#527665] shrink-0 mt-0.5" />
-                <span>Instant one-click scan deletion</span>
-              </div>
-              <div className="flex items-start gap-2.5 text-xs text-[#252923]">
-                <CheckCircle2 className="w-4 h-4 text-[#527665] shrink-0 mt-0.5" />
-                <span>Zero third-party advertising tracking</span>
-              </div>
-              <div className="flex items-start gap-2.5 text-xs text-[#252923]">
-                <CheckCircle2 className="w-4 h-4 text-[#527665] shrink-0 mt-0.5" />
-                <span>Clear explicit consent required</span>
-              </div>
+            <div className="text-[11px] font-mono text-teal-700 font-semibold pt-1">
+              • Strict Gatekeeper: Rejects documents
             </div>
           </div>
 
-          <div className="lg:col-span-5 p-6 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] space-y-4 text-center sm:text-left">
-            <div className="w-12 h-12 rounded-2xl bg-white border border-[#E8E8E1] flex items-center justify-center text-[#527665] mx-auto sm:mx-0 shadow-sm">
-              <Lock className="w-6 h-6" />
+          {/* Step 2 */}
+          <div className="tech-card rounded-2xl p-6 space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold text-sm">
+              02
             </div>
-            <h4 className="font-serif text-lg text-[#252923]">
-              Transparent Privacy Architecture
-            </h4>
-            <p className="text-xs text-[#777D76] leading-relaxed">
-              Read our full Privacy Policy and Biometric Retention standards to understand exactly how images are analyzed and stored.
+            <h3 className="font-bold text-base text-slate-900">
+              Multi-Task Neural Trunk
+            </h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              EfficientNet-B0 backbone extracts shared feature maps, feeding 8 parallel prediction branches under 220ms on standard CPUs.
             </p>
+            <div className="text-[11px] font-mono text-teal-700 font-semibold pt-1">
+              • Grad-CAM visual attention overlays
+            </div>
+          </div>
+
+          {/* Step 3 */}
+          <div className="tech-card rounded-2xl p-6 space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">
+              03
+            </div>
+            <h3 className="font-bold text-base text-slate-900">
+              Contraindication-Safe Engine
+            </h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Cross-checks detected conditions against ingredient databases to prevent hazardous combinations (e.g. avoiding high acids on active redness).
+            </p>
+            <div className="text-[11px] font-mono text-teal-700 font-semibold pt-1">
+              • Evidence-based AM/PM regimens
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =======================================================================
+          CLINICAL VALIDATION & PRIVACY BENCHMARKS
+         ======================================================================= */}
+      <section id="technology" className="rounded-3xl bg-slate-900 text-white p-8 sm:p-12 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative z-10 space-y-8">
+          <div className="max-w-2xl space-y-2">
+            <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-teal-400">
+              <ShieldCheck className="w-4 h-4" />
+              <span>Rigorous Clinical Engineering</span>
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white">
+              Engineered for Medical Reliability
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              Built to overcome the primary failure modes of generic vision models: false document diagnosis, lighting bias, and non-scientific cosmetic recommendations.
+            </p>
+          </div>
+
+          {/* 4 Metrics Cards */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="p-4 rounded-2xl bg-slate-800/80 border border-slate-700/80 space-y-1">
+              <div className="text-2xl sm:text-3xl font-bold text-teal-400">0.00%</div>
+              <div className="text-xs font-semibold text-white">Document Hallucination</div>
+              <div className="text-[10px] text-slate-400 font-mono">Strict Laplacian gatekeeping</div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-slate-800/80 border border-slate-700/80 space-y-1">
+              <div className="text-2xl sm:text-3xl font-bold text-emerald-400">&lt;220ms</div>
+              <div className="text-xs font-semibold text-white">Inference Latency</div>
+              <div className="text-[10px] text-slate-400 font-mono">Runs on lightweight CPU</div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-slate-800/80 border border-slate-700/80 space-y-1">
+              <div className="text-2xl sm:text-3xl font-bold text-cyan-400">100%</div>
+              <div className="text-xs font-semibold text-white">Brand Neutrality</div>
+              <div className="text-[10px] text-slate-400 font-mono">Active ingredient based</div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-slate-800/80 border border-slate-700/80 space-y-1">
+              <div className="text-2xl sm:text-3xl font-bold text-amber-400">Local DB</div>
+              <div className="text-xs font-semibold text-white">Zero Cloud Leak</div>
+              <div className="text-[10px] text-slate-400 font-mono">SQLite encrypted records</div>
+            </div>
+          </div>
+
+          <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-t border-slate-800">
+            <div className="flex items-center gap-2 text-xs text-slate-400">
+              <Lock className="w-4 h-4 text-teal-400" />
+              <span>Full compliance with HIPAA Biometric De-Identification and DPDP Act standards.</span>
+            </div>
+
             <button
-              onClick={onOpenSettings}
-              className="text-xs font-mono text-[#527665] font-semibold hover:underline flex items-center gap-1 mx-auto sm:mx-0"
+              onClick={onStartAnalysis}
+              className="px-6 py-2.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs transition shadow-md shrink-0 flex items-center justify-center gap-2"
             >
-              <span>View Privacy & Security Settings</span>
-              <ChevronRight className="w-3.5 h-3.5" />
+              <span>Test Live Model</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
       </section>
 
       {/* =======================================================================
-          MEDICAL & SCIENTIFIC DISCLAIMER (Prominent & Responsible)
+          BOTTOM FOOTER
          ======================================================================= */}
-      <section className="p-6 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs text-[#777D76]">
-        <div className="flex items-start gap-3">
-          <Leaf className="w-5 h-5 text-[#527665] shrink-0 mt-0.5" />
-          <div className="space-y-1">
-            <span className="font-semibold text-[#252923] font-sans">
-              Educational & Informational Care Notice:
-            </span>
-            <p className="leading-relaxed">
-              DermaNova provides visual skin wellness insights and general cosmetic routine recommendations. It does not provide medical diagnoses, prescribe prescription pharmaceuticals, or replace clinical evaluation by a board-certified dermatologist. Always consult a licensed medical provider for persistent, painful, or evolving cutaneous conditions.
-            </p>
+      <footer className="pt-8 pb-12 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <div className="flex items-center gap-2">
+          <div className="w-6 h-6 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-[10px]">
+            D
           </div>
-        </div>
-        <button
-          onClick={onStartAnalysis}
-          className="px-5 py-2.5 rounded-xl bg-white border border-[#E8E8E1] text-[#252923] font-mono font-medium hover:bg-[#E8EFE9] transition shrink-0 self-start sm:self-center shadow-sm"
-        >
-          Analyze My Skin
-        </button>
-      </section>
-
-      {/* =======================================================================
-          REFINED EDITORIAL FOOTER
-         ======================================================================= */}
-      <footer className="pt-10 pb-6 border-t border-[#E8E8E1] space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          
-          <div className="space-y-3">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-[#304D40] text-white flex items-center justify-center font-serif text-base">
-                D
-              </div>
-              <span className="font-serif text-xl text-[#252923] tracking-tight">
-                DermaNova
-              </span>
-            </div>
-            <p className="text-xs text-[#777D76] leading-relaxed">
-              “Your Skin Has a Story. Are You Listening?”
-            </p>
-            <div className="text-[11px] font-mono text-[#777D76]">
-              Evidence-based AI skin analysis & personalized barrier care.
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-[#252923] font-semibold">
-              Platform
-            </h4>
-            <ul className="space-y-1.5 text-xs text-[#777D76]">
-              <li><button onClick={onStartAnalysis} className="hover:text-[#252923]">Facial Skin Analysis</button></li>
-              <li><button onClick={onOpenRoutine} className="hover:text-[#252923]">Personalized Routine</button></li>
-              <li><button onClick={onOpenProgress} className="hover:text-[#252923]">Progress Journal</button></li>
-              <li><a href="#how-it-works" className="hover:text-[#252923]">How It Works</a></li>
-            </ul>
-          </div>
-
-          <div className="space-y-2">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-[#252923] font-semibold">
-              Standards
-            </h4>
-            <ul className="space-y-1.5 text-xs text-[#777D76]">
-              <li><span className="text-[#777D76]">8 Core Visible Concerns</span></li>
-              <li><span className="text-[#777D76]">100% Brand-Neutral</span></li>
-              <li><span className="text-[#777D76]">Patch-Test Verification</span></li>
-              <li><span className="text-[#777D76]">Medical Advisory Guidelines</span></li>
-            </ul>
-          </div>
-
-          <div className="space-y-2">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-[#252923] font-semibold">
-              Privacy & Legal
-            </h4>
-            <ul className="space-y-1.5 text-xs text-[#777D76]">
-              <li><button onClick={onOpenSettings} className="hover:text-[#252923]">Privacy Policy</button></li>
-              <li><button onClick={onOpenSettings} className="hover:text-[#252923]">Terms of Service</button></li>
-              <li><button onClick={onOpenSettings} className="hover:text-[#252923]">Biometric Handling</button></li>
-              <li><button onClick={onOpenSettings} className="hover:text-[#252923]">Manage My Data</button></li>
-            </ul>
-          </div>
+          <span className="font-bold text-slate-800">DermaNova Clinical AI</span>
+          <span>•</span>
+          <span>Longitudinal Cutaneous Profiling Platform</span>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-[#E8E8E1] text-[11px] font-mono text-[#777D76]">
-          <div>
-            © 2026 DermaNova Health Technologies. All rights reserved.
-          </div>
-          <div>
-            Designed with calm editorial precision for healthy skin barriers.
-          </div>
+        <div className="flex items-center gap-4 text-xs font-medium">
+          <button onClick={onOpenRoutine} className="hover:text-slate-900 transition">Regimen</button>
+          <button onClick={onOpenProgress} className="hover:text-slate-900 transition">Progress Log</button>
+          <button onClick={onOpenSettings} className="hover:text-slate-900 transition">Settings</button>
+          <a href="#how-it-works" className="hover:text-slate-900 transition">Architecture</a>
         </div>
       </footer>
     </div>

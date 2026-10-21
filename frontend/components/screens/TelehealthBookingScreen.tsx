@@ -31,7 +31,6 @@ export const TelehealthBookingScreen: React.FC<TelehealthBookingScreenProps> = (
 }) => {
   const [selectedSpecialist, setSelectedSpecialist] = useState<string>('doc-1');
   
-  // Dynamic dates starting from tomorrow
   const dateOptions = [
     { label: 'Tomorrow', date: new Date(Date.now() + 86400000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', weekday: 'short' }) },
     { label: 'In 2 Days', date: new Date(Date.now() + 2 * 86400000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', weekday: 'short' }) },
@@ -48,24 +47,24 @@ export const TelehealthBookingScreen: React.FC<TelehealthBookingScreenProps> = (
       id: 'doc-1',
       name: 'Dr. Marcus Thorne, MD, FAAD',
       role: 'Board-Certified Medical Dermatologist',
-      focus: 'Photobiology, Vascular Flushing & Barrier Regeneration',
+      focus: 'Vascular Flushing, Erythema & Barrier Remodeling',
       rating: '4.98',
-      reviews: '312 consultations',
+      reviews: '312 consults',
       fee: '$85 / 20-min consult',
       availability: 'Available ' + dateOptions[0].label,
-      bio: 'Former clinical faculty at Northwestern Dermatology. Specializes in translating computerized facial telemetry into gentle, non-irritating barrier recovery plans.',
+      bio: 'Former clinical faculty at Northwestern Dermatology. Translates computerized facial telemetry into targeted barrier recovery protocols.',
       avatar: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=260&q=80',
     },
     {
       id: 'doc-2',
       name: 'Dr. Siobhan Wu, MD, FAAD',
       role: 'Consultant Dermatologist & Cosmetic Chemist',
-      focus: 'Persistent Erythema, Melasma & INCI Formulation Safety',
+      focus: 'Comedonal Acne, Melasma & Formulation Safety',
       rating: '4.95',
-      reviews: '240 consultations',
+      reviews: '240 consults',
       fee: '$90 / 20-min consult',
       availability: 'Available ' + dateOptions[1].label,
-      bio: 'Expert in cutaneous barrier pharmacology and minimizing post-inflammatory hyperpigmentation through low-irritation actives.',
+      bio: 'Expert in cutaneous barrier pharmacology and minimizing hyperpigmentation flares with buffered actives.',
       avatar: 'https://images.unsplash.com/photo-1594824813579-a764d27dc68f?auto=format&fit=crop&w=260&q=80',
     },
   ];
@@ -73,111 +72,118 @@ export const TelehealthBookingScreen: React.FC<TelehealthBookingScreenProps> = (
   const activeDoc = specialists.find((d) => d.id === selectedSpecialist) || specialists[0];
 
   return (
-    <div className="w-full max-w-4xl mx-auto space-y-8 animate-fade-in py-2">
+    <div className="w-full max-w-4xl mx-auto space-y-6 animate-fade-in py-2">
       
-      {/* Top Breadcrumb & Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#E8E8E1]">
+      {/* Top Clinical Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-slate-200">
         <div>
-          <span className="text-[11px] font-mono uppercase tracking-widest text-[#527665] font-semibold">
-            Clinical Triage & Telehealth Network
-          </span>
-          <h1 className="font-serif text-3xl sm:text-4xl text-[#252923] font-normal tracking-tight">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="px-2.5 py-0.5 rounded-md bg-teal-50 border border-teal-200 text-teal-800 text-[10px] font-mono font-bold uppercase tracking-wider">
+              Clinical Triage Network
+            </span>
+            <span className="text-[11px] font-mono text-slate-500">
+              Board-Certified FAAD Dermatologists
+            </span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
             Telehealth Dermatologist Consultation
           </h1>
-          <p className="text-xs text-[#777D76] mt-0.5">
-            Connect your biometric scan records directly with board-certified dermatologists.
+          <p className="text-xs text-slate-500 mt-0.5">
+            Forward your quantitative scan telemetry and INCI formulations directly for board-certified clinical review.
           </p>
         </div>
 
         <button
-          onClick={() => alert('Downloading your clinical summary dossier (PDF) with optical findings and active ingredient sensitivities.')}
-          className="px-4 py-2 rounded-xl bg-white hover:bg-[#FAF9F6] border border-[#E8E8E1] text-[#252923] text-xs font-mono transition flex items-center gap-1.5 shadow-sm self-start sm:self-center"
+          onClick={() => alert('Exporting clinical summary dossier (PDF) with optical findings.')}
+          className="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-mono font-semibold transition flex items-center gap-1.5 shadow-xs self-start sm:self-center"
         >
-          <Download className="w-3.5 h-3.5 text-[#527665]" />
-          <span>Download Clinical Dossier</span>
+          <Download className="w-3.5 h-3.5 text-teal-600" />
+          <span>Export Clinical Dossier</span>
         </button>
       </div>
 
-      {/* Biometric Diagnostic Dossier Banner */}
-      <div className="p-5 sm:p-6 rounded-3xl bg-[#E8EFE9]/60 border border-[#d6e0ce] space-y-2 shadow-sm">
-        <div className="flex items-center gap-2">
-          <ShieldCheck className="w-4 h-4 text-[#527665]" />
-          <span className="font-mono text-xs font-bold text-[#304D40] uppercase tracking-wider">
-            {analysis ? 'Biometric Telemetry Dossier Ready' : 'Biometric Telemetry Consultation'}
-          </span>
-          <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white text-[#304D40] border border-[#cbd7c1]">
-            Encrypted AES-256
+      {/* Biometric Telemetry Dossier Status Banner */}
+      <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 text-white space-y-2 shadow-xs">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            <span className="font-mono text-xs font-bold text-teal-300 uppercase tracking-wider">
+              {analysis ? 'Biometric Telemetry Dossier Compiled' : 'Consultation Telemetry Ready'}
+            </span>
+          </div>
+          <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 border border-slate-700">
+            Encrypted TLS 1.3
           </span>
         </div>
-        <p className="text-xs text-[#777D76] leading-relaxed">
+        <p className="text-xs text-slate-300 leading-relaxed">
           {analysis ? (
             <>
-              Consolidating your latest scan findings (Overall Health Score: <strong>{analysis.overall_health_score}</strong>, Detected Skin Type: <strong>{analysis.detected_skin_type}</strong>
+              Consolidating optical evaluation (Health Score: <strong className="text-white">{analysis.overall_health_score}/100</strong>, Skin Type: <strong className="text-white">{analysis.detected_skin_type}</strong>
               {analysis.top_concerns && analysis.top_concerns.length > 0 && (
-                <>, Top Concerns: <strong>{analysis.top_concerns.join(', ')}</strong></>
+                <>, Prominent Biomarkers: <strong className="text-white">{analysis.top_concerns.join(', ')}</strong></>
               )}
-              ), daily routine compliance logs, and localized environmental factors for physician review.
+              ), AM/PM protocol logs, and contraindication filters for physician review.
             </>
           ) : (
             <>
-              Connect directly with dermatologists to review your skincare concerns and formulation plan. Complete a facial analysis scan to attach quantitative telemetry to your appointment.
+              Connect directly with dermatologists to review your skincare concerns and formulation plan.
             </>
           )}
         </p>
       </div>
 
       {/* Main 2-Column Booking Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
         {/* Left Column: Specialist Directory */}
-        <div className="lg:col-span-7 space-y-4">
-          <div className="text-xs font-mono uppercase tracking-wider text-[#777D76] font-semibold">
-            Matched Board-Certified Specialists
+        <div className="lg:col-span-7 space-y-3">
+          <div className="text-xs font-mono uppercase tracking-wider text-slate-900 font-bold">
+            Matched FAAD Specialists
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             {specialists.map((doc) => {
               const isSelected = selectedSpecialist === doc.id;
               return (
                 <div
                   key={doc.id}
                   onClick={() => setSelectedSpecialist(doc.id)}
-                  className={`p-5 rounded-3xl border transition cursor-pointer space-y-3 ${
+                  className={`p-4 rounded-xl border transition cursor-pointer space-y-2.5 ${
                     isSelected
-                      ? 'bg-white border-[#527665] shadow-[0px_4px_16px_rgba(48,77,64,0.08)]'
-                      : 'bg-white/70 border-[#E8E8E1] hover:border-[#527665]/40 hover:bg-white'
+                      ? 'bg-white border-slate-900 ring-2 ring-slate-900/10 shadow-xs'
+                      : 'bg-white border-slate-200 hover:border-slate-300'
                   }`}
                 >
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-3.5">
                     <img
                       src={doc.avatar}
                       alt={doc.name}
-                      className="w-16 h-16 rounded-2xl object-cover border border-[#E8E8E1] shrink-0"
+                      className="w-14 h-14 rounded-xl object-cover border border-slate-200 shrink-0"
                     />
-                    <div className="space-y-1 min-w-0">
+                    <div className="space-y-0.5 min-w-0 flex-1">
                       <div className="flex items-center justify-between gap-2">
-                        <h3 className="font-serif text-lg text-[#252923] font-normal leading-tight">
+                        <h3 className="font-bold text-sm text-slate-900 leading-snug">
                           {doc.name}
                         </h3>
-                        <span className="font-mono text-xs font-bold text-[#304D40] shrink-0">
+                        <span className="font-mono text-xs font-bold text-teal-800 shrink-0">
                           {doc.fee}
                         </span>
                       </div>
-                      <div className="text-xs text-[#527665] font-mono">
+                      <div className="text-xs text-teal-700 font-mono font-medium">
                         {doc.role}
                       </div>
-                      <p className="text-[11px] text-[#777D76] leading-relaxed">
+                      <p className="text-[11px] text-slate-500 leading-snug">
                         {doc.focus}
                       </p>
                     </div>
                   </div>
 
-                  <div className="pt-2 border-t border-[#E8E8E1] flex items-center justify-between text-[11px] font-mono text-[#777D76]">
+                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] font-mono text-slate-500">
                     <span className="flex items-center gap-1">
                       <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                      <strong className="text-[#252923]">{doc.rating}</strong> ({doc.reviews})
+                      <strong className="text-slate-900 font-semibold">{doc.rating}</strong> ({doc.reviews})
                     </span>
-                    <span className="text-[#527665] font-medium">
+                    <span className="text-teal-700 font-semibold">
                       {doc.availability}
                     </span>
                   </div>
@@ -188,23 +194,23 @@ export const TelehealthBookingScreen: React.FC<TelehealthBookingScreenProps> = (
         </div>
 
         {/* Right Column: Time Slot & Booking Confirmation */}
-        <div className="lg:col-span-5 rounded-3xl bg-white border border-[#E8E8E1] p-6 sm:p-7 space-y-5 shadow-sm">
+        <div className="lg:col-span-5 rounded-2xl bg-white border border-slate-200 p-5 space-y-4 shadow-xs">
           
-          <div className="space-y-1">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-[#527665] font-semibold">
+          <div className="space-y-0.5">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-teal-700 font-bold">
               Video Consultation Slot
             </span>
-            <h3 className="font-serif text-xl text-[#252923] font-normal">
+            <h3 className="text-base font-bold text-slate-900">
               Schedule Appointment
             </h3>
-            <p className="text-xs text-[#777D76]">
+            <p className="text-xs text-slate-500">
               With {activeDoc.name}
             </p>
           </div>
 
           {/* Date Selector */}
-          <div className="space-y-2">
-            <label className="text-xs font-mono text-[#252923] font-medium block">Select Date</label>
+          <div className="space-y-1.5">
+            <label className="text-xs font-mono text-slate-900 font-bold block">Select Date</label>
             <div className="grid grid-cols-2 gap-2 text-xs font-mono">
               {dateOptions.map((opt) => (
                 <button
@@ -213,30 +219,30 @@ export const TelehealthBookingScreen: React.FC<TelehealthBookingScreenProps> = (
                   onClick={() => setSelectedDate(opt.date)}
                   className={`p-2.5 rounded-xl border text-center transition ${
                     selectedDate === opt.date
-                      ? 'bg-[#E8EFE9] border-[#527665] text-[#304D40] font-semibold'
-                      : 'border-[#E8E8E1] text-[#777D76] hover:bg-[#FAF9F6]'
+                      ? 'bg-slate-900 border-slate-900 text-white font-bold'
+                      : 'border-slate-200 text-slate-600 hover:bg-slate-50'
                   }`}
                 >
-                  <div className="font-semibold">{opt.label}</div>
-                  <div className="text-[10px] text-[#777D76]">{opt.date}</div>
+                  <div className="font-bold">{opt.label}</div>
+                  <div className="text-[10px] opacity-80">{opt.date}</div>
                 </button>
               ))}
             </div>
           </div>
 
           {/* Time Slot Selector */}
-          <div className="space-y-2">
-            <label className="text-xs font-mono text-[#252923] font-medium block">Available Times (EST)</label>
-            <div className="grid grid-cols-3 gap-2 text-xs font-mono">
+          <div className="space-y-1.5">
+            <label className="text-xs font-mono text-slate-900 font-bold block">Available Times (EST)</label>
+            <div className="grid grid-cols-3 gap-1.5 text-xs font-mono">
               {['09:00 AM', '10:30 AM', '02:00 PM', '03:30 PM', '05:00 PM'].map((slot) => (
                 <button
                   key={slot}
                   type="button"
                   onClick={() => setSelectedSlot(slot)}
-                  className={`p-2 rounded-xl border text-center transition ${
+                  className={`p-2 rounded-lg border text-center transition ${
                     selectedSlot === slot
-                      ? 'bg-[#304D40] text-white font-semibold'
-                      : 'border-[#E8E8E1] text-[#777D76] hover:bg-[#FAF9F6]'
+                      ? 'bg-teal-600 border-teal-600 text-white font-bold'
+                      : 'border-slate-200 text-slate-600 hover:bg-slate-50'
                   }`}
                 >
                   {slot}
@@ -246,40 +252,40 @@ export const TelehealthBookingScreen: React.FC<TelehealthBookingScreenProps> = (
           </div>
 
           {/* Booking Summary Box */}
-          <div className="p-4 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] space-y-2 text-xs">
+          <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5 text-xs">
             <div className="flex items-center justify-between font-mono">
-              <span className="text-[#777D76]">Consultation:</span>
-              <span className="font-semibold text-[#252923]">20-Min Video Call</span>
+              <span className="text-slate-500">Format:</span>
+              <span className="font-bold text-slate-900">20-Min Telehealth HD</span>
             </div>
             <div className="flex items-center justify-between font-mono">
-              <span className="text-[#777D76]">Selected Slot:</span>
-              <span className="font-semibold text-[#252923]">{selectedDate} @ {selectedSlot}</span>
+              <span className="text-slate-500">Scheduled:</span>
+              <span className="font-bold text-slate-900">{selectedDate} @ {selectedSlot}</span>
             </div>
-            <div className="flex items-center justify-between font-mono pt-1 border-t border-[#E8E8E1]">
-              <span className="text-[#777D76]">Patient:</span>
-              <span className="font-semibold text-[#252923]">{currentUser?.full_name || 'Registered Patient'}</span>
+            <div className="flex items-center justify-between font-mono pt-1 border-t border-slate-200">
+              <span className="text-slate-500">Patient:</span>
+              <span className="font-bold text-slate-900">{currentUser?.full_name || 'Presentation Demo User'}</span>
             </div>
           </div>
 
           {/* Book Action */}
           {isBooked ? (
-            <div className="p-4 rounded-2xl bg-[#E8EFE9] border border-[#d6e0ce] text-[#304D40] text-xs font-mono space-y-1 text-center">
+            <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-mono space-y-1 text-center">
               <div className="font-bold flex items-center justify-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#527665]" />
-                <span>Appointment Confirmed!</span>
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <span>Appointment Confirmed</span>
               </div>
-              <p className="text-[11px] text-[#777D76]">
-                Calendar invitation and secure video link dispatched to {currentUser?.email || 'your email'}.
+              <p className="text-[11px] text-emerald-700">
+                Encrypted appointment link dispatched to {currentUser?.email || 'demo.patient@dermanova.app'}.
               </p>
             </div>
           ) : (
             <button
               type="button"
               onClick={() => setIsBooked(true)}
-              className="w-full py-3.5 rounded-2xl bg-[#304D40] hover:bg-[#253d33] text-white font-mono text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition shadow-[0px_4px_16px_rgba(48,77,64,0.18)]"
+              className="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-mono text-xs font-semibold flex items-center justify-center gap-2 transition shadow-xs"
             >
-              <Video className="w-4 h-4" />
-              <span>Confirm Video Consultation</span>
+              <Video className="w-4 h-4 text-teal-400" />
+              <span>Confirm Telehealth Booking</span>
             </button>
           )}
         </div>
