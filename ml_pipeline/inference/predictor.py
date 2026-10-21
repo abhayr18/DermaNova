@@ -692,9 +692,11 @@ class DermaNovaPredictor:
             reverse=True
         )
 
-        top_active_conds = [c for c, p in ranked_conditions if p >= 0.30]
+        top_active_conds = [c for c, p in ranked_conditions if p >= 0.35]
         if not top_active_conds:
-            top_active_conds = [ranked_conditions[0][0], ranked_conditions[1][0]]
+            # All conditions are low probability / clear skin: do not fabricate false lesions
+            return []
+
 
         # Evaluate real pixel feature intensity in each candidate zone
         scored_zones = []

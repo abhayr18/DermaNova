@@ -77,14 +77,20 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
 
   const dynamicPins = React.useMemo(() => {
     if (analysis?.detected_lesions && analysis.detected_lesions.length > 0) {
-      return analysis.detected_lesions.map((l) => ({
-        id: l.condition_id === 'dark_spots' ? 'darkSpots' : l.condition_id === 'pores' ? 'visiblePores' : l.condition_id,
-        label: l.condition_name.split(' ')[0],
-        prob: Math.round(l.confidence * 100),
-        color: l.color || '#b85c3c',
-        x: l.box.x + l.box.width / 2,
-        y: l.box.y + l.box.height / 2,
-      }));
+      // Filter out any lesions whose condition is not actually prominent (probability < 0.35)
+      return analysis.detected_lesions
+        .filter((l) => {
+          const cond = analysis.conditions?.[l.condition_id];
+          return cond ? (cond.is_detected || cond.probability >= 0.35) : l.confidence >= 0.65;
+        })
+        .map((l) => ({
+          id: l.condition_id === 'dark_spots' ? 'darkSpots' : l.condition_id === 'pores' ? 'visiblePores' : l.condition_id,
+          label: l.condition_name.split(' ')[0],
+          prob: Math.round(l.confidence * 100),
+          color: l.color || '#b85c3c',
+          x: l.box.x + l.box.width / 2,
+          y: l.box.y + l.box.height / 2,
+        }));
     }
 
     if (analysis?.conditions) {
@@ -100,7 +106,7 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
       };
 
       const detected = Object.entries(analysis.conditions)
-        .filter(([_, v]) => v.probability >= 0.30)
+        .filter(([_, v]) => v.is_detected || v.probability >= 0.35)
         .sort((a, b) => b[1].probability - a[1].probability)
         .slice(0, 3);
 
@@ -120,11 +126,35 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
       }
     }
 
-    return [
-      { id: 'acne', label: 'Acne', prob: 74, color: '#b85c3c', x: 58, y: 38 },
-      { id: 'redness', label: 'Redness', prob: 82, color: '#527665', x: 34, y: 48 },
-      { id: 'visiblePores', label: 'Pores', prob: 71, color: '#777D76', x: 46, y: 44 },
-    ];
+    // When all 8 markers are low probability / clear skin, do not show fake pins
+    return [];
+  }, [analysis]);
+
+  // Dynamic clinical interpretation reflecting actual findings
+  const clinicalInterpretation = React.useMemo(() => {
+    if (!analysis?.conditions) {
+      return {
+        heading: "Optimal Cutaneous Homeostasis",
+        body: "Your skin barrier reflects balanced follicular activity and healthy moisture equilibrium. Routine maintenance should focus on barrier lipid replenishment, antioxidant hydration, and daily broad-spectrum photoprotection."
+      };
+    }
+
+    const activeList = Object.entries(analysis.conditions)
+      .filter(([_, v]) => v.is_detected || v.probability >= 0.35)
+      .sort((a, b) => b[1].probability - a[1].probability);
+
+    if (activeList.length === 0) {
+      return {
+        heading: "High Cutaneous Barrier Equilibrium",
+        body: "Your facial scan demonstrates high barrier integrity with low biomarker activity across all 8 analyzed categories. No prominent active acne, follicular comedones, or focal post-inflammatory hyperpigmentation were detected. Recommendations center on cellular hydration, ceramide lipid replenishment, and daily broad-spectrum SPF photoprotection."
+      };
+    }
+
+    const prominentNames = activeList.map(([_, v]) => v.display_name).slice(0, 3).join(", ");
+    return {
+      heading: `Cutaneous Assessment Focus: ${prominentNames}`,
+      body: `Your scan reflects localized activity primarily associated with ${prominentNames}. Introducing targeted, low-irritation actives matched to these biomarkers alongside gentle ceramide barrier support will foster optimal cellular equilibrium.`
+    };
   }, [analysis]);
 
   // All 8 core concerns in structured order
@@ -262,6 +292,14 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
                       </span>
                     </div>
                   ))}
+
+                  {/* Indicator if no prominent lesions are detected */}
+                  {dynamicPins.length === 0 && (
+                    <div className="absolute top-4 inset-x-4 p-2.5 rounded-xl bg-white/95 backdrop-blur-md border border-[#E8E8E1] text-[11px] font-mono text-[#304D40] flex items-center justify-center gap-2 shadow-xs pointer-events-auto">
+                      <span className="w-2 h-2 rounded-full bg-[#527665]" />
+                      <span>Optimal Homeostasis • No Focal Lesions Detected</span>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -411,10 +449,10 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
               Clinical Interpretation
             </span>
             <h3 className="font-serif text-xl text-[#252923] font-normal">
-              What this may mean for your skin barrier
+              {clinicalInterpretation.heading}
             </h3>
             <p className="text-xs sm:text-sm text-[#777D76] leading-relaxed">
-              Your results reflect an active T-zone combined with superficial erythema on the lateral cheeks. This suggests a reactive barrier currently experiencing mild oxidative stress, where introducing calming ingredients (Azelaic Acid, Centella Asiatica) before stronger exfoliating acids will yield maximum comfort and cellular equilibrium.
+              {clinicalInterpretation.body}
             </p>
 
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-t border-[#E8E8E1]">
