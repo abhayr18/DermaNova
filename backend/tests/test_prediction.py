@@ -96,3 +96,33 @@ def test_recommendation_safety_and_contraindications():
         is_pregnant_or_nursing=True
     )
     assert any("pregnancy" in c.lower() or "retinal" in c.lower() for c in recs_preg.contraindications_avoided)
+
+
+def test_portrait_with_light_background_accepted():
+    """Verify that selfies taken in front of white/light background walls are accepted, not rejected."""
+    sample_path = Path("sample_images/my_face.jpeg")
+    if not sample_path.exists():
+        pytest.skip("sample_images/my_face.jpeg not found")
+
+    from ml_pipeline.inference.predictor import predictor_service
+    with open(sample_path, "rb") as f:
+        res = predictor_service.predict(f.read())
+    assert res.overall_health_score >= 85
+    assert res.face_detected is True
+
+
+def test_document_rejected():
+    """Verify that pure text marksheets / documents are rejected with ValueError."""
+    import cv2
+    from ml_pipeline.inference.predictor import predictor_service
+
+    doc = np.ones((1000, 750, 3), dtype=np.uint8) * 245
+    for y in range(200, 800, 50):
+        cv2.line(doc, (50, y), (700, y), (50, 50, 50), 2)
+    cv2.putText(doc, "BOARD OF EDUCATION MARKSHEET", (100, 100), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (20, 20, 20), 2)
+    _, buf = cv2.imencode(".jpg", doc)
+
+    with pytest.raises(ValueError) as excinfo:
+        predictor_service.predict(buf.tobytes())
+    assert "Document or certificate detected" in str(excinfo.value)
+

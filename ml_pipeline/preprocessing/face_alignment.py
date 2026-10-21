@@ -114,50 +114,57 @@ class FaceROIExtractor:
         """
         Detects if the uploaded image is a document, certificate, marksheet,
         ID card, screenshot, or text paper rather than a human face or clinical skin photo.
+        Prevents false positive rejection on selfies/portraits taken against light/white walls.
         """
         if not HAS_OPENCV:
             return False, ""
 
         H, W = img_np.shape[:2]
+        total_area = float(H * W)
         gray = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY)
         hsv = cv2.cvtColor(img_np, cv2.COLOR_RGB2HSV)
 
-        # 1. Paper canvas metrics: documents/marksheets have bright, desaturated paper backgrounds
-        white_paper_ratio = float(np.mean(gray > 200))
-        light_bg_ratio = float(np.mean(gray > 170))
-        low_sat_ratio = float(np.mean(hsv[:, :, 1] < 40))
+        # 1. Human face presence check via YuNet neural face detector
+        # A photo containing a prominent face occupying >= 10% of the frame is guaranteed a portrait
+        has_face, bbox, _, conf = self._detect_yunet_face(img_np)
+        if has_face and bbox is not None and conf >= 0.70:
+            face_area_ratio = (bbox[2] * bbox[3]) / total_area
+            if face_area_ratio >= 0.10:
+                return False, ""
 
-        # 2. Document grid / table line detection
-        thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2)
-        h_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (25, 1))
-        v_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 25))
-        h_lines = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, h_kernel)
-        v_lines = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, v_kernel)
-        line_ratio = float((np.count_nonzero(h_lines) + np.count_nonzero(v_lines)) / (H * W))
+        # 2. Skin ratio check
+        ycrcb = cv2.cvtColor(img_np, cv2.COLOR_RGB2YCrCb)
+        lower_skin = np.array([0, 133, 77], dtype=np.uint8)
+        upper_skin = np.array([255, 175, 130], dtype=np.uint8)
+        mask = cv2.inRange(ycrcb, lower_skin, upper_skin)
+        skin_ratio = float(cv2.countNonZero(mask)) / total_area
 
-        # 3. Small text character glyph contours
-        contours, _ = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-        text_like_boxes = 0
-        for c in contours:
-            _, _, cw, ch = cv2.boundingRect(c)
-            if 4 <= cw <= 80 and 5 <= ch <= 80:
-                text_like_boxes += 1
+        white_paper_ratio = float(np.mean(gray > 205))
+        low_sat_ratio = float(np.mean(hsv[:, :, 1] < 45))
 
-        # A document must have an actual document paper background canvas
-        has_paper_canvas = (white_paper_ratio > 0.15 or light_bg_ratio > 0.18) and (low_sat_ratio > 0.15)
-        is_doc = bool(has_paper_canvas and (
-            (text_like_boxes > 40) or
-            (line_ratio > 0.012 and text_like_boxes > 20) or
-            (white_paper_ratio > 0.50)
-        ))
+        # Close-up macro skin patches (e.g. cheek crop, acne lesion, forehead)
+        if skin_ratio >= 0.35 and white_paper_ratio < 0.50:
+            return False, ""
 
-        if is_doc:
-            return True, (
-                "Document or certificate detected. DermaNova requires a clear, well-lit photograph "
-                "of a human face, not an academic marksheet, ID card, or text paper."
-            )
+        # 3. Document paper canvas & line/text criteria
+        # A document must have an extensive bright, desaturated paper background (>50%)
+        if white_paper_ratio > 0.50 and low_sat_ratio > 0.35:
+            # Check document table / grid lines
+            thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2)
+            h_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (35, 1))
+            v_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 35))
+            h_lines = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, h_kernel)
+            v_lines = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, v_kernel)
+            line_ratio = float((np.count_nonzero(h_lines) + np.count_nonzero(v_lines)) / total_area)
+
+            if line_ratio > 0.005 or white_paper_ratio > 0.65 or skin_ratio < 0.15:
+                return True, (
+                    "Document or certificate detected. DermaNova requires a clear, well-lit photograph "
+                    "of a human face, not an academic marksheet, ID card, or text paper."
+                )
 
         return False, ""
+
 
     def _detect_yunet_face(self, img_np: np.ndarray) -> Tuple[bool, Optional[Tuple[int, int, int, int]], Optional[Dict[str, Tuple[float, float]]], float]:
         """
