@@ -9,7 +9,22 @@ Modules:
 
 from .image_enhancement import ImageEnhancer
 from .face_alignment import FaceROIExtractor
-from .augmentation import DermaNovaAugmenter
-from .dataset import DermaNovaSkinDataset, create_dataloaders
 
-__all__ = ["ImageEnhancer", "FaceROIExtractor", "DermaNovaAugmenter", "DermaNovaSkinDataset", "create_dataloaders"]
+try:
+    from .augmentation import DermaNovaAugmenter
+except ImportError:
+    DermaNovaAugmenter = None
+
+try:
+    from .dataset import DermaNovaSkinDataset, create_dataloaders
+except ImportError:
+    DermaNovaSkinDataset = None
+    create_dataloaders = None
+
+__all__ = [
+    "ImageEnhancer",
+    "FaceROIExtractor",
+    "DermaNovaAugmenter",
+    "DermaNovaSkinDataset",
+    "create_dataloaders"
+]
