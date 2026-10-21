@@ -276,22 +276,22 @@ export const apiService = {
   ): Promise<AnalysisResponse> {
     const formData = new FormData();
     formData.append('file', file);
-    // Let browser/Axios set correct multipart/form-data boundary automatically
-    const response = await apiClient.post<AnalysisResponse>('/analyses', formData, {
-      onUploadProgress: (progressEvent) => {
-        if (onProgress && progressEvent.total) {
-          const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-          onProgress(percent);
-        }
-      },
-    }).catch(async (err) => {
-      // Fallback to legacy endpoint if /analyses not available
-      if (err?.response?.status === 404) {
-        return await apiClient.post<AnalysisResponse>('/analyze', formData);
-      }
-      throw err;
-    });
-    return response.data;
+    try {
+      // Primary verified endpoint /analyze
+      const response = await apiClient.post<AnalysisResponse>('/analyze', formData, {
+        onUploadProgress: (progressEvent) => {
+          if (onProgress && progressEvent.total) {
+            const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            onProgress(percent);
+          }
+        },
+      });
+      return response.data;
+    } catch (err: any) {
+      // Fallback to /analyses if /analyze fails
+      const response = await apiClient.post<AnalysisResponse>('/analyses', formData);
+      return response.data;
+    }
   },
 
   async analyzeBase64(base64Data: string): Promise<AnalysisResponse> {

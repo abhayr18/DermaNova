@@ -99,6 +99,26 @@ app = FastAPI(
 app.add_exception_handler(DermaNovaBaseException, dermanova_exception_handler)
 app.add_exception_handler(RequestValidationError, validation_exception_handler)
 
+@app.exception_handler(Exception)
+async def generic_exception_handler(request: Request, exc: Exception):
+    logger.error(f"Unhandled server error on {request.url.path}: {exc}", exc_info=True)
+    origin = request.headers.get("origin", "*")
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={
+            "error_code": "INTERNAL_SERVER_ERROR",
+            "message": "An internal diagnostic processing error occurred. Please retry with a clear facial photo.",
+            "details": str(exc) if settings.DEBUG else None
+        },
+        headers={
+            "Access-Control-Allow-Origin": origin,
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Methods": "*",
+            "Access-Control-Allow-Headers": "*",
+        }
+    )
+
+
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,

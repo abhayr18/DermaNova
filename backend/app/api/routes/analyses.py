@@ -53,12 +53,22 @@ async def create_analysis(
     if not image_bytes:
         raise ImageValidationError("Uploaded image file is empty.")
 
-    result = await analysis_service.run_analysis(
-        image_input=image_bytes,
-        user=current_user,
-        db=db
-    )
-    return result
+    try:
+        result = await analysis_service.run_analysis(
+            image_input=image_bytes,
+            user=current_user,
+            db=db
+        )
+        return result
+    except Exception as e:
+        logger.warning(f"analysis_service failed ({e}), falling back to predictor_service: {e}")
+        from ml_pipeline.inference.predictor import predictor_service
+        from backend.app.api.v1.analysis import _save_assessment_and_routine
+        legacy_result = predictor_service.predict(image_bytes)
+        if current_user and db:
+            await _save_assessment_and_routine(legacy_result, image_bytes, current_user, db)
+        return legacy_result
+
 
 
 @router.get(
