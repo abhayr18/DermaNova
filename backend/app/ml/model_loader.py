@@ -161,17 +161,20 @@ class ModelLoader:
 
     def get_info(self) -> Dict[str, Any]:
         """Safe metadata for public/client inspection."""
+        from ml_pipeline.inference.predictor import predictor_service
+        is_ready = self.is_loaded or getattr(predictor_service, "is_model_loaded", False)
+        active_arch = self.checkpoint_metadata.get("backbone", "efficientnet_b0") if self.is_loaded else "efficientnet_b0 (ONNX Runtime)"
         return {
-            "model_name": "DermaNova Multi-Task EfficientNet",
+            "model_name": "DermaNova Multi-Task EfficientNet" if self.is_loaded else "DermaNova Multi-Task EfficientNet (ONNX)",
             "model_version": self.model_version,
-            "architecture": self.checkpoint_metadata.get("backbone", "efficientnet_b0"),
+            "architecture": active_arch,
             "input_resolution": [224, 224],
-            "device": str(self.device),
-            "is_ready": self.is_loaded,
+            "device": str(self.device) if self.is_loaded else "cpu",
+            "is_ready": is_ready,
             "supported_conditions": DERMANOVA_CONDITION_KEYS,
             "severity_grades": ["Mild", "Moderate", "Severe"],
             "skin_types": ["Normal", "Oily", "Dry", "Combination", "Sensitive"],
-            "load_error": self.load_error if not self.is_loaded else None
+            "load_error": None if is_ready else (self.load_error or "No model weights loaded")
         }
 
 

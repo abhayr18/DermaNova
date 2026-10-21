@@ -139,6 +139,15 @@ class DermaNovaPredictor:
         """Check if at least one inference backend (ONNX or PyTorch) is available."""
         return self.onnx_session is not None or self.torch_model is not None
 
+    @property
+    def active_model_type(self) -> str:
+        """Identifies active inference backend engine."""
+        if self.onnx_session is not None:
+            return "ONNX Runtime (Ultralight)"
+        elif self.torch_model is not None:
+            return "PyTorch MultiTaskModel"
+        return "None"
+
     def _init_models(self):
         """Load trained ONNX or PyTorch checkpoints. Logs warnings but does not crash on failure."""
         # 1. Try ONNX runtime for lightweight fast execution (<30MB RAM)

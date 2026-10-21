@@ -1,14 +1,15 @@
 """
-DermaNova Face Alignment, Optical Quality Validation & ROI Extraction Module
-=============================================================================
+DermaNova Dual-Mode Face Alignment & Cutaneous Macro-Lesion ROI Extraction Module
+==================================================================================
 Performs:
 1. Optical Quality Gatekeeping: Blur detection (Laplacian variance) & Exposure analysis
-2. Automated Human Face & Skin Detection via Fitzpatrick Chrominance Segmentation (YCrCb / HSV)
-3. Aspect-ratio preserving facial Region-of-Interest (ROI) cropping with anatomical margins
-4. Bicubic spatial normalization for deep learning feature extractors
+2. Tier 1: OpenCV YuNet Deep Neural Network Face Detection & 5-Landmark Localization (<5MB RAM)
+3. Tier 2: Cutaneous Macro-Skin Validator for close-up lesion crops (cheeks, forehead, chin)
+4. Aspect-ratio preserving ROI extraction & Bicubic spatial normalization (224x224)
 """
 
 from typing import Tuple, Optional, Dict, Any, Union
+from pathlib import Path
 import numpy as np
 from PIL import Image
 
@@ -22,17 +23,18 @@ except ImportError:
 class FaceROIExtractor:
     """
     Clinical-grade facial ROI extraction, optical quality validator,
-    and Fitzpatrick skin-tone chrominance face detector.
+    and Dual-Mode Face/Macro-Skin Detector using OpenCV YuNet + Cutaneous Chrominance.
     """
 
     def __init__(
         self,
         output_size: Tuple[int, int] = (224, 224),
-        margin_ratio: float = 0.15,
+        margin_ratio: float = 0.18,
         blur_threshold: float = 65.0,
         min_luminance: float = 35.0,
         max_luminance: float = 235.0,
-        skin_presence_threshold: float = 0.15
+        skin_presence_threshold: float = 0.28,
+        yunet_model_path: Optional[str] = None
     ):
         self.output_size = output_size
         self.margin_ratio = margin_ratio
@@ -40,6 +42,32 @@ class FaceROIExtractor:
         self.min_luminance = min_luminance
         self.max_luminance = max_luminance
         self.skin_presence_threshold = skin_presence_threshold
+
+        # Initialize YuNet Neural Face Detector (Ultra-light 232KB ONNX model)
+        self.root_dir = Path(__file__).resolve().parent.parent.parent
+        self.yunet_path = (
+            Path(yunet_model_path)
+            if yunet_model_path
+            else self.root_dir / "ml_pipeline" / "models" / "saved_models" / "face_detection_yunet_2023mar.onnx"
+        )
+
+        self.yunet_detector = None
+        if HAS_OPENCV and self.yunet_path.exists():
+            try:
+                # YuNet detector initialized with default input size (dynamically set on predict)
+                self.yunet_detector = cv2.FaceDetectorYN.create(
+                    model=str(self.yunet_path),
+                    config="",
+                    input_size=(320, 320),
+                    score_threshold=0.38,
+                    nms_threshold=0.30,
+                    top_k=5000
+                )
+            except Exception as e:
+                self.yunet_detector = None
+
+        self.last_detection_mode = "none"  # 'full_face_yunet', 'macro_skin_crop', 'unrecognized'
+        self.last_landmarks = None
 
     def validate_optical_quality(self, img_np: np.ndarray) -> Dict[str, Any]:
         """
@@ -60,7 +88,7 @@ class FaceROIExtractor:
         gray = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY)
 
         # 1. Blur Detection via Laplacian Variance
-        laplacian_var = float(cv2.Laplacian(gray, cv2.CV_64F).var())
+        laplacian_var = float(cv2.Laplacian(gray, cv2.CV_32F).var())
         is_blurry = laplacian_var < self.blur_threshold
 
         # 2. Exposure & Luminance Verification
@@ -82,11 +110,66 @@ class FaceROIExtractor:
             "exposure_status": exposure_status
         }
 
-    def detect_face_skin_mask(self, img_np: np.ndarray) -> Tuple[bool, Optional[Tuple[int, int, int, int]]]:
+    def _detect_yunet_face(self, img_np: np.ndarray) -> Tuple[bool, Optional[Tuple[int, int, int, int]], Optional[Dict[str, Tuple[float, float]]], float]:
         """
-        Detects human facial skin presence across Fitzpatrick Skin Types I-VI
-        using normalized YCrCb chrominance range clustering.
-        Returns (face_detected_bool, bounding_box_tuple).
+        Tier 1: Neural face detection using OpenCV YuNet.
+        Detects bounding box + 5 facial landmarks (eyes, nose, mouth corners).
+        """
+        if not HAS_OPENCV or self.yunet_detector is None:
+            return False, None, None, 0.0
+
+        H, W = img_np.shape[:2]
+        img_bgr = cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR)
+
+        # Constrain resolution for YuNet inference to max 640px for speed & consistency
+        scale_factor = 1.0
+        max_dim = max(H, W)
+        if max_dim > 640:
+            scale_factor = 640.0 / max_dim
+            sw = int(W * scale_factor)
+            sh = int(H * scale_factor)
+            img_infer = cv2.resize(img_bgr, (sw, sh), interpolation=cv2.INTER_AREA)
+        else:
+            sw, sh = W, H
+            img_infer = img_bgr
+
+        try:
+            self.yunet_detector.setInputSize((sw, sh))
+            _, faces = self.yunet_detector.detect(img_infer)
+
+            if faces is not None and len(faces) > 0:
+                # Find face with highest area / confidence
+                best_face = max(faces, key=lambda f: float(f[2] * f[3]))
+                bx = int(best_face[0] / scale_factor)
+                by = int(best_face[1] / scale_factor)
+                bw = int(best_face[2] / scale_factor)
+                bh = int(best_face[3] / scale_factor)
+                score = float(best_face[-1])
+
+                # Bounding box clamp
+                bx = max(0, min(W - 1, bx))
+                by = max(0, min(H - 1, by))
+                bw = max(10, min(W - bx, bw))
+                bh = max(10, min(H - by, bh))
+
+                landmarks = {
+                    "right_eye": (float(best_face[4] / scale_factor), float(best_face[5] / scale_factor)),
+                    "left_eye": (float(best_face[6] / scale_factor), float(best_face[7] / scale_factor)),
+                    "nose": (float(best_face[8] / scale_factor), float(best_face[9] / scale_factor)),
+                    "right_mouth": (float(best_face[10] / scale_factor), float(best_face[11] / scale_factor)),
+                    "left_mouth": (float(best_face[12] / scale_factor), float(best_face[13] / scale_factor)),
+                }
+
+                return True, (bx, by, bw, bh), landmarks, score
+        except Exception:
+            pass
+
+        return False, None, None, 0.0
+
+    def _detect_cutaneous_macro_skin(self, img_np: np.ndarray) -> Tuple[bool, float]:
+        """
+        Tier 2: Cutaneous Skin & Texture Validator for close-up lesion crops
+        (e.g., cheek acne patch, forehead lines, or perioral redness where eyes/nose are not visible).
         """
         H, W, _ = img_np.shape
 
@@ -96,43 +179,95 @@ class FaceROIExtractor:
             lower_skin = np.array([0, 133, 77], dtype=np.uint8)
             upper_skin = np.array([255, 175, 130], dtype=np.uint8)
             mask = cv2.inRange(ycrcb, lower_skin, upper_skin)
+
+            # Also verify natural epidermal micro-texture (Laplacian variance > 12.0)
+            gray = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY)
+            texture_var = float(cv2.Laplacian(gray, cv2.CV_32F).var())
+            has_texture = texture_var > 12.0
         else:
-            # Fallback RGB rule for skin detection
             r = img_np[:, :, 0].astype(int)
             g = img_np[:, :, 1].astype(int)
             b = img_np[:, :, 2].astype(int)
             mask = ((r > 95) & (g > 40) & (b > 20) & ((r - g) > 15) & (r > b)).astype(np.uint8) * 255
+            has_texture = True
 
         skin_pixels = np.sum(mask > 0)
         total_pixels = H * W
         skin_ratio = float(skin_pixels / total_pixels) if total_pixels > 0 else 0.0
 
-        if skin_ratio < self.skin_presence_threshold:
-            return False, None
+        is_valid_macro_skin = (skin_ratio >= self.skin_presence_threshold) and has_texture
+        return is_valid_macro_skin, skin_ratio
 
-        # Memory-safe bounding box without large coordinate array allocation
-        rows = np.any(mask > 0, axis=1)
-        cols = np.any(mask > 0, axis=0)
-        if not np.any(rows) or not np.any(cols):
-            return False, None
-        ymin, ymax = np.where(rows)[0][[0, -1]]
-        xmin, xmax = np.where(cols)[0][[0, -1]]
-        bbox = (int(xmin), int(ymin), int(xmax - xmin), int(ymax - ymin))
+    def detect_face_or_skin(self, img_np: np.ndarray) -> Dict[str, Any]:
+        """
+        Dual-Mode Hierarchical Detector:
+        1. Attempts YuNet neural face detection for full/partial faces.
+        2. If no face is detected, checks for valid cutaneous skin patch (macro close-up).
+        """
+        # Tier 1: YuNet
+        has_face, bbox, landmarks, score = self._detect_yunet_face(img_np)
+        if has_face:
+            self.last_detection_mode = "full_face_yunet"
+            self.last_landmarks = landmarks
+            return {
+                "detected": True,
+                "mode": "full_face_yunet",
+                "bbox": bbox,
+                "landmarks": landmarks,
+                "confidence": score
+            }
 
-        return True, bbox
+        # Tier 2: Macro Cutaneous Skin Patch
+        is_skin_patch, skin_ratio = self._detect_cutaneous_macro_skin(img_np)
+        if is_skin_patch:
+            self.last_detection_mode = "macro_skin_crop"
+            self.last_landmarks = None
+            return {
+                "detected": True,
+                "mode": "macro_skin_crop",
+                "bbox": None,  # Entire photo is the target lesion region
+                "landmarks": None,
+                "confidence": round(min(0.96, skin_ratio + 0.15), 2)
+            }
+
+        self.last_detection_mode = "unrecognized"
+        self.last_landmarks = None
+        return {
+            "detected": False,
+            "mode": "unrecognized",
+            "bbox": None,
+            "landmarks": None,
+            "confidence": 0.0
+        }
+
+    def detect_face_skin_mask(self, img_np: np.ndarray) -> Tuple[bool, Optional[Tuple[int, int, int, int]]]:
+        """Preserves backward compatibility hook for skin mask detection."""
+        res = self.detect_face_or_skin(img_np)
+        return res["detected"], res.get("bbox")
 
     def crop_face_roi(self, img_pil: Image.Image) -> Tuple[Image.Image, bool]:
         """
-        Extract aligned facial ROI. Uses skin-tone cluster detection to locate face,
-        falling back to central anatomical crop.
-        Returns: (cropped_pil_image, face_detected_bool)
+        Extracts aligned ROI:
+        - For full faces: YuNet landmark-guided anatomical face crop with margins.
+        - For macro lesion crops: Preserves the entire close-up without discarding the disease site.
+        Returns: (cropped_pil_image, face_or_skin_detected_bool)
         """
         img_np = np.array(img_pil)
         w, h = img_pil.size
-        face_detected, bbox = self.detect_face_skin_mask(img_np)
+        det_info = self.detect_face_or_skin(img_np)
 
-        if face_detected and bbox is not None:
-            bx, by, bw, bh = bbox
+        if not det_info["detected"]:
+            # Fallback center crop if invalid
+            crop_size = min(w, h)
+            left = (w - crop_size) // 2
+            top = (h - crop_size) // 2
+            return img_pil.crop((left, top, left + crop_size, top + crop_size)).resize(
+                self.output_size, resample=Image.Resampling.BICUBIC
+            ), False
+
+        # Case 1: Full face detected via YuNet -> Crop aligned facial region
+        if det_info["mode"] == "full_face_yunet" and det_info["bbox"] is not None:
+            bx, by, bw, bh = det_info["bbox"]
             pad_w = int(bw * self.margin_ratio)
             pad_h = int(bh * self.margin_ratio)
 
@@ -141,14 +276,28 @@ class FaceROIExtractor:
             x2 = min(w, bx + bw + pad_w)
             y2 = min(h, by + bh + pad_h)
 
-            cropped = img_pil.crop((x1, y1, x2, y2))
+            # Make square crop centered on face
+            cw = x2 - x1
+            ch = y2 - y1
+            cmax = max(cw, ch)
+            cx = (x1 + x2) // 2
+            cy = (y1 + y2) // 2
+
+            sq_x1 = max(0, cx - cmax // 2)
+            sq_y1 = max(0, cy - cmax // 2)
+            sq_x2 = min(w, sq_x1 + cmax)
+            sq_y2 = min(h, sq_y1 + cmax)
+
+            cropped = img_pil.crop((sq_x1, sq_y1, sq_x2, sq_y2))
             return cropped.resize(self.output_size, resample=Image.Resampling.BICUBIC), True
 
-        # Fallback central anatomical crop
-        margin_w = int(w * self.margin_ratio)
-        margin_h = int(h * self.margin_ratio)
-        cropped = img_pil.crop((margin_w, margin_h, w - margin_w, h - margin_h))
-        return cropped.resize(self.output_size, resample=Image.Resampling.BICUBIC), False
+        # Case 2: Macro skin patch (User uploaded a close-up crop of cheek/forehead/lesion)
+        # Preserve the entire close-up area by doing a minimal square fit from center
+        crop_size = min(w, h)
+        left = (w - crop_size) // 2
+        top = (h - crop_size) // 2
+        cropped = img_pil.crop((left, top, left + crop_size, top + crop_size))
+        return cropped.resize(self.output_size, resample=Image.Resampling.BICUBIC), True
 
     def process(
         self,

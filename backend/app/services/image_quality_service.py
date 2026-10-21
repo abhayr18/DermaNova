@@ -42,6 +42,10 @@ class ImageQualityService:
         Evaluates optical clarity, exposure, and human face/skin presence.
         Raises ImageQualityError with clear actionable explanation if unsuitable.
         """
+        if max(pil_img.size) > 640:
+            pil_img = pil_img.copy()
+            pil_img.thumbnail((640, 640), Image.Resampling.BILINEAR)
+
         img_np = np.array(pil_img)
         H, W = img_np.shape[:2]
 
@@ -49,7 +53,7 @@ class ImageQualityService:
         if HAS_OPENCV:
             gray = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY)
             mean_lum = float(np.mean(gray))
-            laplacian_var = float(cv2.Laplacian(gray, cv2.CV_64F).var())
+            laplacian_var = float(cv2.Laplacian(gray, cv2.CV_32F).var())
         else:
             r = img_np[:, :, 0].astype(np.float32)
             g = img_np[:, :, 1].astype(np.float32)

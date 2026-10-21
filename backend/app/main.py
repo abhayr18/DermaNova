@@ -59,14 +59,14 @@ async def lifespan(app: FastAPI):
 
     # 3. Model readiness (PyTorch singleton or ONNX Runtime)
     try:
-        if getattr(model_loader, "has_torch", False):
+        if getattr(model_loader, "has_torch", False) and getattr(model_loader, "checkpoint_path", None) and model_loader.checkpoint_path.exists():
             model_loader.load()
             logger.info(
                 f"PyTorch Model loaded and verified on device: {model_loader.device}. "
                 f"Trained epoch: {model_loader.checkpoint_metadata.get('epoch')}"
             )
         else:
-            logger.info("PyTorch not installed; utilizing ONNX Runtime inference engine.")
+            logger.info("PyTorch weights not active; utilizing lightweight ONNX Runtime inference engine.")
             if predictor_service.is_model_loaded:
                 logger.info(f"ONNX Model engine loaded: {predictor_service.active_model_type}")
     except Exception as e:
