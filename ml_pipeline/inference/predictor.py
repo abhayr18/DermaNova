@@ -386,6 +386,14 @@ class DermaNovaPredictor:
         pil_img, img_np = self.decode_image(image_input)
         orig_h, orig_w = img_np.shape[:2]
 
+        # -----------------------------------------------------------------
+        # DOCUMENT & CERTIFICATE GATEKEEPER:
+        # Strictly reject academic marksheets, certificates, ID cards, text pages
+        # -----------------------------------------------------------------
+        is_doc, doc_reason = self.roi_extractor.is_document_or_text_image(img_np)
+        if is_doc:
+            raise ValueError(doc_reason)
+
         # 2. Optical Quality Gatekeeper & Face Crop
         quality_res = self.roi_extractor.validate_optical_quality(img_np)
         cropped_pil, face_detected = self.roi_extractor.crop_face_roi(pil_img)

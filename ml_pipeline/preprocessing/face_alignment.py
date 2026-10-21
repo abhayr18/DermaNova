@@ -110,6 +110,50 @@ class FaceROIExtractor:
             "exposure_status": exposure_status
         }
 
+    def is_document_or_text_image(self, img_np: np.ndarray) -> Tuple[bool, str]:
+        """
+        Detects if the uploaded image is a document, certificate, marksheet,
+        ID card, screenshot, or text paper rather than a human face or clinical skin photo.
+        """
+        if not HAS_OPENCV:
+            return False, ""
+
+        H, W = img_np.shape[:2]
+        gray = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY)
+
+        # 1. White paper background ratio
+        white_paper_ratio = float(np.mean(gray > 205))
+
+        # 2. Document grid / table line detection
+        thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2)
+        h_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (25, 1))
+        v_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 25))
+        h_lines = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, h_kernel)
+        v_lines = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, v_kernel)
+        line_ratio = float((np.count_nonzero(h_lines) + np.count_nonzero(v_lines)) / (H * W))
+
+        # 3. Small text character glyph contours
+        contours, _ = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        text_like_boxes = 0
+        for c in contours:
+            _, _, cw, ch = cv2.boundingRect(c)
+            if 4 <= cw <= 80 and 5 <= ch <= 80:
+                text_like_boxes += 1
+
+        is_doc = (
+            (white_paper_ratio > 0.40 and text_like_boxes > 35) or
+            (line_ratio > 0.015 and text_like_boxes > 25) or
+            (white_paper_ratio > 0.65 and text_like_boxes > 15)
+        )
+
+        if is_doc:
+            return True, (
+                "Document or certificate detected. DermaNova requires a clear, well-lit photograph "
+                "of a human face, not an academic marksheet, ID card, or text paper."
+            )
+
+        return False, ""
+
     def _detect_yunet_face(self, img_np: np.ndarray) -> Tuple[bool, Optional[Tuple[int, int, int, int]], Optional[Dict[str, Tuple[float, float]]], float]:
         """
         Tier 1: Neural face detection using OpenCV YuNet.
@@ -146,6 +190,11 @@ class FaceROIExtractor:
                 bh = int(best_face[3] / scale_factor)
                 score = float(best_face[-1])
 
+                # Reject miniature thumbnail faces on ID cards/certificates/documents
+                face_area_ratio = float((bw * bh) / (W * H))
+                if face_area_ratio < 0.05 or (bw / float(W) < 0.14 and bh / float(H) < 0.14):
+                    return False, None, None, 0.0
+
                 # Bounding box clamp
                 bx = max(0, min(W - 1, bx))
                 by = max(0, min(H - 1, by))
@@ -174,6 +223,12 @@ class FaceROIExtractor:
         H, W, _ = img_np.shape
 
         if HAS_OPENCV:
+            gray = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY)
+            # Rejection guard: Documents / paper with white background (>35%) are NOT skin macro crops
+            white_paper_ratio = float(np.mean(gray > 205))
+            if white_paper_ratio > 0.35:
+                return False, 0.0
+
             ycrcb = cv2.cvtColor(img_np, cv2.COLOR_RGB2YCrCb)
             # Universal human skin chrominance cluster: Cr in [133, 175], Cb in [77, 130]
             lower_skin = np.array([0, 133, 77], dtype=np.uint8)
@@ -181,7 +236,6 @@ class FaceROIExtractor:
             mask = cv2.inRange(ycrcb, lower_skin, upper_skin)
 
             # Also verify natural epidermal micro-texture (Laplacian variance > 12.0)
-            gray = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY)
             texture_var = float(cv2.Laplacian(gray, cv2.CV_32F).var())
             has_texture = texture_var > 12.0
         else:
@@ -201,9 +255,23 @@ class FaceROIExtractor:
     def detect_face_or_skin(self, img_np: np.ndarray) -> Dict[str, Any]:
         """
         Dual-Mode Hierarchical Detector:
+        0. Checks if image is a document, marksheet, certificate, or text paper.
         1. Attempts YuNet neural face detection for full/partial faces.
         2. If no face is detected, checks for valid cutaneous skin patch (macro close-up).
         """
+        # Step 0: Document Gatekeeper
+        is_doc, doc_msg = self.is_document_or_text_image(img_np)
+        if is_doc:
+            self.last_detection_mode = "document_rejected"
+            self.last_landmarks = None
+            return {
+                "detected": False,
+                "mode": "document_rejected",
+                "bbox": None,
+                "landmarks": None,
+                "confidence": 0.0,
+                "reason": doc_msg
+            }
         # Tier 1: YuNet
         has_face, bbox, landmarks, score = self._detect_yunet_face(img_np)
         if has_face:

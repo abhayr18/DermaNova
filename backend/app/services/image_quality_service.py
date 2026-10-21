@@ -86,6 +86,19 @@ class ImageQualityService:
         # Extreme blur check
         is_blurry = laplacian_var < self.blur_threshold
 
+        # Document & Text Paper Rejection Check
+        if HAS_OPENCV:
+            white_paper_ratio = float(np.mean(gray > 205))
+            if white_paper_ratio > 0.35:
+                thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2)
+                contours, _ = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+                text_like_boxes = sum(1 for c in contours if 4 <= cv2.boundingRect(c)[2] <= 80 and 5 <= cv2.boundingRect(c)[3] <= 80)
+                if text_like_boxes > 25:
+                    raise ImageQualityError(
+                        "The uploaded image appears to be a document, marksheet, or certificate with text. "
+                        "Please upload a clear, close-up photograph of your face."
+                    )
+
         # 2. Skin / Face Presence check (Fitzpatrick Chrominance Clustering)
         face_detected, skin_fraction, bbox = self._detect_skin_presence(img_np)
 
