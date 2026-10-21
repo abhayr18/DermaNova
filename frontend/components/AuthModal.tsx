@@ -42,6 +42,22 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthent
     }
   };
 
+  const handleDemoLogin = async () => {
+    setIsLoading(true);
+    setErrorMsg(null);
+    try {
+      const res = await apiService.login({ email: 'demo.patient@dermanova.app', password: 'password123' });
+      onAuthenticated(res.user);
+      onClose();
+    } catch (err: any) {
+      console.error(err);
+      setErrorMsg(err?.response?.data?.detail || 'Could not connect to local demo account. Ensure local backend is active.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
       <div className="relative w-full max-w-md bg-white rounded-3xl border border-[#e6e2d8] p-6 sm:p-8 space-y-6 shadow-2xl">
@@ -155,9 +171,22 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthent
           </button>
         </form>
 
+        {/* 1-Click Presentation Demo Login */}
+        <div className="pt-2 border-t border-[#ded9cd]/60">
+          <button
+            type="button"
+            onClick={handleDemoLogin}
+            disabled={isLoading}
+            className="w-full py-2.5 px-4 rounded-full bg-[#f4f6f1] hover:bg-[#eef2ea] border border-[#cbd7c1] text-[#304D40] font-mono-clinical font-semibold text-xs flex items-center justify-center gap-2 transition shadow-xs"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-[#527665]" />
+            <span>1-Click Presentation Demo Login</span>
+          </button>
+        </div>
+
         {/* Security Note */}
         <p className="text-[10px] text-center text-[#8b9784] font-mono-clinical">
-          🔒 Encrypted on Supabase Cloud Infrastructure • HIPAA & DPDP Compliant
+          🔒 Encrypted on Local & Cloud SQLite • HIPAA & DPDP Compliant
         </p>
       </div>
     </div>

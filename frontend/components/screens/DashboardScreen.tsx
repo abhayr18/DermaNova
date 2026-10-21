@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Camera,
   FileText,
@@ -20,7 +20,7 @@ import {
   Moon,
   Info
 } from 'lucide-react';
-import { UserAccount, AnalysisResponse } from '../../services/api';
+import { UserAccount, AnalysisResponse, apiService, TimelineScanItem } from '../../services/api';
 
 interface DashboardScreenProps {
   currentUser: UserAccount | null;
@@ -37,19 +37,48 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
   onStartNewAnalysis,
   onOpenConcernDetail,
 }) => {
+  const [dbTimeline, setDbTimeline] = useState<TimelineScanItem[]>([]);
+  const [dbLoading, setDbLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchTimeline = async () => {
+      try {
+        setDbLoading(true);
+        const res = await apiService.getJourneyTimeline();
+        if (res?.timeline && res.timeline.length > 0) {
+          setDbTimeline(res.timeline);
+        }
+      } catch (err) {
+        // Silently handle if unauthenticated or offline
+      } finally {
+        setDbLoading(false);
+      }
+    };
+    fetchTimeline();
+  }, [currentUser, latestAnalysis]);
+
   const userName = currentUser?.full_name?.split(' ')[0] || 'Friend';
 
-  const hasAnalysis = Boolean(latestAnalysis);
+  // If there's an active analysis passed in prop, use it. Otherwise, fallback to newest DB scan!
+  const newestDbScan = dbTimeline.length > 0 ? dbTimeline[dbTimeline.length - 1] : null;
+
+  const hasAnalysis = Boolean(latestAnalysis || newestDbScan);
   const scanDate = latestAnalysis
     ? new Date(latestAnalysis.timestamp || Date.now()).toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
         year: 'numeric',
       })
+    : newestDbScan
+    ? new Date(newestDbScan.date || Date.now()).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      })
     : null;
 
-  const skinType = latestAnalysis?.detected_skin_type || 'Unspecified';
-  const overallScore = latestAnalysis?.overall_health_score;
+  const skinType = latestAnalysis?.detected_skin_type || newestDbScan?.skin_type || 'Unspecified';
+  const overallScore = latestAnalysis?.overall_health_score ?? newestDbScan?.health_score;
 
   const topConcerns = latestAnalysis?.conditions
     ? Object.entries(latestAnalysis.conditions)
@@ -346,21 +375,47 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
           </div>
 
           <div className="space-y-2.5">
-            <div className="p-3 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] flex items-center justify-between text-xs">
-              <div className="space-y-0.5">
-                <div className="font-mono font-medium text-[#252923]">Scan #2 • 4-Week Follow Up</div>
-                <div className="text-[11px] text-[#777D76]">Oct 18, 2026 • Mild Redness, Calmer Pores</div>
-              </div>
-              <span className="font-mono text-xs font-semibold text-[#527665]">Score 84</span>
-            </div>
+            {dbTimeline.length > 0 ? (
+              [...dbTimeline].reverse().slice(0, 3).map((item) => (
+                <div
+                  key={item.assessment_id}
+                  onClick={() => onNavigateTab('journey')}
+                  className="p-3 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] hover:border-[#527665]/40 cursor-pointer flex items-center justify-between text-xs transition"
+                >
+                  <div className="space-y-0.5">
+                    <div className="font-mono font-medium text-[#252923]">
+                      Scan #{item.scan_number} • {item.phase_label}
+                    </div>
+                    <div className="text-[11px] text-[#777D76]">
+                      {item.date} • {item.primary_concern} ({item.skin_type})
+                    </div>
+                  </div>
+                  <span className={`font-mono text-xs font-semibold px-2 py-0.5 rounded-full ${
+                    item.health_score >= 80 ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'
+                  }`}>
+                    Score {item.health_score}
+                  </span>
+                </div>
+              ))
+            ) : (
+              <>
+                <div className="p-3 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] flex items-center justify-between text-xs">
+                  <div className="space-y-0.5">
+                    <div className="font-mono font-medium text-[#252923]">Scan #2 • 4-Week Follow Up</div>
+                    <div className="text-[11px] text-[#777D76]">Oct 18, 2026 • Mild Redness, Calmer Pores</div>
+                  </div>
+                  <span className="font-mono text-xs font-semibold text-[#527665]">Score 84</span>
+                </div>
 
-            <div className="p-3 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] flex items-center justify-between text-xs">
-              <div className="space-y-0.5">
-                <div className="font-mono font-medium text-[#252923]">Scan #1 • Baseline Assessment</div>
-                <div className="text-[11px] text-[#777D76]">Sep 20, 2026 • Erythema & Active Papules</div>
-              </div>
-              <span className="font-mono text-xs font-semibold text-[#777D76]">Score 71</span>
-            </div>
+                <div className="p-3 rounded-2xl bg-[#FAF9F6] border border-[#E8E8E1] flex items-center justify-between text-xs">
+                  <div className="space-y-0.5">
+                    <div className="font-mono font-medium text-[#252923]">Scan #1 • Baseline Assessment</div>
+                    <div className="text-[11px] text-[#777D76]">Sep 20, 2026 • Erythema & Active Papules</div>
+                  </div>
+                  <span className="font-mono text-xs font-semibold text-[#777D76]">Score 71</span>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

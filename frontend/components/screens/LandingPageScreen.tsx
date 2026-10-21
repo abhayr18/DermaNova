@@ -256,7 +256,7 @@ export const LandingPageScreen: React.FC<LandingPageScreenProps> = ({
       {/* =======================================================================
           FEATURE CARDS: FACIAL SKIN INSIGHTS, PERSONALIZED ROUTINE, PROGRESS
          ======================================================================= */}
-      <section className="space-y-8">
+      <section id="features" className="space-y-8 scroll-mt-24">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
             <span className="text-[11px] font-mono uppercase tracking-widest text-[#527665] font-semibold">
@@ -336,9 +336,155 @@ export const LandingPageScreen: React.FC<LandingPageScreenProps> = ({
       </section>
 
       {/* =======================================================================
+          8 CLINICAL BIOMARKERS SHOWCASE
+         ======================================================================= */}
+      <section id="biomarkers" className="space-y-8 scroll-mt-24">
+        <div className="text-center max-w-2xl mx-auto space-y-3">
+          <span className="text-[11px] font-mono uppercase tracking-widest text-[#527665] font-semibold">
+            Cutaneous Telemetry
+          </span>
+          <h2 className="font-serif text-2xl sm:text-4xl text-[#252923] font-normal tracking-tight">
+            8 Visible Markers Analyzed Simultaneously
+          </h2>
+          <p className="text-xs sm:text-sm text-[#777D76] leading-relaxed">
+            Our multi-task deep learning network evaluates distinct pathological pathways across follicular, vascular, and pigmentary structures.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[
+            {
+              id: 'acne',
+              title: 'Acne (Papules & Pustules)',
+              badge: 'Follicular Inflammation',
+              color: 'text-red-700 bg-red-50 border-red-200',
+              desc: 'Active erythematous papules and pustules exhibiting bacterial colonization.'
+            },
+            {
+              id: 'blackheads',
+              title: 'Blackheads (Open Comedones)',
+              badge: 'Oxidized Sebum',
+              color: 'text-amber-800 bg-amber-50 border-amber-200',
+              desc: 'Widened follicular openings containing oxidized lipid matrix and keratin debris.'
+            },
+            {
+              id: 'whiteheads',
+              title: 'Whiteheads (Closed Comedones)',
+              badge: 'Sub-corneal Impaction',
+              color: 'text-orange-800 bg-orange-50 border-orange-200',
+              desc: 'Non-inflamed microscopic follicular impactions beneath an intact stratum corneum.'
+            },
+            {
+              id: 'dark_spots',
+              title: 'Dark Spots (PIH)',
+              badge: 'Melanocyte Hyperactivity',
+              color: 'text-purple-800 bg-purple-50 border-purple-200',
+              desc: 'Focal macules resulting from post-inflammatory melanocyte melanin deposition.'
+            },
+            {
+              id: 'redness',
+              title: 'Facial Erythema & Redness',
+              badge: 'Micro-vascular Dilation',
+              color: 'text-rose-800 bg-rose-50 border-rose-200',
+              desc: 'Superficial capillary dilation indicative of acute barrier compromise or flushing.'
+            },
+            {
+              id: 'pores',
+              title: 'Visible & Dilated Pores',
+              badge: 'Follicular Flux',
+              color: 'text-cyan-800 bg-cyan-50 border-cyan-200',
+              desc: 'Enlarged follicular orifices across T-zone associated with elevated sebum flux.'
+            },
+            {
+              id: 'pigmentation',
+              title: 'Uneven Tone & Melasma',
+              badge: 'Photo-damage Macules',
+              color: 'text-pink-800 bg-pink-50 border-pink-200',
+              desc: 'Broad mottled hyperchromia triggered by cumulative ultraviolet exposure.'
+            },
+            {
+              id: 'wrinkles',
+              title: 'Fine Lines & Texture',
+              badge: 'Matrix Degradation',
+              color: 'text-blue-800 bg-blue-50 border-blue-200',
+              desc: 'Localized epidermal creasing and dermal collagen relaxation.'
+            }
+          ].map((m) => (
+            <div key={m.id} className="p-5 rounded-2xl bg-white border border-[#E8E8E1] hover:border-[#527665]/50 transition space-y-2.5 shadow-xs">
+              <span className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold border ${m.color}`}>
+                {m.badge}
+              </span>
+              <h4 className="font-serif text-base text-[#252923] font-normal">{m.title}</h4>
+              <p className="text-xs text-[#777D76] leading-relaxed">{m.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* =======================================================================
+          CLINICAL AI TECHNOLOGY & ACCURACY
+         ======================================================================= */}
+      <section id="technology" className="rounded-3xl bg-[#FAF9F6] border border-[#E8E8E1] p-8 sm:p-12 space-y-8 scroll-mt-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-7 space-y-4">
+            <span className="text-[11px] font-mono uppercase tracking-widest text-[#527665] font-semibold">
+              Deep Learning Architecture
+            </span>
+            <h2 className="font-serif text-2xl sm:text-4xl text-[#252923] font-normal tracking-tight">
+              Validated on 98.9% Mean AUC Classification
+            </h2>
+            <p className="text-xs sm:text-sm text-[#777D76] leading-relaxed">
+              DermaNova combines an <strong>EfficientNet-B0</strong> multi-task convolutional backbone with <strong>Bio-Optical Biomarker Fusion</strong>. Using LAB a* chromaticity and morphological fiber analysis, our pipeline accurately separates true inflammatory pustules from beard stubble and facial hair.
+            </p>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-3 font-mono">
+              <div className="p-3.5 rounded-2xl bg-white border border-[#E8E8E1]">
+                <div className="text-2xl font-serif text-[#304D40]">98.9%</div>
+                <div className="text-[10px] text-[#777D76] mt-0.5">Mean Test AUC</div>
+              </div>
+              <div className="p-3.5 rounded-2xl bg-white border border-[#E8E8E1]">
+                <div className="text-2xl font-serif text-[#527665]">&lt;45ms</div>
+                <div className="text-[10px] text-[#777D76] mt-0.5">ONNX Inference</div>
+              </div>
+              <div className="p-3.5 rounded-2xl bg-white border border-[#E8E8E1]">
+                <div className="text-2xl font-serif text-[#252923]">Grad-CAM</div>
+                <div className="text-[10px] text-[#777D76] mt-0.5">Turbo Attention</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-5 rounded-2xl bg-white border border-[#E8E8E1] p-6 space-y-4 shadow-sm font-mono text-xs">
+            <div className="flex items-center gap-2 text-[#304D40] font-semibold pb-2 border-b border-[#E8E8E1]">
+              <Sparkles className="w-4 h-4 text-[#527665]" />
+              <span>Multi-Task Diagnostic Heads</span>
+            </div>
+            <ul className="space-y-2 text-[#777D76]">
+              <li className="flex items-center justify-between">
+                <span>Multi-Label Conditions (8 classes)</span>
+                <span className="text-[#304D40] font-semibold">BCE Logits</span>
+              </li>
+              <li className="flex items-center justify-between">
+                <span>Ordinal Severity Grading</span>
+                <span className="text-[#304D40] font-semibold">Cumulative 2-Logit</span>
+              </li>
+              <li className="flex items-center justify-between">
+                <span>Fitzpatrick Skin Typing (5 types)</span>
+                <span className="text-[#304D40] font-semibold">Softmax CE</span>
+              </li>
+              <li className="flex items-center justify-between">
+                <span>Bio-Optical Hair Discrimination</span>
+                <span className="text-[#304D40] font-semibold">Active Filter</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* =======================================================================
           PRIVACY & ETHICAL AI FOUNDATION
          ======================================================================= */}
-      <section className="rounded-3xl bg-white border border-[#E8E8E1] p-6 sm:p-10 space-y-6 shadow-sm">
+      <section id="safety" className="rounded-3xl bg-white border border-[#E8E8E1] p-6 sm:p-10 space-y-6 shadow-sm scroll-mt-24">
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           <div className="lg:col-span-7 space-y-4">

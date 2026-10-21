@@ -24,6 +24,8 @@ import { ProgressTrackingScreen } from '../components/screens/ProgressTrackingSc
 import { ProfileSettingsScreen } from '../components/screens/ProfileSettingsScreen';
 import { TelehealthBookingScreen } from '../components/screens/TelehealthBookingScreen';
 import { HistoricalTelemetryScreen } from '../components/screens/HistoricalTelemetryScreen';
+import { AuthModal } from '../components/AuthModal';
+import { CosmeticsFitScanner } from '../components/CosmeticsFitScanner';
 import {
   Camera,
   Home as HomeIcon,
@@ -44,6 +46,7 @@ import {
 export default function DermaNovaApp() {
   const [currentScreen, setCurrentScreen] = useState<ScreenId>('landing');
   const [currentUser, setCurrentUser] = useState<UserAccount | null>(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResponse | null>(null);
@@ -192,30 +195,41 @@ export default function DermaNovaApp() {
   };
 
   // Authenticated section check for persistent sidebar
+  // Authenticated section check for persistent sidebar
   const isDashboardLayout = [
     'dashboard',
     'capture',
     'results',
+    'detail',
     'routine',
+    'scanner',
     'progress',
     'settings',
+    'telehealth',
+    'telemetry',
   ].includes(currentScreen);
 
   return (
     <div className="min-h-screen bg-[#FAF9F6] text-[#252923] flex flex-col font-sans selection:bg-[#E8EFE9] selection:text-[#304D40]">
       
-      {/* Universal Navigation Header & Screen Switcher */}
+      {/* Universal Navigation Header */}
       <ScreenNavHeader
         currentScreen={currentScreen}
-        onSelectScreen={(screen) => setCurrentScreen(screen)}
+        onSelectScreen={(screen) => {
+          if (!currentUser && ['dashboard', 'results', 'routine', 'scanner', 'progress', 'settings', 'telehealth', 'telemetry'].includes(screen)) {
+            setIsAuthModalOpen(true);
+          } else {
+            setCurrentScreen(screen);
+          }
+        }}
         currentUser={currentUser}
-        onOpenAuth={() => setCurrentScreen('auth')}
+        onOpenAuth={() => setIsAuthModalOpen(true)}
         onLogout={handleLogout}
       />
 
       {/* Global Error Banner if any */}
       {errorMsg && (
-        <div className="max-w-[1200px] mx-auto w-full px-4 sm:px-6 mt-4">
+        <div className="max-w-[1280px] mx-auto w-full px-4 sm:px-6 mt-4">
           <div className="p-4 rounded-2xl bg-[#fff5f5] border border-[#fed7d7] text-[#9b2c2c] text-xs space-y-2 shadow-xs">
             <div className="flex items-center justify-between flex-wrap gap-2">
               <span className="font-medium">{errorMsg}</span>
@@ -264,22 +278,52 @@ export default function DermaNovaApp() {
                     {backendTestStatus}
                   </div>
                 )}
-                <div className="text-[10px] text-[#777D76] font-mono">
-                  Permanent setting: Add <strong>NEXT_PUBLIC_API_URL</strong> in your Vercel Project Settings &gt; Environment Variables.
-                </div>
               </div>
             )}
           </div>
         </div>
       )}
 
-      {/* App Body Container: Desktop layout with optional persistent sidebar for authenticated pages */}
-      <div className="flex-1 w-full max-w-[1240px] mx-auto px-4 sm:px-6 py-6 pb-24 md:pb-12 flex gap-8">
-        
-        {/* Desktop Persistent Sidebar (Shown on authenticated portal screens) */}
-        {isDashboardLayout && (
-          <aside className="hidden lg:flex flex-col w-60 shrink-0 space-y-6 sticky top-28 self-start">
-            
+      {/* RENDER VIEW: Public Landing Page vs Authenticated Member Portal */}
+      {currentScreen === 'landing' ? (
+        <div className="flex-1 w-full max-w-[1280px] mx-auto px-4 sm:px-6 py-8 sm:py-12">
+          <LandingPageScreen
+            onStartAnalysis={() => {
+              if (currentUser) {
+                setCurrentScreen('capture');
+              } else {
+                setIsAuthModalOpen(true);
+              }
+            }}
+            onOpenAuth={() => setIsAuthModalOpen(true)}
+            onOpenRoutine={() => {
+              if (currentUser) {
+                setCurrentScreen('routine');
+              } else {
+                setIsAuthModalOpen(true);
+              }
+            }}
+            onOpenProgress={() => {
+              if (currentUser) {
+                setCurrentScreen('progress');
+              } else {
+                setIsAuthModalOpen(true);
+              }
+            }}
+            onOpenSettings={() => {
+              if (currentUser) {
+                setCurrentScreen('settings');
+              } else {
+                setIsAuthModalOpen(true);
+              }
+            }}
+          />
+        </div>
+      ) : (
+        <div className="flex-1 w-full max-w-[1360px] mx-auto px-4 sm:px-6 py-6 pb-24 md:pb-12 flex gap-8">
+          
+          {/* Desktop Persistent Sidebar (Member Portal) */}
+          <aside className="hidden lg:flex flex-col w-64 shrink-0 space-y-6 sticky top-24 self-start">
             <div className="rounded-3xl bg-white border border-[#E8E8E1] p-4 space-y-1 shadow-xs">
               <div className="px-3 py-2 text-[10px] font-mono uppercase tracking-wider text-[#777D76] font-semibold">
                 Member Portal
@@ -306,7 +350,7 @@ export default function DermaNovaApp() {
                 }`}
               >
                 <Camera className="w-4 h-4 text-[#527665]" />
-                <span>Skin Analysis</span>
+                <span>Diagnostic Studio</span>
               </button>
 
               <button
@@ -318,7 +362,7 @@ export default function DermaNovaApp() {
                 }`}
               >
                 <Layers className="w-4 h-4 text-[#527665]" />
-                <span>AI Skin Report</span>
+                <span>AI Clinical Report</span>
               </button>
 
               <button
@@ -330,7 +374,19 @@ export default function DermaNovaApp() {
                 }`}
               >
                 <FileText className="w-4 h-4 text-[#527665]" />
-                <span>My Routine</span>
+                <span>Daily Routine</span>
+              </button>
+
+              <button
+                onClick={() => setCurrentScreen('scanner')}
+                className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-mono transition text-left ${
+                  currentScreen === 'scanner'
+                    ? 'bg-[#E8EFE9] text-[#304D40] font-semibold'
+                    : 'text-[#777D76] hover:bg-[#FAF9F6] hover:text-[#252923]'
+                }`}
+              >
+                <Sparkles className="w-4 h-4 text-[#527665]" />
+                <span>Cosmetics Fit Scanner</span>
               </button>
 
               <button
@@ -342,7 +398,7 @@ export default function DermaNovaApp() {
                 }`}
               >
                 <Compass className="w-4 h-4 text-[#527665]" />
-                <span>Progress Journal</span>
+                <span>Progress Log</span>
               </button>
 
               <button
@@ -359,193 +415,207 @@ export default function DermaNovaApp() {
             </div>
 
             {/* Sidebar User Widget */}
-            <div className="p-4 rounded-3xl bg-[#FAF9F6] border border-[#E8E8E1] space-y-3">
+            <div className="p-4 rounded-3xl bg-white border border-[#E8E8E1] space-y-3 shadow-xs">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-full bg-[#304D40] text-white flex items-center justify-center font-mono text-xs font-bold">
-                  {currentUser?.full_name?.charAt(0) || 'M'}
+                <div className="w-9 h-9 rounded-full bg-[#304D40] text-white flex items-center justify-center font-mono text-xs font-bold">
+                  {currentUser?.full_name?.charAt(0) || 'D'}
                 </div>
-                <div className="truncate">
+                <div className="truncate flex-1">
                   <div className="font-mono text-xs font-semibold text-[#252923] truncate">
-                    {currentUser?.full_name || 'Guest Explorer'}
+                    {currentUser?.full_name || 'Presentation Demo'}
                   </div>
-                  <div className="text-[10px] text-[#777D76] font-mono">
-                    {analysisResult ? `Health Score: ${analysisResult.overall_health_score}` : 'No Scan Recorded'}
+                  <div className="text-[10px] text-[#777D76] font-mono truncate">
+                    {currentUser?.email || 'demo.patient@dermanova.app'}
                   </div>
                 </div>
               </div>
 
-              <div className="text-[11px] font-mono text-[#527665] flex items-center gap-1.5 pt-1 border-t border-[#E8E8E1]">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Private Biometric Vault</span>
+              <div className="pt-2 border-t border-[#E8E8E1] flex items-center justify-between">
+                <div className="text-[11px] font-mono text-[#527665] flex items-center gap-1.5">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <span>Local DB Synced</span>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="text-[10px] font-mono text-[#9b2c2c] hover:underline font-semibold"
+                >
+                  Sign Out
+                </button>
               </div>
             </div>
           </aside>
-        )}
 
-        {/* Main Content Pane */}
-        <main className="flex-1 w-full min-w-0">
-          
-          {/* SCREEN 1: LANDING PAGE */}
-          {currentScreen === 'landing' && (
-            <LandingPageScreen
-              onStartAnalysis={() => setCurrentScreen('capture')}
-              onOpenAuth={() => setCurrentScreen('auth')}
-              onOpenRoutine={() => setCurrentScreen('routine')}
-              onOpenProgress={() => setCurrentScreen('progress')}
-              onOpenSettings={() => setCurrentScreen('settings')}
-            />
-          )}
+          {/* Main Content Pane */}
+          <main className="flex-1 w-full min-w-0">
+            {/* SCREEN 2: AUTHENTICATION AND ONBOARDING */}
+            {currentScreen === 'auth' && (
+              <AuthOnboardingScreen
+                currentUser={currentUser}
+                onAuthenticated={(user) => setCurrentUser(user)}
+                onCompleteOnboarding={(profile) => {
+                  if (currentUser) {
+                    setCurrentUser({
+                      ...currentUser,
+                      profile: { ...(currentUser.profile as PatientProfile), ...profile },
+                    });
+                  }
+                  setCurrentScreen('dashboard');
+                }}
+                onClose={() => setCurrentScreen(currentUser ? 'dashboard' : 'landing')}
+              />
+            )}
 
-          {/* SCREEN 2: AUTHENTICATION AND ONBOARDING */}
-          {currentScreen === 'auth' && (
-            <AuthOnboardingScreen
-              currentUser={currentUser}
-              onAuthenticated={(user) => setCurrentUser(user)}
-              onCompleteOnboarding={(profile) => {
-                if (currentUser) {
-                  setCurrentUser({
-                    ...currentUser,
-                    profile: { ...(currentUser.profile as PatientProfile), ...profile },
-                  });
-                }
-                setCurrentScreen('dashboard');
-              }}
-              onClose={() => setCurrentScreen('landing')}
-            />
-          )}
+            {/* SCREEN 3: USER DASHBOARD */}
+            {currentScreen === 'dashboard' && (
+              <DashboardScreen
+                currentUser={currentUser}
+                latestAnalysis={analysisResult}
+                onNavigateTab={(tab) => {
+                  if (tab === 'scan') setCurrentScreen('results');
+                  else if (tab === 'regimen') setCurrentScreen('routine');
+                  else if (tab === 'journey') setCurrentScreen('progress');
+                }}
+                onStartNewAnalysis={() => setCurrentScreen('capture')}
+                onOpenConcernDetail={(concernId) => {
+                  setActiveConcernDetail(concernId);
+                }}
+              />
+            )}
 
-          {/* SCREEN 3: USER DASHBOARD */}
-          {currentScreen === 'dashboard' && (
-            <DashboardScreen
-              currentUser={currentUser}
-              latestAnalysis={analysisResult}
-              onNavigateTab={(tab) => {
-                if (tab === 'scan') setCurrentScreen('results');
-                else if (tab === 'regimen') setCurrentScreen('routine');
-                else if (tab === 'journey') setCurrentScreen('progress');
-              }}
-              onStartNewAnalysis={() => setCurrentScreen('capture')}
-              onOpenConcernDetail={(concernId) => {
-                setActiveConcernDetail(concernId);
-              }}
-            />
-          )}
+            {/* SCREEN 4: FACIAL PHOTO CAPTURE AND UPLOAD */}
+            {currentScreen === 'capture' && (
+              <CaptureUploadScreen
+                onImageSelected={(image) => handlePerformAnalysis(image)}
+                onUseSampleImage={handleUseSampleImage}
+                isLoading={isLoading}
+              />
+            )}
 
-          {/* SCREEN 4: FACIAL PHOTO CAPTURE AND UPLOAD */}
-          {currentScreen === 'capture' && (
-            <CaptureUploadScreen
-              onImageSelected={(image) => handlePerformAnalysis(image)}
-              onUseSampleImage={handleUseSampleImage}
-              isLoading={isLoading}
-            />
-          )}
+            {/* SCREEN 5: ANALYSIS LOADING STATE */}
+            {currentScreen === 'loading' && (
+              <AnalysisLoadingScreen
+                imagePreview={selectedImage}
+                onCancel={() => {
+                  setIsLoading(false);
+                  setCurrentScreen('capture');
+                }}
+              />
+            )}
 
-          {/* SCREEN 5: ANALYSIS LOADING STATE */}
-          {currentScreen === 'loading' && (
-            <AnalysisLoadingScreen
-              imagePreview={selectedImage}
-              onCancel={() => {
-                setIsLoading(false);
-                setCurrentScreen('capture');
-              }}
-            />
-          )}
-
-          {/* SCREEN 6: AI ANALYSIS RESULTS DASHBOARD */}
-          {currentScreen === 'results' && (
-            <AnalysisResultsScreen
-              analysis={analysisResult}
-              displayImage={selectedImage}
-              onStartNewAnalysis={() => setCurrentScreen('capture')}
-              onOpenConcernDetail={(concernId) => {
-                setActiveConcernDetail(concernId);
-              }}
-              onBuildRoutine={() => setCurrentScreen('routine')}
-            />
-          )}
-
-          {/* SCREEN 7: DETAILED SKIN CONCERN REPORT (Modal / Full View) */}
-          {activeConcernDetail && (
-            <ConcernDetailModal
-              concernId={activeConcernDetail}
-              analysis={analysisResult}
-              displayImage={selectedImage}
-              onClose={() => setActiveConcernDetail(null)}
-              onNavigateToRoutine={() => {
-                setActiveConcernDetail(null);
-                setCurrentScreen('routine');
-              }}
-            />
-          )}
-
-          {/* If explicitly navigating to Screen 7 as standalone view from screen switcher */}
-          {currentScreen === 'detail' && (
-            <div className="space-y-4">
-              <div className="p-4 rounded-2xl bg-[#E8EFE9] text-[#304D40] text-xs font-mono">
-                Viewing Detailed Clinical Concern Profile: {activeConcernDetail || 'Acne'}
-              </div>
-              <ConcernDetailModal
-                concernId={activeConcernDetail || 'acne'}
+            {/* SCREEN 6: AI ANALYSIS RESULTS DASHBOARD */}
+            {currentScreen === 'results' && (
+              <AnalysisResultsScreen
                 analysis={analysisResult}
                 displayImage={selectedImage}
-                onClose={() => setCurrentScreen('results')}
-                onNavigateToRoutine={() => setCurrentScreen('routine')}
+                onStartNewAnalysis={() => setCurrentScreen('capture')}
+                onOpenConcernDetail={(concernId) => {
+                  setActiveConcernDetail(concernId);
+                }}
+                onBuildRoutine={() => setCurrentScreen('routine')}
               />
-            </div>
-          )}
+            )}
 
-          {/* SCREEN 8: PERSONALIZED SKINCARE ROUTINE */}
-          {currentScreen === 'routine' && (
-            <PersonalizedRoutineScreen
-              recommendations={recommendations}
-              skinType={analysisResult?.detected_skin_type || 'Combination'}
-              onEditPreferences={() => setCurrentScreen('settings')}
-              onStartScan={() => setCurrentScreen('capture')}
-            />
-          )}
+            {/* SCREEN 7: DETAILED SKIN CONCERN REPORT (Modal / Full View) */}
+            {activeConcernDetail && (
+              <ConcernDetailModal
+                concernId={activeConcernDetail}
+                analysis={analysisResult}
+                displayImage={selectedImage}
+                onClose={() => setActiveConcernDetail(null)}
+                onNavigateToRoutine={() => {
+                  setActiveConcernDetail(null);
+                  setCurrentScreen('routine');
+                }}
+              />
+            )}
 
-          {/* SCREEN 9: PROGRESS TRACKING AND SCAN HISTORY */}
-          {currentScreen === 'progress' && (
-            <ProgressTrackingScreen
-              latestAnalysis={analysisResult}
-              onStartNewAnalysis={() => setCurrentScreen('capture')}
-            />
-          )}
+            {/* If explicitly navigating to Screen 7 as standalone view from screen switcher */}
+            {currentScreen === 'detail' && (
+              <div className="space-y-4">
+                <div className="p-4 rounded-2xl bg-[#E8EFE9] text-[#304D40] text-xs font-mono">
+                  Viewing Detailed Clinical Concern Profile: {activeConcernDetail || 'Acne'}
+                </div>
+                <ConcernDetailModal
+                  concernId={activeConcernDetail || 'acne'}
+                  analysis={analysisResult}
+                  displayImage={selectedImage}
+                  onClose={() => setCurrentScreen('results')}
+                  onNavigateToRoutine={() => setCurrentScreen('routine')}
+                />
+              </div>
+            )}
 
-          {/* SCREEN 10: PROFILE, PREFERENCES, AND PRIVACY SETTINGS */}
-          {currentScreen === 'settings' && (
-            <ProfileSettingsScreen
-              currentUser={currentUser}
-              onLogout={handleLogout}
-              onProfileUpdated={(up) => {
-                if (currentUser) {
-                  setCurrentUser({ ...currentUser, ...up });
-                }
-              }}
-            />
-          )}
+            {/* SCREEN 8: PERSONALIZED SKINCARE ROUTINE */}
+            {currentScreen === 'routine' && (
+              <PersonalizedRoutineScreen
+                recommendations={recommendations}
+                skinType={analysisResult?.detected_skin_type || 'Combination'}
+                onEditPreferences={() => setCurrentScreen('settings')}
+                onStartScan={() => setCurrentScreen('capture')}
+              />
+            )}
 
-          {/* SCREEN 11: TELEHEALTH DERMATOLOGIST CONSULTATION (Stitch AI Feature) */}
-          {currentScreen === 'telehealth' && (
-            <TelehealthBookingScreen
-              onBackToDashboard={() => setCurrentScreen('dashboard')}
-              analysis={analysisResult}
-              currentUser={currentUser}
-            />
-          )}
+            {/* SCREEN: COSMETICS FIT SCANNER */}
+            {currentScreen === 'scanner' && (
+              <CosmeticsFitScanner
+                userSkinType={analysisResult?.detected_skin_type || 'Combination'}
+                detectedIssues={analysisResult?.conditions ? Object.keys(analysisResult.conditions).filter(k => analysisResult.conditions[k].is_detected) : undefined}
+              />
+            )}
 
-          {/* SCREEN 12: HISTORICAL SCAN ARCHIVE & TELEMETRY LOG (Stitch AI Feature) */}
-          {currentScreen === 'telemetry' && (
-            <HistoricalTelemetryScreen
-              onBackToDashboard={() => setCurrentScreen('dashboard')}
-              onOpenAnalysisResults={() => setCurrentScreen('results')}
-              onOpenConsultation={() => setCurrentScreen('telehealth')}
-              latestAnalysis={analysisResult}
-              currentUser={currentUser}
-            />
-          )}
-        </main>
-      </div>
+            {/* SCREEN 9: PROGRESS TRACKING AND SCAN HISTORY */}
+            {currentScreen === 'progress' && (
+              <ProgressTrackingScreen
+                latestAnalysis={analysisResult}
+                onStartNewAnalysis={() => setCurrentScreen('capture')}
+              />
+            )}
+
+            {/* SCREEN 10: PROFILE, PREFERENCES, AND PRIVACY SETTINGS */}
+            {currentScreen === 'settings' && (
+              <ProfileSettingsScreen
+                currentUser={currentUser}
+                onLogout={handleLogout}
+                onProfileUpdated={(up) => {
+                  if (currentUser) {
+                    setCurrentUser({ ...currentUser, ...up });
+                  }
+                }}
+              />
+            )}
+
+            {/* SCREEN 11: TELEHEALTH DERMATOLOGIST CONSULTATION */}
+            {currentScreen === 'telehealth' && (
+              <TelehealthBookingScreen
+                onBackToDashboard={() => setCurrentScreen('dashboard')}
+                analysis={analysisResult}
+                currentUser={currentUser}
+              />
+            )}
+
+            {/* SCREEN 12: HISTORICAL SCAN ARCHIVE & TELEMETRY LOG */}
+            {currentScreen === 'telemetry' && (
+              <HistoricalTelemetryScreen
+                onBackToDashboard={() => setCurrentScreen('dashboard')}
+                onOpenAnalysisResults={() => setCurrentScreen('results')}
+                onOpenConsultation={() => setCurrentScreen('telehealth')}
+                latestAnalysis={analysisResult}
+                currentUser={currentUser}
+              />
+            )}
+          </main>
+        </div>
+      )}
+
+      {/* Auth Modal for 1-Click Demo Login and Sign In / Sign Up */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        onAuthenticated={(user) => {
+          setCurrentUser(user);
+          setCurrentScreen('dashboard');
+        }}
+      />
 
       {/* =======================================================================
           MOBILE BOTTOM NAVIGATION (Fixed on small screens: md:hidden)
